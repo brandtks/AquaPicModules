@@ -296,7 +296,7 @@ void initializeHardware (void) {
 
     ADCON1 = 0b11010100;
              //1******* = ADFM: A/D Result Format Select, Right Justified
-             //*110**** = ADCS: A/D Conversion Clock Select, FOSC/32
+             //*101**** = ADCS: A/D Conversion Clock Select, FOSC/16
              //*****0** = ADNREF: A/D Negative Voltage Reference Configuration, VREF- is connected to Vss
              //******00 = ADPREF: A/D Positive Voltage Reference Configuration, VREF+ is connected to Vdd
     
