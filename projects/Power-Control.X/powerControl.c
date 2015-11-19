@@ -99,6 +99,7 @@ void eeprom_write (unsigned char address, unsigned char value);
 
 #define FILTER_VALUES   10
 #define NUM_OUTLETS     8
+//#define ENABLE_CURRENT
 
 #define COMM_ERROR_SP   200 //25mSec timer interrupt, 5 sec alarm
                             //5000mSec / 25mSec = 200
@@ -106,12 +107,14 @@ void eeprom_write (unsigned char address, unsigned char value);
 /******************************************************************************/
 /* Variable Definitions                                                       */
 /******************************************************************************/
+#ifdef ENABLE_CURRENT
 typedef struct amperage_filter {
     uint16_t sum;
     uint16_t values[FILTER_VALUES];
     uint16_t average;
     uint8_t chsValue : 5;
 }amperageFilter;
+#endif
 
 /******************************************************************************/
 /* Functions                                                                  */
@@ -123,15 +126,19 @@ void sendDefualtResponse (void);
 void enableAddressDetection (void);
 void disableAddressDetection (void);
 void memoryCopy (void* to, void* from, size_t count);
+#ifdef ENABLE_CURRENT
 uint16_t getAdc (void);
+#endif
 
 /******************************************************************************/
 /* Global Variables                                                           */
 /******************************************************************************/
 apb_obj apbInst;
+#ifdef ENABLE_CURRENT
 amperageFilter ct[NUM_OUTLETS];
 uint8_t outletPtr;
 uint8_t valuePtr;
+#endif
 uint8_t commCounter;
 uint8_t commError;
 uint8_t fallbackFlags;
@@ -139,9 +146,10 @@ uint8_t fallbackFlags;
 void main (void) {
     initializeHardware ();
     
+#ifdef ENABLE_CURRENT
     outletPtr = 0;
     valuePtr = 0;
-    
+ 
     int i, j;
     for (i = 0; i < NUM_OUTLETS; ++i) {
         ct[i].sum = 0;
@@ -158,6 +166,7 @@ void main (void) {
     ct[5].chsValue = 0b00110;
     ct[6].chsValue = 0b00111;
     ct[7].chsValue = 0b01000;
+#endif
     
     fallbackFlags = eeprom_read (OUTLET_FALLBACK_ADDRESS);
     
@@ -184,6 +193,7 @@ void main (void) {
 }
 
 void interrupt ISR (void) {
+#ifdef ENABLE_CURRENT
     static uint8_t lastPtr = NUM_OUTLETS - 1; //outletPtr starts at 0 so we'll just initialize this to the end
     
     if (ADIF) {
@@ -201,12 +211,17 @@ void interrupt ISR (void) {
         
         ADIF = 0; //Clear flag
     }
+#endif
     
     if (TMR4IF) {
+        TMR4IF = 0; //Clear flag
+        
+#ifdef ENABLE_CURRENT
         if (outletPtr != lastPtr) { //the ADC isn't finished so don't start it
             startAdc;
             lastPtr = outletPtr;
         }
+#endif
         
         if (!commError) {
             ++commCounter;
@@ -224,8 +239,6 @@ void interrupt ISR (void) {
                 gLedOn;
             }
         }
-        
-        TMR4IF = 0; //Clear flag
     }
 }
 
@@ -288,7 +301,8 @@ void initializeHardware (void) {
              //*****1** = RE2, AN7, Outlet 7 CT
              //******1* = RE1, AN6, Outlet 6 CT
              //*******1 = RE0, AN5, Outlet 5 CT
-    
+
+#ifdef ENABLE_CURRENT
     /*ADC*/
     ADCON0 = 0b00000001;
              //*00000** = CHS: Analog Channel Select bits, AN0
@@ -299,6 +313,7 @@ void initializeHardware (void) {
              //*101**** = ADCS: A/D Conversion Clock Select, FOSC/16
              //*****0** = ADNREF: A/D Negative Voltage Reference Configuration, VREF- is connected to Vss
              //******00 = ADPREF: A/D Positive Voltage Reference Configuration, VREF+ is connected to Vdd
+#endif
     
     /*Timer 4*/
     PR4 = 0xC2; //Timer Period = 25mSec
@@ -339,8 +354,10 @@ void initializeHardware (void) {
             //*1****** = RX9: 9-bit Receive Enable, Selects 9-bit reception
             //****1*** = ADDEN: Address Detect Enable, Enables address detection
     
+#ifdef ENABLE_CURRENT
     ADIF = 0; //Clear ADC interrupt flag
     ADIE = 1; //Enable ADC interrupts
+#endif
     
     TMR4IF = 0; //Clear Timer4 interrupt flag
     TMR4IE = 1; //Enable Timer4 interrupts
@@ -364,8 +381,9 @@ void apbMessageHandler (void) {
             sendDefualtResponse ();
             break;
         }
+#ifdef ENABLE_CURRENT
         case 10: { //read outlet current
-#define FUNCTION10_LENGTH 8 //header + outlet + current + crc = 3 + 1 + 2 + 2
+            #define FUNCTION10_LENGTH 8 //header + outlet + current + crc = 3 + 1 + 2 + 2
             
             uint8_t outlet = apbInst->message[3];
             uint16_t current  = ct[outlet].average;
@@ -386,8 +404,9 @@ void apbMessageHandler (void) {
             
             break;
         }
+#endif
         case 20: { //read status
-#define FUNCTION20_LENGTH 7 //header + ac power avail + current mask + crc = 3 + 1 + 1 + 2
+            #define FUNCTION20_LENGTH 7 //header + ac power avail + current mask + crc = 3 + 1 + 1 + 2
             
             uint8_t m[FUNCTION20_LENGTH];
             uint8_t crc[2];
@@ -399,7 +418,13 @@ void apbMessageHandler (void) {
                 m[3] = 0xFF;
             else
                 m[3] = 0x00;
+            
+#ifdef ENABLE_CURRENT
             m[4] = 0xFF;
+#else
+            m[4] = 0x00;
+#endif
+            
             apb_crc16 (m, crc, FUNCTION20_LENGTH);
             m[FUNCTION20_LENGTH - 2] = crc[0];
             m[FUNCTION20_LENGTH - 1] = crc[1];
@@ -408,8 +433,9 @@ void apbMessageHandler (void) {
             
             break;
         }
+#ifdef ENABLE_CURRENT
         case 21: { //read all current
-#define FUNCTION21_LENGTH 21 //header + 8 * current + crc = 3 + (8 * 2) + 2
+            #define FUNCTION21_LENGTH 21 //header + 8 * current + crc = 3 + (8 * 2) + 2
             
             uint8_t m[FUNCTION21_LENGTH];
             uint8_t crc[2];
@@ -428,6 +454,7 @@ void apbMessageHandler (void) {
             
             break;
         }
+#endif
         case 30: { //write outlet
             uint8_t outlet = apbInst->message [3];
             uint8_t state  = apbInst->message [4];
@@ -440,6 +467,7 @@ void apbMessageHandler (void) {
             break;
         }
         default:
+            sendDefualtResponse ();
             break;
     }
 }
@@ -482,6 +510,7 @@ void memoryCopy (void* to, void* from, size_t count) {
         *ptr_to++ = *ptr_from++;
 }
 
+#ifdef ENABLE_CURRENT
 uint16_t getAdc (void) {
     uint16_t counts;
 
@@ -490,3 +519,4 @@ uint16_t getAdc (void) {
 
     return counts;
 }
+#endif

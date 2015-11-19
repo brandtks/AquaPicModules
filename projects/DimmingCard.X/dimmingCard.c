@@ -81,8 +81,18 @@ void eeprom_write (unsigned char address, unsigned char value);
 #define GREEN_LED       LATAbits.LATA1
 #define YELLOW_LED      LATAbits.LATA2
 
+#define rLedOn          RED_LED = 0
+#define rLedOff         RED_LED = 1
+#define gLedOn          GREEN_LED = 0
+#define gLedOff         GREEN_LED = 1
+#define yLedOn          YELLOW_LED = 0
+#define yLedOff         YELLOW_LED = 1
+
 #define TX_nRX          LATCbits.LATC5
 #define APB_ADDRESS     0x20
+
+#define COMM_ERROR_SP   200 //25mSec timer interrupt, 5 sec alarm
+                            //5000mSec / 25mSec = 200
 
 /******************************************************************************/
 /* Variable Definitions                                                       */
@@ -110,6 +120,8 @@ void setChannelValue (uint8_t channel, uint16_t value);
 /******************************************************************************/
 apb_obj apbInst;
 pwmPort pwm [4];
+uint8_t commCounter;
+uint8_t commError;
 
 void main (void) {
     initializeHardware ();
@@ -141,8 +153,8 @@ void main (void) {
     TXSTAbits.TXEN = 1; //Transmit Enable, Transmit enabled
     RCSTAbits.CREN = 1; //Continuous Receive Enable, Enables receiver
     
-    YELLOW_LED = 1;
-    GREEN_LED = 0;
+    yLedOff;
+    gLedOn;
     
     while (1) {
         //RCIF is set regardless of the global interrupts 
@@ -162,8 +174,22 @@ void interrupt ISR (void) {
 //    }
     if (TMR4IF) {
         TMR4IF = 0; //Clear flag
-
         
+        if (!commError) {
+            ++commCounter;
+            
+            if (commCounter >= COMM_ERROR_SP) {
+                commError = 1;
+                gLedOff;
+                rLedOn;
+            }
+        } else {
+            if (commCounter == 0) {
+                commError = 0;
+                rLedOff;
+                gLedOn;
+            }
+        }
     }
 }
 
@@ -289,11 +315,13 @@ void initializeHardware (void) {
             //****1*** = ADDEN: Address Detect Enable, Enables address detection
 
     /*Global Interrupts*/
-    //PEIE = 1; //Enable peripheral interrupts
-    //GIE = 1; //Enable Global interrupts
+    PEIE = 1; //Enable peripheral interrupts
+    GIE = 1; //Enable Global interrupts
 }
 
 void apbMessageHandler (void) {
+    commCounter = 0;
+    
     switch (apbInst->function) {
         case 2: { //setup single channel
             uint8_t channel = apbInst->message [3] + 1; //0 is channel 1
