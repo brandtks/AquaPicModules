@@ -395,7 +395,7 @@ void apbMessageHandler (void) {
         case 31: { //write single channel value
             uint8_t channel = apbInst->message [3];
             uint16_t value;
-            memoryCopy (&value, &(apbInst->message[5]), sizeof (uint16_t));
+            memoryCopy (&value, &(apbInst->message[4]), sizeof (uint16_t));
             
             //value = (value >> 8) | (value << 8); // reverse the endianess
             
