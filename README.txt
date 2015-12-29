@@ -5,5 +5,7 @@ drv-lib/ --necessary libraries
 *common
 
 projects/ --MPLABx project folders
-*Dimming Card
+*Analog Input Card
+*Analog Output Card
+*Digital Input Card
 *Power Control
