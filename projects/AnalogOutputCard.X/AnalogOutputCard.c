@@ -1,6 +1,6 @@
 /* Created by Skyler Brandt on August 2015
  *
- * Power Control
+ * Analog Output Card
  *
  *******************************************************************************
  * Copyright (C) 2015 Skyler Brandt
@@ -27,7 +27,6 @@
 #include <stdint.h>     //For uint8_t, int8_t definition
 #include <xc.h>
 #include "../../drv_lib/aquapic_bus/aquapic_bus.h"
-#include "../../drv_lib/common/slib_com.h"
 
 /******************************************************************************/
 /* CONFIGUTION WORDS                                                          */
@@ -50,7 +49,7 @@
 #pragma config PLLEN = ON       //PLL Enable (4x PLL enabled)
 #pragma config STVREN = ON      //Stack Overflow/Underflow Reset Enable (Stack Overflow or Underflow will cause a Reset)
 #pragma config BORV = LO        //Brown-out Reset Voltage Selection (Brown-out Reset Voltage (Vbor), low trip point selected.)
-#pragma config LVP = OFF        //Low-Voltage Programming Enable (High-voltage on MCLR/VPP must be used for programming)
+#pragma config LVP = OFF         //Low-Voltage Programming Enable (Low-voltage programming enabled)
 
 /******************************************************************************/
 /* EEPROM                                                                     */
@@ -63,29 +62,24 @@ unsigned char eeprom_read (unsigned char address);
 void eeprom_write (unsigned char address, unsigned char value);
 
 /*User Defined*/
-#define OUTLET_FALLBACK_ADDRESS 0x00
+#define CHANNEL_1_ADDRESS 0x00
+#define CHANNEL_2_ADDRESS 0x01
+#define CHANNEL_3_ADDRESS 0x02
+#define CHANNEL_4_ADDRESS 0x03
 
 /******************************************************************************/
 /* USER DEFINED                                                               */
 /******************************************************************************/
 #define _XTAL_FREQ      32000000UL  //Used by the __delay_ms(xx) and __delay_us(xx) Methods, 32MHz
 
-#define AC_POWER_AVAIL  PORTCbits.RC3
+#define CHANNEL_1_RELAY LATBbits.LATB1
+#define CHANNEL_2_RELAY LATBbits.LATB2
+#define CHANNEL_3_RELAY LATBbits.LATB3
+#define CHANNEL_4_RELAY LATBbits.LATB4
 
-#define OUTLET1_RELAY   LATDbits.LATD0
-#define OUTLET2_RELAY   LATDbits.LATD1
-#define OUTLET3_RELAY   LATDbits.LATD2
-#define OUTLET4_RELAY   LATDbits.LATD3
-#define OUTLET5_RELAY   LATDbits.LATD4
-#define OUTLET6_RELAY   LATDbits.LATD5
-#define OUTLET7_RELAY   LATDbits.LATD6
-#define OUTLET8_RELAY   LATDbits.LATD7
-
-#define startAdc        GO = 1
-
-#define RED_LED         LATCbits.LATC0
-#define GREEN_LED       LATCbits.LATC1
-#define YELLOW_LED      LATCbits.LATC2
+#define RED_LED         LATAbits.LATA0
+#define GREEN_LED       LATAbits.LATA1
+#define YELLOW_LED      LATAbits.LATA2
 
 #define rLedOn          RED_LED = 0
 #define rLedOff         RED_LED = 1
@@ -95,11 +89,7 @@ void eeprom_write (unsigned char address, unsigned char value);
 #define yLedOff         YELLOW_LED = 1
 
 #define TX_nRX          LATCbits.LATC5
-#define APB_ADDRESS     0x10
-
-#define FILTER_VALUES   10
-#define NUM_OUTLETS     8
-//#define ENABLE_CURRENT
+#define APB_ADDRESS     0x20
 
 #define COMM_ERROR_SP   200 //25mSec timer interrupt, 5 sec alarm
                             //5000mSec / 25mSec = 200
@@ -107,14 +97,10 @@ void eeprom_write (unsigned char address, unsigned char value);
 /******************************************************************************/
 /* Variable Definitions                                                       */
 /******************************************************************************/
-#ifdef ENABLE_CURRENT
-typedef struct amperage_filter {
-    uint16_t sum;
-    uint16_t values[FILTER_VALUES];
-    uint16_t average;
-    uint8_t chsValue : 5;
-}amperageFilter;
-#endif
+typedef struct pwm_port {
+    volatile uint8_t* ccpr;
+    volatile uint8_t* ccpcon;
+}pwmPort;
 
 /******************************************************************************/
 /* Functions                                                                  */
@@ -126,62 +112,46 @@ void sendDefualtResponse (void);
 void enableAddressDetection (void);
 void disableAddressDetection (void);
 void memoryCopy (void* to, void* from, size_t count);
-#ifdef ENABLE_CURRENT
-uint16_t getAdc (void);
-#endif
+uint16_t getChannelValue (uint8_t channel);
+void setChannelValue (uint8_t channel, uint16_t value);
 
 /******************************************************************************/
 /* Global Variables                                                           */
 /******************************************************************************/
 apb_obj apbInst;
-#ifdef ENABLE_CURRENT
-amperageFilter ct[NUM_OUTLETS];
-uint8_t outletPtr;
-uint8_t valuePtr;
-#endif
+pwmPort pwm [4];
 uint8_t commCounter;
 uint8_t commError;
-uint8_t fallbackFlags;
 
 void main (void) {
     initializeHardware ();
-    
-#ifdef ENABLE_CURRENT
-    outletPtr = 0;
-    valuePtr = 0;
- 
-    int i, j;
-    for (i = 0; i < NUM_OUTLETS; ++i) {
-        ct[i].sum = 0;
-        for (j = 0; j < FILTER_VALUES; ++j)
-            ct[i].values[j] = 0;
-        ct[i].average = 0;
+
+    pwm [0].ccpr = &CCPR1L;
+    pwm [0].ccpcon = &CCP1CON;
+    pwm [1].ccpr = &CCPR2L;
+    pwm [1].ccpcon = &CCP2CON;
+    pwm [2].ccpr = &CCPR3L;
+    pwm [2].ccpcon = &CCP3CON;
+    pwm [3].ccpr = &CCPR4L;
+    pwm [3].ccpcon = &CCP4CON;
+
+    int i;
+    for (i = 0; i < 4; ++i) {
+        uint8_t type = eeprom_read (i);
+
+        //type 255 is PWM output so close relay to bypass filter
+        if (type == 255)
+            PORTB |= 1 << (i + 1);
     }
-    
-    ct[0].chsValue = 0b00000;
-    ct[1].chsValue = 0b00001;
-    ct[2].chsValue = 0b00010;
-    ct[3].chsValue = 0b00011;
-    ct[4].chsValue = 0b00101;
-    ct[5].chsValue = 0b00110;
-    ct[6].chsValue = 0b00111;
-    ct[7].chsValue = 0b01000;
-#endif
-    
-    fallbackFlags = eeprom_read (OUTLET_FALLBACK_ADDRESS);
-    
+
     //AquaPic Bus initialization
     apbInst = apb_new ();
     apb_init (apbInst, &apbMessageHandler, &enableAddressDetection, &disableAddressDetection, APB_ADDRESS);
-    
+
     //enable UART
     TX_nRX = 0;
     TXSTAbits.TXEN = 1; //Transmit Enable, Transmit enabled
     RCSTAbits.CREN = 1; //Continuous Receive Enable, Enables receiver
-    
-    /*Global Interrupts*/
-    PEIE = 1; //Enable peripheral interrupts
-    GIE = 1;  //Enable Global interrupts
     
     yLedOff;
     gLedOn;
@@ -197,41 +167,13 @@ void main (void) {
 }
 
 void interrupt ISR (void) {
-#ifdef ENABLE_CURRENT
-    static uint8_t lastPtr = NUM_OUTLETS - 1; //outletPtr starts at 0 so we'll just initialize this to the end
-    
-    if (ADIF) {
-        ct[outletPtr].sum -= ct[outletPtr].values[valuePtr]; //subtract the oldest value from the sum
-        ct[outletPtr].values[valuePtr] = getAdc (); //get the new value
-        ct[outletPtr].sum += ct[outletPtr].values[valuePtr]; //add the newest value to the sum
-        
-        ct[outletPtr].average = ct[outletPtr].sum / FILTER_VALUES; //average the sum
-        
-        _increment(outletPtr, NUM_OUTLETS);
-        ADCON0bits.CHS = ct[outletPtr].chsValue; //set the ADC to the new channel
-        
-        if (outletPtr == 0) //we're back to the beginning of the outlets, increment the value array pointer
-            _increment(valuePtr, FILTER_VALUES);
-        
-        ADIF = 0; //Clear flag
-    }
-#endif
-    
     if (TMR4IF) {
         TMR4IF = 0; //Clear flag
-        
-#ifdef ENABLE_CURRENT
-        if (outletPtr != lastPtr) { //the ADC isn't finished so don't start it
-            startAdc;
-            lastPtr = outletPtr;
-        }
-#endif
         
         if (!commError) {
             ++commCounter;
             
             if (commCounter >= COMM_ERROR_SP) {
-                LATD = fallbackFlags; //set outlets to the fallback
                 commError = 1;
                 gLedOff;
                 rLedOn;
@@ -251,73 +193,79 @@ void initializeHardware (void) {
     OSCCONbits.SCS = 0b00;  //System Clock Select: Clock determined by FOSC<2:0> in Configuration Word 1
 
     /*Port Initialization*/
-    PORTA = 0x00;   //Clear Port A
+    PORTA = 0x03;   //Clear Port A, Write 1 to RG Status LED sinks, ie turn off LEDs
     PORTB = 0x00;   //Clear Port B
-    PORTC = 0x03;   //Clear Port C, Write 1 to RG Status LED sinks, ie turn off LEDs
-    PORTD = 0x00;   //Clear Port D
-    PORTE = 0x00;   //Clear Port E
+    PORTC = 0x00;   //Clear Port C
 
     /*Port Direction*/
-    TRISA = 0b00001111; //Port A Directions
-            //****1*** = RA3, AN3, Outlet 4 CT
-            //*****1** = RA2, AN2, Outlet 3 CT
-            //******1* = RA1, AN1, Outlet 2 CT
-            //*******1 = RA0, AN0, Outlet 1 CT
-
-    TRISB = 0b00000100; //Port B Directions
-            //*****1** = RB2, AN8, Outlet 8 CT
-
-    TRISC = 0b10001000; //Port C Directions
+    TRISA = 0b00000000; //Port A Directions
+            //*****0** = RA2, Yellow Status LED
+            //******0* = RA1, Green Status LED
+            //*******0 = RA0, Red Status LED
+    TRISB = 0b00100001; //Port B Directions
+            //**1***** = RB5, Initial setting for CCP3(PWM) setup
+            //***0**** = RB4, Ch4 Relay
+            //****0*** = RB3, Ch3 Relay
+            //*****0** = RB2, Ch2 Relay
+            //******0* = RB1, Ch1 Relay
+            //*******1 = RB0, Initial setting for CCP4(PWM) setup
+    TRISC = 0b10000110; //Port C Directions
             //1******* = RC7, RX
             //*0****** = RC6, TX
             //**0***** = RC5, TX_nRX
-            //****1*** = RC3, AC Power Available
-            //*****0** = RC2, Yellow Status LED
-            //******0* = RC1, Green Status LED
-            //*******0 = RC0, Red Status LED
-    
-    TRISD = 0b00000000; //Port D Directions
-            //0******* = RD7, Outlet 8 relay
-            //*0****** = RD6, Outlet 7 relay
-            //**0***** = RD5, Outlet 6 relay
-            //***0**** = RD5, Outlet 5 relay
-            //****0*** = RD3, Outlet 4 relay
-            //*****0** = RD2, Outlet 3 relay
-            //******0* = RD1, Outlet 2 relay
-            //*******0 = RD0, Outlet 1 relay
-    
-    TRISE = 0b00000111; //Port E Directions
-            //*****1** = RE2, AN7, Outlet 7 CT
-            //******1* = RE1, AN6, Outlet 6 CT
-            //*******1 = RE0, AN5, Outlet 5 CT
+            //*****1** = RC2, Initial setting for CCP1(PWM) setup
+            //******1* = RC1, Initial setting for CCP2(PWM) setup
 
     /*Analog Select*/
-    ANSELA = 0b00001111;
-             //****1*** = RA3, AN3, Outlet 4 CT
-             //*****1** = RA2, AN2, Outlet 3 CT
-             //******1* = RA1, AN1, Outlet 2 CT
-             //*******1 = RA0, AN0, Outlet 1 CT
+    ANSELA = 0x00;  //All digital ports
+    ANSELB = 0x00;  //All digital ports
 
-    ANSELB = 0b00000100;
-             //*****1** = RB2, AN8, Outlet 8 CT
-    
-    ANSELE = 0b00000111;
-             //*****1** = RE2, AN7, Outlet 7 CT
-             //******1* = RE1, AN6, Outlet 6 CT
-             //*******1 = RE0, AN5, Outlet 5 CT
+    /*Port Selection*/
+    APFCONbits.CCP3SEL = 1; //CCP3:P3A function is on RB5
+    APFCONbits.CCP2SEL = 0; //CCP2:P2A function is on
 
-#ifdef ENABLE_CURRENT
-    /*ADC*/
-    ADCON0 = 0b00000001;
-             //*00000** = CHS: Analog Channel Select bits, AN0
-             //*******1 = ADON: ADC Enable bit, ADC is enabled
+    /*CCP(PWM)*/
+    PR2 = 0xFF; //31.25 kHz from data sheet page 218
 
-    ADCON1 = 0b11010100;
-             //1******* = ADFM: A/D Result Format Select, Right Justified
-             //*101**** = ADCS: A/D Conversion Clock Select, FOSC/16
-             //*****0** = ADNREF: A/D Negative Voltage Reference Configuration, VREF- is connected to Vss
-             //******00 = ADPREF: A/D Positive Voltage Reference Configuration, VREF+ is connected to Vdd
-#endif
+    /*CCP1*/
+    CCP1CON = 0b00001100;
+              //00****** = P1M: Enhanced PWM Output Configuration, Single output; PxA modulated; PxB, PxC, PxD assigned as port pins
+              //**00**** = DC1B: PWM Duty Cycle Least Significant bits
+              //****1100 = CCP1M: ECCP1 Mode Select, PWM mode
+    CCPR1L = 0x00;  //Duty Cycle set to 0
+
+    /*CCP2*/
+    CCP2CON = 0b00001100;
+              //00****** = P2M: Enhanced PWM Output Configuration, Single output; PxA modulated; PxB, PxC, PxD assigned as port pins
+              //**00**** = DC2B: PWM Duty Cycle Least Significant bits
+              //****1100 = CCP2M: ECCP2 Mode Select, PWM mode
+    CCPR2L = 0x00;  //Duty Cycle set to 0;
+
+    /*CCP3*/
+    CCP3CON = 0b00001100;
+              //00****** = P3M: Enhanced PWM Output Configuration, Single output; PxA modulated; PxB, PxC, PxD assigned as port pins
+              //**00**** = DC3B: PWM Duty Cycle Least Significant bits
+              //****1100 = CCP3M: ECCP3 Mode Select, PWM mode
+    CCPR3L = 0x00;  //Duty Cycle set to 0;
+
+    /*CCP4*/
+    CCP4CON = 0b00001100;
+              //00****** = P4M: Enhanced PWM Output Configuration, Single output; PxA modulated; PxB, PxC, PxD assigned as port pins
+              //**00**** = DC4B: PWM Duty Cycle Least Significant bits
+              //****1100 = CCP4M: CCP4 Mode Select, PWM mode
+    CCPR4L = 0x00;  //Duty Cycle set to 0;
+
+    CCPTMRS0 = 0b00000000;  //CCP<1:4> Modules based on Timer2
+
+    T2CON = 0b00000100;
+            //*0000*** = T2OUTPS: Timer2 Output Postscaler Select, Does Not Matter for PWM Period
+            //*****1** = TMR2ON: Timer2 is on
+            //******00 = T2CKPS: Timer2-type Clock Prescale Select, Prescaler is 1
+
+    TRISCbits.TRISC2 = 0; //Clear TRISC2 bit to enable PWM1 output on pin
+    TRISCbits.TRISC1 = 0; //Clear TRISC1 bit to enable PWM2 output on pin
+    TRISBbits.TRISB5 = 0; //Clear TRISB5 bit to enable PWM3 output on pin
+    TRISBbits.TRISB0 = 0; //Clear TRISB0 bit to enable PWM4 output on pin
     
     /*Timer 4*/
     PR4 = 0xC2; //Timer Period = 25mSec
@@ -332,14 +280,17 @@ void initializeHardware (void) {
             //*****1** = TMR2ON: Timer2 is on
             //******11 = T2CKPS: Timer2-type Clock Prescale Select, Prescaler is 64
 
+    TMR4IF = 0; //Clear Timer4 interrupt flag
+    TMR4IE = 1; //Enable Timer4 interrupts
+
     /*UART*/
-    //Set BRG16 to one for fast speed
+    //Set to one for fast speed
     BAUDCONbits.BRG16 = 1; //16-bit Baud Rate Generator, 16-bit Baud Rate Generator is used
-    //Set BRGH to one for fast speed
+    //Set to one for fast speed
     TXSTAbits.BRGH = 1; //High Baud Rate Select, High speed
     SPBRGH = 0x00;  //Nothing in the high register
     SPBRGL = 0x8A;  
-                    //Desired Baud Rate = ***57,600Mb*** or 115,200Mb
+                    //Desired Baud Rate = 57,600Mb or 115,200Mb
                     //Baud Rate = Fosc / 4(BRG + 1) = 32MHz / 4(138 + 1) = 57,554Mb
                     //BRG = 138 or 0x8A
                     //Error = (Desired Baud Rate - Baud Rate) / Desired Baud Rate
@@ -357,14 +308,10 @@ void initializeHardware (void) {
             //1******* = SPEN: Serial Port Enable, Serial port enabled
             //*1****** = RX9: 9-bit Receive Enable, Selects 9-bit reception
             //****1*** = ADDEN: Address Detect Enable, Enables address detection
-    
-#ifdef ENABLE_CURRENT
-    ADIF = 0; //Clear ADC interrupt flag
-    ADIE = 1; //Enable ADC interrupts
-#endif
-    
-    TMR4IF = 0; //Clear Timer4 interrupt flag
-    TMR4IE = 1; //Enable Timer4 interrupts
+
+    /*Global Interrupts*/
+    PEIE = 1; //Enable peripheral interrupts
+    GIE = 1; //Enable Global interrupts
 }
 
 void apbMessageHandler (void) {
@@ -372,102 +319,88 @@ void apbMessageHandler (void) {
     
     switch (apbInst->function) {
         case 2: { //setup single channel
-            uint8_t outlet   = apbInst->message [3];
-            uint8_t fallback = apbInst->message [4];
+            uint8_t channel = apbInst->message [3] + 1; //0 is channel 1
+            uint8_t type    = apbInst->message [4];
 
-            flagSet(fallbackFlags, outlet, fallback);
-
-            eeprom_write (OUTLET_FALLBACK_ADDRESS, fallbackFlags);
-            sendDefualtResponse ();
-            break;
-        }
-#ifdef ENABLE_CURRENT
-        case 10: { //read outlet current
-            #define FUNCTION10_LENGTH 8 //header + outlet + current + crc = 3 + 1 + 2 + 2
-            
-            uint8_t outlet = apbInst->message[3];
-            uint16_t current  = ct[outlet].average;
-            
-            uint8_t m[FUNCTION10_LENGTH];
-            uint8_t crc[2];
-
-            m[0] = apbInst->address;
-            m[1] = 10; //function number
-            m[2] = FUNCTION10_LENGTH;  //message length
-            m[3] = outlet;
-            memoryCopy (&(m[4]), &current, sizeof (uint16_t));
-            apb_crc16 (m, crc, FUNCTION10_LENGTH);
-            m[FUNCTION10_LENGTH - 2] = crc[0];
-            m[FUNCTION10_LENGTH - 1] = crc[1];
-            
-            writeUartData (m, FUNCTION10_LENGTH);
-            
-            break;
-        }
-#endif
-        case 20: { //read status
-            #define FUNCTION20_LENGTH 7 //header + ac power avail + current mask + crc = 3 + 1 + 1 + 2
-            
-            uint8_t m[FUNCTION20_LENGTH];
-            uint8_t crc[2];
-            
-            m[0] = apbInst->address;
-            m[1] = 20; //function number
-            m[2] = FUNCTION20_LENGTH;  //message length
-            if (AC_POWER_AVAIL)
-                m[3] = 0xFF;
+            //type 255 is PWM output so close relay to bypass filter
+            if (type == 255)
+                PORTB |= 1 << channel;
             else
-                m[3] = 0x00;
-            
-#ifdef ENABLE_CURRENT
-            m[4] = 0xFF;
-#else
-            m[4] = 0x00;
-#endif
-            
-            apb_crc16 (m, crc, FUNCTION20_LENGTH);
-            m[FUNCTION20_LENGTH - 2] = crc[0];
-            m[FUNCTION20_LENGTH - 1] = crc[1];
-            
-            writeUartData (m, FUNCTION20_LENGTH);
-            
-            break;
-        }
-#ifdef ENABLE_CURRENT
-        case 21: { //read all current
-            #define FUNCTION21_LENGTH 21 //header + 8 * current + crc = 3 + (8 * 2) + 2
-            
-            uint8_t m[FUNCTION21_LENGTH];
-            uint8_t crc[2];
-            
-            m[0] = apbInst->address;
-            m[1] = 21; //function number
-            m[2] = FUNCTION21_LENGTH; //message length
-            int i;
-            for (i = 0; i < NUM_OUTLETS; ++i)
-                memoryCopy (&(m[i * sizeof (uint16_t) + 3]), &(ct[i].average), sizeof (uint16_t));
-            apb_crc16 (m, crc, FUNCTION21_LENGTH);
-            m[FUNCTION21_LENGTH - 2] = crc[0];
-            m[FUNCTION21_LENGTH - 1] = crc[1];
-            
-            writeUartData (m, FUNCTION21_LENGTH);
-            
-            break;
-        }
-#endif
-        case 30: { //write outlet
-            uint8_t outlet = apbInst->message [3];
-            uint8_t state  = apbInst->message [4];
-            
-            uint8_t dLat = LATD;
-            flagSet(dLat, outlet, state);
-            LATD = dLat;
-            
+                PORTB &= ~(1 << channel);
+
+            eeprom_write (channel - 1, type);
+
             sendDefualtResponse ();
+
+            break;
+        }
+        case 10: { //read single channel value
+            uint8_t channel = apbInst->message [3];
+            uint16_t value  = getChannelValue (channel);
+            
+            uint8_t m [7];
+            uint8_t crc [2];
+
+            m [0] = apbInst->address;
+            m [1] = 10; //function number
+            m [2] = 7;  //message length
+            memoryCopy (&(m [3]), &value, sizeof (uint16_t));
+            apb_crc16 (m, crc, 7);
+            m [5] = crc [0];
+            m [6] = crc [1];
+
+            writeUartData (m, 7);
+
+            break;
+        }
+        case 20: { //read all channels values
+            uint16_t values [4];
+
+            int i;
+            for (i = 0; i < 4; ++i) 
+                values [i] = getChannelValue (i);
+
+            uint8_t m [13];
+            uint8_t crc [2];
+
+            m [0] = apbInst->address;
+            m [1] = 20; //function number
+            m [2] = 13; //message length
+            memoryCopy (&(m [3]), values, sizeof (uint16_t) * 4);
+            apb_crc16 (m, crc, 13);
+            m [11] = crc [0];
+            m [12] = crc [1];
+
+            writeUartData (m, 13);
+
+            break;
+        }
+        case 30: { //write all channels values
+            uint16_t values [4];
+            memoryCopy (values, &(apbInst->message[3]), sizeof (uint16_t) * 4);
+
+            int i;
+            for (i = 0; i < 4; ++i)
+                setChannelValue (i, values [i]);
+
+            sendDefualtResponse ();
+
+            break;
+        }
+        case 31: { //write single channel value
+            uint8_t channel = apbInst->message [3];
+            uint16_t value;
+            memoryCopy (&value, &(apbInst->message[4]), sizeof (uint16_t));
+            
+            //value = (value >> 8) | (value << 8); // reverse the endianess
+            
+            setChannelValue (channel, value);
+
+            sendDefualtResponse ();
+
             break;
         }
         default:
-            sendDefualtResponse ();
             break;
     }
 }
@@ -510,13 +443,23 @@ void memoryCopy (void* to, void* from, size_t count) {
         *ptr_to++ = *ptr_from++;
 }
 
-#ifdef ENABLE_CURRENT
-uint16_t getAdc (void) {
-    uint16_t counts;
-
-    counts = ADRESH << 8; //grab highest 2 bits shift right 8
-    counts |= ADRESL;
-
-    return counts;
+uint16_t getChannelValue (uint8_t channel) {
+    uint16_t value = *(pwm [channel].ccpr) << 2;
+    value |= (*(pwm [channel].ccpcon) & 0x30) >> 4; //bits 5:4 in CCPxCON are the two LSBs
+    return value;
 }
-#endif
+
+void setChannelValue (uint8_t channel, uint16_t value) {
+    uint8_t upper = (uint8_t)((value >> 2) & 0xFF);
+    *(pwm [channel].ccpr) = upper;
+
+    if (value & 0x01) //if LSB set bit 4 in CCPxCON register
+        *(pwm [channel].ccpcon) |= 0x10;
+    else
+        *(pwm [channel].ccpcon) &= ~0x10;
+
+    if (value & 0x02) //if 2nd LSD set bit 5 in CCPxCON register
+        *(pwm [channel].ccpcon) |= 0x20;
+    else
+        *(pwm [channel].ccpcon) &= ~0x20;
+}
