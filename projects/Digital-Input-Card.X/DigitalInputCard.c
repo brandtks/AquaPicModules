@@ -1,6 +1,6 @@
 /* Created by Skyler Brandt on December 2015
  *
- * Analog Input Card
+ * Digital Input Card
  *
  *******************************************************************************
  * Copyright (C) 2015 Skyler Brandt
