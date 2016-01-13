@@ -26,6 +26,7 @@
 #include <stdlib.h>
 #include <stdint.h>     //For uint8_t, int8_t definition
 #include <xc.h>
+#include <pic16f1936.h>
 #include "../../drv_lib/aquapic_bus/aquapic_bus.h"
 
 /******************************************************************************/
@@ -318,6 +319,7 @@ void apbMessageHandler (void) {
     commCounter = 0;
     
     switch (apbInst->function) {
+#if SELECTABLE_OUTPUT
         case 2: { //setup single channel
             uint8_t channel = apbInst->message [3] + 1; //0 is channel 1
             uint8_t type    = apbInst->message [4];
@@ -334,6 +336,7 @@ void apbMessageHandler (void) {
 
             break;
         }
+#endif
         case 10: { //read single channel value
             uint8_t channel = apbInst->message [3];
             uint16_t value  = getChannelValue (channel);

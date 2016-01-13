@@ -240,7 +240,6 @@ void initializeHardware (void) {
     ANSELA = 0x00;  /*All digital ports*/
     ANSELB = 0x00;  /*All digital ports*/
     
-#if IOC
     /*Port B*/
     WPUB = 0b00111111; /*Port B Pull-up Resistors*/
            //**1***** = RB5, Input 6
@@ -249,7 +248,8 @@ void initializeHardware (void) {
            //*****1** = RB2, Input 3
            //******1* = RB1, Input 2
            //*******1 = RB0, Input 1
-    
+
+#if IOC    
     IOCBP = 0b00111111; /*Port B Interrupt on Positive Edge*/
             //**1***** = RB5, Input 6
             //***1**** = RB4, Input 5
