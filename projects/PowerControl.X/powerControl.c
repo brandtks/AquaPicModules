@@ -26,6 +26,7 @@
 #include <stdlib.h>
 #include <stdint.h>     //For uint8_t, int8_t definition
 #include <xc.h>
+#include <pic16f1937.h>
 #include "../../drv_lib/aquapic_bus/aquapic_bus.h"
 #include "../../drv_lib/common/slib_com.h"
 
@@ -280,7 +281,7 @@ void initializeHardware (void) {
             //0******* = RD7, Outlet 8 relay
             //*0****** = RD6, Outlet 7 relay
             //**0***** = RD5, Outlet 6 relay
-            //***0**** = RD5, Outlet 5 relay
+            //***0**** = RD4, Outlet 5 relay
             //****0*** = RD3, Outlet 4 relay
             //*****0** = RD2, Outlet 3 relay
             //******0* = RD1, Outlet 2 relay
@@ -406,7 +407,7 @@ void apbMessageHandler (void) {
         }
 #endif
         case 20: { //read status
-            #define FUNCTION20_LENGTH 7 //header + ac power avail + current mask + crc = 3 + 1 + 1 + 2
+            #define FUNCTION20_LENGTH 8 //header + ac power avail + state mask + current mask + crc = 3 + 1 + 1 + 1 + 2
             
             uint8_t m[FUNCTION20_LENGTH];
             uint8_t crc[2];
@@ -419,10 +420,12 @@ void apbMessageHandler (void) {
             else
                 m[3] = 0x00;
             
+            m[4] = LATD;
+            
 #ifdef ENABLE_CURRENT
-            m[4] = 0xFF;
+            m[5] = 0xFF;
 #else
-            m[4] = 0x00;
+            m[5] = 0x00;
 #endif
             
             apb_crc16 (m, crc, FUNCTION20_LENGTH);
