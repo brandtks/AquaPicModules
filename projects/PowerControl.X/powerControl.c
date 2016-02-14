@@ -35,7 +35,7 @@
 /******************************************************************************/
 /*CONFIG1*/
 #pragma config FOSC = HS        //Oscillator Selection (HS Oscillator, High-speed crystal/resonator connected between OSC1 and OSC2 pins)
-#pragma config WDTE = OFF       //Watchdog Timer Enable (WDT disabled)
+#pragma config WDTE = OFF       //Watchdog Timer Enable (WDT disnabled)
 #pragma config PWRTE = OFF      //Power-up Timer Enable (PWRT disabled)
 #pragma config MCLRE = ON       //MCLR Pin Function Select (MCLR/VPP pin function is MCLR)
 #pragma config CP = OFF         //Flash Program Memory Code Protection (Program memory code protection is disabled)
@@ -102,8 +102,8 @@ void eeprom_write (unsigned char address, unsigned char value);
 #define NUM_OUTLETS     8
 //#define ENABLE_CURRENT
 
-#define COMM_ERROR_SP   200 //25mSec timer interrupt, 5 sec alarm
-                            //5000mSec / 25mSec = 200
+#define COMM_ERROR_SP   400 //25mSec timer interrupt, 10 sec alarm
+                            //10,000mSec / 25mSec = 400
 
 /******************************************************************************/
 /* Variable Definitions                                                       */
@@ -126,6 +126,7 @@ void writeUartData (uint8_t* data, uint8_t length);
 void sendDefualtResponse (void);
 void enableAddressDetection (void);
 void disableAddressDetection (void);
+int8_t checkNinthBit (void);
 void memoryCopy (void* to, void* from, size_t count);
 #ifdef ENABLE_CURRENT
 uint16_t getAdc (void);
@@ -134,14 +135,15 @@ uint16_t getAdc (void);
 /******************************************************************************/
 /* Global Variables                                                           */
 /******************************************************************************/
-apb_obj apbInst;
+struct apbObjStruct apbInstStruct;
+apbObj apbInst = &apbInstStruct;
 #ifdef ENABLE_CURRENT
 amperageFilter ct[NUM_OUTLETS];
 uint8_t outletPtr;
 uint8_t valuePtr;
 #endif
-uint8_t commCounter;
-uint8_t commError;
+uint16_t commCounter;
+int8_t  commError;
 uint8_t fallbackFlags;
 
 void main (void) {
@@ -172,8 +174,12 @@ void main (void) {
     fallbackFlags = eeprom_read (OUTLET_FALLBACK_ADDRESS);
     
     //AquaPic Bus initialization
-    apbInst = apb_new ();
-    apb_init (apbInst, &apbMessageHandler, &enableAddressDetection, &disableAddressDetection, APB_ADDRESS);
+    apb_init (apbInst, 
+            &apbMessageHandler, 
+            &enableAddressDetection, 
+            &disableAddressDetection, 
+            &checkNinthBit,
+            APB_ADDRESS);
     
     //enable UART
     TX_nRX = 0;
@@ -233,9 +239,10 @@ void interrupt ISR (void) {
             
             if (commCounter >= COMM_ERROR_SP) {
                 LATD = fallbackFlags; //set outlets to the fallback
-                commError = 1;
+                commError = -1;
                 gLedOff;
                 rLedOn;
+                apb_restart (apbInst);
             }
         } else {
             if (commCounter == 0) {
@@ -493,7 +500,7 @@ void writeUartData (uint8_t* data, uint8_t length) {
 }
 
 void sendDefualtResponse (void) {
-    uint8_t* m = apb_build_defualt_response (apbInst);
+    uint8_t* m = apb_buildDefualtResponse (apbInst);
     writeUartData (m, 5);
 }
 
@@ -503,6 +510,14 @@ void enableAddressDetection (void) {
 
 void disableAddressDetection (void) {
     RCSTAbits.ADDEN = 0;
+}
+
+int8_t checkNinthBit (void) {
+    if (RCSTA & _RCSTA_RX9D_MASK) {
+        return -1;
+    } else {
+        return 0;
+    }
 }
 
 void memoryCopy (void* to, void* from, size_t count) {

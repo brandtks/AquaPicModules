@@ -17,7 +17,7 @@
   along with this program.  If not, see <http://www.gnu.org/licenses/
 */
 
-#include <stdlib.h> // for calloc()
+#include <stdlib.h> // for NULL
 #include <stdint.h> // for int8_t and uint8_t
 
 #include "aquapic_bus.h"
@@ -26,92 +26,81 @@
 /* Functions                                                                  */
 /******************************************************************************/
 /*****Constructor**************************************************************/
-apb_obj apb_new (void) {
+/*
+apbObj apb_new (void) {
 #ifdef CHIPKIT
-    apb_obj inst = (apb_obj)calloc(1, sizeof(struct apb_obj_struct));
+    apbObj inst = (apbObj)calloc(1, sizeof(struct apbObjStruct));
     return inst;
 #else
-    static struct apb_obj_struct inst;
+    static struct apbObjStruct inst;
     return &inst;
 #endif
 }
+*/
 
 /*****Initialize***************************************************************/
-int8_t apb_init (apb_obj inst, 
-                void (*message_handler_var)(void), 
-                void (*enable_address_detection_var)(void),
-                void (*disable_address_detection_var)(void),
-                uint8_t address_var)
+int8_t apb_init(apbObj inst, 
+                void (*messageHandlerVar)(void), 
+                void (*enableAddressDetectionVar)(void),
+                void (*disableAddressDetectionVar)(void),
+                int8_t (*checkNinthBitVar)(void),
+                uint8_t addressVar)
 {
     if (inst == NULL) return ERR_NOMEM;
     
-    inst->message_handler = message_handler_var;
-    inst->enable_address_detection = enable_address_detection_var;
-    inst->disable_address_detection = disable_address_detection_var;
-    inst->address = address_var;
-    inst->function = 0;
-    inst->message_length = 0;
-    inst->message_count = 0;
-    apb_clear_message_buffer(inst);
+    inst->messageHandler = messageHandlerVar;
+    inst->enableAddressDetection = enableAddressDetectionVar;
+    inst->disableAddressDetection = disableAddressDetectionVar;
+    inst->checkNinthBit = checkNinthBitVar;
+    inst->address = addressVar;
     
-#ifdef CHIPKIT
-    inst->apb_status = ADDRESS_RECIEVED;
-#else
-    inst->apb_status = STANDBY;
-#endif
+    apb_restart (inst);
     
     return ERR_NOERROR;
 }
 
 /*****Run Time*****************************************************************/
-void apb_run (apb_obj inst, uint8_t byte_received) {
-    switch (inst->apb_status) {
-#ifndef CHIPKIT
+void apb_run (apbObj inst, uint8_t byte_received) {
+    if (inst->checkNinthBit != NULL) {
+        if (inst->checkNinthBit ()) {
+            inst->apbStatus = STANDBY;
+        }
+    }
+    
+    switch (inst->apbStatus) {
         case STANDBY:
             if (byte_received == inst->address) {
+                if (inst->disableAddressDetection != NULL)
+                    inst->disableAddressDetection();
                 inst->message[0] = inst->address;
-                inst->message_count = 1;
-                inst->apb_status = ADDRESS_RECIEVED;
-                if (inst->disable_address_detection != NULL)
-                    inst->disable_address_detection();
+                inst->messageCount = 1;
+                inst->apbStatus = ADDRESS_RECIEVED;
+            } else {
+                apb_restart (inst);
             }
             
             break;
-#endif
         case ADDRESS_RECIEVED:
-#ifdef CHIPKIT
-            inst->message[0] = inst->address;
-#endif
             inst->function = byte_received;
             inst->message[1] = inst->function;
-            inst->message_count = 2;
-            inst->apb_status = FUNCTION_RECIEVED;
+            inst->messageCount = 2;
+            inst->apbStatus = FUNCTION_RECIEVED;
             break;
         case FUNCTION_RECIEVED:
-            inst->message_length = byte_received;
-            inst->message[2] = inst->message_length;
-            inst->message_count = 3;
-            inst->apb_status = MESSAGE_LENGTH_RECIEVED;
+            inst->messageLength = byte_received;
+            inst->message[2] = inst->messageLength;
+            inst->messageCount = 3;
+            inst->apbStatus = MESSAGE_LENGTH_RECIEVED;
             break;
         case MESSAGE_LENGTH_RECIEVED:
-            inst->message[inst->message_count++] = byte_received;
-            if (inst->message_count == inst->message_length) {
-                if (apb_check_crc(inst->message, inst->message_count)) {
-                    if (inst->message_handler != NULL)
-                        inst->message_handler();
+            inst->message[inst->messageCount++] = byte_received;
+            if (inst->messageCount == inst->messageLength) {
+                if (apb_checkCrc(inst->message, inst->messageCount)) {
+                    if (inst->messageHandler != NULL)
+                        inst->messageHandler();
                 }
                 
-                inst->message_count = 0;
-                apb_clear_message_buffer(inst);
-                
-#ifdef CHIPKIT
-                inst->apb_status = ADDRESS_RECIEVED;
-#else
-                inst->apb_status = STANDBY;
-#endif
-                
-                if (inst->enable_address_detection != NULL)
-                    inst->enable_address_detection();
+                apb_restart (inst);
             }
             
             break;
@@ -120,13 +109,23 @@ void apb_run (apb_obj inst, uint8_t byte_received) {
     }
 }
 
-void apb_clear_message_buffer (apb_obj inst) {
+void apb_restart (apbObj inst) {
+    inst->messageCount = 0;
+    inst->messageLength = 0;
+    inst->function = 0;
+    inst->apbStatus = STANDBY;
+    apb_clearMessageBuffer (inst);
+    if (inst->enableAddressDetection != NULL)
+        inst->enableAddressDetection();
+}
+
+void apb_clearMessageBuffer (apbObj inst) {
     int i;
     for (i = 0; i < MESSAGE_BUFFER_LENGTH; ++i)
         inst->message[i] = 0;
 }
 
-int8_t apb_check_crc (uint8_t* message, int length) {
+int8_t apb_checkCrc (uint8_t* message, int length) {
     uint8_t crc[2] = { 0 };
     apb_crc16(message, crc, length);
     if ((message[length - 2] == crc[0]) && (message[length - 1] == crc[1]))
@@ -157,7 +156,7 @@ void apb_crc16 (uint8_t* message, uint8_t* crc, int length) {
     crc[0] = (uint8_t)(crc_full & 0xFF);
 }
 
-uint8_t* apb_build_defualt_response (apb_obj inst) {
+uint8_t* apb_buildDefualtResponse (apbObj inst) {
     static uint8_t response[5] = { 0 };
     uint8_t crc[2] =  { 0 };
 
