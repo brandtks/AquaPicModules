@@ -182,9 +182,10 @@ void interrupt ISR (void) {
             ++commCounter;
             
             if (commCounter >= COMM_ERROR_SP) {
-                commError = 1;
+                commError = -1;
                 gLedOff;
                 rLedOn;
+                apb_restart (apbInst);
             }
         } else {
             if (commCounter == 0) {

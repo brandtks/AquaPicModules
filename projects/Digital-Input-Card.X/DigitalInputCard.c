@@ -108,12 +108,14 @@ void writeUartData (uint8_t* data, uint8_t length);
 void sendDefualtResponse (void);
 void enableAddressDetection (void);
 void disableAddressDetection (void);
+int8_t checkNinthBit (void);
 void memoryCopy (void* to, void* from, size_t count);
 
 /******************************************************************************/
 /* Global Variables                                                           */
 /******************************************************************************/
-apb_obj apbInst;
+struct apbObjStruct apbInstStruct;
+apbObj apbInst = &apbInstStruct;
 uint8_t commCounter;
 uint8_t commError;
 
@@ -121,8 +123,12 @@ void main (void) {
     initializeHardware ();
 
     //AquaPic Bus initialization
-    apbInst = apb_new ();
-    apb_init (apbInst, &apbMessageHandler, &enableAddressDetection, &disableAddressDetection, APB_ADDRESS);
+    apb_init (apbInst, 
+            &apbMessageHandler, 
+            &enableAddressDetection, 
+            &disableAddressDetection, 
+            &checkNinthBit,
+            APB_ADDRESS);
 
     //enable UART
     TX_nRX = 0;
@@ -188,9 +194,10 @@ void interrupt ISR (void) {
             ++commCounter;
             
             if (commCounter >= COMM_ERROR_SP) {
-                commError = 1;
+                commError = -1;
                 gLedOff;
                 rLedOn;
+                apb_restart (apbInst);
             }
         } else {
             if (commCounter == 0) {
@@ -386,7 +393,7 @@ void writeUartData (uint8_t* data, uint8_t length) {
 }
 
 void sendDefualtResponse (void) {
-    uint8_t* m = apb_build_defualt_response (apbInst);
+    uint8_t* m = apb_buildDefualtResponse (apbInst);
     writeUartData (m, 5);
 }
 
@@ -396,6 +403,14 @@ void enableAddressDetection (void) {
 
 void disableAddressDetection (void) {
     RCSTAbits.ADDEN = 0;
+}
+
+int8_t checkNinthBit (void) {
+    if (RCSTA & _RCSTA_RX9D_MASK) {
+        return -1;
+    } else {
+        return 0;
+    }
 }
 
 void memoryCopy (void* to, void* from, size_t count) {
