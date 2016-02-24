@@ -43,7 +43,6 @@ int8_t apb_init(apbObj inst,
                 void (*messageHandlerVar)(void), 
                 void (*enableAddressDetectionVar)(void),
                 void (*disableAddressDetectionVar)(void),
-                int8_t (*checkNinthBitVar)(void),
                 uint8_t addressVar)
 {
     if (inst == NULL) return ERR_NOMEM;
@@ -51,7 +50,6 @@ int8_t apb_init(apbObj inst,
     inst->messageHandler = messageHandlerVar;
     inst->enableAddressDetection = enableAddressDetectionVar;
     inst->disableAddressDetection = disableAddressDetectionVar;
-    inst->checkNinthBit = checkNinthBitVar;
     inst->address = addressVar;
     
     apb_restart (inst);
@@ -60,24 +58,26 @@ int8_t apb_init(apbObj inst,
 }
 
 /*****Run Time*****************************************************************/
-void apb_run (apbObj inst, uint8_t byte_received) {
-    if (inst->checkNinthBit != NULL) {
-        if (inst->checkNinthBit ()) {
-            inst->apbStatus = STANDBY;
+void apb_run (apbObj inst, uint8_t byte_received, int8_t ninthBit) {
+    if (ninthBit) {
+        if (inst->apbStatus != STANDBY) {
+            apb_restart (inst);
         }
+        
+        inst->apbStatus = STANDBY;
     }
     
     switch (inst->apbStatus) {
         case STANDBY:
             if (byte_received == inst->address) {
-                if (inst->disableAddressDetection != NULL)
-                    inst->disableAddressDetection();
+                //if (inst->disableAddressDetection != NULL)
+                //    inst->disableAddressDetection();
                 inst->message[0] = inst->address;
                 inst->messageCount = 1;
                 inst->apbStatus = ADDRESS_RECIEVED;
-            } else {
-                apb_restart (inst);
-            }
+            } //else {
+                //apb_restart (inst);
+            //}
             
             break;
         case ADDRESS_RECIEVED:
@@ -115,8 +115,8 @@ void apb_restart (apbObj inst) {
     inst->function = 0;
     inst->apbStatus = STANDBY;
     apb_clearMessageBuffer (inst);
-    if (inst->enableAddressDetection != NULL)
-        inst->enableAddressDetection();
+    //if (inst->enableAddressDetection != NULL)
+    //    inst->enableAddressDetection();
 }
 
 void apb_clearMessageBuffer (apbObj inst) {

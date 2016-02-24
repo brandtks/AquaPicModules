@@ -52,7 +52,6 @@ struct apbObjStruct {
     void (*messageHandler)(void);
     void (*enableAddressDetection)(void);
     void (*disableAddressDetection)(void);
-    int8_t (*checkNinthBit)(void);
     uint8_t address;
     uint8_t function;
     uint8_t messageLength;
@@ -74,11 +73,10 @@ int8_t apb_init (apbObj inst,
                 void (*messageHandlerVar)(void), 
                 void (*enableAddressDetectionVar)(void),
                 void (*disableAddressDetectionVar)(void),
-                int8_t (*checkNinthBitVar)(void),
                 uint8_t address_var);
 
 /*****Run Time*****************************************************************/
-void apb_run (apbObj inst, uint8_t byte_received);
+void apb_run (apbObj inst, uint8_t byte_received, int8_t ninthBit);
 
 void apb_restart (apbObj inst);
 void apb_clearMessageBuffer (apbObj inst);

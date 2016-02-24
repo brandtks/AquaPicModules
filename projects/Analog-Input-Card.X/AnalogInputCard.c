@@ -101,7 +101,6 @@ void writeUartData (uint8_t* data, uint8_t length);
 void sendDefualtResponse (void);
 void enableAddressDetection (void);
 void disableAddressDetection (void);
-int8_t checkNinthBit (void);
 void memoryCopy (void* to, void* from, size_t count);
 uint16_t getAdc (void);
 
@@ -110,11 +109,11 @@ uint16_t getAdc (void);
 /******************************************************************************/
 struct apbObjStruct apbInstStruct;
 apbObj apbInst = &apbInstStruct;
-uint8_t commCounter;
-uint8_t commError;
+uint16_t commCounter;
+uint8_t  commError;
 amperageFilter ct[NUM_CHANNELS];
-uint8_t outletPtr;
-uint8_t valuePtr;
+uint8_t  outletPtr;
+uint8_t  valuePtr;
 
 void main (void) {
     initializeHardware ();
@@ -140,7 +139,6 @@ void main (void) {
             &apbMessageHandler, 
             &enableAddressDetection, 
             &disableAddressDetection, 
-            &checkNinthBit,
             APB_ADDRESS);
 
     //enable UART
@@ -159,8 +157,9 @@ void main (void) {
         //RCIF is set regardless of the global interrupts 
         //apb_run might take a while so putting it in the main "loop" makes more sense
         if (RCIF) {
+            int8_t ninthBit = maskFlagTest(RCSTA, _RCSTA_RX9D_MASK);
             uint8_t data = RCREG;
-            apb_run (apbInst, data);
+            apb_run (apbInst, data, ninthBit);
         }
     }
 }
@@ -292,10 +291,10 @@ void initializeHardware (void) {
                     //9615 Mb
 
     TXSTAbits.TX9 = 1; //9-bit Transmit Enable, De-Selects 9-bit transmission
-    RCSTA = 0b11001000;
+    RCSTA = 0b11000000;
             //1******* = SPEN: Serial Port Enable, Serial port enabled
             //*1****** = RX9: 9-bit Receive Enable, Selects 9-bit reception
-            //****1*** = ADDEN: Address Detect Enable, Enables address detection
+            //****0*** = ADDEN: Address Detect Enable, Disables address detection
 }
 
 void apbMessageHandler (void) {
@@ -380,14 +379,6 @@ void enableAddressDetection (void) {
 
 void disableAddressDetection (void) {
     RCSTAbits.ADDEN = 0;
-}
-
-int8_t checkNinthBit (void) {
-    if (RCSTA & _RCSTA_RX9D_MASK) {
-        return -1;
-    } else {
-        return 0;
-    }
 }
 
 void memoryCopy (void* to, void* from, size_t count) {

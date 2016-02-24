@@ -1,9 +1,9 @@
 #ifndef SLIB_COM_H
 #define SLIB_COM_H
 
-//some commonly used macros
+/* some commonly used macros */
 #define _range(i, min, max)         (i >= min) && (i <= max) ? 1 : 0
-#define _rangeRange(i, x, range)    (i >= (x-range)) && (i <= (x+range)) ? 1 : 0
+#define _rangeDeadband(i, x, db)    (i >= (x-db)) && (i <= (x+db)) ? 1 : 0
 #define _rangeInc(i, max)           ((i+1) <= max) ? i+1 : i
 #define _rangeDcr(i, min)           ((i-1) >= min) ? i-1 : i
 #define _float2int(f)               (int)((f < 0.0f) ? f - 0.5f : f + 0.5f)
@@ -26,30 +26,24 @@
 #define int2bcd(i)	(uint8_t)(((i)/10<<4) + (i) % 10)
 #define bcd2int(i)	(uint8_t)((((i)>>4) * 10) + ((i) & 0x0F))
 
-#define bitSet(word, mask, b)       b ? (word |= mask) : (word &= ~mask)
-#define bitOff(word, mask)          word &= ~mask
-#define bitOn(word, mask)           word |= mask
-#define bitTest(word, mask)         (word & mask) ? 1 : 0
+#define maskFlagSet(word, mask, b)  b ? (word |= mask) : (word &= ~mask)
+#define maskFlagOff(word, mask)     word &= ~mask
+#define maskFlagOn(word, mask)      word |= mask
+#define maskFlagTest(word, mask)    (word & mask) ? 1 : 0
 
-#define flagSet(word, bit, b)       b ? (word |= (0x01 << bit)) : (word &= ~(0x01 << bit))
-#define flagOff(word, bit)          word &= ~(0x01 << bit)
-#define flagOn(word, bit)           word |= (0x01 << bit)
-#define flagTest(word, bit)         (word & (0x01 << bit)) ? 1 : 0
+#define bitFlagSet(word, bit, b)    b ? (word |= (0x01 << bit)) : (word &= ~(0x01 << bit))
+#define bitFlagOff(word, bit)       word &= ~(0x01 << bit)
+#define bitFlagOn(word, bit)        word |= (0x01 << bit)
+#define bitFlagTest(word, bit)      (word & (0x01 << bit)) ? 1 : 0
 
 /****ASM Level Macros****/
-//execute code at this address
+/* execute code at this address */
 #define _stringize(x)	#x
 #define _asm_goto(x)	__asm__("goto " _stringize(x))
-
-/****Bootloader Start Address****/
-#define BootMemResetAddr	0x00000400		//start of bootloader address
 
 /****Error Constants****/
 #define SLIB_ERR_NOERROR	0	//no error has occured
 #define SLIB_ERR_UNKNOWN	-1	//unknown error
 #define SLIB_ERR_NOMEM		-5	//out of memory
-
-/****QP Events****/
-#define SLIB_NULL_SIG	0
 
 #endif  /* SLIB_COM_H */

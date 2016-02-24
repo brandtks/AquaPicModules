@@ -126,7 +126,6 @@ void writeUartData (uint8_t* data, uint8_t length);
 void sendDefualtResponse (void);
 void enableAddressDetection (void);
 void disableAddressDetection (void);
-int8_t checkNinthBit (void);
 void memoryCopy (void* to, void* from, size_t count);
 #ifdef ENABLE_CURRENT
 uint16_t getAdc (void);
@@ -143,8 +142,8 @@ uint8_t outletPtr;
 uint8_t valuePtr;
 #endif
 uint16_t commCounter;
-int8_t  commError;
-uint8_t fallbackFlags;
+int8_t   commError;
+uint8_t  fallbackFlags;
 
 void main (void) {
     initializeHardware ();
@@ -178,7 +177,6 @@ void main (void) {
             &apbMessageHandler, 
             &enableAddressDetection, 
             &disableAddressDetection, 
-            &checkNinthBit,
             APB_ADDRESS);
     
     //enable UART
@@ -194,11 +192,12 @@ void main (void) {
     gLedOn;
     
     while (1) {
-        //RCIF is set regardless of the global interrupts 
-        //apb_run might take a while so putting it in the main "loop" makes more sense
+        /* RCIF is set regardless of the global interrupts */
+        /* apb_run might take a while so putting it in the main "loop" makes more sense */
         if (RCIF) {
+            int8_t ninthBit = maskFlagTest(RCSTA, _RCSTA_RX9D_MASK);
             uint8_t data = RCREG;
-            apb_run (apbInst, data);
+            apb_run (apbInst, data, ninthBit);
         }
     }
 }
@@ -228,7 +227,7 @@ void interrupt ISR (void) {
         TMR4IF = 0; //Clear flag
         
 #ifdef ENABLE_CURRENT
-        if (outletPtr != lastPtr) { //the ADC isn't finished so don't start it
+        if (outletPtr != lastPtr) { /* the ADC isn't finished so don't start it */
             startAdc;
             lastPtr = outletPtr;
         }
@@ -238,7 +237,7 @@ void interrupt ISR (void) {
             ++commCounter;
             
             if (commCounter >= COMM_ERROR_SP) {
-                LATD = fallbackFlags; //set outlets to the fallback
+                LATD = fallbackFlags; /* set outlets to the fallback */
                 commError = -1;
                 gLedOff;
                 rLedOn;
@@ -255,17 +254,17 @@ void interrupt ISR (void) {
 }
 
 void initializeHardware (void) {
-    /*Oscillator*/
+    /****Oscillator****/
     OSCCONbits.SCS = 0b00;  //System Clock Select: Clock determined by FOSC<2:0> in Configuration Word 1
 
-    /*Port Initialization*/
+    /****Port Initialization****/
     PORTA = 0x00;   //Clear Port A
     PORTB = 0x00;   //Clear Port B
     PORTC = 0x03;   //Clear Port C, Write 1 to RG Status LED sinks, ie turn off LEDs
     PORTD = 0x00;   //Clear Port D
     PORTE = 0x00;   //Clear Port E
 
-    /*Port Direction*/
+    /****Port Direction****/
     TRISA = 0b00001111; //Port A Directions
             //****1*** = RA3, AN3, Outlet 4 CT
             //*****1** = RA2, AN2, Outlet 3 CT
@@ -299,7 +298,7 @@ void initializeHardware (void) {
             //******1* = RE1, AN6, Outlet 6 CT
             //*******1 = RE0, AN5, Outlet 5 CT
 
-    /*Analog Select*/
+    /****Analog Select****/
     ANSELA = 0b00001111;
              //****1*** = RA3, AN3, Outlet 4 CT
              //*****1** = RA2, AN2, Outlet 3 CT
@@ -315,7 +314,7 @@ void initializeHardware (void) {
              //*******1 = RE0, AN5, Outlet 5 CT
 
 #ifdef ENABLE_CURRENT
-    /*ADC*/
+    /****ADC****/
     ADCON0 = 0b00000001;
              //*00000** = CHS: Analog Channel Select bits, AN0
              //*******1 = ADON: ADC Enable bit, ADC is enabled
@@ -325,9 +324,12 @@ void initializeHardware (void) {
              //*101**** = ADCS: A/D Conversion Clock Select, FOSC/16
              //*****0** = ADNREF: A/D Negative Voltage Reference Configuration, VREF- is connected to Vss
              //******00 = ADPREF: A/D Positive Voltage Reference Configuration, VREF+ is connected to Vdd
+    
+    ADIF = 0;       /* Clear ADC interrupt flag */
+    ADIE = 1;       /* Enable ADC interrupts */
 #endif
     
-    /*Timer 4*/
+    /****Timer 4****/
     PR4 = 0xC2; //Timer Period = 25mSec
                 //Timer Period = [PRx + 1] * 4 * Tosc * TxCKPS * TxOUTPS
                 //PRx = [Timer Period / (4 * Tosc * TxCKPS * TxOUTPS)] - 1
@@ -339,12 +341,15 @@ void initializeHardware (void) {
             //*1111*** = T2OUTPS: Timer Output Postscaler Select, 1:16 Postscaler
             //*****1** = TMR2ON: Timer2 is on
             //******11 = T2CKPS: Timer2-type Clock Prescale Select, Prescaler is 64
+    
+    TMR4IF = 0;     /* Clear Timer4 interrupt flag */
+    TMR4IE = 1;     /* Enable Timer4 interrupts */
 
-    /*UART*/
-    //Set BRG16 to one for fast speed
+    /****UART****/
+    /* Set BRG16 to one for fast speed */
     BAUDCONbits.BRG16 = 1; //16-bit Baud Rate Generator, 16-bit Baud Rate Generator is used
-    //Set BRGH to one for fast speed
-    TXSTAbits.BRGH = 1; //High Baud Rate Select, High speed
+    /* Set BRGH to one for fast speed */
+    TXSTAbits.BRGH = 1; /* High Baud Rate Select, High speed */
     SPBRGH = 0x00;  //Nothing in the high register
     SPBRGL = 0x8A;  
                     //Desired Baud Rate = ***57,600Mb*** or 115,200Mb
@@ -360,38 +365,30 @@ void initializeHardware (void) {
                     //BRG = 51 or 0x33
                     //9615 Mb
 
-    TXSTAbits.TX9 = 1; //9-bit Transmit Enable, De-Selects 9-bit transmission
-    RCSTA = 0b11001000;
+    TXSTAbits.TX9 = 1; /* 9-bit Transmit Enable, Selects 9-bit transmission */
+    RCSTA = 0b11000000;
             //1******* = SPEN: Serial Port Enable, Serial port enabled
             //*1****** = RX9: 9-bit Receive Enable, Selects 9-bit reception
-            //****1*** = ADDEN: Address Detect Enable, Enables address detection
-    
-#ifdef ENABLE_CURRENT
-    ADIF = 0; //Clear ADC interrupt flag
-    ADIE = 1; //Enable ADC interrupts
-#endif
-    
-    TMR4IF = 0; //Clear Timer4 interrupt flag
-    TMR4IE = 1; //Enable Timer4 interrupts
+            //****0*** = ADDEN: Address Detect Enable, Disables address detection
 }
 
 void apbMessageHandler (void) {
     commCounter = 0;
     
     switch (apbInst->function) {
-        case 2: { //setup single channel
+        case 2: { /* setup single channel */
             uint8_t outlet   = apbInst->message [3];
             uint8_t fallback = apbInst->message [4];
 
-            flagSet(fallbackFlags, outlet, fallback);
+            bitFlagSet(fallbackFlags, outlet, fallback);
 
             eeprom_write (OUTLET_FALLBACK_ADDRESS, fallbackFlags);
             sendDefualtResponse ();
             break;
         }
 #ifdef ENABLE_CURRENT
-        case 10: { //read outlet current
-            #define FUNCTION10_LENGTH 8 //header + outlet + current + crc = 3 + 1 + 2 + 2
+        case 10: { /* read outlet current */
+            #define FUNCTION10_LENGTH 8 /* header + outlet + current + crc = 3 + 1 + 2 + 2 */
             
             uint8_t outlet = apbInst->message[3];
             uint16_t current  = ct[outlet].average;
@@ -400,8 +397,8 @@ void apbMessageHandler (void) {
             uint8_t crc[2];
 
             m[0] = apbInst->address;
-            m[1] = 10; //function number
-            m[2] = FUNCTION10_LENGTH;  //message length
+            m[1] = 10; /* function number */
+            m[2] = FUNCTION10_LENGTH;  /* message length */
             m[3] = outlet;
             memoryCopy (&(m[4]), &current, sizeof (uint16_t));
             apb_crc16 (m, crc, FUNCTION10_LENGTH);
@@ -413,15 +410,15 @@ void apbMessageHandler (void) {
             break;
         }
 #endif
-        case 20: { //read status
-            #define FUNCTION20_LENGTH 8 //header + ac power avail + state mask + current mask + crc = 3 + 1 + 1 + 1 + 2
+        case 20: { /* read status */
+            #define FUNCTION20_LENGTH 8 /* header + ac power avail + state mask + current mask + crc = 3 + 1 + 1 + 1 + 2 */
             
             uint8_t m[FUNCTION20_LENGTH];
             uint8_t crc[2];
             
             m[0] = apbInst->address;
-            m[1] = 20; //function number
-            m[2] = FUNCTION20_LENGTH;  //message length
+            m[1] = 20; /* function number */
+            m[2] = FUNCTION20_LENGTH;  /* message length */
             if (AC_POWER_AVAIL)
                 m[3] = 0xFF;
             else
@@ -444,15 +441,15 @@ void apbMessageHandler (void) {
             break;
         }
 #ifdef ENABLE_CURRENT
-        case 21: { //read all current
-            #define FUNCTION21_LENGTH 21 //header + 8 * current + crc = 3 + (8 * 2) + 2
+        case 21: { /* read all current */
+            #define FUNCTION21_LENGTH 21 /* header + 8 * current + crc = 3 + (8 * 2) + 2 */
             
             uint8_t m[FUNCTION21_LENGTH];
             uint8_t crc[2];
             
             m[0] = apbInst->address;
-            m[1] = 21; //function number
-            m[2] = FUNCTION21_LENGTH; //message length
+            m[1] = 21; /* function number */
+            m[2] = FUNCTION21_LENGTH; /* message length */
             int i;
             for (i = 0; i < NUM_OUTLETS; ++i)
                 memoryCopy (&(m[i * sizeof (uint16_t) + 3]), &(ct[i].average), sizeof (uint16_t));
@@ -465,12 +462,12 @@ void apbMessageHandler (void) {
             break;
         }
 #endif
-        case 30: { //write outlet
+        case 30: { /* write outlet */
             uint8_t outlet = apbInst->message [3];
             uint8_t state  = apbInst->message [4];
             
             uint8_t dLat = LATD;
-            flagSet(dLat, outlet, state);
+            bitFlagSet(dLat, outlet, state);
             LATD = dLat;
             
             sendDefualtResponse ();
@@ -483,20 +480,20 @@ void apbMessageHandler (void) {
 }
 
 void writeUartData (uint8_t* data, uint8_t length) {
-    TX_nRX = 1; //RS-485 chip transmit enable is high
+    TX_nRX = 1; /* RS-485 chip transmit enable is high */
     
     int i;
     for (i = 0; i < length; ++i) {
         TXREG = *data;
         ++data;
-        while (!TXIF) //TXIF is set when the TXREG is empty
+        while (!TXIF) /* TXIF is set when the TXREG is empty */
             continue;
     }
 
-    while (!TRMT) //wait for transmit shift register to be empty
+    while (!TRMT) /* wait for transmit shift register to be empty */
         continue;
     
-    TX_nRX = 0; //RS-485 chip receive enable is low
+    TX_nRX = 0; /* RS-485 chip receive enable is low */
 }
 
 void sendDefualtResponse (void) {
@@ -510,14 +507,6 @@ void enableAddressDetection (void) {
 
 void disableAddressDetection (void) {
     RCSTAbits.ADDEN = 0;
-}
-
-int8_t checkNinthBit (void) {
-    if (RCSTA & _RCSTA_RX9D_MASK) {
-        return -1;
-    } else {
-        return 0;
-    }
 }
 
 void memoryCopy (void* to, void* from, size_t count) {
