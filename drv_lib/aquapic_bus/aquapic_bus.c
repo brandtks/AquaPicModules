@@ -39,18 +39,21 @@ apbObj apb_new (void) {
 */
 
 /*****Initialize***************************************************************/
-int8_t apb_init(apbObj inst, 
-                void (*messageHandlerVar)(void), 
-                void (*enableAddressDetectionVar)(void),
-                void (*disableAddressDetectionVar)(void),
-                uint8_t addressVar)
-{
+int8_t apb_init(
+        apbObj inst, 
+        void (*messageHandlerVar)(void), 
+        void (*enableAddressDetectionVar)(void),
+        void (*disableAddressDetectionVar)(void),
+        uint8_t addressVar,
+        uint8_t framingTimer
+) {
     if (inst == NULL) return ERR_NOMEM;
     
     inst->messageHandler = messageHandlerVar;
     inst->enableAddressDetection = enableAddressDetectionVar;
     inst->disableAddressDetection = disableAddressDetectionVar;
     inst->address = addressVar;
+    inst->framingSetpoint = FRAMING_TIME / framingTimer;
     
     apb_restart (inst);
     
@@ -58,26 +61,30 @@ int8_t apb_init(apbObj inst,
 }
 
 /*****Run Time*****************************************************************/
-void apb_run (apbObj inst, uint8_t byte_received, int8_t ninthBit) {
-    if (ninthBit) {
-        if (inst->apbStatus != STANDBY) {
-            apb_restart (inst);
-        }
-        
-        inst->apbStatus = STANDBY;
-    }
+//void apb_run (apbObj inst, uint8_t byte_received, int8_t ninthBit) {
+void apb_run (apbObj inst, uint8_t byte_received) {
+    //if (ninthBit) {
+    //    if (inst->apbStatus != STANDBY) {
+    //        apb_restart (inst);
+    //    }
+    //    
+    //    inst->apbStatus = STANDBY;
+    //}
+    
+    inst->framingCount = 0;
     
     switch (inst->apbStatus) {
-        case STANDBY:
+        case WAIT_FOR_ADDRESS:
             if (byte_received == inst->address) {
                 //if (inst->disableAddressDetection != NULL)
                 //    inst->disableAddressDetection();
                 inst->message[0] = inst->address;
                 inst->messageCount = 1;
                 inst->apbStatus = ADDRESS_RECIEVED;
-            } //else {
+            } else {
                 //apb_restart (inst);
-            //}
+                inst->apbStatus = WAIT_FOR_FRAMING;
+            }
             
             break;
         case ADDRESS_RECIEVED:
@@ -100,7 +107,8 @@ void apb_run (apbObj inst, uint8_t byte_received, int8_t ninthBit) {
                         inst->messageHandler();
                 }
                 
-                apb_restart (inst);
+                //apb_restart (inst);
+                inst->apbStatus = WAIT_FOR_FRAMING;
             }
             
             break;
@@ -109,24 +117,45 @@ void apb_run (apbObj inst, uint8_t byte_received, int8_t ninthBit) {
     }
 }
 
+void apb_framing (apbObj inst) {
+    if (inst->apbStatus != WAIT_FOR_ADDRESS) {
+        inst->framingCount++;
+        
+        if (inst->framingCount >= inst->framingSetpoint) {
+            apb_setupMessage (inst);
+        }
+    }
+}
+
 void apb_restart (apbObj inst) {
     inst->messageCount = 0;
     inst->messageLength = 0;
     inst->function = 0;
-    inst->apbStatus = STANDBY;
+    inst->framingCount = 0;
+    inst->apbStatus = WAIT_FOR_FRAMING;
     apb_clearMessageBuffer (inst);
+    
     //if (inst->enableAddressDetection != NULL)
     //    inst->enableAddressDetection();
 }
 
+void apb_setupMessage (apbObj inst) {
+    inst->messageCount = 0;
+    inst->messageLength = 0;
+    inst->function = 0;
+    inst->apbStatus = WAIT_FOR_ADDRESS;
+    apb_clearMessageBuffer (inst);
+}
+
 void apb_clearMessageBuffer (apbObj inst) {
     int i;
-    for (i = 0; i < MESSAGE_BUFFER_LENGTH; ++i)
+    for (i = 0; i < MESSAGE_BUFFER_LENGTH; ++i) {
         inst->message[i] = 0;
+    }
 }
 
 int8_t apb_checkCrc (uint8_t* message, int length) {
-    uint8_t crc[2] = { 0 };
+    uint8_t crc[2] = {0,0};
     apb_crc16(message, crc, length);
     if ((message[length - 2] == crc[0]) && (message[length - 1] == crc[1]))
         return -1;  // true

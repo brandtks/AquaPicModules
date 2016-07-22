@@ -139,7 +139,8 @@ void main (void) {
             &apbMessageHandler, 
             &enableAddressDetection, 
             &disableAddressDetection, 
-            APB_ADDRESS);
+            APB_ADDRESS,
+            1);
 
     //enable UART
     TX_nRX = 0;
@@ -157,9 +158,10 @@ void main (void) {
         //RCIF is set regardless of the global interrupts 
         //apb_run might take a while so putting it in the main "loop" makes more sense
         if (RCIF) {
-            int8_t ninthBit = maskFlagTest(RCSTA, _RCSTA_RX9D_MASK);
+            //int8_t ninthBit = maskFlagTest(RCSTA, _RCSTA_RX9D_MASK);
             uint8_t data = RCREG;
-            apb_run (apbInst, data, ninthBit);
+            //apb_run (apbInst, data, ninthBit);
+            apb_run (apbInst, data);
         }
     }
 }
@@ -168,6 +170,8 @@ void interrupt ISR (void) {
     static uint8_t lastPtr = NUM_CHANNELS - 1; //outletPtr starts at 0 so we'll just initialize this to the end
     
     if (ADIF) {
+        ADIF = 0; /*Clear flag*/
+        
         ct[outletPtr].sum -= ct[outletPtr].values[valuePtr]; //subtract the oldest value from the sum
         ct[outletPtr].values[valuePtr] = getAdc (); //get the new value
         ct[outletPtr].sum += ct[outletPtr].values[valuePtr]; //add the newest value to the sum
@@ -179,11 +183,16 @@ void interrupt ISR (void) {
         
         if (outletPtr == 0) //we're back to the beginning of the outlets, increment the value array pointer
             _increment(valuePtr, FILTER_VALUES);
-        
-        ADIF = 0; /*Clear flag*/
+    }
+    
+    if (TMR2IF) {
+        TMR2IF = 0; /* Clear flag */
+        apb_framing (apbInst);
     }
     
     if (TMR4IF) {
+        TMR4IF = 0; /* Clear flag */
+        
         if (outletPtr != lastPtr) { //the ADC isn't finished so don't start it
             startAdc;
             lastPtr = outletPtr;
@@ -205,8 +214,6 @@ void interrupt ISR (void) {
                 gLedOn;
             }
         }
-        
-        TMR4IF = 0; /*Clear flag*/
     }
 }
 
@@ -251,8 +258,18 @@ void initializeHardware (void) {
              //*****0** = ADNREF: A/D Negative Voltage Reference Configuration, VREF- is connected to Vss
              //******00 = ADPREF: A/D Positive Voltage Reference Configuration, VREF+ is connected to Vdd
     
-    ADIF = 0; //Clear ADC interrupt flag
-    ADIE = 1; //Enable ADC interrupts
+    /****Timer 2****/
+    PR2 = 0x7C; //Timer Period = 1mSec
+                //Timer Period = [PRx + 1] * 4 * Tosc * TxCKPS * TxOUTPS
+                //PRx = [Timer Period / (4 * Tosc * TxCKPS * TxOUTPS)] - 1
+                //PRx = 1mSec / (4 * (1 / 32MHz) * 64 * 1)] - 1
+                //PRx = 124 or 7C
+                //Note: Tosc = 1 / Fosc
+
+    T2CON = 0b00000111;
+            //*0000*** = T2OUTPS: Timer Output Postscaler Select, 1:1 Postscaler
+            //*****1** = TMR2ON: Timer2 is on
+            //******11 = T2CKPS: Timer2-type Clock Prescaler Select, Prescaler is 64
     
     /*Timer 4*/
     PR4 = 0xC2; //Timer Period = 25mSec
@@ -266,9 +283,6 @@ void initializeHardware (void) {
             //*1111*** = T2OUTPS: Timer Output Postscaler Select, 1:16 Postscaler
             //*****1** = TMR2ON: Timer2 is on
             //******11 = T2CKPS: Timer2-type Clock Prescale Select, Prescaler is 64
-
-    TMR4IF = 0; //Clear Timer4 interrupt flag
-    TMR4IE = 1; //Enable Timer4 interrupts
 
     /*UART*/
     //Set to one for fast speed
@@ -290,11 +304,19 @@ void initializeHardware (void) {
                     //BRG = 51 or 0x33
                     //9615 Mb
 
-    TXSTAbits.TX9 = 1; //9-bit Transmit Enable, De-Selects 9-bit transmission
-    RCSTA = 0b11000000;
+    TXSTAbits.TX9 = 0; /* 9-bit Transmit Enable, De-selects 9-bit transmission */
+    RCSTA = 0b10000000;
             //1******* = SPEN: Serial Port Enable, Serial port enabled
-            //*1****** = RX9: 9-bit Receive Enable, Selects 9-bit reception
+            //*0****** = RX9: 9-bit Receive Enable, De-selects 9-bit reception
             //****0*** = ADDEN: Address Detect Enable, Disables address detection
+    
+    /*Interrupts*/
+    ADIF = 0;       /* Clear ADC interrupt flag */
+    ADIE = 1;       /* Enable ADC interrupts */
+    TMR2IF = 0;     /* Clear Timer2 interrupt flag */
+    TMR2IE = 1;     /* Enable Timer2 interrupts */
+    TMR4IF = 0;     /* Clear Timer4 interrupt flag */
+    TMR4IE = 1;     /* Enable Timer2 interrupts */
 }
 
 void apbMessageHandler (void) {
