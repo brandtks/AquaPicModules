@@ -47,8 +47,6 @@ typedef enum abpStatusEnum {
 /******************************************************************************/
 struct apbObjStruct {
     void (*messageHandler)(void);
-    void (*enableAddressDetection)(void);
-    void (*disableAddressDetection)(void);
     uint8_t address;
     uint8_t function;
     uint8_t messageLength;
@@ -64,20 +62,14 @@ typedef struct apbObjStruct* apbObj;
 /******************************************************************************/
 /* Functions                                                                  */
 /******************************************************************************/
-/*****Constructor**************************************************************/
-//apbObj apb_new(void);
-
 /*****Initialize***************************************************************/
 int8_t apb_init(
         apbObj inst, 
-        void (*messageHandlerVar)(void), 
-        void (*enableAddressDetectionVar)(void),
-        void (*disableAddressDetectionVar)(void),
+        void (*messageHandlerVar)(void),
         uint8_t addressVar,
-        uint8_t framingTimer);
+        uint8_t framingTimerTime);
 
 /*****Run Time*****************************************************************/
-//void apb_run (apbObj inst, uint8_t byte_received, int8_t ninthBit);
 void apb_run (apbObj inst, uint8_t byte_received);
 void apb_framing (apbObj inst);
 void apb_restart (apbObj inst);

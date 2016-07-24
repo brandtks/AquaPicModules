@@ -111,8 +111,6 @@ void initializeHardware (void);
 void apbMessageHandler (void);
 void writeUartData (uint8_t* data, uint8_t length);
 void sendDefualtResponse (void);
-void enableAddressDetection (void);
-void disableAddressDetection (void);
 void memoryCopy (void* to, void* from, size_t count);
 uint16_t getChannelValue (uint8_t channel);
 void setChannelValue (uint8_t channel, uint16_t value);
@@ -151,8 +149,6 @@ void main (void) {
     //AquaPic Bus initialization
     apb_init (apbInst, 
             &apbMessageHandler, 
-            &enableAddressDetection, 
-            &disableAddressDetection, 
             APB_ADDRESS,
             1);
 
@@ -172,9 +168,7 @@ void main (void) {
         //RCIF is set regardless of the global interrupts 
         //apb_run might take a while so putting it in the main "loop" makes more sense
         if (RCIF) {
-            //int8_t ninthBit = maskFlagTest(RCSTA, _RCSTA_RX9D_MASK);
             uint8_t data = RCREG;
-            //apb_run (apbInst, data, ninthBit);
             apb_run (apbInst, data);
         }
     }
@@ -459,14 +453,6 @@ void writeUartData (uint8_t* data, uint8_t length) {
 void sendDefualtResponse (void) {
     uint8_t* m = apb_buildDefualtResponse (apbInst);
     writeUartData (m, 5);
-}
-
-void enableAddressDetection (void) {
-    RCSTAbits.ADDEN = 1;
-}
-
-void disableAddressDetection (void) {
-    RCSTAbits.ADDEN = 0;
 }
 
 void memoryCopy (void* to, void* from, size_t count) {
