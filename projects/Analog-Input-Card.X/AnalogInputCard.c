@@ -191,26 +191,26 @@ void interrupt ISR (void) {
         timerCounter = ++timerCounter % 25;
         if (timerCounter == 0) {
             if (inletPtr != lastPtr) { //the ADC isn't finished so don't start it
-            startAdc;
-            lastPtr = inletPtr;
-        }
-        
-        if (!commError) {
-            ++commCounter;
-            
-            if (commCounter >= COMM_ERROR_SP) {
-                commError = -1;
-                gLedOff;
-                rLedOn;
-                apb_restart (apbInst);
+                startAdc;
+                lastPtr = inletPtr;
             }
-        } else {
-            if (commCounter == 0) {
-                commError = 0;
-                rLedOff;
-                gLedOn;
+
+            if (!commError) {
+                ++commCounter;
+
+                if (commCounter >= COMM_ERROR_SP) {
+                    commError = -1;
+                    gLedOff;
+                    rLedOn;
+                    apb_restart (apbInst);
+                }
+            } else {
+                if (commCounter == 0) {
+                    commError = 0;
+                    rLedOff;
+                    gLedOn;
+                }
             }
-        }
         }
     }
 }
