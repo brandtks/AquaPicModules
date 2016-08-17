@@ -26,31 +26,33 @@
 #include <stdlib.h>
 #include <stdint.h>     //For uint8_t, int8_t definition
 #include <xc.h>
-#include <pic16f1827.h>
+#include <pic16f1783.h>
 #include "../../drv_lib/aquapic_bus/aquapic_bus.h"
 #include "../../drv_lib/common/slib_com.h"
 
 /******************************************************************************/
 /* CONFIGUTION WORDS                                                          */
 /******************************************************************************/
-/*CONFIG1*/
-#pragma config FOSC = HS        //Oscillator Selection (HS Oscillator, High-speed crystal/resonator connected between OSC1 and OSC2 pins)
-#pragma config WDTE = OFF       //Watchdog Timer Enable (WDT disabled)
-#pragma config PWRTE = OFF      //Power-up Timer Enable (PWRT disabled)
-#pragma config MCLRE = ON       //MCLR Pin Function Select (MCLR/VPP pin function is MCLR)
-#pragma config CP = OFF         //Flash Program Memory Code Protection (Program memory code protection is disabled)
-#pragma config CPD = OFF        //Data Memory Code Protection (Data memory code protection is disabled)
-#pragma config BOREN = ON       //Brown-out Reset Enable (Brown-out Reset enabled)
-#pragma config CLKOUTEN = OFF   //Clock Out Enable (CLKOUT function is disabled. I/O or oscillator function on the CLKOUT pin)
-#pragma config IESO = ON        //Internal/External Switchover (Internal/External Switchover mode is enabled)
-#pragma config FCMEN = ON       //Fail-Safe Clock Monitor Enable (Fail-Safe Clock Monitor is enabled)
+/* CONFIG1 */
+#pragma config FOSC = HS        // Oscillator Selection (HS Oscillator, High-speed crystal/resonator connected between OSC1 and OSC2 pins)
+#pragma config WDTE = OFF       // Watchdog Timer Enable (WDT disabled)
+#pragma config PWRTE = OFF      // Power-up Timer Enable (PWRT disabled)
+#pragma config MCLRE = ON       // MCLR Pin Function Select (MCLR/VPP pin function is MCLR)
+#pragma config CP = OFF         // Flash Program Memory Code Protection (Program memory code protection is disabled)
+#pragma config CPD = OFF        // Data Memory Code Protection (Data memory code protection is disabled)
+#pragma config BOREN = ON       // Brown-out Reset Enable (Brown-out Reset enabled)
+#pragma config CLKOUTEN = OFF   // Clock Out Enable (CLKOUT function is disabled. I/O or oscillator function on the CLKOUT pin)
+#pragma config IESO = ON        // Internal/External Switchover (Internal/External Switchover mode is enabled)
+#pragma config FCMEN = ON       // Fail-Safe Clock Monitor Enable (Fail-Safe Clock Monitor is enabled)
 
-/*CONFIG2*/
-#pragma config WRT = OFF        //Flash Memory Self-Write Protection (Write protection off)
-#pragma config PLLEN = ON       //PLL Enable (4x PLL enabled)
-#pragma config STVREN = ON      //Stack Overflow/Underflow Reset Enable (Stack Overflow or Underflow will cause a Reset)
-#pragma config BORV = LO        //Brown-out Reset Voltage Selection (Brown-out Reset Voltage (Vbor), low trip point selected.)
-#pragma config LVP = OFF         //Low-Voltage Programming Enable (Low-voltage programming enabled)
+/* CONFIG2 */
+#pragma config WRT = OFF        // Flash Memory Self-Write Protection (Write protection off)
+#pragma config VCAPEN = OFF     // Voltage Regulator Capacitor Enable bit (Vcap functionality is disabled on RA6.)
+#pragma config PLLEN = ON       // PLL Enable (4x PLL enabled)
+#pragma config STVREN = ON      // Stack Overflow/Underflow Reset Enable (Stack Overflow or Underflow will cause a Reset)
+#pragma config BORV = LO        // Brown-out Reset Voltage Selection (Brown-out Reset Voltage (Vbor), low trip point selected.)
+#pragma config LPBOR = OFF      // Low Power Brown-Out Reset Enable Bit (Low power brown-out is disabled)
+#pragma config LVP = OFF        // Low-Voltage Programming Enable (High-voltage on MCLR/VPP must be used for programming)
 
 /******************************************************************************/
 /* EEPROM                                                                     */
@@ -61,9 +63,9 @@
 /******************************************************************************/
 #define _XTAL_FREQ      32000000UL  //Used by the __delay_ms(xx) and __delay_us(xx) Methods, 32MHz
 
-#define RED_LED         LATBbits.LATB3
-#define GREEN_LED       LATBbits.LATB1
-#define YELLOW_LED      LATBbits.LATB0
+#define RED_LED         LATCbits.LATC3
+#define GREEN_LED       LATCbits.LATC2
+#define YELLOW_LED      LATCbits.LATC1
 
 #define rLedOn          RED_LED = 0
 #define rLedOff         RED_LED = 1
@@ -76,7 +78,7 @@
 #define NUM_CHANNELS    4
 #define startAdc        GO = 1
 
-#define TX_nRX          LATBbits.LATB4
+#define TX_nRX          LATCbits.LATC5
 #define APB_ADDRESS     0x50
 
 #define COMM_ERROR_SP   400 //25mSec timer interrupt, 10 sec alarm
@@ -110,15 +112,17 @@ apbObj apbInst = &apbInstStruct;
 uint16_t commCounter;
 uint8_t  commError;
 amperageFilter ct[NUM_CHANNELS];
-uint8_t  outletPtr;
+uint8_t  inletPtr;
 uint8_t  valuePtr;
+uint8_t  timerCounter;
 
 void main (void) {
     initializeHardware ();
     
-    outletPtr = 0;
+    inletPtr = 0;
     valuePtr = 0;
- 
+    timerCounter = 0;
+    
     int i, j;
     for (i = 0; i < NUM_CHANNELS; ++i) {
         ct[i].sum = 0;
@@ -166,30 +170,29 @@ void interrupt ISR (void) {
     if (ADIF) {
         ADIF = 0; /*Clear flag*/
         
-        ct[outletPtr].sum -= ct[outletPtr].values[valuePtr]; //subtract the oldest value from the sum
-        ct[outletPtr].values[valuePtr] = getAdc (); //get the new value
-        ct[outletPtr].sum += ct[outletPtr].values[valuePtr]; //add the newest value to the sum
+        ct[inletPtr].sum -= ct[inletPtr].values[valuePtr]; //subtract the oldest value from the sum
+        ct[inletPtr].values[valuePtr] = getAdc (); //get the new value
+        ct[inletPtr].sum += ct[inletPtr].values[valuePtr]; //add the newest value to the sum
         
-        ct[outletPtr].average = ct[outletPtr].sum / FILTER_VALUES; //average the sum
+        ct[inletPtr].average = ct[inletPtr].sum / FILTER_VALUES; //average the sum
         
-        _increment(outletPtr, NUM_CHANNELS);
-        ADCON0bits.CHS = ct[outletPtr].chsValue; //set the ADC to the new channel
+        _increment(inletPtr, NUM_CHANNELS);
+        ADCON0bits.CHS = ct[inletPtr].chsValue; //set the ADC to the new channel
         
-        if (outletPtr == 0) //we're back to the beginning of the outlets, increment the value array pointer
+        if (inletPtr == 0) //we're back to the beginning of the outlets, increment the value array pointer
             _increment(valuePtr, FILTER_VALUES);
     }
     
     if (TMR2IF) {
         TMR2IF = 0; /* Clear flag */
-        apb_framing (apbInst);
-    }
-    
-    if (TMR4IF) {
-        TMR4IF = 0; /* Clear flag */
         
-        if (outletPtr != lastPtr) { //the ADC isn't finished so don't start it
+        apb_framing (apbInst);
+        
+        timerCounter = ++timerCounter % 25;
+        if (timerCounter == 0) {
+            if (inletPtr != lastPtr) { //the ADC isn't finished so don't start it
             startAdc;
-            lastPtr = outletPtr;
+            lastPtr = inletPtr;
         }
         
         if (!commError) {
@@ -208,6 +211,7 @@ void interrupt ISR (void) {
                 gLedOn;
             }
         }
+        }
     }
 }
 
@@ -216,8 +220,9 @@ void initializeHardware (void) {
     OSCCONbits.SCS = 0b00;  //System Clock Select: Clock determined by FOSC<2:0> in Configuration Word 1
 
     /*Port Initialization*/
-    PORTA = 0x00;   //Clear Port A
-    PORTB = 0x18;   //Clear Port B, Write 1 to RG Status LED sinks, ie turn off LEDs
+    PORTA = 0x00;   /* Clear Port A */
+    PORTB = 0x00;   /* Clear Port B */
+    PORTC = 0x12;   /* Clear Port C, Write 1 to RG Status LED sinks, ie turn off LEDs */
 
     /*Port Direction*/
     TRISA = 0b00001111; //Port A Directions
@@ -225,21 +230,20 @@ void initializeHardware (void) {
             //*****1** = RA2, AN2, Input 3
             //******1* = RA1, AN1, Input 2
             //*******1 = RA0, AN0, Input 1
-    TRISB = 0b00000100; //Port B Directions
-            //**0***** = RB5, TX
-            //***0**** = RB4, TX_nRX
-            //****0*** = RB3, Red Status LED
-            //*****1** = RB2, RX
-            //******0* = RB1, Green Status LED
-            //*******0 = RB0, Yellow Status LED
+    
+    TRISB = 0x00; /* Nothing on port B */
+    
+    TRISC = 0b10000000; /* Port C Directions */
+            //1******* = RC7, RX
+            //*0****** = RC6, TX
+            //**0***** = RC5, TX_nRX
+            //****0*** = RC3, Red Status LED
+            //*****0** = RC2, Green Status LED
+            //******0* = RC1, Yellow Status LED
 
     /*Analog Select*/
-    ANSELA = 0x0F;  //Lower pins are analog
-    ANSELB = 0x00;  //All digital ports
-
-    /*Port Selection*/
-    APFCON0bits.RXDTSEL = 1; //RX function is on RB2
-    APFCON1bits.TXCKSEL = 1; //TX function is on RB5
+    ANSELA = 0x0F;  /* Lower pins are analog */
+    ANSELB = 0x00;  /* All digital ports */
     
     /*ADC*/
     ADCON0 = 0b00000001;
@@ -264,19 +268,6 @@ void initializeHardware (void) {
             //*0000*** = T2OUTPS: Timer Output Postscaler Select, 1:1 Postscaler
             //*****1** = TMR2ON: Timer2 is on
             //******11 = T2CKPS: Timer2-type Clock Prescaler Select, Prescaler is 64
-    
-    /*Timer 4*/
-    PR4 = 0xC2; //Timer Period = 25mSec
-                //Timer Period = [PRx + 1] * 4 * Tosc * TxCKPS * TxOUTPS
-                //PRx = [Timer Period / (4 * Tosc * TxCKPS * TxOUTPS)] - 1
-                //PRx = 25mSec / (4 * (1 / 32MHz) * 64 * 16)] - 1
-                //PRx = 194.3125 or 194 or C2
-                //Note: Tosc = 1 / Fosc
-
-    T4CON = 0b01111111;
-            //*1111*** = T2OUTPS: Timer Output Postscaler Select, 1:16 Postscaler
-            //*****1** = TMR2ON: Timer2 is on
-            //******11 = T2CKPS: Timer2-type Clock Prescale Select, Prescaler is 64
 
     /*UART*/
     //Set to one for fast speed
@@ -309,8 +300,6 @@ void initializeHardware (void) {
     ADIE = 1;       /* Enable ADC interrupts */
     TMR2IF = 0;     /* Clear Timer2 interrupt flag */
     TMR2IE = 1;     /* Enable Timer2 interrupts */
-    TMR4IF = 0;     /* Clear Timer4 interrupt flag */
-    TMR4IE = 1;     /* Enable Timer2 interrupts */
 }
 
 void apbMessageHandler (void) {
