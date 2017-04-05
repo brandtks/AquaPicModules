@@ -1,24 +1,27 @@
 /*
-  AquaPic Bus
+ * AquaPic Bus
+ * 
+ * Copyright (c) 2017 Skyler Brandt
+ *  
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * 
+ * Optionally you can also view the license at <http://www.gnu.org/licenses/>.
+ */
 
-  Created by Skyler Brandt on January 2015
-
-  This program is free software: you can redistribute it and/or modify
-  it under the terms of the GNU General Public License as published by
-  the Free Software Foundation, either version 3 of the License, or
-  (at your option) any later version.
-
-  This program is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU General Public License for more details.
-
-  You should have received a copy of the GNU General Public License
-  along with this program.  If not, see <http://www.gnu.org/licenses/
-*/
-
-#ifndef DRV_AQUAPIC_BUS_H
-#define DRV_AQUAPIC_BUS_H
+#ifndef AQUAPIC_BUS_H
+#define AQUAPIC_BUS_H
 
 #include <stdint.h>
 
@@ -55,6 +58,8 @@ struct apbObjStruct {
     apbStatus_t apbStatus;
     uint8_t framingCount;
     uint8_t framingSetpoint;
+    volatile uint8_t* transmitEnablePort;
+    uint8_t transmitEnablePin;
 };
 
 typedef struct apbObjStruct* apbObj;
@@ -63,20 +68,27 @@ typedef struct apbObjStruct* apbObj;
 /* Functions                                                                  */
 /******************************************************************************/
 /*****Initialize***************************************************************/
-int8_t apb_init(
-        apbObj inst, 
+int8_t apb_init(apbObj inst,
         void (*messageHandlerVar)(void),
         uint8_t addressVar,
-        uint8_t framingTimerTime);
+        uint8_t framingTimerTime,
+        volatile uint8_t* transmitEnablePort,
+        uint8_t transmitEnablePin);
 
 /*****Run Time*****************************************************************/
 void apb_run (apbObj inst, uint8_t byte_received);
 void apb_framing (apbObj inst);
+void apb_sendDefualtResponse (apbObj inst);
+
+/* Depreciated */
+uint8_t* apb_buildDefualtResponse (apbObj inst);
+
+/* Private */
 void apb_restart (apbObj inst);
 void apb_setupMessage (apbObj inst);
 void apb_clearMessageBuffer (apbObj inst);
 int8_t apb_checkCrc (uint8_t* message, int length);
 void apb_crc16 (uint8_t* message, uint8_t* crc, int length);
-uint8_t* apb_buildDefualtResponse (apbObj inst);
+void apb_sendMessage (apbObj inst, uint8_t* message, uint8_t length);
 
-#endif // DRV_AQUAPIC_BUS_H
+#endif /* AQUAPIC_BUS_H */

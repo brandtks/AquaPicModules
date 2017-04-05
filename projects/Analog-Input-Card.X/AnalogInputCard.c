@@ -22,37 +22,13 @@
 /******************************************************************************/
 /* Files to Include                                                           */
 /******************************************************************************/
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdint.h>     //For uint8_t, int8_t definition
-#include <xc.h>
+#include <stdlib.h>     /* null */
+#include <stdint.h>     /* uint8_t, int8_t */
 #include <pic16f1783.h>
-#include "../../drv_lib/aquapic_bus/aquapic_bus.h"
-#include "../../drv_lib/common/slib_com.h"
-
-/******************************************************************************/
-/* CONFIGUTION WORDS                                                          */
-/******************************************************************************/
-/* CONFIG1 */
-#pragma config FOSC = HS        // Oscillator Selection (HS Oscillator, High-speed crystal/resonator connected between OSC1 and OSC2 pins)
-#pragma config WDTE = OFF       // Watchdog Timer Enable (WDT disabled)
-#pragma config PWRTE = OFF      // Power-up Timer Enable (PWRT disabled)
-#pragma config MCLRE = ON       // MCLR Pin Function Select (MCLR/VPP pin function is MCLR)
-#pragma config CP = OFF         // Flash Program Memory Code Protection (Program memory code protection is disabled)
-#pragma config CPD = OFF        // Data Memory Code Protection (Data memory code protection is disabled)
-#pragma config BOREN = ON       // Brown-out Reset Enable (Brown-out Reset enabled)
-#pragma config CLKOUTEN = OFF   // Clock Out Enable (CLKOUT function is disabled. I/O or oscillator function on the CLKOUT pin)
-#pragma config IESO = ON        // Internal/External Switchover (Internal/External Switchover mode is enabled)
-#pragma config FCMEN = ON       // Fail-Safe Clock Monitor Enable (Fail-Safe Clock Monitor is enabled)
-
-/* CONFIG2 */
-#pragma config WRT = OFF        // Flash Memory Self-Write Protection (Write protection off)
-#pragma config VCAPEN = OFF     // Voltage Regulator Capacitor Enable bit (Vcap functionality is disabled on RA6.)
-#pragma config PLLEN = ON       // PLL Enable (4x PLL enabled)
-#pragma config STVREN = ON      // Stack Overflow/Underflow Reset Enable (Stack Overflow or Underflow will cause a Reset)
-#pragma config BORV = LO        // Brown-out Reset Voltage Selection (Brown-out Reset Voltage (Vbor), low trip point selected.)
-#pragma config LPBOR = OFF      // Low Power Brown-Out Reset Enable Bit (Low power brown-out is disabled)
-#pragma config LVP = OFF        // Low-Voltage Programming Enable (High-voltage on MCLR/VPP must be used for programming)
+#include "../../lib/aquaPicBus/aquaPicBus.h"
+#include "../../lib/common/common.h"
+#include "../../lib/adc/adc.h"
+#include "bsp.h"
 
 /******************************************************************************/
 /* EEPROM                                                                     */
@@ -61,28 +37,8 @@
 /******************************************************************************/
 /* USER DEFINED                                                               */
 /******************************************************************************/
-#define _XTAL_FREQ      32000000UL  //Used by the __delay_ms(xx) and __delay_us(xx) Methods, 32MHz
-
-#define RED_LED         LATCbits.LATC3
-#define GREEN_LED       LATCbits.LATC2
-#define YELLOW_LED      LATCbits.LATC1
-
-#define rLedOn          RED_LED = 0
-#define rLedOff         RED_LED = 1
-#define gLedOn          GREEN_LED = 0
-#define gLedOff         GREEN_LED = 1
-#define yLedOn          YELLOW_LED = 0
-#define yLedOff         YELLOW_LED = 1
-
 #define FILTER_VALUES   10
 #define NUM_CHANNELS    4
-#define startAdc        GO = 1
-
-#define TX_nRX          LATCbits.LATC5
-#define APB_ADDRESS     0x50
-
-#define COMM_ERROR_SP   400 //25mSec timer interrupt, 10 sec alarm
-                            //10,000mSec / 25mSec = 200
 
 /******************************************************************************/
 /* Variable Definitions                                                       */
@@ -102,7 +58,6 @@ void apbMessageHandler (void);
 void writeUartData (uint8_t* data, uint8_t length);
 void sendDefualtResponse (void);
 void memoryCopy (void* to, void* from, size_t count);
-uint16_t getAdc (void);
 
 /******************************************************************************/
 /* Global Variables                                                           */
@@ -140,10 +95,11 @@ void main (void) {
     apb_init (apbInst, 
             &apbMessageHandler, 
             APB_ADDRESS,
-            1);
+            1,
+            &LATC,
+            5);
 
     //enable UART
-    TX_nRX = 0;
     TXSTAbits.TXEN = 1; //Transmit Enable, Transmit enabled
     RCSTAbits.CREN = 1; //Continuous Receive Enable, Enables receiver
     
@@ -151,8 +107,8 @@ void main (void) {
     PEIE = 1; //Enable peripheral interrupts
     GIE = 1; //Enable Global interrupts
     
-    yLedOff;
-    gLedOn;
+    yellowLedOff;
+    greenLedOn;
     
     while (1) {
         //RCIF is set regardless of the global interrupts 
@@ -176,11 +132,11 @@ void interrupt ISR (void) {
         
         ct[inletPtr].average = ct[inletPtr].sum / FILTER_VALUES; //average the sum
         
-        _increment(inletPtr, NUM_CHANNELS);
+        increment(inletPtr, NUM_CHANNELS);
         ADCON0bits.CHS = ct[inletPtr].chsValue; //set the ADC to the new channel
         
         if (inletPtr == 0) //we're back to the beginning of the outlets, increment the value array pointer
-            _increment(valuePtr, FILTER_VALUES);
+            increment(valuePtr, FILTER_VALUES);
     }
     
     if (TMR2IF) {
@@ -191,7 +147,7 @@ void interrupt ISR (void) {
         timerCounter = ++timerCounter % 25;
         if (timerCounter == 0) {
             if (inletPtr != lastPtr) { //the ADC isn't finished so don't start it
-                startAdc;
+                startAdc();
                 lastPtr = inletPtr;
             }
 
@@ -200,15 +156,15 @@ void interrupt ISR (void) {
 
                 if (commCounter >= COMM_ERROR_SP) {
                     commError = -1;
-                    gLedOff;
-                    rLedOn;
+                    greenLedOff;
+                    redLedOn;
                     apb_restart (apbInst);
                 }
             } else {
                 if (commCounter == 0) {
                     commError = 0;
-                    rLedOff;
-                    gLedOn;
+                    redLedOff;
+                    greenLedOn;
                 }
             }
         }
@@ -246,15 +202,17 @@ void initializeHardware (void) {
     ANSELB = 0x00;  /* All digital ports */
     
     /*ADC*/
-    ADCON0 = 0b00000001;
+    /*ADCON0 = 0b00000001;*/
              //*00000** = CHS: Analog Channel Select bits, AN0
              //*******1 = ADON: ADC Enable bit, ADC is enabled
 
-    ADCON1 = 0b11010100;
+    /*ADCON1 = 0b11010100;*/
              //1******* = ADFM: A/D Result Format Select, Right Justified
              //*101**** = ADCS: A/D Conversion Clock Select, FOSC/16
              //*****0** = ADNREF: A/D Negative Voltage Reference Configuration, VREF- is connected to Vss
              //******00 = ADPREF: A/D Positive Voltage Reference Configuration, VREF+ is connected to Vdd
+    
+    initAdc (CHS_AN0 | AD0_ADON_ENABLE, AD1_ADFM_RIGHT | AD1_ADCS_FOSC_16 | AD1_ADNREF_VSS | AD1_ADPREF_VDD);
     
     /****Timer 2****/
     PR2 = 0x7C; //Timer Period = 1mSec
@@ -356,7 +314,7 @@ void apbMessageHandler (void) {
     }
 }
 
-void writeUartData (uint8_t* data, uint8_t length) {
+/*void writeUartData (uint8_t* data, uint8_t length) {
     TX_nRX = 1; //RS-485 chip transmit enable is high
     
     int i;
@@ -371,26 +329,13 @@ void writeUartData (uint8_t* data, uint8_t length) {
         continue;
     
     TX_nRX = 0; //RS-485 chip receive enable is low
+}*/
+
+void writeUartData (uint8_t* data, uint8_t length) {
+    apb_sendMessage (apbInst, data, length);
 }
 
 void sendDefualtResponse (void) {
     uint8_t* m = apb_buildDefualtResponse (apbInst);
     writeUartData (m, 5);
-}
-
-void memoryCopy (void* to, void* from, size_t count) {
-    uint8_t* ptr_to = (uint8_t*)to;
-    uint8_t* ptr_from = (uint8_t*)from;
-
-    while (count--)
-        *ptr_to++ = *ptr_from++;
-}
-
-uint16_t getAdc (void) {
-    uint16_t counts;
-
-    counts = ADRESH << 8; //grab highest 2 bits shift right 8
-    counts |= ADRESL;
-
-    return counts;
 }

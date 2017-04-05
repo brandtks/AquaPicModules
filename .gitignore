@@ -1,11 +1,5 @@
 button/
-drv_SPI/
-EE_24AA02/
-I2c_irq/
-I2c_slow8/
-I2c_slow16/
-LCD_ST7036i/
-MAX31855/
+Unused/
 pid/
 Archieve/
 Test/
@@ -16,3 +10,4 @@ build/
 *.obj
 Makefile
 funclist
+.directory

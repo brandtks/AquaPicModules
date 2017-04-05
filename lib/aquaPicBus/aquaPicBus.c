@@ -1,42 +1,49 @@
 /*
-  AquaPic Bus
-
-  Created by Skyler Brandt on January 2015
-
-  This program is free software: you can redistribute it and/or modify
-  it under the terms of the GNU General Public License as published by
-  the Free Software Foundation, either version 3 of the License, or
-  (at your option) any later version.
-
-  This program is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU General Public License for more details.
-
-  You should have received a copy of the GNU General Public License
-  along with this program.  If not, see <http://www.gnu.org/licenses/
-*/
+ * AquaPic Bus
+ * 
+ * Copyright (c) 2017 Skyler Brandt
+ *  
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * 
+ * Optionally you can also view the license at <http://www.gnu.org/licenses/>.
+ */
 
 #include <stdlib.h> // for NULL
 #include <stdint.h> // for int8_t and uint8_t
-
-#include "aquapic_bus.h"
+#include "aquaPicBus.h"
+#include "../uart/uart.h"
+#include "../pins/pins.h"
 
 /******************************************************************************/
 /* Functions                                                                  */
 /******************************************************************************/
 /*****Initialize***************************************************************/
-int8_t apb_init(
-        apbObj inst, 
+int8_t apb_init(apbObj inst,
         void (*messageHandlerVar)(void),
         uint8_t addressVar,
-        uint8_t framingTimerTime
-) {
+        uint8_t framingTimerTime,
+        volatile uint8_t* transmitEnablePort,
+        uint8_t transmitEnablePin)
+{
     if (inst == NULL) return ERR_NOMEM;
     
     inst->messageHandler = messageHandlerVar;
     inst->address = addressVar;
     inst->framingSetpoint = FRAMING_TIME / framingTimerTime;
+    inst->transmitEnablePort = transmitEnablePort;
+    inst->transmitEnablePin = transmitEnablePin;
     
     apb_restart (inst);
     
@@ -97,6 +104,43 @@ void apb_framing (apbObj inst) {
     }
 }
 
+void apb_sendDefualtResponse (apbObj inst) {
+    uint8_t response[5];
+    uint8_t crc[2];
+
+    response[0] = inst->address;
+    response[1] = inst->function;
+    response[2] = 5;
+    apb_crc16(response, crc, 5);
+    response[3] = crc[0];
+    response[4] = crc[1];
+
+    apb_sendMessage (inst, response, 5);
+}
+
+void apb_initResponse (apbObj inst) {
+    apb_clearMessageBuffer (inst);
+    inst->message[0] = inst->address;
+    inst->message[1] = inst->function;
+    inst->messageLength = 5; /* at least 5 to include the length and crc */
+}
+
+/* Depreciated */
+uint8_t* apb_buildDefualtResponse (apbObj inst) {
+    static uint8_t response[5] = { 0 };
+    uint8_t crc[2] =  { 0 };
+
+    response[0] = inst->address;
+    response[1] = inst->function;
+    response[2] = 5;
+    apb_crc16(response, crc, 5);
+    response[3] = crc[0];
+    response[4] = crc[1];
+
+    return response;
+}
+
+/* Private */
 void apb_restart (apbObj inst) {
     inst->messageCount = 0;
     inst->messageLength = 0;
@@ -104,6 +148,7 @@ void apb_restart (apbObj inst) {
     inst->framingCount = 0;
     inst->apbStatus = WAIT_FOR_FRAMING;
     apb_clearMessageBuffer (inst);
+    writePin (inst->transmitEnablePort, inst->transmitEnablePin, LOW);
 }
 
 void apb_setupMessage (apbObj inst) {
@@ -152,16 +197,8 @@ void apb_crc16 (uint8_t* message, uint8_t* crc, int length) {
     crc[0] = (uint8_t)(crc_full & 0xFF);
 }
 
-uint8_t* apb_buildDefualtResponse (apbObj inst) {
-    static uint8_t response[5] = { 0 };
-    uint8_t crc[2] =  { 0 };
-
-    response[0] = inst->address;
-    response[1] = inst->function;
-    response[2] = 5;
-    apb_crc16(response, crc, 5);
-    response[3] = crc[0];
-    response[4] = crc[1];
-
-    return response;
+void apb_sendMessage (apbObj inst, uint8_t* message, uint8_t length) {
+    writePin (inst->transmitEnablePort, inst->transmitEnablePin, HIGH);
+    putsch (message, length);
+    writePin (inst->transmitEnablePort, inst->transmitEnablePin, LOW);
 }
