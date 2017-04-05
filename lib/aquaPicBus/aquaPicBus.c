@@ -119,10 +119,21 @@ void apb_sendDefualtResponse (apbObj inst) {
 }
 
 void apb_initResponse (apbObj inst) {
-    apb_clearMessageBuffer (inst);
-    inst->message[0] = inst->address;
-    inst->message[1] = inst->function;
-    inst->messageLength = 5; /* at least 5 to include the length and crc */
+    if (inst->apbStatus == MESSAGE_LENGTH_RECIEVED) {
+        apb_clearMessageBuffer (inst);
+        inst->message[0] = inst->address;
+        inst->message[1] = inst->function;
+        inst->messageLength = 5; /* at least 5 to include the length and crc */
+    }
+}
+
+void apb_addToResponse (apbObj inst, void* data, size_t length) {
+    if (inst->apbStatus == MESSAGE_LENGTH_RECIEVED) {
+        apb_clearMessageBuffer (inst);
+        inst->message[0] = inst->address;
+        inst->message[1] = inst->function;
+        inst->messageLength = 5; /* at least 5 to include the length and crc */
+    }
 }
 
 /* Depreciated */
