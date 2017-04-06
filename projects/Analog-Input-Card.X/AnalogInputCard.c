@@ -96,8 +96,8 @@ void main (void) {
             &apbMessageHandler, 
             APB_ADDRESS,
             1,
-            &LATC,
-            5);
+            transmitEnablePort,
+            transmitEnablePin);
 
     //enable UART
     TXSTAbits.TXEN = 1; //Transmit Enable, Transmit enabled
@@ -201,17 +201,6 @@ void initializeHardware (void) {
     ANSELA = 0x0F;  /* Lower pins are analog */
     ANSELB = 0x00;  /* All digital ports */
     
-    /*ADC*/
-    /*ADCON0 = 0b00000001;*/
-             //*00000** = CHS: Analog Channel Select bits, AN0
-             //*******1 = ADON: ADC Enable bit, ADC is enabled
-
-    /*ADCON1 = 0b11010100;*/
-             //1******* = ADFM: A/D Result Format Select, Right Justified
-             //*101**** = ADCS: A/D Conversion Clock Select, FOSC/16
-             //*****0** = ADNREF: A/D Negative Voltage Reference Configuration, VREF- is connected to Vss
-             //******00 = ADPREF: A/D Positive Voltage Reference Configuration, VREF+ is connected to Vdd
-    
     initAdc (CHS_AN0 | AD0_ADON_ENABLE, AD1_ADFM_RIGHT | AD1_ADCS_FOSC_16 | AD1_ADNREF_VSS | AD1_ADPREF_VDD);
     
     /****Timer 2****/
@@ -265,77 +254,30 @@ void apbMessageHandler (void) {
     
     switch (apbInst->function) {
         case 10: { //read single channel value
-            #define FUNCTION10_LENGTH 8 //header + channel + value + crc = 3 + 1 + 2 + 2
-
             uint8_t channel = apbInst->message [3];
             uint16_t value  = ct[channel].average;
             
-            uint8_t m [FUNCTION10_LENGTH];
-            uint8_t crc [2];
-
-            m [0] = apbInst->address;
-            m [1] = 10; //function number
-            m [2] = FUNCTION10_LENGTH;  //message length
-            m [3] = channel;
-            memoryCopy (&(m [4]), &value, sizeof (uint16_t));
-            apb_crc16 (m, crc, FUNCTION10_LENGTH);
-            m [FUNCTION10_LENGTH - 2] = crc [0];
-            m [FUNCTION10_LENGTH - 1] = crc [1];
-
-            writeUartData (m, FUNCTION10_LENGTH);
-
+            apb_initResponse (apbInst);
+            apb_appendToResponse (apbInst, channel);
+            apb_addToResponse (apbInst, &value, sizeof(uint16_t));
+            apb_sendResponse (apbInst);
+ 
             break;
         }
-        case 20: { //read all channels values
-            #define FUNCTION20_LENGTH 13 //header + value * 4 + crc = 3 + 2 * 4 + 2
-            
+        case 20: { //read all channels values     
             uint16_t values [NUM_CHANNELS];
-            uint8_t m [FUNCTION20_LENGTH];
-            uint8_t crc [2];
 
             int i;
             for (i = 0; i < NUM_CHANNELS; ++i) 
                 values [i] = ct[i].average;
-
-            m [0] = apbInst->address;
-            m [1] = 20; //function number
-            m [2] = FUNCTION20_LENGTH; //message length
-            memoryCopy (&(m [3]), values, sizeof (uint16_t) * NUM_CHANNELS);
-            apb_crc16 (m, crc, FUNCTION20_LENGTH);
-            m [FUNCTION20_LENGTH - 2] = crc [0];
-            m [FUNCTION20_LENGTH - 1] = crc [1];
-
-            writeUartData (m, FUNCTION20_LENGTH);
+            
+            apb_initResponse (apbInst);
+            apb_addToResponse (apbInst, values, sizeof (uint16_t) * NUM_CHANNELS);
+            apb_sendResponse (apbInst);
 
             break;
         }
         default:
             break;
     }
-}
-
-/*void writeUartData (uint8_t* data, uint8_t length) {
-    TX_nRX = 1; //RS-485 chip transmit enable is high
-    
-    int i;
-    for (i = 0; i < length; ++i) {
-        TXREG = *data;
-        ++data;
-        while (!TXIF) //TXIF is set when the TXREG is empty
-            continue;
-    }
-
-    while (!TRMT) //wait for transmit shift register to be empty
-        continue;
-    
-    TX_nRX = 0; //RS-485 chip receive enable is low
-}*/
-
-void writeUartData (uint8_t* data, uint8_t length) {
-    apb_sendMessage (apbInst, data, length);
-}
-
-void sendDefualtResponse (void) {
-    uint8_t* m = apb_buildDefualtResponse (apbInst);
-    writeUartData (m, 5);
 }

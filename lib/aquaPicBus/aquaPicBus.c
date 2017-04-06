@@ -20,11 +20,12 @@
  * Optionally you can also view the license at <http://www.gnu.org/licenses/>.
  */
 
-#include <stdlib.h> // for NULL
-#include <stdint.h> // for int8_t and uint8_t
+#include <stdlib.h>     /* null, size_t */
+#include <stdint.h>     /* uint8_t, int8_t */
 #include "aquaPicBus.h"
 #include "../uart/uart.h"
 #include "../pins/pins.h"
+#include "../common/common.h"
 
 /******************************************************************************/
 /* Functions                                                                  */
@@ -104,39 +105,45 @@ void apb_framing (apbObj inst) {
     }
 }
 
+/* This clears the message buffer so make sure you have all the data stored from the command */
 void apb_sendDefualtResponse (apbObj inst) {
-    uint8_t response[5];
-    uint8_t crc[2];
-
-    response[0] = inst->address;
-    response[1] = inst->function;
-    response[2] = 5;
-    apb_crc16(response, crc, 5);
-    response[3] = crc[0];
-    response[4] = crc[1];
-
-    apb_sendMessage (inst, response, 5);
+    apb_initResponse (inst);
+    apb_sendResponse (inst);
 }
 
+/* This clears the message buffer so make sure you have all the data stored from the command */
 void apb_initResponse (apbObj inst) {
     if (inst->apbStatus == MESSAGE_LENGTH_RECIEVED) {
         apb_clearMessageBuffer (inst);
         inst->message[0] = inst->address;
         inst->message[1] = inst->function;
-        inst->messageLength = 5; /* at least 5 to include the length and crc */
+        inst->messageLength = 3; /* 3 to include the length */
     }
+}
+
+void apb_appendToResponse (apbObj inst, uint8_t data) {
+    inst->message[inst->messageLength] = data;
+    inst->messageLength += 1;
 }
 
 void apb_addToResponse (apbObj inst, void* data, size_t length) {
     if (inst->apbStatus == MESSAGE_LENGTH_RECIEVED) {
-        apb_clearMessageBuffer (inst);
-        inst->message[0] = inst->address;
-        inst->message[1] = inst->function;
-        inst->messageLength = 5; /* at least 5 to include the length and crc */
+        memoryCopy (&(inst->message[inst->messageLength]), data, length);
+        inst->messageLength += (uint8_t)length;
     }
 }
 
+void apb_sendResponse (apbObj inst) {
+    uint8_t crc[2];
+    inst->messageCount += 2; /* 2 for crc */
+    apb_crc16(inst->message, crc, inst->messageLength);
+    inst->message[inst->messageLength - 2] = crc[0];
+    inst->message[inst->messageLength - 1] = crc[1];
+    apb_sendMessage (inst, inst->message, inst->messageCount);
+}
+
 /* Depreciated */
+/* 
 uint8_t* apb_buildDefualtResponse (apbObj inst) {
     static uint8_t response[5] = { 0 };
     uint8_t crc[2] =  { 0 };
@@ -150,6 +157,7 @@ uint8_t* apb_buildDefualtResponse (apbObj inst) {
 
     return response;
 }
+*/
 
 /* Private */
 void apb_restart (apbObj inst) {

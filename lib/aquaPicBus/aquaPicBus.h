@@ -78,10 +78,18 @@ int8_t apb_init(apbObj inst,
 /*****Run Time*****************************************************************/
 void apb_run (apbObj inst, uint8_t byte_received);
 void apb_framing (apbObj inst);
+
+/* This clears the message buffer so make sure you have all the data stored from the command */
 void apb_sendDefualtResponse (apbObj inst);
 
+/* This clears the message buffer so make sure you have all the data stored from the command */
+void apb_initResponse (apbObj inst);
+void apb_appendToResponse (apbObj inst, uint8_t data);
+void apb_addToResponse (apbObj inst, void* data, size_t length);
+void apb_sendResponse (apbObj inst);
+
 /* Depreciated */
-uint8_t* apb_buildDefualtResponse (apbObj inst);
+/* uint8_t* apb_buildDefualtResponse (apbObj inst); */
 
 /* Private */
 void apb_restart (apbObj inst);
