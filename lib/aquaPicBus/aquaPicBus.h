@@ -76,27 +76,27 @@ int8_t apb_init(apbObj inst,
         uint8_t transmitEnablePin);
 
 /*****Run Time*****************************************************************/
-void apb_run (apbObj inst, uint8_t byte_received);
-void apb_framing (apbObj inst);
+void apb_run(apbObj inst, uint8_t byte_received);
+void apb_framing(apbObj inst);
 
 /* This clears the message buffer so make sure you have all the data stored from the command */
-void apb_sendDefualtResponse (apbObj inst);
+void apb_sendDefualtResponse(apbObj inst);
 
 /* This clears the message buffer so make sure you have all the data stored from the command */
-void apb_initResponse (apbObj inst);
-void apb_appendToResponse (apbObj inst, uint8_t data);
-void apb_addToResponse (apbObj inst, void* data, size_t length);
-void apb_sendResponse (apbObj inst);
+void apb_initResponse(apbObj inst);
+void apb_appendToResponse(apbObj inst, uint8_t data);
+void apb_addToResponse(apbObj inst, void* data, size_t length);
+void apb_sendResponse(apbObj inst);
 
 /* Depreciated */
 /* uint8_t* apb_buildDefualtResponse (apbObj inst); */
 
 /* Private */
-void apb_restart (apbObj inst);
-void apb_setupMessage (apbObj inst);
-void apb_clearMessageBuffer (apbObj inst);
-int8_t apb_checkCrc (uint8_t* message, int length);
-void apb_crc16 (uint8_t* message, uint8_t* crc, int length);
-void apb_sendMessage (apbObj inst, uint8_t* message, uint8_t length);
+void apb_restart(apbObj inst);
+void apb_setupMessage(apbObj inst);
+void apb_clearMessageBuffer(apbObj inst);
+int8_t apb_checkCrc(uint8_t* message, int length);
+void apb_crc16(uint8_t* message, uint8_t* crc, int length);
+void apb_sendMessage(apbObj inst, uint8_t* message, uint8_t length);
 
 #endif /* AQUAPIC_BUS_H */
