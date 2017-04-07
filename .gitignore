@@ -11,3 +11,5 @@ build/
 Makefile
 funclist
 .directory
+.dep
+bin/
