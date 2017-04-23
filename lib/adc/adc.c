@@ -24,12 +24,12 @@
 #include <stdint.h>     /* uint8_t, int8_t */
 #include "adc.h" 
 
-void initAdc (uint8_t adcon0, uint8_t adcon1) {
+void inline initAdc(uint8_t adcon0, uint8_t adcon1) {
     ADCON0 = adcon0;
     ADCON1 = adcon1;
 }
 
-uint16_t getAdc (void) {
+uint16_t getAdc(void) {
     uint16_t counts;
 
     counts = ADRESH << 8; //grab highest 2 bits shift right 8

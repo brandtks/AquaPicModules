@@ -87,10 +87,10 @@ void main(void) {
         ct[i].average = 0;
     }
     
-    ct[0].chsValue = 0b00000;
-    ct[1].chsValue = 0b00001;
-    ct[2].chsValue = 0b00010;
-    ct[3].chsValue = 0b00011;
+    ct[0].chsValue = CHS_AN0;
+    ct[1].chsValue = CHS_AN1;
+    ct[2].chsValue = CHS_AN2;
+    ct[3].chsValue = CHS_AN3;
 
     //AquaPic Bus initialization
     apb_init (apbInst, 
