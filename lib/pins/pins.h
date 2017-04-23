@@ -26,6 +26,6 @@
 #define HIGH    1
 #define LOW     0
 
-void writePin (volatile uint8_t* port, uint8_t pin, uint8_t value);
+#define WRITE_PIN(port, pin, value) value ? *port |= 0x01 << pin : *port &= ~(0x01 << pin)
 
 #endif	/* PINS_H */ 

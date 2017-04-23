@@ -50,22 +50,19 @@
 
 #define _XTAL_FREQ      32000000UL  /* Used by the __delay_ms(xx) and __delay_us(xx) Methods, 32MHz */
 
-#define RED_LED         LATCbits.LATC3
-#define GREEN_LED       LATCbits.LATC2
-#define YELLOW_LED      LATCbits.LATC1
+#define RED_LED_PORT    &LATC
+#define GREEN_LED_PORT  &LATC
+#define YELLOW_LED_PORT &LATC
 
-#define redLedOn        RED_LED = 0
-#define redLedOff       RED_LED = 1
-#define greenLedOn      GREEN_LED = 0
-#define greenLedOff     GREEN_LED = 1
-#define yellowLedOn     YELLOW_LED = 0
-#define yellowLedOff    YELLOW_LED = 1
+#define RED_LED_PIN     3
+#define GREEN_LED_PIN   2
+#define YELLOW_LED_PIN  1
 
-#define transmitEnablePort  &LATC
-#define transmitEnablePin   5
-#define APB_ADDRESS         0x50
-#define COMM_ERROR_SP       400 /* 25mSec timer interrupt, 10 sec alarm */
-                                /* 10,000mSec / 25mSec = 200 */
+#define TX_ENABLE_PORT  &LATC
+#define TX_ENABLE_PIN   5
+#define APB_ADDRESS     0x50
+#define COMM_ERROR_SP   400 /* 25mSec timer interrupt, 10 sec alarm */
+                            /* 10,000mSec / 25mSec = 200 */
 
 #endif	/* BSP_H */
 

@@ -22,6 +22,7 @@
 
 #include <stdlib.h>     /* null, size_t */
 #include <stdint.h>     /* uint8_t, int8_t */
+#include <string.h>     /* memcpy */
 #include "aquaPicBus.h"
 
 #ifdef TEST
@@ -31,8 +32,6 @@
 #include "../uart/uart.h"
 #include "../pins/pins.h"
 #endif
-
-#include "../common/common.h"
 
 /******************************************************************************/
 /* Functions                                                                  */
@@ -134,7 +133,7 @@ void apb_appendToResponse(apbObj inst, uint8_t data) {
 
 void apb_addToResponse(apbObj inst, void* data, size_t length) {
     if (inst->apbStatus == MESSAGE_LENGTH_RECIEVED) {
-        memoryCopy (&(inst->message[inst->messageLength]), data, length);
+        memcpy(&(inst->message[inst->messageLength]), data, length);
         inst->messageLength += (uint8_t)length;
     }
 }
@@ -173,8 +172,8 @@ void apb_restart(apbObj inst) {
     inst->function = 0;
     inst->framingCount = 0;
     inst->apbStatus = WAIT_FOR_FRAMING;
-    apb_clearMessageBuffer (inst);
-    writePin (inst->transmitEnablePort, inst->transmitEnablePin, LOW);
+    apb_clearMessageBuffer(inst);
+    WRITE_PIN(inst->transmitEnablePort, inst->transmitEnablePin, LOW);
 }
 
 void apb_setupMessage(apbObj inst) {
@@ -182,7 +181,7 @@ void apb_setupMessage(apbObj inst) {
     inst->messageLength = 0;
     inst->function = 0;
     inst->apbStatus = WAIT_FOR_ADDRESS;
-    apb_clearMessageBuffer (inst);
+    apb_clearMessageBuffer(inst);
 }
 
 void apb_clearMessageBuffer(apbObj inst) {
@@ -224,7 +223,7 @@ void apb_crc16(uint8_t* message, uint8_t* crc, int length) {
 }
 
 void apb_sendMessage(apbObj inst, uint8_t* message, uint8_t length) {
-    writePin (inst->transmitEnablePort, inst->transmitEnablePin, HIGH);
-    putsch (message, length);
-    writePin (inst->transmitEnablePort, inst->transmitEnablePin, LOW);
+    WRITE_PIN(inst->transmitEnablePort, inst->transmitEnablePin, HIGH);
+    putsch(message, length);
+    WRITE_PIN(inst->transmitEnablePort, inst->transmitEnablePin, LOW);
 }

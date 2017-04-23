@@ -24,8 +24,9 @@
 #define	ADC_H
 
 /* WIP adding config bits as needed */
-#define CHS_AN0             0b00000000  /* CHS: Analog Channel Select bits, AN0 */
+#define CHS_AN0             0b00000     /* CHS: Analog Channel Select bits, AN0 */
 
+#define AD0_CHS_AN0         0b00000000  /* CHS: Analog Channel Select bits, AN0 */
 #define AD0_ADON_ENABLE     0b00000001  /* ADON: ADC Enable bit, ADC is enabled */
 #define AD0_ADON_DISABLE    0b00000000  /* ADON: ADC Enable bit, ADC is disabled */
 
@@ -34,7 +35,8 @@
 #define AD1_ADNREF_VSS      0b00000000  /* ADNREF: A/D Negative Voltage Reference Configuration, VREF- is connected to Vss */
 #define AD1_ADPREF_VDD      0b00000000  /* ADPREF: A/D Positive Voltage Reference Configuration, VREF+ is connected to Vdd */
 
-#define startAdc()          GO = 1
+#define START_ADC()          GO = 1
+#define SET_CHANNEL(channel) ADCON0bits.CHS = channel
 
 void initAdc (uint8_t adcon0, uint8_t adcon1);
 uint16_t getAdc (void);

@@ -24,7 +24,7 @@
 #include <stdint.h>     /* uint8_t, int8_t */
 #include "uart.h"
 
-void putsch (uint8_t* data, uint8_t length) {
+void putsch(uint8_t* data, uint8_t length) {
     while(length--) {
         TXREG = *data++;
         while (!TXIF) //TXIF is set when the TXREG is empty

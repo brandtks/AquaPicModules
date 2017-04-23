@@ -23,7 +23,7 @@
 #ifndef UART_H
 #define	UART_H
 
-void putsch (uint8_t* data, uint8_t length);
+void putsch(uint8_t* data, uint8_t length);
 
 #endif	/* UART_H */
 

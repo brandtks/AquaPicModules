@@ -47,7 +47,4 @@
 #define bitFlagOn(word, bit)        word |= (0x01 << bit)
 #define bitFlagTest(word, bit)      (word & (0x01 << bit)) ? 1 : 0
 
-/* some common used functions */
-void memoryCopy (void* to, void* from, size_t count);
-
 #endif  /* COMMON_H */

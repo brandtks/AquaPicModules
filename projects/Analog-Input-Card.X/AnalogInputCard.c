@@ -28,6 +28,7 @@
 #include "../../lib/aquaPicBus/aquaPicBus.h"
 #include "../../lib/common/common.h"
 #include "../../lib/adc/adc.h"
+#include "../../lib/led/led.h"
 #include "bsp.h"
 
 /******************************************************************************/
@@ -71,7 +72,7 @@ uint8_t  inletPtr;
 uint8_t  valuePtr;
 uint8_t  timerCounter;
 
-void main (void) {
+void main(void) {
     initializeHardware ();
     
     inletPtr = 0;
@@ -96,8 +97,8 @@ void main (void) {
             &apbMessageHandler, 
             APB_ADDRESS,
             1,
-            transmitEnablePort,
-            transmitEnablePin);
+            TX_ENABLE_PORT,
+            TX_ENABLE_PIN);
 
     //enable UART
     TXSTAbits.TXEN = 1; //Transmit Enable, Transmit enabled
@@ -107,8 +108,8 @@ void main (void) {
     PEIE = 1; //Enable peripheral interrupts
     GIE = 1; //Enable Global interrupts
     
-    yellowLedOff;
-    greenLedOn;
+    SET_LED(YELLOW_LED_PORT, YELLOW_LED_PIN, OFF);
+    SET_LED(GREEN_LED_PORT, GREEN_LED_PIN, ON);
     
     while (1) {
         //RCIF is set regardless of the global interrupts 
@@ -133,7 +134,8 @@ void interrupt ISR (void) {
         ct[inletPtr].average = ct[inletPtr].sum / FILTER_VALUES; //average the sum
         
         increment(inletPtr, NUM_CHANNELS);
-        ADCON0bits.CHS = ct[inletPtr].chsValue; //set the ADC to the new channel
+        //ADCON0bits.CHS = ct[inletPtr].chsValue; //set the ADC to the new channel
+        SET_CHANNEL(ct[inletPtr].chsValue);
         
         if (inletPtr == 0) //we're back to the beginning of the outlets, increment the value array pointer
             increment(valuePtr, FILTER_VALUES);
@@ -147,7 +149,7 @@ void interrupt ISR (void) {
         timerCounter = ++timerCounter % 25;
         if (timerCounter == 0) {
             if (inletPtr != lastPtr) { //the ADC isn't finished so don't start it
-                startAdc();
+                START_ADC();
                 lastPtr = inletPtr;
             }
 
@@ -156,15 +158,15 @@ void interrupt ISR (void) {
 
                 if (commCounter >= COMM_ERROR_SP) {
                     commError = -1;
-                    greenLedOff;
-                    redLedOn;
+                    SET_LED(GREEN_LED_PORT, GREEN_LED_PIN, OFF);
+                    SET_LED(RED_LED_PORT, RED_LED_PIN, ON);
                     apb_restart (apbInst);
                 }
             } else {
                 if (commCounter == 0) {
                     commError = 0;
-                    redLedOff;
-                    greenLedOn;
+                    SET_LED(RED_LED_PORT, RED_LED_PIN, OFF);
+                    SET_LED(GREEN_LED_PORT, GREEN_LED_PIN, ON);
                 }
             }
         }
@@ -178,7 +180,7 @@ void initializeHardware (void) {
     /*Port Initialization*/
     PORTA = 0x00;   /* Clear Port A */
     PORTB = 0x00;   /* Clear Port B */
-    PORTC = 0x12;   /* Clear Port C, Write 1 to RG Status LED sinks, ie turn off LEDs */
+    PORTC = 0x00;   /* Clear Port C, Write 1 to RG Status LED sinks, ie turn off LEDs */
 
     /*Port Direction*/
     TRISA = 0b00001111; //Port A Directions
@@ -196,12 +198,14 @@ void initializeHardware (void) {
             //****0*** = RC3, Red Status LED
             //*****0** = RC2, Green Status LED
             //******0* = RC1, Yellow Status LED
+    
+    SET_LED(YELLOW_LED_PORT, YELLOW_LED_PIN, ON);
 
     /*Analog Select*/
     ANSELA = 0x0F;  /* Lower pins are analog */
     ANSELB = 0x00;  /* All digital ports */
     
-    initAdc (CHS_AN0 | AD0_ADON_ENABLE, AD1_ADFM_RIGHT | AD1_ADCS_FOSC_16 | AD1_ADNREF_VSS | AD1_ADPREF_VDD);
+    initAdc(AD0_CHS_AN0 | AD0_ADON_ENABLE, AD1_ADFM_RIGHT | AD1_ADCS_FOSC_16 | AD1_ADNREF_VSS | AD1_ADPREF_VDD);
     
     /****Timer 2****/
     PR2 = 0x7C; //Timer Period = 1mSec
