@@ -31,6 +31,7 @@
 #include "../../lib/common/common.h"
 #include "../../lib/led/led.h"
 #include "../../lib/pins/pins.h"
+#include "../../lib/pwm/pwm.h"
 #include "bsp.h"
 
 /******************************************************************************/
@@ -56,39 +57,30 @@ void eeprom_write(unsigned char address, unsigned char value);
 /******************************************************************************/
 /* Variable Definitions                                                       */
 /******************************************************************************/
-typedef struct pwm_port {
-    volatile uint8_t* ccpr;
-    volatile uint8_t* ccpcon;
-}pwmPort;
 
 /******************************************************************************/
 /* Functions                                                                  */
 /******************************************************************************/
 void initializeHardware (void);
 void apbMessageHandler (void);
-uint16_t getChannelValue (uint8_t channel);
-void setChannelValue (uint8_t channel, uint16_t value);
 
 /******************************************************************************/
 /* Global Variables                                                           */
 /******************************************************************************/
 struct apbObjStruct apbInstStruct;
-apbObj apbInst = &apbInstStruct;
-pwmPort  pwm[4];
+apbObj apbInst;
+struct pwmObjStruct pwmInstStruct[4];
+pwmObj pwmInst[4];
 uint16_t commCounter;
-uint8_t  commError;
+uint8_t commError;
 
 void main (void) {
+    int i;
+    for (i = 0; i < 4; ++i) {
+        pwmInst[i] = &pwmInstStruct[i];
+    }
+    
     initializeHardware ();
-
-    pwm[0].ccpr = &CCPR1L;
-    pwm[0].ccpcon = &CCP1CON;
-    pwm[1].ccpr = &CCPR2L;
-    pwm[1].ccpcon = &CCP2CON;
-    pwm[2].ccpr = &CCPR3L;
-    pwm[2].ccpcon = &CCP3CON;
-    pwm[3].ccpr = &CCPR4L;
-    pwm[3].ccpcon = &CCP4CON;
 
 #if SELECTABLE_OUTPUT
     int i;
@@ -99,6 +91,7 @@ void main (void) {
 #endif
 
     /* AquaPicBus Initialization */
+    apbInst = &apbInstStruct;
     apb_init(apbInst, 
             &apbMessageHandler, 
             APB_ADDRESS,
@@ -192,38 +185,16 @@ void initializeHardware (void) {
     APFCONbits.CCP2SEL = 0; //CCP2:P2A function is on
 
     /* CCP(PWM) */
+    initPwm(pwmInst[0], &CCP1CON, &CCPR1L); /* CCP1 */
+    initPwm(pwmInst[1], &CCP2CON, &CCPR2L); /* CCP2 */
+    initPwm(pwmInst[2], &CCP3CON, &CCPR3L); /* CCP3 */
+    initPwm(pwmInst[3], &CCP4CON, &CCPR4L); /* CCP4 */
+    CCPTMRS0 = CCPTMRS0_C1TSEL_TMR2 | 
+            CCPTMRS0_C2TSEL_TMR2 | 
+            CCPTMRS0_C3TSEL_TMR2 | 
+            CCPTMRS0_C4TSEL_TMR2;
+
     PR2 = 0xFF; /* 31.25 kHz from data sheet page 218 */
-
-    /* CCP1 */
-    CCP1CON = 0b00001100;
-              //00****** = P1M: Enhanced PWM Output Configuration, Single output; PxA modulated; PxB, PxC, PxD assigned as port pins
-              //**00**** = DC1B: PWM Duty Cycle Least Significant bits
-              //****1100 = CCP1M: ECCP1 Mode Select, PWM mode
-    CCPR1L = 0x00;  /* Duty Cycle set to 0 */
-
-    /* CCP2 */
-    CCP2CON = 0b00001100;
-              //00****** = P2M: Enhanced PWM Output Configuration, Single output; PxA modulated; PxB, PxC, PxD assigned as port pins
-              //**00**** = DC2B: PWM Duty Cycle Least Significant bits
-              //****1100 = CCP2M: ECCP2 Mode Select, PWM mode
-    CCPR2L = 0x00;  //Duty Cycle set to 0;
-
-    /* CCP3 */
-    CCP3CON = 0b00001100;
-              //00****** = P3M: Enhanced PWM Output Configuration, Single output; PxA modulated; PxB, PxC, PxD assigned as port pins
-              //**00**** = DC3B: PWM Duty Cycle Least Significant bits
-              //****1100 = CCP3M: ECCP3 Mode Select, PWM mode
-    CCPR3L = 0x00;  //Duty Cycle set to 0;
-
-    /* CCP4 */
-    CCP4CON = 0b00001100;
-              //00****** = P4M: Enhanced PWM Output Configuration, Single output; PxA modulated; PxB, PxC, PxD assigned as port pins
-              //**00**** = DC4B: PWM Duty Cycle Least Significant bits
-              //****1100 = CCP4M: CCP4 Mode Select, PWM mode
-    CCPR4L = 0x00;  //Duty Cycle set to 0;
-
-    CCPTMRS0 = 0b00000000;  //CCP<1:4> Modules based on Timer2
-
     T2CON = 0b00000100;
             //*0000*** = T2OUTPS: Timer2 Output Postscaler Select, Does Not Matter for PWM Period
             //*****1** = TMR2ON: Timer2 is on
@@ -310,7 +281,7 @@ void apbMessageHandler (void) {
 #endif
         case 10: { /* read single channel value */
             uint8_t channel = apbInst->message[3];
-            uint16_t value  = getChannelValue(channel);
+            uint16_t value  = getPwmValue(pwmInst[channel]);
             apb_initResponse(apbInst);
             apb_addToResponse(apbInst, &value, sizeof(uint16_t));
             apb_sendResponse(apbInst);
@@ -321,7 +292,7 @@ void apbMessageHandler (void) {
             uint16_t values[4];
             int i;
             for (i = 0; i < 4; ++i) {
-                values[i] = getChannelValue(i);
+                values[i] = getPwmValue(pwmInst[i]);
             }
             apb_initResponse(apbInst);
             apb_addToResponse(apbInst, values, sizeof(uint16_t) * 4);
@@ -333,7 +304,7 @@ void apbMessageHandler (void) {
             memcpy(values, &(apbInst->message[3]), sizeof(uint16_t) * 4);
             int i;
             for (i = 0; i < 4; ++i) {
-                setChannelValue (i, values [i]);
+                setPwmValue(pwmInst[i], values [i]);
             }
             apb_sendDefualtResponse(apbInst);
             break;
@@ -343,32 +314,11 @@ void apbMessageHandler (void) {
             uint16_t value;
             memcpy(&value, &(apbInst->message[4]), sizeof(uint16_t));
             /* value = (value >> 8) | (value << 8); /* reverse the endianess */
-            setChannelValue(channel, value);
+            setPwmValue(pwmInst[channel], value);
             apb_sendDefualtResponse(apbInst);
             break;
         }
         default:
             break;
     }
-}
-
-uint16_t getChannelValue(uint8_t channel) {
-    uint16_t value = *(pwm [channel].ccpr) << 2;
-    value |= (*(pwm [channel].ccpcon) & 0x30) >> 4; //bits 5:4 in CCPxCON are the two LSBs
-    return value;
-}
-
-void setChannelValue(uint8_t channel, uint16_t value) {
-    uint8_t upper = (uint8_t)((value >> 2) & 0xFF);
-    *(pwm[channel].ccpr) = upper;
-
-    if (value & 0x01) //if LSB set bit 4 in CCPxCON register
-        *(pwm[channel].ccpcon) |= 0x10;
-    else
-        *(pwm[channel].ccpcon) &= ~0x10;
-
-    if (value & 0x02) //if 2nd LSD set bit 5 in CCPxCON register
-        *(pwm[channel].ccpcon) |= 0x20;
-    else
-        *(pwm[channel].ccpcon) &= ~0x20;
 }
