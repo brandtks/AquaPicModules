@@ -17,8 +17,8 @@ I'm lazy so I just use the IDE, MPLAB X.
 The AquaPic firmware code is released under the terms of the GNU General Public License (GPL), version 3 or later. See COPYING for details.
 
 ### Website
-[HackADay Build Log](https://hackaday.io/project/1436-aquapic-aquarium-controller)
-[Less Updated Build Log](https://sites.google.com/site/aquapicbuildlog/)
+ * [HackADay Build Log](https://hackaday.io/project/1436-aquapic-aquarium-controller)
+ * [Less Updated Build Log](https://sites.google.com/site/aquapicbuildlog/)
 
 #### Additional Notes
 **AquaPicBus Slave Test Code**
