@@ -22,46 +22,27 @@
 /******************************************************************************/
 /* Files to Include                                                           */
 /******************************************************************************/
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdint.h>     //For uint8_t, int8_t definition
-#include <xc.h>
+#include <stdlib.h>     /* null */
+#include <stdint.h>     /* uint8_t, int8_t */
+#include <string.h>     /* memcpy */
+#include <xc.h>         /* EEPROM */
 #include <pic16f1937.h>
-#include "../../drv_lib/aquapic_bus/aquapic_bus.h"
-#include "../../drv_lib/common/slib_com.h"
-
-/******************************************************************************/
-/* CONFIGUTION WORDS                                                          */
-/******************************************************************************/
-/*CONFIG1*/
-#pragma config FOSC = HS        //Oscillator Selection (HS Oscillator, High-speed crystal/resonator connected between OSC1 and OSC2 pins)
-#pragma config WDTE = OFF       //Watchdog Timer Enable (WDT disnabled)
-#pragma config PWRTE = OFF      //Power-up Timer Enable (PWRT disabled)
-#pragma config MCLRE = ON       //MCLR Pin Function Select (MCLR/VPP pin function is MCLR)
-#pragma config CP = OFF         //Flash Program Memory Code Protection (Program memory code protection is disabled)
-#pragma config CPD = OFF        //Data Memory Code Protection (Data memory code protection is disabled)
-#pragma config BOREN = ON       //Brown-out Reset Enable (Brown-out Reset enabled)
-#pragma config CLKOUTEN = OFF   //Clock Out Enable (CLKOUT function is disabled. I/O or oscillator function on the CLKOUT pin)
-#pragma config IESO = ON        //Internal/External Switchover (Internal/External Switchover mode is enabled)
-#pragma config FCMEN = ON       //Fail-Safe Clock Monitor Enable (Fail-Safe Clock Monitor is enabled)
-
-/*CONFIG2*/
-#pragma config WRT = OFF        //Flash Memory Self-Write Protection (Write protection off)
-#pragma config VCAPEN = RA5     //Voltage Regulator Capacitor Enable (VCAP functionality is enabled on RA5)
-#pragma config PLLEN = ON       //PLL Enable (4x PLL enabled)
-#pragma config STVREN = ON      //Stack Overflow/Underflow Reset Enable (Stack Overflow or Underflow will cause a Reset)
-#pragma config BORV = LO        //Brown-out Reset Voltage Selection (Brown-out Reset Voltage (Vbor), low trip point selected.)
-#pragma config LVP = OFF        //Low-Voltage Programming Enable (High-voltage on MCLR/VPP must be used for programming)
+#include "../../lib/adc/adc.h"
+#include "../../lib/aquaPicBus/aquaPicBus.h"
+#include "../../lib/common/common.h"
+#include "../../lib/led/led.h"
+#include "../../lib/pins/pins.h"
+#include "bsp.h"
 
 /******************************************************************************/
 /* EEPROM                                                                     */
 /******************************************************************************/
 /*HEX FILE EEPROM INITIAL VALUES*/
-__EEPROM_DATA (0,0,0,0,0,0,0,0);
+__EEPROM_DATA(0,0,0,0,0,0,0,0);
 
 /*Define eeprom read and write functions from xc.h*/
-unsigned char eeprom_read (unsigned char address);
-void eeprom_write (unsigned char address, unsigned char value);
+unsigned char eeprom_read(unsigned char address);
+void eeprom_write(unsigned char address, unsigned char value);
 
 /*User Defined*/
 #define OUTLET_FALLBACK_ADDRESS 0x00
@@ -69,41 +50,9 @@ void eeprom_write (unsigned char address, unsigned char value);
 /******************************************************************************/
 /* USER DEFINED                                                               */
 /******************************************************************************/
-#define _XTAL_FREQ      32000000UL  //Used by the __delay_ms(xx) and __delay_us(xx) Methods, 32MHz
-
-#define AC_POWER_AVAIL  PORTCbits.RC3
-
-#define OUTLET1_RELAY   LATDbits.LATD0
-#define OUTLET2_RELAY   LATDbits.LATD1
-#define OUTLET3_RELAY   LATDbits.LATD2
-#define OUTLET4_RELAY   LATDbits.LATD3
-#define OUTLET5_RELAY   LATDbits.LATD4
-#define OUTLET6_RELAY   LATDbits.LATD5
-#define OUTLET7_RELAY   LATDbits.LATD6
-#define OUTLET8_RELAY   LATDbits.LATD7
-
-#define startAdc        GO = 1
-
-#define RED_LED         LATCbits.LATC0
-#define GREEN_LED       LATCbits.LATC1
-#define YELLOW_LED      LATCbits.LATC2
-
-#define rLedOn          RED_LED = 0
-#define rLedOff         RED_LED = 1
-#define gLedOn          GREEN_LED = 0
-#define gLedOff         GREEN_LED = 1
-#define yLedOn          YELLOW_LED = 0
-#define yLedOff         YELLOW_LED = 1
-
-#define TX_nRX          LATCbits.LATC5
-#define APB_ADDRESS     0x10
-
 #define FILTER_VALUES   10
 #define NUM_OUTLETS     8
-//#define ENABLE_CURRENT
-
-#define COMM_ERROR_SP   400 //25mSec timer interrupt, 10 sec alarm
-                            //10,000mSec / 25mSec = 400
+#define ENABLE_CURRENT
 
 /******************************************************************************/
 /* Variable Definitions                                                       */
@@ -120,28 +69,24 @@ typedef struct amperage_filter {
 /******************************************************************************/
 /* Functions                                                                  */
 /******************************************************************************/
-void initializeHardware (void);
-void apbMessageHandler (void);
-void writeUartData (uint8_t* data, uint8_t length);
-void sendDefualtResponse (void);
-void memoryCopy (void* to, void* from, size_t count);
-#ifdef ENABLE_CURRENT
-uint16_t getAdc (void);
-#endif
+void initializeHardware(void);
+void apbMessageHandler(void);
 
 /******************************************************************************/
 /* Global Variables                                                           */
 /******************************************************************************/
 struct apbObjStruct apbInstStruct;
 apbObj apbInst = &apbInstStruct;
+
+uint16_t commCounter;
+int8_t   commError;
+uint8_t  fallbackFlags;
+
 #ifdef ENABLE_CURRENT
 amperageFilter ct[NUM_OUTLETS];
 uint8_t outletPtr;
 uint8_t valuePtr;
 #endif
-uint16_t commCounter;
-int8_t   commError;
-uint8_t  fallbackFlags;
 
 void main (void) {
     initializeHardware ();
@@ -158,35 +103,37 @@ void main (void) {
         ct[i].average = 0;
     }
     
-    ct[0].chsValue = 0b00000;
-    ct[1].chsValue = 0b00001;
-    ct[2].chsValue = 0b00010;
-    ct[3].chsValue = 0b00011;
-    ct[4].chsValue = 0b00101;
-    ct[5].chsValue = 0b00110;
-    ct[6].chsValue = 0b00111;
-    ct[7].chsValue = 0b01000;
+    ct[0].chsValue = CHS_AN0;
+    ct[1].chsValue = CHS_AN1;
+    ct[2].chsValue = CHS_AN2;
+    ct[3].chsValue = CHS_AN3;
+    ct[4].chsValue = CHS_AN5;
+    ct[5].chsValue = CHS_AN6;
+    ct[6].chsValue = CHS_AN7;
+    ct[7].chsValue = CHS_AN8;
 #endif
     
-    fallbackFlags = eeprom_read (OUTLET_FALLBACK_ADDRESS);
+    fallbackFlags = eeprom_read(OUTLET_FALLBACK_ADDRESS);
     
-    //AquaPic Bus initialization
-    apb_init (apbInst, 
+    /* AquaPicBus Initialization */
+    apbInst = &apbInstStruct;
+    apb_init(apbInst, 
             &apbMessageHandler, 
             APB_ADDRESS,
-            1);
+            1,
+            TX_ENABLE_PORT,
+            TX_ENABLE_PIN);
     
-    //enable UART
-    TX_nRX = 0;
-    TXSTAbits.TXEN = 1; //Transmit Enable, Transmit enabled
-    RCSTAbits.CREN = 1; //Continuous Receive Enable, Enables receiver
+    /* Enable UART */
+    TXSTAbits.TXEN = 1; /* Transmit Enable, Transmit enabled */
+    RCSTAbits.CREN = 1; /* Continuous Receive Enable, Enables receiver */
     
     /*Global Interrupts*/
-    PEIE = 1; //Enable peripheral interrupts
-    GIE = 1;  //Enable Global interrupts
+    PEIE = 1;   /* Enable peripheral interrupts */
+    GIE = 1;    /* Enable Global interrupts */
     
-    yLedOff;
-    gLedOn;
+    SET_LED(YELLOW_LED_PORT, YELLOW_LED_PIN, OFF);
+    SET_LED(GREEN_LED_PORT, GREEN_LED_PIN, ON);
     
     while (1) {
         /* RCIF is set regardless of the global interrupts */
@@ -198,7 +145,7 @@ void main (void) {
     }
 }
 
-void interrupt ISR (void) {
+void interrupt ISR(void) {
 #ifdef ENABLE_CURRENT
     static uint8_t lastPtr = NUM_OUTLETS - 1; //outletPtr starts at 0 so we'll just initialize this to the end
     
@@ -209,11 +156,11 @@ void interrupt ISR (void) {
         
         ct[outletPtr].average = ct[outletPtr].sum / FILTER_VALUES; //average the sum
         
-        _increment(outletPtr, NUM_OUTLETS);
+        increment(outletPtr, NUM_OUTLETS);
         ADCON0bits.CHS = ct[outletPtr].chsValue; //set the ADC to the new channel
         
         if (outletPtr == 0) //we're back to the beginning of the outlets, increment the value array pointer
-            _increment(valuePtr, FILTER_VALUES);
+            increment(valuePtr, FILTER_VALUES);
         
         ADIF = 0; //Clear flag
     }
@@ -229,7 +176,7 @@ void interrupt ISR (void) {
         
 #ifdef ENABLE_CURRENT
         if (outletPtr != lastPtr) { /* the ADC isn't finished so don't start it */
-            startAdc;
+            START_ADC();
             lastPtr = outletPtr;
         }
 #endif
@@ -240,21 +187,21 @@ void interrupt ISR (void) {
             if (commCounter >= COMM_ERROR_SP) {
                 LATD = fallbackFlags; /* set outlets to the fallback */
                 commError = -1;
-                gLedOff;
-                rLedOn;
-                apb_restart (apbInst);
+                SET_LED(GREEN_LED_PORT, GREEN_LED_PIN, OFF);
+                SET_LED(RED_LED_PORT, RED_LED_PIN, ON);
+                apb_restart(apbInst);
             }
         } else {
             if (commCounter == 0) {
                 commError = 0;
-                rLedOff;
-                gLedOn;
+                SET_LED(RED_LED_PORT, RED_LED_PIN, OFF);
+                SET_LED(GREEN_LED_PORT, GREEN_LED_PIN, ON);
             }
         }
     }
 }
 
-void initializeHardware (void) {
+void initializeHardware(void) {
     /****Oscillator****/
     OSCCONbits.SCS = 0b00;  //System Clock Select: Clock determined by FOSC<2:0> in Configuration Word 1
 
@@ -299,6 +246,7 @@ void initializeHardware (void) {
             //******1* = RE1, AN6, Outlet 6 CT
             //*******1 = RE0, AN5, Outlet 5 CT
 
+#ifdef ENABLE_CURRENT 
     /****Analog Select****/
     ANSELA = 0b00001111;
              //****1*** = RA3, AN3, Outlet 4 CT
@@ -314,20 +262,7 @@ void initializeHardware (void) {
              //******1* = RE1, AN6, Outlet 6 CT
              //*******1 = RE0, AN5, Outlet 5 CT
 
-#ifdef ENABLE_CURRENT
-    /****ADC****/
-    ADCON0 = 0b00000001;
-             //*00000** = CHS: Analog Channel Select bits, AN0
-             //*******1 = ADON: ADC Enable bit, ADC is enabled
-
-    ADCON1 = 0b11010100;
-             //1******* = ADFM: A/D Result Format Select, Right Justified
-             //*101**** = ADCS: A/D Conversion Clock Select, FOSC/16
-             //*****0** = ADNREF: A/D Negative Voltage Reference Configuration, VREF- is connected to Vss
-             //******00 = ADPREF: A/D Positive Voltage Reference Configuration, VREF+ is connected to Vdd
-    
-    ADIF = 0;       /* Clear ADC interrupt flag */
-    ADIE = 1;       /* Enable ADC interrupts */
+    initAdc(AD0_CHS_AN0 | AD0_ADON_ENABLE, AD1_ADFM_RIGHT | AD1_ADCS_FOSC_16 | AD1_ADNREF_VSS | AD1_ADPREF_VDD);
 #endif
     
     /****Timer 2****/
@@ -383,160 +318,69 @@ void initializeHardware (void) {
             //****0*** = ADDEN: Address Detect Enable, Disables address detection
     
     /*Interrupts*/
-    #ifdef ENABLE_CURRENT
+#ifdef ENABLE_CURRENT
     ADIF = 0;       /* Clear ADC interrupt flag */
     ADIE = 1;       /* Enable ADC interrupts */
-    #endif
+#endif
     TMR2IF = 0;     /* Clear Timer2 interrupt flag */
     TMR2IE = 1;     /* Enable Timer2 interrupts */
     TMR4IF = 0;     /* Clear Timer4 interrupt flag */
     TMR4IE = 1;     /* Enable Timer4 interrupts */
 }
 
-void apbMessageHandler (void) {
+void apbMessageHandler(void) {
     commCounter = 0;
     
     switch (apbInst->function) {
         case 2: { /* setup single channel */
-            uint8_t outlet   = apbInst->message [3];
-            uint8_t fallback = apbInst->message [4];
-
+            uint8_t outlet   = apbInst->message[3];
+            uint8_t fallback = apbInst->message[4];
             bitFlagSet(fallbackFlags, outlet, fallback);
-
             eeprom_write (OUTLET_FALLBACK_ADDRESS, fallbackFlags);
-            sendDefualtResponse ();
+            apb_sendDefualtResponse(apbInst);
             break;
         }
 #ifdef ENABLE_CURRENT
         case 10: { /* read outlet current */
-            #define FUNCTION10_LENGTH 8 /* header + outlet + current + crc = 3 + 1 + 2 + 2 */
-            
-            uint8_t outlet = apbInst->message[3];
-            uint16_t current  = ct[outlet].average;
-            
-            uint8_t m[FUNCTION10_LENGTH];
-            uint8_t crc[2];
-
-            m[0] = apbInst->address;
-            m[1] = 10; /* function number */
-            m[2] = FUNCTION10_LENGTH;  /* message length */
-            m[3] = outlet;
-            memoryCopy (&(m[4]), &current, sizeof (uint16_t));
-            apb_crc16 (m, crc, FUNCTION10_LENGTH);
-            m[FUNCTION10_LENGTH - 2] = crc[0];
-            m[FUNCTION10_LENGTH - 1] = crc[1];
-            
-            writeUartData (m, FUNCTION10_LENGTH);
-            
+            uint8_t outlet   = apbInst->message[3];
+            uint16_t current = ct[outlet].average;
+            apb_initResponse(apbInst);
+            apb_appendToResponse(apbInst, outlet);
+            apb_addToResponse(apbInst, &current, sizeof(uint16_t));
+            apb_sendResponse(apbInst);
             break;
         }
 #endif
         case 20: { /* read status */
-            #define FUNCTION20_LENGTH 8 /* header + ac power avail + state mask + current mask + crc = 3 + 1 + 1 + 1 + 2 */
-            
-            uint8_t m[FUNCTION20_LENGTH];
-            uint8_t crc[2];
-            
-            m[0] = apbInst->address;
-            m[1] = 20; /* function number */
-            m[2] = FUNCTION20_LENGTH;  /* message length */
-            if (AC_POWER_AVAIL)
-                m[3] = 0xFF;
-            else
-                m[3] = 0x00;
-            
-            m[4] = LATD;
-            
+            apb_initResponse(apbInst);
+            READ_PIN(POWER_AVAIL_PORT, POWER_AVAIL_PIN) ? apb_appendToResponse(apbInst, 0xFF) : apb_appendToResponse(apbInst, 0x00);
+            apb_appendToResponse(apbInst, LATD);
 #ifdef ENABLE_CURRENT
-            m[5] = 0xFF;
+            apb_appendToResponse(apbInst, 0xFF);
 #else
-            m[5] = 0x00;
+            apb_appendToResponse(apbInst, 0x00);
 #endif
-            
-            apb_crc16 (m, crc, FUNCTION20_LENGTH);
-            m[FUNCTION20_LENGTH - 2] = crc[0];
-            m[FUNCTION20_LENGTH - 1] = crc[1];
-            
-            writeUartData (m, FUNCTION20_LENGTH);
-            
+            apb_sendResponse(apbInst);
             break;
         }
 #ifdef ENABLE_CURRENT
         case 21: { /* read all current */
-            #define FUNCTION21_LENGTH 21 /* header + 8 * current + crc = 3 + (8 * 2) + 2 */
-            
-            uint8_t m[FUNCTION21_LENGTH];
-            uint8_t crc[2];
-            
-            m[0] = apbInst->address;
-            m[1] = 21; /* function number */
-            m[2] = FUNCTION21_LENGTH; /* message length */
             int i;
+            apb_initResponse(apbInst);
             for (i = 0; i < NUM_OUTLETS; ++i)
-                memoryCopy (&(m[i * sizeof (uint16_t) + 3]), &(ct[i].average), sizeof (uint16_t));
-            apb_crc16 (m, crc, FUNCTION21_LENGTH);
-            m[FUNCTION21_LENGTH - 2] = crc[0];
-            m[FUNCTION21_LENGTH - 1] = crc[1];
-            
-            writeUartData (m, FUNCTION21_LENGTH);
-            
+                apb_addToResponse(apbInst, &(ct[i].average), sizeof(uint16_t));
+            apb_sendResponse(apbInst);
             break;
         }
 #endif
         case 30: { /* write outlet */
-            uint8_t outlet = apbInst->message [3];
-            uint8_t state  = apbInst->message [4];
-            
-            uint8_t dLat = LATD;
-            bitFlagSet(dLat, outlet, state);
-            LATD = dLat;
-            
-            sendDefualtResponse ();
+            uint8_t outlet = apbInst->message[3];
+            uint8_t state  = apbInst->message[4];
+            WRITE_PIN(&LATD, outlet, state);
+            apb_sendDefualtResponse(apbInst);
             break;
         }
         default:
-            sendDefualtResponse ();
             break;
     }
 }
-
-void writeUartData (uint8_t* data, uint8_t length) {
-    TX_nRX = 1; /* RS-485 chip transmit enable is high */
-    
-    int i;
-    for (i = 0; i < length; ++i) {
-        TXREG = *data;
-        ++data;
-        while (!TXIF) /* TXIF is set when the TXREG is empty */
-            continue;
-    }
-
-    while (!TRMT) /* wait for transmit shift register to be empty */
-        continue;
-    
-    TX_nRX = 0; /* RS-485 chip receive enable is low */
-}
-
-void sendDefualtResponse (void) {
-    uint8_t* m = apb_buildDefualtResponse (apbInst);
-    writeUartData (m, 5);
-}
-
-void memoryCopy (void* to, void* from, size_t count) {
-    uint8_t* ptr_to = (uint8_t*)to;
-    uint8_t* ptr_from = (uint8_t*)from;
-
-    while (count--)
-        *ptr_to++ = *ptr_from++;
-}
-
-#ifdef ENABLE_CURRENT
-uint16_t getAdc (void) {
-    uint16_t counts;
-
-    counts = ADRESH << 8; //grab highest 2 bits shift right 8
-    counts |= ADRESL;
-
-    return counts;
-}
-#endif
