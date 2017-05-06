@@ -3,12 +3,10 @@ Unused/
 pid/
 Archieve/
 Testing/
-nbproject/
 dist/
 debug/
 build/
 *.obj
-Makefile
 funclist
 .directory
 *.inc
