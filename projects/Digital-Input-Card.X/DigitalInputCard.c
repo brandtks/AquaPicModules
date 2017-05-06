@@ -27,31 +27,11 @@
 #include <stdint.h>     //For uint8_t, int8_t definition
 #include <xc.h>
 #include <pic16f1936.h>
-#include "../../drv_lib/aquapic_bus/aquapic_bus.h"
-#include "../../drv_lib/common/slib_com.h"
-
-/******************************************************************************/
-/* CONFIGUTION WORDS                                                          */
-/******************************************************************************/
-/*CONFIG1*/
-#pragma config FOSC = HS        //Oscillator Selection (HS Oscillator, High-speed crystal/resonator connected between OSC1 and OSC2 pins)
-#pragma config WDTE = OFF       //Watchdog Timer Enable (WDT disabled)
-#pragma config PWRTE = OFF      //Power-up Timer Enable (PWRT disabled)
-#pragma config MCLRE = ON       //MCLR Pin Function Select (MCLR/VPP pin function is MCLR)
-#pragma config CP = OFF         //Flash Program Memory Code Protection (Program memory code protection is disabled)
-#pragma config CPD = OFF        //Data Memory Code Protection (Data memory code protection is disabled)
-#pragma config BOREN = ON       //Brown-out Reset Enable (Brown-out Reset enabled)
-#pragma config CLKOUTEN = OFF   //Clock Out Enable (CLKOUT function is disabled. I/O or oscillator function on the CLKOUT pin)
-#pragma config IESO = ON        //Internal/External Switchover (Internal/External Switchover mode is enabled)
-#pragma config FCMEN = ON       //Fail-Safe Clock Monitor Enable (Fail-Safe Clock Monitor is enabled)
-
-/*CONFIG2*/
-#pragma config WRT = OFF        //Flash Memory Self-Write Protection (Write protection off)
-#pragma config VCAPEN = RA5     //Voltage Regulator Capacitor Enable (VCAP functionality is enabled on RA5)
-#pragma config PLLEN = ON       //PLL Enable (4x PLL enabled)
-#pragma config STVREN = ON      //Stack Overflow/Underflow Reset Enable (Stack Overflow or Underflow will cause a Reset)
-#pragma config BORV = LO        //Brown-out Reset Voltage Selection (Brown-out Reset Voltage (Vbor), low trip point selected.)
-#pragma config LVP = OFF         //Low-Voltage Programming Enable (Low-voltage programming enabled)
+#include "../../lib/aquaPicBus/aquaPicBus.h"
+#include "../../lib/common/common.h"
+#include "../../lib/led/led.h"
+#include "../../lib/pins/pins.h"
+#include "bsp.h"
 
 /******************************************************************************/
 /* EEPROM                                                                     */
@@ -60,40 +40,7 @@
 /******************************************************************************/
 /* USER DEFINED                                                               */
 /******************************************************************************/
-#define _XTAL_FREQ      32000000UL  //Used by the __delay_ms(xx) and __delay_us(xx) Methods, 32MHz
-
-#define RED_LED         LATAbits.LATA0
-#define GREEN_LED       LATAbits.LATA1
-#define YELLOW_LED      LATAbits.LATA2
-
-#define rLedOn          RED_LED = 0
-#define rLedOff         RED_LED = 1
-#define gLedOn          GREEN_LED = 0
-#define gLedOff         GREEN_LED = 1
-#define yLedOn          YELLOW_LED = 0
-#define yLedOff         YELLOW_LED = 1
-
 #define NUM_CHANNELS    6
-
-#define INPUT1          PORTBbits.RB0
-#define INPUT2          PORTBbits.RB1
-#define INPUT3          PORTBbits.RB2
-#define INPUT4          PORTBbits.RB3
-#define INPUT5          PORTBbits.RB4
-#define INPUT6          PORTBbits.RB5
-
-#define CH1_LED         LATAbits.LATA3
-#define CH2_LED         LATAbits.LATA4
-#define CH3_LED         LATCbits.LATC0
-#define CH4_LED         LATCbits.LATC1
-#define CH5_LED         LATCbits.LATC2
-#define CH6_LED         LATCbits.LATC3
-
-#define TX_nRX          LATCbits.LATC5
-#define APB_ADDRESS     0x30
-
-#define COMM_ERROR_SP   400 //25mSec timer interrupt, 10 sec alarm
-                            //10,000mSec / 25mSec = 400
 
 /******************************************************************************/
 /* Variable Definitions                                                       */
@@ -104,9 +51,6 @@
 /******************************************************************************/
 void initializeHardware (void);
 void apbMessageHandler (void);
-void writeUartData (uint8_t* data, uint8_t length);
-void sendDefualtResponse (void);
-void memoryCopy (void* to, void* from, size_t count);
 
 /******************************************************************************/
 /* Global Variables                                                           */
@@ -119,60 +63,33 @@ uint8_t  commError;
 void main (void) {
     initializeHardware ();
 
-    //AquaPic Bus initialization
-    apb_init (apbInst, 
+    /* AquaPicBus Initialization */
+    apbInst = &apbInstStruct;
+    apb_init(apbInst, 
             &apbMessageHandler, 
             APB_ADDRESS,
-            1);
+            1,
+            TX_ENABLE_PORT,
+            TX_ENABLE_PIN);
 
-    //enable UART
-    TX_nRX = 0;
-    TXSTAbits.TXEN = 1; //Transmit Enable, Transmit enabled
-    RCSTAbits.CREN = 1; //Continuous Receive Enable, Enables receiver
+    /* Enable UART */
+    TXSTAbits.TXEN = 1; /* Transmit Enable, Transmit enabled */
+    RCSTAbits.CREN = 1; /* Continuous Receive Enable, Enables receiver */
     
     /*Global Interrupts*/
-    PEIE = 1; //Enable peripheral interrupts
-    GIE = 1; //Enable Global interrupts
+    PEIE = 1;   /* Enable peripheral interrupts */
+    GIE = 1;    /* Enable Global interrupts */
     
-    yLedOff;
-    gLedOn;
+    SET_LED(YELLOW_LED_PORT, YELLOW_LED_PIN, OFF);
+    SET_LED(GREEN_LED_PORT, GREEN_LED_PIN, ON);
     
     while (1) {
-        if (INPUT1) {
-            CH1_LED = 1;
-        } else {
-            CH1_LED = 0;
-        }
-        
-        if (INPUT2) {
-            CH2_LED = 1;
-        } else {
-            CH2_LED = 0;
-        }
-        
-        if (INPUT3) {
-            CH3_LED = 1;
-        } else {
-            CH3_LED = 0;
-        }
-        
-        if (INPUT4) {
-            CH4_LED = 1;
-        } else {
-            CH4_LED = 0;
-        }
-        
-        if (INPUT5) {
-            CH5_LED = 1;
-        } else {
-            CH5_LED = 0;
-        }
-        
-        if (INPUT6) {
-            CH6_LED = 1;
-        } else {
-            CH6_LED = 0;
-        }
+        SET_LED(CH1_LED_PORT, CH1_LED_PIN, READ_PIN(CH1_INPUT_PORT, CH1_INPUT_PIN));
+        SET_LED(CH2_LED_PORT, CH2_LED_PIN, READ_PIN(CH2_INPUT_PORT, CH2_INPUT_PIN));
+        SET_LED(CH3_LED_PORT, CH3_LED_PIN, READ_PIN(CH3_INPUT_PORT, CH3_INPUT_PIN));
+        SET_LED(CH4_LED_PORT, CH4_LED_PIN, READ_PIN(CH4_INPUT_PORT, CH4_INPUT_PIN));
+        SET_LED(CH5_LED_PORT, CH5_LED_PIN, READ_PIN(CH5_INPUT_PORT, CH5_INPUT_PIN));
+        SET_LED(CH6_LED_PORT, CH6_LED_PIN, READ_PIN(CH6_INPUT_PORT, CH6_INPUT_PIN));
         
         /*RCIF is set regardless of the global interrupts*/
         /*apb_run might take a while so putting it in the main "loop" makes more sense*/
@@ -197,15 +114,15 @@ void interrupt ISR (void) {
             
             if (commCounter >= COMM_ERROR_SP) {
                 commError = -1;
-                gLedOff;
-                rLedOn;
+                SET_LED(GREEN_LED_PORT, GREEN_LED_PIN, OFF);
+                SET_LED(RED_LED_PORT, RED_LED_PIN, ON);
                 apb_restart (apbInst);
             }
         } else {
             if (commCounter == 0) {
                 commError = 0;
-                rLedOff;
-                gLedOn;
+                SET_LED(RED_LED_PORT, RED_LED_PIN, OFF);
+                SET_LED(GREEN_LED_PORT, GREEN_LED_PIN, ON);
             }
         }
     }
@@ -336,87 +253,32 @@ void initializeHardware (void) {
     TMR4IE = 1;     /* Enable Timer4 interrupts */
 }
 
-void apbMessageHandler (void) {
+void apbMessageHandler(void) {
     commCounter = 0;
     
     switch (apbInst->function) {
-        case 10: { //read single channel value
-            #define FUNCTION10_LENGTH 7 //header + channel + value + crc = 3 + 1 + 1 + 2
-
-            uint8_t channel = apbInst->message [3];
-            uint16_t value  = PORTB & (0x01 << channel);
+        case 10: { /* read single channel value */
+            uint8_t channel = apbInst->message[3];
+            uint8_t value  = READ_PIN(&PORTB, channel);
             
-            uint8_t m [FUNCTION10_LENGTH];
-            uint8_t crc [2];
-
-            m [0] = apbInst->address;
-            m [1] = 10; //function number
-            m [2] = FUNCTION10_LENGTH;  //message length
-            m [3] = channel;
-            m [4] = value;
-            apb_crc16 (m, crc, FUNCTION10_LENGTH);
-            m [FUNCTION10_LENGTH - 2] = crc [0];
-            m [FUNCTION10_LENGTH - 1] = crc [1];
-
-            writeUartData (m, FUNCTION10_LENGTH);
-
+            apb_initResponse(apbInst);
+            apb_appendToResponse(apbInst, value);
+            apb_sendResponse(apbInst);
             break;
         }
-        case 20: { //read all channels values
-            #define FUNCTION20_LENGTH 6 //header + values + crc = 3 + 1 + 2
-            
-            uint8_t values = 0x00;
-            uint8_t m [FUNCTION20_LENGTH];
-            uint8_t crc [2];
-            
+        case 20: { /* read all channels values */
+            uint8_t values = 0x00;            
             int i;
             for (i = 0; i < NUM_CHANNELS; ++i) {
-                values |= (PORTB & (0x01 << i));
+                values |= READ_PIN(&PORTB, i);
             }
 
-            m [0] = apbInst->address;
-            m [1] = 20; //function number
-            m [2] = FUNCTION20_LENGTH; //message length
-            m [3] = values;
-            apb_crc16 (m, crc, FUNCTION20_LENGTH);
-            m [FUNCTION20_LENGTH - 2] = crc [0];
-            m [FUNCTION20_LENGTH - 1] = crc [1];
-
-            writeUartData (m, FUNCTION20_LENGTH);
-
+            apb_initResponse(apbInst);
+            apb_appendToResponse(apbInst, values);
+            apb_sendResponse(apbInst);
             break;
         }
         default:
             break;
     }
-}
-
-void writeUartData (uint8_t* data, uint8_t length) {
-    TX_nRX = 1; //RS-485 chip transmit enable is high
-    
-    int i;
-    for (i = 0; i < length; ++i) {
-        TXREG = *data;
-        ++data;
-        while (!TXIF) //TXIF is set when the TXREG is empty
-            continue;
-    }
-
-    while (!TRMT) //wait for transmit shift register to be empty
-        continue;
-    
-    TX_nRX = 0; //RS-485 chip receive enable is low
-}
-
-void sendDefualtResponse (void) {
-    uint8_t* m = apb_buildDefualtResponse (apbInst);
-    writeUartData (m, 5);
-}
-
-void memoryCopy (void* to, void* from, size_t count) {
-    uint8_t* ptr_to = (uint8_t*)to;
-    uint8_t* ptr_from = (uint8_t*)from;
-
-    while (count--)
-        *ptr_to++ = *ptr_from++;
 }

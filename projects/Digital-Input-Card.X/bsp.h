@@ -56,15 +56,33 @@
 #define GREEN_LED_PIN   1
 #define YELLOW_LED_PIN  2
 
-#define CH_1_RELAY_PORT &LATB
-#define CH_2_RELAY_PORT &LATB
-#define CH_3_RELAY_PORT &LATB
-#define CH_4_RELAY_PORT &LATB
+#define CH1_INPUT_PORT  &LATB
+#define CH2_INPUT_PORT  &LATB
+#define CH3_INPUT_PORT  &LATB
+#define CH4_INPUT_PORT  &LATB
+#define CH5_INPUT_PORT  &LATB
+#define CH6_INPUT_PORT  &LATB
 
-#define CH_1_RELAY_PIN  1
-#define CH_2_RELAY_PIN  2
-#define CH_3_RELAY_PIN  3
-#define CH_4_RELAY_PIN  4
+#define CH1_INPUT_PIN   0
+#define CH2_INPUT_PIN   1
+#define CH3_INPUT_PIN   2
+#define CH4_INPUT_PIN   3
+#define CH5_INPUT_PIN   4
+#define CH6_INPUT_PIN   5
+
+#define CH1_LED_PORT    &LATA
+#define CH2_LED_PORT    &LATA
+#define CH3_LED_PORT    &LATC
+#define CH4_LED_PORT    &LATC
+#define CH5_LED_PORT    &LATC
+#define CH6_LED_PORT    &LATC
+
+#define CH1_LED_PIN     3
+#define CH2_LED_PIN     4
+#define CH3_LED_PIN     0
+#define CH4_LED_PIN     1
+#define CH5_LED_PIN     2
+#define CH6_LED_PIN     3
 
 #define TX_ENABLE_PORT  &LATC
 #define TX_ENABLE_PIN   5
@@ -73,4 +91,3 @@
                             /* 10,000mSec / 25mSec = 200 */
 
 #endif	/* BSP_H */
-

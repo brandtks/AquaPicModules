@@ -27,5 +27,6 @@
 #define LOW     0
 
 #define WRITE_PIN(port, pin, value) value ? *port |= 0x01 << pin : *port &= ~(0x01 << pin)
+#define READ_PIN(port, pin)         *port & (0x01 << pin)
 
 #endif	/* PINS_H */ 
