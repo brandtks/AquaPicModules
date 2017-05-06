@@ -52,7 +52,7 @@ void eeprom_write(unsigned char address, unsigned char value);
 /******************************************************************************/
 #define FILTER_VALUES   10
 #define NUM_OUTLETS     8
-#define ENABLE_CURRENT
+//#define ENABLE_CURRENT
 
 /******************************************************************************/
 /* Variable Definitions                                                       */
