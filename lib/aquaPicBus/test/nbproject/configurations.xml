@@ -17,8 +17,6 @@
                    displayName="Source Files"
                    projectFiles="true">
       <itemPath>../aquaPicBus.c</itemPath>
-      <itemPath>../../common/common.c</itemPath>
-      <itemPath>../../pins/test/pins.c</itemPath>
       <itemPath>testAquaPicBus.c</itemPath>
       <itemPath>../../uart/test/uart.c</itemPath>
     </logicalFolder>
@@ -50,11 +48,7 @@
           </preprocessorList>
         </cTool>
       </compileType>
-      <item path="../../common/common.c" ex="false" tool="0" flavor2="0">
-      </item>
       <item path="../../common/common.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="../../pins/test/pins.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="../../pins/test/pins.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -90,11 +84,7 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
-      <item path="../../common/common.c" ex="false" tool="0" flavor2="0">
-      </item>
       <item path="../../common/common.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="../../pins/test/pins.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="../../pins/test/pins.h" ex="false" tool="3" flavor2="0">
       </item>

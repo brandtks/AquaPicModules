@@ -35,8 +35,6 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/_ext/b0c5a78b/common.o \
-	${OBJECTDIR}/_ext/7d1870e3/pins.o \
 	${OBJECTDIR}/_ext/f8b2fa93/uart.o \
 	${OBJECTDIR}/_ext/5c0/aquaPicBus.o \
 	${OBJECTDIR}/testAquaPicBus.o
@@ -65,16 +63,6 @@ LDLIBSOPTIONS=
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/test: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.c} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/test ${OBJECTFILES} ${LDLIBSOPTIONS}
-
-${OBJECTDIR}/_ext/b0c5a78b/common.o: ../../common/common.c
-	${MKDIR} -p ${OBJECTDIR}/_ext/b0c5a78b
-	${RM} "$@.d"
-	$(COMPILE.c) -g -DTEST -std=c99 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/b0c5a78b/common.o ../../common/common.c
-
-${OBJECTDIR}/_ext/7d1870e3/pins.o: ../../pins/test/pins.c
-	${MKDIR} -p ${OBJECTDIR}/_ext/7d1870e3
-	${RM} "$@.d"
-	$(COMPILE.c) -g -DTEST -std=c99 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/7d1870e3/pins.o ../../pins/test/pins.c
 
 ${OBJECTDIR}/_ext/f8b2fa93/uart.o: ../../uart/test/uart.c
 	${MKDIR} -p ${OBJECTDIR}/_ext/f8b2fa93
