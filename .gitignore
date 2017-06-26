@@ -11,3 +11,8 @@ funclist
 .directory
 *.inc
 bin/
+disassembly/
+xbuild/
+xdist/
+nbproject/
+Makefile
