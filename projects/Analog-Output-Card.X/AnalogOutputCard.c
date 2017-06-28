@@ -79,7 +79,7 @@ void main (void) {
     for (i = 0; i < 4; ++i) {
         pwmInst[i] = &pwmInstStruct[i];
     }
-    
+
     initializeHardware ();
 
 #if SELECTABLE_OUTPUT
@@ -92,8 +92,8 @@ void main (void) {
 
     /* AquaPicBus Initialization */
     apbInst = &apbInstStruct;
-    apb_init(apbInst, 
-            &apbMessageHandler, 
+    apb_init(apbInst,
+            &apbMessageHandler,
             APB_ADDRESS,
             1,
             TX_ENABLE_PORT,
@@ -102,14 +102,14 @@ void main (void) {
     /* Enable UART */
     TXSTAbits.TXEN = 1; /* Transmit Enable, Transmit enabled */
     RCSTAbits.CREN = 1; /* Continuous Receive Enable, Enables receiver */
-    
+
     /*Global Interrupts*/
     PEIE = 1;   /* Enable peripheral interrupts */
     GIE = 1;    /* Enable Global interrupts */
-    
+
     SET_LED(YELLOW_LED_PORT, YELLOW_LED_PIN, OFF);
     SET_LED(GREEN_LED_PORT, GREEN_LED_PIN, ON);
-    
+
     while (1) {
         /* RCIF is set regardless of the global interrupts */
         /* apb_run might take a while so putting it in the main "loop" makes more sense */
@@ -125,13 +125,13 @@ void interrupt ISR (void) {
         TMR6IF = 0; /* Clear flag */
         apb_framing(apbInst);
     }
-    
+
     if (TMR4IF) {
         TMR4IF = 0; //Clear flag
-        
+
         if (!commError) {
             ++commCounter;
-            
+
             if (commCounter >= COMM_ERROR_SP) {
                 commError = -1;
                 SET_LED(GREEN_LED_PORT, GREEN_LED_PIN, OFF);
@@ -189,9 +189,9 @@ void initializeHardware (void) {
     initPwm(pwmInst[1], &CCP2CON, &CCPR2L); /* CCP2 */
     initPwm(pwmInst[2], &CCP3CON, &CCPR3L); /* CCP3 */
     initPwm(pwmInst[3], &CCP4CON, &CCPR4L); /* CCP4 */
-    CCPTMRS0 = CCPTMRS0_C1TSEL_TMR2 | 
-            CCPTMRS0_C2TSEL_TMR2 | 
-            CCPTMRS0_C3TSEL_TMR2 | 
+    CCPTMRS0 = CCPTMRS0_C1TSEL_TMR2 |
+            CCPTMRS0_C2TSEL_TMR2 |
+            CCPTMRS0_C3TSEL_TMR2 |
             CCPTMRS0_C4TSEL_TMR2;
 
     PR2 = 0xFF; /* 31.25 kHz from data sheet page 218 */
@@ -204,7 +204,7 @@ void initializeHardware (void) {
     TRISCbits.TRISC1 = 0; //Clear TRISC1 bit to enable PWM2 output on pin
     TRISBbits.TRISB5 = 0; //Clear TRISB5 bit to enable PWM3 output on pin
     TRISBbits.TRISB0 = 0; //Clear TRISB0 bit to enable PWM4 output on pin
-    
+
     /* Timer 4 */
     PR4 = 0xC2; //Timer Period = 25mSec
                 //Timer Period = [PRx + 1] * 4 * Tosc * TxCKPS * TxOUTPS
@@ -217,7 +217,7 @@ void initializeHardware (void) {
             //*1111*** = T4OUTPS: Timer Output Postscaler Select, 1:16 Postscaler
             //*****1** = TMR4ON: Timer4 is on
             //******11 = T4CKPS: Timer2-type Clock Prescale Select, Prescaler is 64
-    
+
     /* Timer 6 */
     PR6 = 0x7C; //Timer Period = 1mSec
                 //Timer Period = [PRx + 1] * 4 * Tosc * TxCKPS * TxOUTPS
@@ -237,13 +237,13 @@ void initializeHardware (void) {
     //Set to one for fast speed
     TXSTAbits.BRGH = 1; //High Baud Rate Select, High speed
     SPBRGH = 0x00;  //Nothing in the high register
-    SPBRGL = 0x8A;  
+    SPBRGL = 0x8A;
                     //Desired Baud Rate = 57,600Mb or 115,200Mb
                     //Baud Rate = Fosc / 4(BRG + 1) = 32MHz / 4(138 + 1) = 57,554Mb
                     //BRG = 138 or 0x8A
                     //Error = (Desired Baud Rate - Baud Rate) / Desired Baud Rate
                     //      = 57,600 - 57,554 / 57,600 = 0.08% Error
-    
+
                     //Desired Baud Rate = 9600 for testing
                     //Baud Rate = Fosc / 64(BRG + 1)
                     //BRG = Fosc / (64 * Baud Rate) - 1
@@ -256,7 +256,7 @@ void initializeHardware (void) {
             //1******* = SPEN: Serial Port Enable, Serial port enabled
             //*0****** = RX9: 9-bit Receive Enable, De-selects 9-bit reception
             //****0*** = ADDEN: Address Detect Enable, Disables address detection
-    
+
     /* Interrupts */
     TMR4IF = 0;     /* Clear Timer4 interrupt flag */
     TMR4IE = 1;     /* Enable Timer2 interrupts */
@@ -266,7 +266,7 @@ void initializeHardware (void) {
 
 void apbMessageHandler (void) {
     commCounter = 0;
-    
+
     switch (apbInst->function) {
 #if SELECTABLE_OUTPUT
         case 2: { /* setup single channel */
