@@ -11,7 +11,8 @@ Microchip MPLAB X v3.51. May work with early versions.
 Microchip XC8 v1.40. May work with early versions.
 
 ### Building
-Projects are built individually. Navigate to the project directory to be built, i.e. _projects/Analog-Input-Card.X_, and issue `make` to build that module. HEX file output is located at _dist/default/production/'project'.production.hex_.
+ * Edit Makefile-define.mk to match the executing environment and desired output paths
+ * ```make```
 
 ### License
 The AquaPic firmware code is released under the terms of the GNU General Public License (GPL), version 3 or later. See COPYING for details.

@@ -1,24 +1,8 @@
-#XC8 compiler command or path to binary
-CC=xc8
+#################################
+###Shouldn't have to edit this###
+#################################
+include ../../Makefile-defines.mk
 
-#BASH command for making directories
-MKDIR=mkdir -p
-#BASH command for removing directories and files
-RM=rm -rf
-
-#Intermediate build location
-OBJ_DIR=build/PowerControl
-#Final destination of the HEX output
-DIST_DIR=dist/PowerControl
-
-#Compiler options, shouldn't have to be editted unless using Standard or Pro license
-MODE=free
-WARN=0
-OPT=+asm,+asmfile,-speed,+space,-debug
-
-#############################################
-###Shouldn't have to edit below this point###
-#############################################
 CHIP=16F1937
 OBJS=$(OBJ_DIR)/PowerControl/PowerControl.p1 $(OBJ_DIR)/adc/adc.p1 $(OBJ_DIR)/uart/uart.p1 $(OBJ_DIR)/aquaPicBus/aquaPicBus.p1
 PROJ_DEPS=../../lib/adc/adc.h ../../lib/aquaPicBus/aquaPicBus.h ../../lib/common/common.h ../../lib/led/led.h ../../lib/pins/pins.h bsp.h
