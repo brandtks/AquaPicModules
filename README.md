@@ -6,12 +6,10 @@ Firmware for the input/output cards for the AquaPic aquarium controller. Include
 **IMPORTANT**: All modules are a work in progress. Most, if not all, are probably unstable and currently untested.  
 
 ### Toolchain
- * Microchip MPLAB X v3.51. May work with early versions.
- * Microchip XC8 v1.40. May work with early versions.
+Microchip XC8 v1.40. May work with early versions.
 
 ### Building
- * Edit Makefile-define.mk to match the executing environment and desired output paths
- * ```make```
+Edit Makefile-define.mk to match the executing environment and desired output paths, then exectute ```make```.
 
 ### License
 The AquaPic firmware code is released under the terms of the GNU General Public License (GPL), version 3 or later. See COPYING for details.
