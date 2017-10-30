@@ -3,7 +3,7 @@ README
 Firmware for the input/output cards for the AquaPic aquarium controller. Includes Analog Input and Output, Digital Input, and Power Strip stored in the projects directory. Libraries are included in the lib directory. This inludes the AquaPicBus slave driver, some common macros, and PIC16F specific drivers for ADC, UART, and PWM. All modules communicate with and are controlled by the [master controller/head unit](https://github.com/AquaPic/AquaPicController).
 
 ### Status
-**IMPORTANT**: All modules are a work in progress. Most, if not all, are probably unstable and currently untested.  
+**IMPORTANT**: All modules are a work in progress. Most, if not all, are probably unstable and currently untested.
 
 ### Toolchain
 Microchip XC8 v1.40. May work with early versions.
