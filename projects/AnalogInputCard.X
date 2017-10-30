@@ -1,1 +1,0 @@
-/home/sbrandt/Dropbox/AquaPic/Firmware/projects/AnalogInputCard.X/

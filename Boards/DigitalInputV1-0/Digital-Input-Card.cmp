@@ -1,0 +1,267 @@
+Cmp-Mod V01 Genere par PcbNew le 12/27/2015 6:50:40 PM
+
+BeginCmp
+TimeStamp = 564D6A4B
+Path = /538CBC4F
+Reference = C1;
+ValeurCmp = 100nF;
+IdModule  = Capacitors_SMD:C_0805;
+EndCmp
+
+BeginCmp
+TimeStamp = 564D6A57
+Path = /538CBC49
+Reference = C2;
+ValeurCmp = 100nF;
+IdModule  = Capacitors_SMD:C_0805;
+EndCmp
+
+BeginCmp
+TimeStamp = 564D6A63
+Path = /558FD6C7
+Reference = C3;
+ValeurCmp = 470pF;
+IdModule  = Capacitors_SMD:C_0805;
+EndCmp
+
+BeginCmp
+TimeStamp = 564D6A6F
+Path = /558FD6D4
+Reference = C4;
+ValeurCmp = 100nF;
+IdModule  = Capacitors_SMD:C_0805;
+EndCmp
+
+BeginCmp
+TimeStamp = 564D6AAA
+Path = /538CBBC4
+Reference = D1;
+ValeurCmp = APT2012;
+IdModule  = LEDs:LED-0805;
+EndCmp
+
+BeginCmp
+TimeStamp = 564D6AE5
+Path = /538CBBCA
+Reference = D2;
+ValeurCmp = APT2012;
+IdModule  = LEDs:LED-0805;
+EndCmp
+
+BeginCmp
+TimeStamp = 564D6B20
+Path = /538CBBD0
+Reference = D3;
+ValeurCmp = APT2012;
+IdModule  = LEDs:LED-0805;
+EndCmp
+
+BeginCmp
+TimeStamp = 564D6B5B
+Path = /538CBBD6
+Reference = D4;
+ValeurCmp = APT2012;
+IdModule  = LEDs:LED-0805;
+EndCmp
+
+BeginCmp
+TimeStamp = 564D6B96
+Path = /538CBBDC
+Reference = D5;
+ValeurCmp = APT2012;
+IdModule  = LEDs:LED-0805;
+EndCmp
+
+BeginCmp
+TimeStamp = 564D6BD1
+Path = /538CBBE2
+Reference = D6;
+ValeurCmp = APT2012;
+IdModule  = LEDs:LED-0805;
+EndCmp
+
+BeginCmp
+TimeStamp = 564E9BF0
+Path = /558FD67C
+Reference = D7;
+ValeurCmp = SMP4-RGY;
+IdModule  = A_MyFootPrints:PLCC-4;
+EndCmp
+
+BeginCmp
+TimeStamp = 564D6C1C
+Path = /558FD6FD
+Reference = D8;
+ValeurCmp = APT2012;
+IdModule  = LEDs:LED-0805;
+EndCmp
+
+BeginCmp
+TimeStamp = 564D6C47
+Path = /538CBC61
+Reference = IC1;
+ValeurCmp = PIC16F1936;
+IdModule  = Housings_SOIC:SOIC-28_7.5x17.9mm_Pitch1.27mm;
+EndCmp
+
+BeginCmp
+TimeStamp = 564D6C59
+Path = /558FD7DB
+Reference = J1;
+ValeurCmp = 5Vdc Jumper;
+IdModule  = Pin_Headers:Pin_Header_Straight_1x03;
+EndCmp
+
+BeginCmp
+TimeStamp = 564D6C77
+Path = /558FC7C0
+Reference = P1;
+ValeurCmp = Inputs;
+IdModule  = A_MyFootPrints:Screw_Header_1x12;
+EndCmp
+
+BeginCmp
+TimeStamp = 564D6C8C
+Path = /538CBBAD
+Reference = P2;
+ValeurCmp = ICSP;
+IdModule  = Pin_Headers:Pin_Header_Straight_1x06;
+EndCmp
+
+BeginCmp
+TimeStamp = 564D6C96
+Path = /558FFC76
+Reference = P3;
+ValeurCmp = Power;
+IdModule  = A_MyFootPrints:Screw_Header_1x2;
+EndCmp
+
+BeginCmp
+TimeStamp = 564D6CAE
+Path = /558FD732
+Reference = P4;
+ValeurCmp = AquaPicBus;
+IdModule  = A_MyFootPrints:USB-1.1_Stacked;
+EndCmp
+
+BeginCmp
+TimeStamp = 564D6CBA
+Path = /538CBBF4
+Reference = R1;
+ValeurCmp = 100R;
+IdModule  = Resistors_SMD:R_0805;
+EndCmp
+
+BeginCmp
+TimeStamp = 564D6CC6
+Path = /538CBBFA
+Reference = R2;
+ValeurCmp = 100R;
+IdModule  = Resistors_SMD:R_0805;
+EndCmp
+
+BeginCmp
+TimeStamp = 564D6CD2
+Path = /538CBC00
+Reference = R3;
+ValeurCmp = 100R;
+IdModule  = Resistors_SMD:R_0805;
+EndCmp
+
+BeginCmp
+TimeStamp = 564D6CDE
+Path = /538CBC06
+Reference = R4;
+ValeurCmp = 100R;
+IdModule  = Resistors_SMD:R_0805;
+EndCmp
+
+BeginCmp
+TimeStamp = 564D6CEA
+Path = /538CBC0C
+Reference = R5;
+ValeurCmp = 100R;
+IdModule  = Resistors_SMD:R_0805;
+EndCmp
+
+BeginCmp
+TimeStamp = 564D6CF6
+Path = /538CBC12
+Reference = R6;
+ValeurCmp = 100R;
+IdModule  = Resistors_SMD:R_0805;
+EndCmp
+
+BeginCmp
+TimeStamp = 564D6D02
+Path = /558FD689
+Reference = R7;
+ValeurCmp = 300R;
+IdModule  = Resistors_SMD:R_0805;
+EndCmp
+
+BeginCmp
+TimeStamp = 564D6D0E
+Path = /558FD690
+Reference = R8;
+ValeurCmp = 300R;
+IdModule  = Resistors_SMD:R_0805;
+EndCmp
+
+BeginCmp
+TimeStamp = 564D6D1A
+Path = /558FD712
+Reference = R9;
+ValeurCmp = 300R;
+IdModule  = Resistors_SMD:R_0805;
+EndCmp
+
+BeginCmp
+TimeStamp = 564D6D26
+Path = /558FD697
+Reference = R10;
+ValeurCmp = 300R;
+IdModule  = Resistors_SMD:R_0805;
+EndCmp
+
+BeginCmp
+TimeStamp = 564D6D3D
+Path = /558FD6A9
+Reference = U1;
+ValeurCmp = ST485EC;
+IdModule  = Housings_SOIC:SOIC-8_3.9x4.9mm_Pitch1.27mm;
+EndCmp
+
+BeginCmp
+TimeStamp = 564D6D44
+Path = /538CBBA7
+Reference = X1;
+ValeurCmp = 8MHz;
+IdModule  = A_MyFootPrints:Resonator_3.2x1.3;
+EndCmp
+
+BeginCmp
+TimeStamp = 564D692A
+Path = /558FD13E
+Reference = Q1;
+ValeurCmp = AO3407A;
+IdModule  = Housings_SOT-23_SOT-143_TSOT-6:SOT-23;
+EndCmp
+
+BeginCmp
+TimeStamp = 56827A71
+Path = 
+Reference = [NoRef];
+ValeurCmp = [NoVal];
+IdModule  = Symbols:Symbol_OSHW-Logo_SilkScreen;
+EndCmp
+
+BeginCmp
+TimeStamp = 5683ACAB
+Path = 
+Reference = LOGO;
+ValeurCmp = Val**;
+IdModule  = A_MyFootPrints:AquaPic_Logo;
+EndCmp
+
+EndListe
