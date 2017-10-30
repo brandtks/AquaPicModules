@@ -6,6 +6,7 @@ References/
 ActualCosts/
 OldVersions/
 MasterBOM/
+PDF/
 dist/
 debug/
 build/
@@ -19,4 +20,3 @@ xbuild/
 xdist/
 nbproject/
 Makefile
-
