@@ -1,7 +1,7 @@
 (export (version D)
   (design
     (source /home/sbrandt/Dropbox/AquaPic/Boards/AnalogInputV2-0/Analog-Input-Card.sch)
-    (date "Wed 01 Nov 2017 05:31:09 PM EDT")
+    (date "Wed 01 Nov 2017 07:13:22 PM EDT")
     (tool "Eeschema 4.0.7")
     (sheet (number 1) (name /) (tstamps /)
       (title_block
