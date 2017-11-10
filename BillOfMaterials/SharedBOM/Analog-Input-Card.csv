@@ -1,0 +1,20 @@
+Refs,Value,Footprint,Quantity,MFR,MPN,SPR,SPN
+D1,SMP4-RGY,A_MyFootPrints:PLCC-4,1,-,-,-,-
+RV1;RV2;RV3;RV4,10K,A_MyFootPrints:POTENTIAMETER_SMD,4,-,-,-,-
+X1,8MHz,A_MyFootPrints:Resonator_3.2x1.3,1,-,-,-,-
+P2,Inputs,A_MyFootPrints:Screw_Header_1x16,1,-,-,-,-
+P4,Power,A_MyFootPrints:Screw_Header_1x2,1,-,-,-,-
+P1,AquaPicBus,A_MyFootPrints:USB-1.1_Stacked,1,-,-,-,-
+C1;C2;C3,100nF,Capacitors_SMD:C_0805,3,-,-,-,-
+IC1,PIC16F18855,Housings_DFN_QFN:QFN-28-1EP_6x6mm_Pitch0.65mm,1,-,-,-,-
+U1,ST485EC,Housings_SOIC:SOIC-8_3.9x4.9mm_Pitch1.27mm,1,-,-,-,-
+Q1,AO3407A,Housings_SOT-23_SOT-143_TSOT-6:SOT-23,1,-,-,-,-
+U2,MCP3428,Housings_SSOP:TSSOP-14_4.4x5mm_Pitch0.65mm,1,-,-,-,-
+D2,APT2012,LEDs:LED-0805,1,-,-,-,-
+P3,EARTH GROUND,Pin_Headers:Pin_Header_Straight_1x01,1,-,-,-,-
+J1,5Vdc Jumper,Pin_Headers:Pin_Header_Straight_1x03,1,-,-,-,-
+P5,ICSP,Pin_Headers:Pin_Header_Straight_1x06,1,-,-,-,-
+R8;R10;R12;R14,10K,Resistors_SMD:R_0805,4,-,-,-,-
+R1;R2;R4;R3,300R,Resistors_SMD:R_0805,4,-,-,-,-
+R7;R9;R11;R13,4K32,Resistors_SMD:R_0805,4,-,-,-,-
+R5;R6,4K7,Resistors_SMD:R_0805,2,-,-,-,-
