@@ -31,6 +31,9 @@
 #define MESSAGE_BUFFER_LENGTH   32
 #define FRAMING_TIME    10  /* Framing time between messages in milliseconds */
 
+/******************************************************************************/
+/* Variable Definitions                                                       */
+/******************************************************************************/
 typedef enum abpStatusEnum {
     WAIT_FOR_FRAMING,
     WAIT_FOR_ADDRESS,
@@ -39,9 +42,6 @@ typedef enum abpStatusEnum {
     MESSAGE_LENGTH_RECIEVED
 }apbStatus_t;
 
-/******************************************************************************/
-/* Variable Definitions                                                       */
-/******************************************************************************/
 struct apbObjStruct {
     void (*messageHandler)(void);
     uint8_t address;

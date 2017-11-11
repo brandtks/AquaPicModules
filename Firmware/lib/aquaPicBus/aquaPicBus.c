@@ -43,7 +43,7 @@ int8_t apb_init(apbObj inst,
         void (*setTransmitPinVar)(uint8_t))
 {
     if (inst == NULL) { 
-        return -1;
+        return 0;
     }
     
     if (messageHandlerVar == NULL) {
@@ -61,7 +61,7 @@ int8_t apb_init(apbObj inst,
 
     apb_restart(inst);
 
-    return 0;
+    return -1;
 }
 
 /*****Run Time*****************************************************************/

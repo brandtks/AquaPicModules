@@ -20,10 +20,16 @@
  * Optionally you can also view the license at <http://www.gnu.org/licenses/>.
  */
 
+/******************************************************************************/
+/* Files to Include                                                           */
+/******************************************************************************/
 #include <xc.h>
 #include <stdint.h>     /* uint8_t, int8_t */
 #include "timer.h"
 
+/******************************************************************************/
+/* Functions                                                                  */
+/******************************************************************************/
 #ifdef _16F18855
 void inline init8bitTimer(uint8_t timerName, 
         uint8_t clkcon, 
