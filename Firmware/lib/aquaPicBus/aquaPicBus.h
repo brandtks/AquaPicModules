@@ -28,14 +28,8 @@
 /******************************************************************************/
 /* #define Macros                                                             */
 /******************************************************************************/
-/*******Errors List************************************************************/
-#define ERR_NOERROR 0 // no error has occured
-#define ERR_UNKNOWN -1 // unknown error
-#define ERR_NOMEM   -2 // out of memory
-
-/*******User Defined***********************************************************/
 #define MESSAGE_BUFFER_LENGTH   32
-#define FRAMING_TIME    10
+#define FRAMING_TIME    10  /* Framing time between messages in milliseconds */
 
 typedef enum abpStatusEnum {
     WAIT_FOR_FRAMING,
@@ -58,8 +52,7 @@ struct apbObjStruct {
     apbStatus_t apbStatus;
     uint8_t framingCount;
     uint8_t framingSetpoint;
-    volatile uint8_t* transmitEnablePort;
-    uint8_t transmitEnablePin;
+    void (*setTransmitPin)(uint8_t);
 };
 
 typedef struct apbObjStruct* apbObj;
@@ -72,8 +65,7 @@ int8_t apb_init(apbObj inst,
         void (*messageHandlerVar)(void),
         uint8_t addressVar,
         uint8_t framingTimerTime,
-        volatile uint8_t* transmitEnablePort,
-        uint8_t transmitEnablePin);
+        void (*setTransmitPinVar)(uint8_t));
 
 /*****Run Time*****************************************************************/
 void apb_run(apbObj inst, uint8_t byte_received);
@@ -88,12 +80,8 @@ void apb_appendToResponse(apbObj inst, uint8_t data);
 void apb_addToResponse(apbObj inst, void* data, size_t length);
 void apb_sendResponse(apbObj inst);
 
-/* Depreciated */
-/* uint8_t* apb_buildDefualtResponse (apbObj inst); */
-
 /* Private */
 void apb_restart(apbObj inst);
-void apb_setupMessage(apbObj inst);
 void apb_clearMessageBuffer(apbObj inst);
 int8_t apb_checkCrc(uint8_t* message, int length);
 void apb_crc16(uint8_t* message, uint8_t* crc, int length);

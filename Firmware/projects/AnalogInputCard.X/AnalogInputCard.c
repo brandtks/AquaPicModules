@@ -1,35 +1,37 @@
-/* Created by Skyler Brandt on December 2015
- *
- * Analog Input Card
- *
- *******************************************************************************
- * Copyright (C) 2015 Skyler Brandt
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
+/*
+ * Analog Input Card Version 2
+ * 
+ * Copyright (c) 2017 Goodtime Development
+ *  
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ * 
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- *
+ * 
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see http://www.gnu.org/licenses/
- ******************************************************************************/
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * 
+ * Optionally you can also view the license at <http://www.gnu.org/licenses/>.
+ */
 
 /******************************************************************************/
 /* Files to Include                                                           */
 /******************************************************************************/
+#include <xc.h>
 #include <stdlib.h>     /* null */
 #include <stdint.h>     /* uint8_t, int8_t */
-#include <pic16f1783.h>
+#include "config.h"
 #include "../../lib/aquaPicBus/aquaPicBus.h"
 #include "../../lib/common/common.h"
-#include "../../lib/adc/adc.h"
 #include "../../lib/led/led.h"
-#include "bsp.h"
+#include "../../lib/timer/timer.h"
+#include "../../lib/uart/uart.h"
 
 /******************************************************************************/
 /* EEPROM                                                                     */
@@ -38,6 +40,46 @@
 /******************************************************************************/
 /* USER DEFINED                                                               */
 /******************************************************************************/
+#define _XTAL_FREQ      32000000UL  /* Used by the __delay_ms(xx) and __delay_us(xx) Methods, 32MHz */
+
+/* Port Initialization settings */
+#define PORTA_VAR       0b00000110  /* Clear Port A except for LEDs, 1 is off, 0 is on */
+                        /******1**  RA2: Red LED off        */
+                        /*******1*  RA1: Green LED off      */
+                        /********0  RA0: Yellow LED on      */
+#define PORTB_VAR       0x00        /* Clear Port B         */
+#define PORTC_VAR       0x00        /* Clear Port C         */
+
+#define TRISA_VAR       0b00000000  /* Port A Directions    */
+                        /******0**  RA2: Red LED            */
+                        /*******0*  RA1: Green LED          */
+                        /********0  RA0: Yellow LED         */
+#define TRISB_VAR       0x00        /* Port B Directions    */
+#define TRISC_VAR       0b10000000  /* Port C Directions    */
+                        /*1*******  RC7: RX                 */
+                        /**0******  RC6: TX                 */
+                        /***0*****  RC5: TX_nRX             */
+                        /****0****  RC4: SDA                */
+                        /*****0***  RC3: SCL                */
+
+/* General Outputs and Inputs */
+#define RED_LED_PORT    &LATA
+#define GREEN_LED_PORT  &LATA
+#define YELLOW_LED_PORT &LATA
+
+#define RED_LED_PIN     2
+#define GREEN_LED_PIN   1
+#define YELLOW_LED_PIN  0
+
+/* AquaPic Bus Settings */
+#define APB_ADDRESS     0x50
+#define FRAMING_TIMER   1   /* Framming called from timer 2 at 1mSec */
+#define COMM_ERROR_SP   40  /* 250mSec tick, 10 sec alarm   */
+                            /* 10,000mSec / 250mSec = 40    */
+#define TX_ENABLE_PORT  &LATC
+#define TX_ENABLE_PIN   5
+
+/*  */
 #define FILTER_VALUES   10
 #define NUM_CHANNELS    4
 
@@ -54,11 +96,9 @@ typedef struct amperage_filter {
 /******************************************************************************/
 /* Functions                                                                  */
 /******************************************************************************/
-void initializeHardware (void);
-void apbMessageHandler (void);
-void writeUartData (uint8_t* data, uint8_t length);
-void sendDefualtResponse (void);
-void memoryCopy (void* to, void* from, size_t count);
+void initializeHardware(void);
+void apbMessageHandler(void);
+void setTransmitPin(uint8_t value);
 
 /******************************************************************************/
 /* Global Variables                                                           */
@@ -73,11 +113,11 @@ uint8_t  valuePtr;
 uint8_t  timerCounter;
 
 void main(void) {
-    initializeHardware ();
+    initializeHardware();
     
     inletPtr = 0;
     valuePtr = 0;
-    timerCounter = 0;
+    timerCounter = 1;
     
     int i, j;
     for (i = 0; i < NUM_CHANNELS; ++i) {
@@ -86,84 +126,68 @@ void main(void) {
             ct[i].values[j] = 0;
         ct[i].average = 0;
     }
-    
-    ct[0].chsValue = CHS_AN0;
-    ct[1].chsValue = CHS_AN1;
-    ct[2].chsValue = CHS_AN2;
-    ct[3].chsValue = CHS_AN3;
 
-    //AquaPic Bus initialization
-    apb_init (apbInst, 
+    /* AquaPic Bus initialization */
+    apb_init(apbInst, 
             &apbMessageHandler, 
             APB_ADDRESS,
-            1,
-            TX_ENABLE_PORT,
-            TX_ENABLE_PIN);
+            FRAMING_TIMER,
+            &setTransmitPin);
 
-    //enable UART
-    TXSTAbits.TXEN = 1; //Transmit Enable, Transmit enabled
-    RCSTAbits.CREN = 1; //Continuous Receive Enable, Enables receiver
+    enableUart();
     
-    /*Global Interrupts*/
-    PEIE = 1; //Enable peripheral interrupts
-    GIE = 1; //Enable Global interrupts
+    /* Global Interrupts */
+    PEIE = 1;   /* Enable peripheral interrupts */
+    GIE = 1;    /* Enable Global interrupts     */  
     
     SET_LED(YELLOW_LED_PORT, YELLOW_LED_PIN, OFF);
     SET_LED(GREEN_LED_PORT, GREEN_LED_PIN, ON);
     
     while (1) {
-        //RCIF is set regardless of the global interrupts 
-        //apb_run might take a while so putting it in the main "loop" makes more sense
+        /* RCIF is set regardless of the global interrupts. apb_run might     */
+        /* take a while so putting it in the main "loop" makes more sense     */
         if (RCIF) {
             uint8_t data = RCREG;
-            apb_run (apbInst, data);
+            apb_run(apbInst, data);
         }
     }
 }
 
 void interrupt ISR (void) {
-    static uint8_t lastPtr = NUM_CHANNELS - 1; //outletPtr starts at 0 so we'll just initialize this to the end
-    
-    if (ADIF) {
-        ADIF = 0; /*Clear flag*/
-        
-        ct[inletPtr].sum -= ct[inletPtr].values[valuePtr]; //subtract the oldest value from the sum
-        ct[inletPtr].values[valuePtr] = getAdc (); //get the new value
-        ct[inletPtr].sum += ct[inletPtr].values[valuePtr]; //add the newest value to the sum
-        
-        ct[inletPtr].average = ct[inletPtr].sum / FILTER_VALUES; //average the sum
-        
-        increment(inletPtr, NUM_CHANNELS);
-        //ADCON0bits.CHS = ct[inletPtr].chsValue; //set the ADC to the new channel
-        SET_CHANNEL(ct[inletPtr].chsValue);
-        
-        if (inletPtr == 0) //we're back to the beginning of the outlets, increment the value array pointer
-            increment(valuePtr, FILTER_VALUES);
-    }
-    
     if (TMR2IF) {
         TMR2IF = 0; /* Clear flag */
         
-        apb_framing (apbInst);
+        apb_framing(apbInst);
         
-        timerCounter = ++timerCounter % 25;
+        timerCounter = ++timerCounter % 250;
+        /* Every 250mSecs */
         if (timerCounter == 0) {
-            if (inletPtr != lastPtr) { //the ADC isn't finished so don't start it
-                START_ADC();
-                lastPtr = inletPtr;
-            }
-
+            /* If not currently faulted */
             if (!commError) {
+                /* Increment the error counter */
                 ++commCounter;
 
+                /* If the counter is greater than the setpoint */
                 if (commCounter >= COMM_ERROR_SP) {
+                    /* set communication fault flag */
                     commError = -1;
                     SET_LED(GREEN_LED_PORT, GREEN_LED_PIN, OFF);
                     SET_LED(RED_LED_PORT, RED_LED_PIN, ON);
-                    apb_restart (apbInst);
+                    /* Make sure on a communication error that the receive is */
+                    /* enabled                                                */
+                    WRITE_PIN(TX_ENABLE_PORT, TX_ENABLE_PIN, LOW);
+                    /* Calling apb_restart here duplicates the function since */
+                    /* it is called from an interrupt and during normal       */
+                    /* execution. I think this will work without restarting   */
+                    /* the apb instance */
+                    /* apb_restart(apbInst); */
                 }
+            /* If currently faulted */
             } else {
+                /* commCounter set to zero by apbMessageHandler. This means   */
+                /* a message was received from the master device              */
                 if (commCounter == 0) {
+                    /* clear communication fault flag */
                     commError = 0;
                     SET_LED(RED_LED_PORT, RED_LED_PIN, OFF);
                     SET_LED(GREEN_LED_PORT, GREEN_LED_PIN, ON);
@@ -174,81 +198,44 @@ void interrupt ISR (void) {
 }
 
 void initializeHardware (void) {
-    /*Oscillator*/
-    OSCCONbits.SCS = 0b00;  //System Clock Select: Clock determined by FOSC<2:0> in Configuration Word 1
+    PORTA = PORTA_VAR;
+    PORTB = PORTB_VAR;
+    PORTC = PORTC_VAR;
+    
+    TRISA = TRISA_VAR;
+    TRISB = TRISB_VAR;
+    TRISC = TRISC_VAR;
+    
+    /* Timer 2 */
+    init8bitTimer(T2, 
+            CLKCON_CS_FOSC4, 
+            CON_ON_ON | CON_CKPS_64 | CON_OUTPS_1, 
+            HLT_MODE_PPSG, 
+            0x00, 
+            0x7C);
+    /* Timer Period = 1mSec                                             */
+    /* Timer Period = [PRx + 1] * 4 * Tosc * TxCKPS * TxOUTPS           */
+    /* PRx = [Timer Period / (4 * Tosc * TxCKPS * TxOUTPS)] - 1         */
+    /* PRx = [1mSec / (4 * (1 / 32MHz) * 64 * 1)] - 1                   */
+    /* PRx = 124 or 0x7C                                                */
+    /* Note: Tosc = 1 / Fosc                                            */
 
-    /*Port Initialization*/
-    PORTA = 0x00;   /* Clear Port A */
-    PORTB = 0x00;   /* Clear Port B */
-    PORTC = 0x00;   /* Clear Port C, Write 1 to RG Status LED sinks, ie turn off LEDs */
+    /* UART */
+    initUart(TX_BRGH_HIGH, RC_SPEN_ENABLE, BAUD_BRG16_16BIT, 0x00, 0x8A);
+    /* Desired Baud Rate = 57,600Mb                                     */
+    /* Baud Rate = Fosc / 4(BRG + 1) = 32MHz / 4(138 + 1) = 57,554Mb    */
+    /* BRG = 138 or 0x8A                                                */
+    /* Error = (Desired Baud Rate - Baud Rate) / Desired Baud Rate      */
+    /*       = 57,600 - 57,554 / 57,600 = 0.08% Error
 
-    /*Port Direction*/
-    TRISA = 0b00001111; //Port A Directions
-            //****1*** = RA3, AN3, Input 4
-            //*****1** = RA2, AN2, Input 3
-            //******1* = RA1, AN1, Input 2
-            //*******1 = RA0, AN0, Input 1
+    /* Desired Baud Rate = 9600 for testing                             */
+    /* Baud Rate = Fosc / 64(BRG + 1)                                   */
+    /* BRG = Fosc / (64 * Baud Rate) - 1                                */
+    /* BRG = 32MHz / (64 * 9600) - 1                                    */
+    /* BRG = 51 or 0x33                                                 */
+    /* 9615 Mb                                                          */
     
-    TRISB = 0x00; /* Nothing on port B */
-    
-    TRISC = 0b10000000; /* Port C Directions */
-            //1******* = RC7, RX
-            //*0****** = RC6, TX
-            //**0***** = RC5, TX_nRX
-            //****0*** = RC3, Red Status LED
-            //*****0** = RC2, Green Status LED
-            //******0* = RC1, Yellow Status LED
-    
-    SET_LED(YELLOW_LED_PORT, YELLOW_LED_PIN, ON);
-
-    /*Analog Select*/
-    ANSELA = 0x0F;  /* Lower pins are analog */
-    ANSELB = 0x00;  /* All digital ports */
-    
-    initAdc(AD0_CHS_AN0 | AD0_ADON_ENABLE, AD1_ADFM_RIGHT | AD1_ADCS_FOSC_16 | AD1_ADNREF_VSS | AD1_ADPREF_VDD);
-    
-    /****Timer 2****/
-    PR2 = 0x7C; //Timer Period = 1mSec
-                //Timer Period = [PRx + 1] * 4 * Tosc * TxCKPS * TxOUTPS
-                //PRx = [Timer Period / (4 * Tosc * TxCKPS * TxOUTPS)] - 1
-                //PRx = 1mSec / (4 * (1 / 32MHz) * 64 * 1)] - 1
-                //PRx = 124 or 7C
-                //Note: Tosc = 1 / Fosc
-
-    T2CON = 0b00000111;
-            //*0000*** = T2OUTPS: Timer Output Postscaler Select, 1:1 Postscaler
-            //*****1** = TMR2ON: Timer2 is on
-            //******11 = T2CKPS: Timer2-type Clock Prescaler Select, Prescaler is 64
-
-    /*UART*/
-    //Set to one for fast speed
-    BAUDCONbits.BRG16 = 1; //16-bit Baud Rate Generator, 16-bit Baud Rate Generator is used
-    //Set to one for fast speed
-    TXSTAbits.BRGH = 1; //High Baud Rate Select, High speed
-    SPBRGH = 0x00;  //Nothing in the high register
-    SPBRGL = 0x8A;  
-                    //Desired Baud Rate = 57,600Mb or 115,200Mb
-                    //Baud Rate = Fosc / 4(BRG + 1) = 32MHz / 4(138 + 1) = 57,554Mb
-                    //BRG = 138 or 0x8A
-                    //Error = (Desired Baud Rate - Baud Rate) / Desired Baud Rate
-                    //      = 57,600 - 57,554 / 57,600 = 0.08% Error
-    
-                    //Desired Baud Rate = 9600 for testing
-                    //Baud Rate = Fosc / 64(BRG + 1)
-                    //BRG = Fosc / (64 * Baud Rate) - 1
-                    //BRG = 32MHz / (64 * 9600) - 1
-                    //BRG = 51 or 0x33
-                    //9615 Mb
-
-    TXSTAbits.TX9 = 0; /* 9-bit Transmit Enable, De-selects 9-bit transmission */
-    RCSTA = 0b10000000;
-            //1******* = SPEN: Serial Port Enable, Serial port enabled
-            //*0****** = RX9: 9-bit Receive Enable, De-selects 9-bit reception
-            //****0*** = ADDEN: Address Detect Enable, Disables address detection
-    
-    /*Interrupts*/
-    ADIF = 0;       /* Clear ADC interrupt flag */
-    ADIE = 1;       /* Enable ADC interrupts */
+    /* Interrupts */
     TMR2IF = 0;     /* Clear Timer2 interrupt flag */
     TMR2IE = 1;     /* Enable Timer2 interrupts */
 }
@@ -284,4 +271,8 @@ void apbMessageHandler (void) {
         default:
             break;
     }
+}
+
+void setTransmitPin(uint8_t value) {
+    WRITE_PIN(TX_ENABLE_PORT, TX_ENABLE_PIN, value);
 }

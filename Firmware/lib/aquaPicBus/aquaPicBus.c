@@ -24,13 +24,12 @@
 #include <stdint.h>     /* uint8_t, int8_t */
 #include <string.h>     /* memcpy */
 #include "aquaPicBus.h"
+#include "../common/common.h"
 
 #ifdef TEST
 #include "../uart/test/uart.h"
-#include "../pins/test/pins.h"
 #else
 #include "../uart/uart.h"
-#include "../pins/pins.h"
 #endif
 
 /******************************************************************************/
@@ -41,26 +40,34 @@ int8_t apb_init(apbObj inst,
         void (*messageHandlerVar)(void),
         uint8_t addressVar,
         uint8_t framingTimerTime,
-        volatile uint8_t* transmitEnablePort,
-        uint8_t transmitEnablePin)
+        void (*setTransmitPinVar)(uint8_t))
 {
-    if (inst == NULL) return ERR_NOMEM;
-
+    if (inst == NULL) { 
+        return -1;
+    }
+    
+    if (messageHandlerVar == NULL) {
+        return -1;
+    }
     inst->messageHandler = messageHandlerVar;
+    
     inst->address = addressVar;
     inst->framingSetpoint = FRAMING_TIME / framingTimerTime;
-    inst->transmitEnablePort = transmitEnablePort;
-    inst->transmitEnablePin = transmitEnablePin;
+    
+    if (setTransmitPinVar == NULL) {
+        return -1;
+    }
+    inst->setTransmitPin = setTransmitPinVar;
 
-    apb_restart (inst);
+    apb_restart(inst);
 
-    return ERR_NOERROR;
+    return 0;
 }
 
 /*****Run Time*****************************************************************/
 void apb_run(apbObj inst, uint8_t byte_received) {
     inst->framingCount = 0;
-
+    
     switch (inst->apbStatus) {
         case WAIT_FOR_ADDRESS:
             if (byte_received == inst->address) {
@@ -88,8 +95,7 @@ void apb_run(apbObj inst, uint8_t byte_received) {
             inst->message[inst->messageCount++] = byte_received;
             if (inst->messageCount == inst->messageLength) {
                 if (apb_checkCrc(inst->message, inst->messageCount)) {
-                    if (inst->messageHandler != NULL)
-                        inst->messageHandler();
+                    inst->messageHandler();
                 }
 
                 inst->apbStatus = WAIT_FOR_FRAMING;
@@ -106,7 +112,10 @@ void apb_framing(apbObj inst) {
         inst->framingCount++;
 
         if (inst->framingCount >= inst->framingSetpoint) {
-            apb_setupMessage (inst);
+            inst->messageCount = 0;
+            inst->messageLength = 0;
+            inst->function = 0;
+            inst->apbStatus = WAIT_FOR_ADDRESS;
         }
     }
 }
@@ -148,23 +157,6 @@ void apb_sendResponse(apbObj inst) {
     apb_sendMessage (inst, inst->message, inst->messageLength);
 }
 
-/* Depreciated */
-/*
-uint8_t* apb_buildDefualtResponse (apbObj inst) {
-    static uint8_t response[5] = { 0 };
-    uint8_t crc[2] =  { 0 };
-
-    response[0] = inst->address;
-    response[1] = inst->function;
-    response[2] = 5;
-    apb_crc16(response, crc, 5);
-    response[3] = crc[0];
-    response[4] = crc[1];
-
-    return response;
-}
-*/
-
 /* Private */
 void apb_restart(apbObj inst) {
     inst->messageCount = 0;
@@ -173,15 +165,7 @@ void apb_restart(apbObj inst) {
     inst->framingCount = 0;
     inst->apbStatus = WAIT_FOR_FRAMING;
     apb_clearMessageBuffer(inst);
-    WRITE_PIN(inst->transmitEnablePort, inst->transmitEnablePin, LOW);
-}
-
-void apb_setupMessage(apbObj inst) {
-    inst->messageCount = 0;
-    inst->messageLength = 0;
-    inst->function = 0;
-    inst->apbStatus = WAIT_FOR_ADDRESS;
-    apb_clearMessageBuffer(inst);
+    inst->setTransmitPin(0);
 }
 
 void apb_clearMessageBuffer(apbObj inst) {
@@ -223,7 +207,7 @@ void apb_crc16(uint8_t* message, uint8_t* crc, int length) {
 }
 
 void apb_sendMessage(apbObj inst, uint8_t* message, uint8_t length) {
-    WRITE_PIN(inst->transmitEnablePort, inst->transmitEnablePin, HIGH);
+    inst->setTransmitPin(1);
     putsch(message, length);
-    WRITE_PIN(inst->transmitEnablePort, inst->transmitEnablePin, LOW);
+    inst->setTransmitPin(0);
 }

@@ -24,6 +24,29 @@
 #include <stdint.h>     /* uint8_t, int8_t */
 #include "uart.h"
 
+void inline initUart(uint8_t txsta, 
+        uint8_t rcsta, 
+        uint8_t baudcon, 
+        uint8_t spbrgh, 
+        uint8_t spbrg1) 
+{
+    TX_STA = txsta;
+    RC_STA = rcsta;
+    BAUD_CON = baudcon;
+    SP_BRGH = spbrgh;
+    SP_BRGL = spbrg1;
+}
+
+void inline enableUart() {
+    TXSTAbits.TXEN = 1; /* Transmit Enable, Transmit enabled            */
+    RCSTAbits.CREN = 1; /* Continuous Receive Enable, Enables receiver  */
+}
+
+void inline disableUart() {
+    TXSTAbits.TXEN = 0; /* Transmit Enable, Transmit disable            */
+    RCSTAbits.CREN = 0; /* Continuous Receive Enable, disable receiver  */
+}
+
 void putsch(uint8_t* data, uint8_t length) {
     while(length--) {
         TXREG = *data++;
