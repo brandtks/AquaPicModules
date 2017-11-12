@@ -37,14 +37,14 @@
 #define int2bcd(i)	(uint8_t)(((i)/10<<4) + (i) % 10)
 #define bcd2int(i)	(uint8_t)((((i)>>4) * 10) + ((i) & 0x0F))
 
-#define setFlagMask(word, mask, b)  b ? (word |= mask) : (word &= ~mask)
-#define turnFlagOffMask(word, mask) word &= ~mask
-#define turnFlagOnMask(word, mask)  word |= mask
-#define testFlagMask(word, mask)    (word & mask) ? 1 : 0
+#define assignFlagStateMask(word, mask, b)  b ? (word |= mask) : (word &= ~mask)
+#define setFlagMask(word, mask)     word |= mask
+#define resetFlagMask(word, mask)   word &= ~mask
+#define testFlagMask(word, mask)    (word & mask) ? -1 : 0
 
-#define setFlagBit(word, bit, b)    b ? (word |= (0x01 << bit)) : (word &= ~(0x01 << bit))
-#define turnFlagOffBit(word, bit)   word &= ~(0x01 << bit)
-#define turnFlagOnBit(word, bit)    word |= (0x01 << bit)
-#define testFlagBit(word, bit)      (word & (0x01 << bit)) ? 1 : 0
+#define assignFlagStateBit(word, bit, b)    b ? (word |= (0x01 << bit)) : (word &= ~(0x01 << bit))
+#define setFlagBit(word, bit)       word |= (0x01 << bit)
+#define resetFlagBit(word, bit)     word &= ~(0x01 << bit)
+#define testFlagBit(word, bit)      (word & (0x01 << bit)) ? -1 : 0
 
 #endif  /* COMMON_H */

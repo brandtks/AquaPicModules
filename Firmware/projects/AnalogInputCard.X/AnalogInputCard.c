@@ -32,6 +32,7 @@
 #include "../../lib/led/led.h"
 #include "../../lib/timer/timer.h"
 #include "../../lib/uart/uart.h"
+#include "../../lib/i2c/i2c.h"
 
 /******************************************************************************/
 /* EEPROM                                                                     */
@@ -43,39 +44,38 @@
 #define _XTAL_FREQ      32000000UL  /* Used by the __delay_ms(xx) and __delay_us(xx) Methods, 32MHz */
 
 /* Port Initialization settings */
-#define PORTA_VAR       0b00000110  /* Clear Port A except for LEDs, 1 is off, 0 is on */
-                        /******1**  RA2: Red LED off        */
+#define PORTA_VAR       0b00000011  /* Clear Port A except for LEDs, 1 is off, 0 is on */
+                        /******0**  RA2: Yellow LED off        */
                         /*******1*  RA1: Green LED off      */
-                        /********0  RA0: Yellow LED on      */
+                        /********1  RA0: Red LED on      */
 #define PORTB_VAR       0x00        /* Clear Port B         */
 #define PORTC_VAR       0x00        /* Clear Port C         */
 
 #define TRISA_VAR       0b00000000  /* Port A Directions    */
-                        /******0**  RA2: Red LED            */
+                        /******0**  RA2: Yellow LED            */
                         /*******0*  RA1: Green LED          */
-                        /********0  RA0: Yellow LED         */
+                        /********0  RA0: Red LED         */
 #define TRISB_VAR       0x00        /* Port B Directions    */
-#define TRISC_VAR       0b10000000  /* Port C Directions    */
+#define TRISC_VAR       0b10011000  /* Port C Directions    */
                         /*1*******  RC7: RX                 */
                         /**0******  RC6: TX                 */
                         /***0*****  RC5: TX_nRX             */
-                        /****0****  RC4: SDA                */
-                        /*****0***  RC3: SCL                */
+                        /****1****  RC4: SDA                */
+                        /*****1***  RC3: SCL                */
 
 /* General Outputs and Inputs */
 #define RED_LED_PORT    &LATA
 #define GREEN_LED_PORT  &LATA
 #define YELLOW_LED_PORT &LATA
 
-#define RED_LED_PIN     2
+#define RED_LED_PIN     0
 #define GREEN_LED_PIN   1
-#define YELLOW_LED_PIN  0
+#define YELLOW_LED_PIN  2
 
 /* AquaPic Bus Settings */
 #define APB_ADDRESS     0x50
-#define FRAMING_TIMER   1   /* Framming called from timer 2 at 1mSec */
-#define COMM_ERROR_SP   40  /* 250mSec tick, 10 sec alarm   */
-                            /* 10,000mSec / 250mSec = 40    */
+#define FRAMING_TIMER   1   /* Framing called from timer 2 at 1mSec */
+#define ERROR_TIME      10  /* 10 sec alarm   */
 #define TX_ENABLE_PORT  &LATC
 #define TX_ENABLE_PIN   5
 
@@ -101,23 +101,25 @@ void apbMessageHandler(void);
 void setTransmitPin(uint8_t value);
 
 /******************************************************************************/
-/* Global Variables                                                           */
+/* Variables                                                                  */
 /******************************************************************************/
 struct apbObjStruct apbInstStruct;
 apbObj apbInst = &apbInstStruct;
 uint16_t commCounter;
-uint8_t  commError;
+uint8_t  apbError;
+
+struct i2cObjStruct i2cInstStruct;
+i2cObj i2cInst = &i2cInstStruct;
+
 amperageFilter ct[NUM_CHANNELS];
 uint8_t  inletPtr;
 uint8_t  valuePtr;
-uint8_t  timerCounter;
 
 void main(void) {
     initializeHardware();
     
     inletPtr = 0;
     valuePtr = 0;
-    timerCounter = 1;
     
     int i, j;
     for (i = 0; i < NUM_CHANNELS; ++i) {
@@ -130,15 +132,27 @@ void main(void) {
     /* AquaPic Bus initialization */
     apb_init(apbInst, 
             &apbMessageHandler, 
+            &setTransmitPin,
             APB_ADDRESS,
             FRAMING_TIMER,
-            &setTransmitPin);
+            ERROR_TIME);
 
-    enableUart();
+    uart_enable();
+    i2c_enable(i2cInst);
     
-    /* Global Interrupts */
-    PEIE = 1;   /* Enable peripheral interrupts */
-    GIE = 1;    /* Enable Global interrupts     */  
+    /* Interrupts */
+    /* Clear Timer2 interrupt flag */
+    TMR2IF = 0;     
+    /* Enable Timer2 interrupts */
+    TMR2IE = 1;   
+    /* Clear SSP1 interrupt flag */
+    SSP1IF = 0;
+    /* Enable SSP1 interrupts */
+    SSP1IE = 0;
+    /* Enable peripheral interrupts */
+    PEIE = 1;
+    /* Enable Global interrupts */  
+    GIE = 1;    
     
     SET_LED(YELLOW_LED_PORT, YELLOW_LED_PIN, OFF);
     SET_LED(GREEN_LED_PORT, GREEN_LED_PIN, ON);
@@ -150,50 +164,30 @@ void main(void) {
             uint8_t data = RCREG;
             apb_run(apbInst, data);
         }
+        
+        if (apb_errorChecking(apbInst)) {
+            SET_LED(GREEN_LED_PORT, GREEN_LED_PIN, OFF);
+            SET_LED(RED_LED_PORT, RED_LED_PIN, ON);
+        } else {
+            SET_LED(RED_LED_PORT, RED_LED_PIN, OFF);
+            SET_LED(GREEN_LED_PORT, GREEN_LED_PIN, ON);
+        }
     }
 }
 
 void interrupt ISR (void) {
+    /* Timer 2 */
     if (TMR2IF) {
-        TMR2IF = 0; /* Clear flag */
-        
+        /* Clear flag */
+        TMR2IF = 0; 
         apb_framing(apbInst);
-        
-        timerCounter = ++timerCounter % 250;
-        /* Every 250mSecs */
-        if (timerCounter == 0) {
-            /* If not currently faulted */
-            if (!commError) {
-                /* Increment the error counter */
-                ++commCounter;
-
-                /* If the counter is greater than the setpoint */
-                if (commCounter >= COMM_ERROR_SP) {
-                    /* set communication fault flag */
-                    commError = -1;
-                    SET_LED(GREEN_LED_PORT, GREEN_LED_PIN, OFF);
-                    SET_LED(RED_LED_PORT, RED_LED_PIN, ON);
-                    /* Make sure on a communication error that the receive is */
-                    /* enabled                                                */
-                    WRITE_PIN(TX_ENABLE_PORT, TX_ENABLE_PIN, LOW);
-                    /* Calling apb_restart here duplicates the function since */
-                    /* it is called from an interrupt and during normal       */
-                    /* execution. I think this will work without restarting   */
-                    /* the apb instance */
-                    /* apb_restart(apbInst); */
-                }
-            /* If currently faulted */
-            } else {
-                /* commCounter set to zero by apbMessageHandler. This means   */
-                /* a message was received from the master device              */
-                if (commCounter == 0) {
-                    /* clear communication fault flag */
-                    commError = 0;
-                    SET_LED(RED_LED_PORT, RED_LED_PIN, OFF);
-                    SET_LED(GREEN_LED_PORT, GREEN_LED_PIN, ON);
-                }
-            }
-        }
+    }
+    
+    /* SSP1 */
+    if (SSP1IF) {
+        /* Clear flag */
+        SSP1IF = 0;
+        i2c_isr(i2cInst);
     }
 }
 
@@ -207,7 +201,7 @@ void initializeHardware (void) {
     TRISC = TRISC_VAR;
     
     /* Timer 2 */
-    init8bitTimer(T2, 
+    timer_init8bit(T2, 
             CLKCON_CS_FOSC4, 
             CON_ON_ON | CON_CKPS_64 | CON_OUTPS_1, 
             HLT_MODE_PPSG, 
@@ -221,23 +215,29 @@ void initializeHardware (void) {
     /* Note: Tosc = 1 / Fosc                                            */
 
     /* UART */
-    initUart(TX_BRGH_HIGH, RC_SPEN_ENABLE, BAUD_BRG16_16BIT, 0x00, 0x8A);
-    /* Desired Baud Rate = 57,600Mb                                     */
-    /* Baud Rate = Fosc / 4(BRG + 1) = 32MHz / 4(138 + 1) = 57,554Mb    */
+    uart_init(TX_BRGH_HIGH, RC_SPEN_ENABLE, BAUD_BRG16_16BIT, 0x8A, 0x00);
+    /* Desired Baud Rate = 57,600                                       */
+    /* Baud Rate = Fosc / [(BRG + 1) * 4]                               */
+    /* BRG = [Fosc / (4 * Baud Rate)] - 1                               */
+    /* BRG = [32MHz / (4 * 57,600)] - 1                                 */
     /* BRG = 138 or 0x8A                                                */
+    /* Baud Rate = Fosc / [(BRG + 1) * 4]                               */
+    /* Baud Rate = 32MHz / [(138 + 1) * 4] = 57,554                     */
+    /* Baud Rate = 57,554                                               */
     /* Error = (Desired Baud Rate - Baud Rate) / Desired Baud Rate      */
-    /*       = 57,600 - 57,554 / 57,600 = 0.08% Error
-
-    /* Desired Baud Rate = 9600 for testing                             */
-    /* Baud Rate = Fosc / 64(BRG + 1)                                   */
-    /* BRG = Fosc / (64 * Baud Rate) - 1                                */
-    /* BRG = 32MHz / (64 * 9600) - 1                                    */
-    /* BRG = 51 or 0x33                                                 */
-    /* 9615 Mb                                                          */
+    /* Error = (57,600 - 57,554) / 57,600                               */
+    /* Error = 0.08% Error                                              */
     
-    /* Interrupts */
-    TMR2IF = 0;     /* Clear Timer2 interrupt flag */
-    TMR2IE = 1;     /* Enable Timer2 interrupts */
+    /* I2C */
+    i2c_init(i2cInst, 
+            SSP1,
+            STAT_SMP_HIGH_SPEED, 
+            0x13);
+    /* Baud Rate = 400kHz                                               */
+    /* Baud Rate = Fosc / [(SSPxADD + 1) * 4]                           */
+    /* SSPxADD = [Fosc / (Baud Rate * 4)] - 1                           */
+    /* SSPxADD = [32Mhz / (400kHz * 4)] - 1                             */
+    /* SSPxADD = 19 or 0x13                                             */
 }
 
 void apbMessageHandler (void) {

@@ -47,7 +47,7 @@
 /* Functions                                                                  */
 /******************************************************************************/
 #ifdef _16F18855
-void inline init8bitTimer(uint8_t timerName, 
+void inline timer_init8bit(uint8_t timerName, 
         uint8_t clkcon, 
         uint8_t con, 
         uint8_t hlt, 

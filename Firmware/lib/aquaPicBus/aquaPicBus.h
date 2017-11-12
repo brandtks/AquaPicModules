@@ -29,7 +29,7 @@
 /* #define Macros                                                             */
 /******************************************************************************/
 #define MESSAGE_BUFFER_LENGTH   32
-#define FRAMING_TIME    10  /* Framing time between messages in milliseconds */
+#define FRAMING_TIME            10  /* Framing time between messages in milliseconds */
 
 /******************************************************************************/
 /* Variable Definitions                                                       */
@@ -50,8 +50,12 @@ struct apbObjStruct {
     uint8_t message[MESSAGE_BUFFER_LENGTH];
     uint8_t messageCount;
     apbStatus_t apbStatus;
-    uint8_t framingCount;
+    uint8_t framingTick;
     uint8_t framingSetpoint;
+    int8_t error;
+    uint8_t timingTick;
+    uint8_t errorTick;
+    uint8_t errorSetpoint;
     void (*setTransmitPin)(uint8_t);
 };
 
@@ -63,13 +67,15 @@ typedef struct apbObjStruct* apbObj;
 /*****Initialize***************************************************************/
 int8_t apb_init(apbObj inst,
         void (*messageHandlerVar)(void),
+        void (*setTransmitPinVar)(uint8_t),
         uint8_t addressVar,
-        uint8_t framingTimerTime,
-        void (*setTransmitPinVar)(uint8_t));
+        uint8_t framingTimerTime,               /* In milliseconds */
+        uint16_t errorTime);                    /* In seconds */
 
 /*****Run Time*****************************************************************/
 void apb_run(apbObj inst, uint8_t byte_received);
 void apb_framing(apbObj inst);
+int8_t apb_errorChecking(apbObj inst);
 
 /* This clears the message buffer so make sure you have all the data stored from the command */
 void apb_sendDefualtResponse(apbObj inst);

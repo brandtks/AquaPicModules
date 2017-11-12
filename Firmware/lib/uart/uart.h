@@ -78,13 +78,13 @@
 /******************************************************************************/
 /* Functions                                                                  */
 /******************************************************************************/
-void inline initUart(uint8_t txsta, 
+void inline uart_init(uint8_t txsta, 
         uint8_t rcsta, 
         uint8_t baudcon, 
-        uint8_t spbrgh, 
-        uint8_t spbrgl);
-void inline enableUart();
-void inline disableUart();
+        uint8_t spbrgl,
+        uint8_t spbrgh);
+void inline uart_enable();
+void inline uart_disable();
 
 void putsch(uint8_t* data, uint8_t length);
 

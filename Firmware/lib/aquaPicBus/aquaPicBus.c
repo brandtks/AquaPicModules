@@ -38,9 +38,10 @@
 /*****Initialize***************************************************************/
 int8_t apb_init(apbObj inst,
         void (*messageHandlerVar)(void),
+        void (*setTransmitPinVar)(uint8_t),
         uint8_t addressVar,
-        uint8_t framingTimerTime,
-        void (*setTransmitPinVar)(uint8_t))
+        uint8_t framingTimerTime,               /* In milliseconds */
+        uint16_t errorTime)                     /* In seconds */
 {
     if (inst == NULL) { 
         return 0;
@@ -54,6 +55,8 @@ int8_t apb_init(apbObj inst,
     inst->address = addressVar;
     inst->framingSetpoint = FRAMING_TIME / framingTimerTime;
     
+    inst->errorSetpoint = errorTime * 4 / framingTimerTime;
+    
     if (setTransmitPinVar == NULL) {
         return -1;
     }
@@ -66,7 +69,7 @@ int8_t apb_init(apbObj inst,
 
 /*****Run Time*****************************************************************/
 void apb_run(apbObj inst, uint8_t byte_received) {
-    inst->framingCount = 0;
+    inst->framingTick = 0;
     
     switch (inst->apbStatus) {
         case WAIT_FOR_ADDRESS:
@@ -95,7 +98,10 @@ void apb_run(apbObj inst, uint8_t byte_received) {
             inst->message[inst->messageCount++] = byte_received;
             if (inst->messageCount == inst->messageLength) {
                 if (apb_checkCrc(inst->message, inst->messageCount)) {
+                    /* Handle the message */
                     inst->messageHandler();
+                    /* Reset the error tick */
+                    inst->errorTick = 0;
                 }
 
                 inst->apbStatus = WAIT_FOR_FRAMING;
@@ -108,16 +114,50 @@ void apb_run(apbObj inst, uint8_t byte_received) {
 }
 
 void apb_framing(apbObj inst) {
+    /* If not waiting for an address */
     if (inst->apbStatus != WAIT_FOR_ADDRESS) {
-        inst->framingCount++;
+        /* Increase the framing count */
+        inst->framingTick++;
 
-        if (inst->framingCount >= inst->framingSetpoint) {
+        /* Framing count greater than frame setpoint */
+        if (inst->framingTick >= inst->framingSetpoint) {
+            /* Setup to receive message */
             inst->messageCount = 0;
             inst->messageLength = 0;
             inst->function = 0;
             inst->apbStatus = WAIT_FOR_ADDRESS;
         }
     }
+    
+    inst->timingTick = ++inst->timingTick % 250;
+}
+
+int8_t apb_errorChecking(apbObj inst) {
+    /* Every 250mSecs */
+    if (inst->timingTick == 0) {
+        /* If not currently faulted */
+        if (!inst->error) {
+            /* Increment the error counter */
+            ++inst->errorTick;
+
+            /* If the counter is greater than the setpoint */
+            if (inst->errorTick >= inst->errorSetpoint) {
+                /* set communication fault flag */
+                inst->error = -1;
+                /* restart the module */
+                apb_restart(inst);
+            }
+        /* If currently faulted */
+        } else {
+            /* errorTick set to 0 if a message is successfully received */
+            if (inst->errorTick == 0) {
+                /* clear communication fault flag */
+                inst->error = 0;
+            }
+        }
+    }
+    
+    return inst->error;
 }
 
 /* This clears the message buffer so make sure you have all the data stored from the command */
@@ -162,7 +202,7 @@ void apb_restart(apbObj inst) {
     inst->messageCount = 0;
     inst->messageLength = 0;
     inst->function = 0;
-    inst->framingCount = 0;
+    inst->framingTick = 0;
     inst->apbStatus = WAIT_FOR_FRAMING;
     apb_clearMessageBuffer(inst);
     inst->setTransmitPin(0);
