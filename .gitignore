@@ -22,4 +22,5 @@ xbuild/
 xdist/
 nbproject/
 Makefile
+Settings/
 chips/
