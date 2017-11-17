@@ -26,19 +26,13 @@
 #include "aquaPicBus.h"
 #include "../common/common.h"
 
-#ifdef TEST
-#include "../uart/test/uart.h"
-#else
-#include "../uart/uart.h"
-#endif
-
 /******************************************************************************/
 /* Functions                                                                  */
 /******************************************************************************/
 /*****Initialize***************************************************************/
 int8_t apb_init(apbObj inst,
         void (*messageHandlerVar)(void),
-        void (*setTransmitPinVar)(uint8_t),
+        void (*putschVar)(uint8_t*, uint8_t),
         uint8_t addressVar,
         uint8_t framingTimerTime,               /* In milliseconds */
         uint16_t errorTime)                     /* In seconds */
@@ -48,7 +42,7 @@ int8_t apb_init(apbObj inst,
     }
     
     if (messageHandlerVar == NULL) {
-        return -1;
+        return 0;
     }
     inst->messageHandler = messageHandlerVar;
     
@@ -57,10 +51,10 @@ int8_t apb_init(apbObj inst,
     
     inst->errorSetpoint = errorTime * 4 / framingTimerTime;
     
-    if (setTransmitPinVar == NULL) {
-        return -1;
+    if (putschVar == NULL) {
+        return 0;
     }
-    inst->setTransmitPin = setTransmitPinVar;
+    inst->putsch = putschVar;
 
     apb_restart(inst);
 
@@ -130,9 +124,7 @@ void apb_framing(apbObj inst) {
     }
     
     inst->timingTick = ++inst->timingTick % 250;
-}
-
-int8_t apb_errorChecking(apbObj inst) {
+    
     /* Every 250mSecs */
     if (inst->timingTick == 0) {
         /* If not currently faulted */
@@ -156,7 +148,9 @@ int8_t apb_errorChecking(apbObj inst) {
             }
         }
     }
-    
+}
+
+int8_t apb_isErrored(apbObj inst) {
     return inst->error;
 }
 
@@ -194,7 +188,7 @@ void apb_sendResponse(apbObj inst) {
     apb_crc16(inst->message, crc, inst->messageLength);
     inst->message[inst->messageLength - 2] = crc[0];
     inst->message[inst->messageLength - 1] = crc[1];
-    apb_sendMessage (inst, inst->message, inst->messageLength);
+    inst->putsch(inst->message, inst->messageLength);
 }
 
 /* Private */
@@ -205,7 +199,6 @@ void apb_restart(apbObj inst) {
     inst->framingTick = 0;
     inst->apbStatus = WAIT_FOR_FRAMING;
     apb_clearMessageBuffer(inst);
-    inst->setTransmitPin(0);
 }
 
 void apb_clearMessageBuffer(apbObj inst) {
@@ -244,10 +237,4 @@ void apb_crc16(uint8_t* message, uint8_t* crc, int length) {
 
     crc[1] = (uint8_t)((crc_full >> 8) & 0xFF);
     crc[0] = (uint8_t)(crc_full & 0xFF);
-}
-
-void apb_sendMessage(apbObj inst, uint8_t* message, uint8_t length) {
-    inst->setTransmitPin(1);
-    putsch(message, length);
-    inst->setTransmitPin(0);
 }

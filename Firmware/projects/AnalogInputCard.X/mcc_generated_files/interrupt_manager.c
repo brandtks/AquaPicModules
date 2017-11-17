@@ -65,4 +65,19 @@ void INTERRUPT_Initialize (void)
         IPC16bits.I2C1SIP = 1;
     //    Sub Priority: 0
         IPC16bits.I2C1SIS = 0;
+    //    UERI: UART 1 Error
+    //    Priority: 1
+        IPC13bits.U1EIP = 1;
+    //    Sub Priority: 0
+        IPC13bits.U1EIS = 0;
+    //    UTXI: UART 1 Transmission
+    //    Priority: 1
+        IPC13bits.U1TXIP = 1;
+    //    Sub Priority: 0
+        IPC13bits.U1TXIS = 0;
+    //    URXI: UART 1 Reception
+    //    Priority: 1
+        IPC13bits.U1RXIP = 1;
+    //    Sub Priority: 0
+        IPC13bits.U1RXIS = 0;
 }

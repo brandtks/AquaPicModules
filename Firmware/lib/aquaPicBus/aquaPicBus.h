@@ -44,6 +44,7 @@ typedef enum abpStatusEnum {
 
 struct apbObjStruct {
     void (*messageHandler)(void);
+    void (*putsch)(uint8_t*, uint8_t);
     uint8_t address;
     uint8_t function;
     uint8_t messageLength;
@@ -56,7 +57,6 @@ struct apbObjStruct {
     uint8_t timingTick;
     uint8_t errorTick;
     uint8_t errorSetpoint;
-    void (*setTransmitPin)(uint8_t);
 };
 
 typedef struct apbObjStruct* apbObj;
@@ -67,7 +67,7 @@ typedef struct apbObjStruct* apbObj;
 /*****Initialize***************************************************************/
 int8_t apb_init(apbObj inst,
         void (*messageHandlerVar)(void),
-        void (*setTransmitPinVar)(uint8_t),
+        void (*putschVar)(uint8_t*, uint8_t),
         uint8_t addressVar,
         uint8_t framingTimerTime,               /* In milliseconds */
         uint16_t errorTime);                    /* In seconds */
@@ -75,7 +75,7 @@ int8_t apb_init(apbObj inst,
 /*****Run Time*****************************************************************/
 void apb_run(apbObj inst, uint8_t byte_received);
 void apb_framing(apbObj inst);
-int8_t apb_errorChecking(apbObj inst);
+int8_t apb_isErrored(apbObj inst);
 
 /* This clears the message buffer so make sure you have all the data stored from the command */
 void apb_sendDefualtResponse(apbObj inst);
@@ -91,6 +91,5 @@ void apb_restart(apbObj inst);
 void apb_clearMessageBuffer(apbObj inst);
 int8_t apb_checkCrc(uint8_t* message, int length);
 void apb_crc16(uint8_t* message, uint8_t* crc, int length);
-void apb_sendMessage(apbObj inst, uint8_t* message, uint8_t length);
 
 #endif /* AQUAPIC_BUS_H */

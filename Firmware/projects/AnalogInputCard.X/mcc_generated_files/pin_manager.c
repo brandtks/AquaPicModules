@@ -61,7 +61,7 @@ void PIN_MANAGER_Initialize(void)
      * Setting the Output Latch SFR(s)
      ***************************************************************************/
     LATA = 0x0000;
-    LATB = 0x4000;
+    LATB = 0x4004;
     LATC = 0x0000;
 
     /****************************************************************************
@@ -92,7 +92,7 @@ void PIN_MANAGER_Initialize(void)
      * Setting the Analog/Digital Configuration SFR(s)
      ***************************************************************************/
     ANSELA = 0x0000;
-    ANSELB = 0x0003;
+    ANSELB = 0x0000;
 
 
 }
