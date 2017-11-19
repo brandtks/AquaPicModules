@@ -89,10 +89,11 @@
 void SYSTEM_Initialize(void)
 {
     PIN_MANAGER_Initialize();
-    OSCILLATOR_Initialize();
     INTERRUPT_Initialize();
+    OSCILLATOR_Initialize();
     I2C1_Initialize();
     UART1_Initialize();
+    TMR1_Initialize();
     INTERRUPT_GlobalEnable();
 }
 
@@ -102,8 +103,8 @@ void OSCILLATOR_Initialize(void)
     SYSTEM_RegUnlock();
     // ORPOL disabled; SIDL disabled; SRC SOSC; TUN Center frequency; POL disabled; ON disabled; 
     OSCTUN = 0x0;
-    // PLLODIV 1:1; PLLMULT 4x; PLLICLK POSC; 
-    SPLLCON = 0x20000;
+    // PLLODIV 1:1; PLLMULT 3x; PLLICLK POSC; 
+    SPLLCON = 0x10000;
     // WDTO disabled; GNMI disabled; CF disabled; WDTS disabled; NMICNT 0; LVD disabled; SWNMI disabled; 
     RNMICON = 0x0;
     // SBOREN disabled; VREGS disabled; RETEN disabled; 

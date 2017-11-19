@@ -105,7 +105,7 @@ static UART_OBJECT uart1_obj ;
 */
 
 #define UART1_CONFIG_TX_BYTEQ_LENGTH 16
-#define UART1_CONFIG_RX_BYTEQ_LENGTH 8
+#define UART1_CONFIG_RX_BYTEQ_LENGTH 16
 
 /** UART Driver Queue
 
@@ -133,8 +133,8 @@ void UART1_Initialize (void)
     U1STA = 0x0;
     // U1TXREG 0; 
     U1TXREG = 0x0;
-    // BaudRate = 57600; Frequency = 32000000 Hz; BRG 138; 
-    U1BRG = 0x8A;
+    // BaudRate = 57600; Frequency = 24000000 Hz; BRG 103; 
+    U1BRG = 0x67;
 
    IEC1bits.U1RXIE = 1;
 

@@ -24,81 +24,121 @@
 #include <stdint.h>     /* uint8_t, int8_t */
 #include <string.h>     /* memcpy */
 #include "aquaPicBus.h"
-#include "../common/common.h"
+
+/******************************************************************************/
+/* Defines                                                                    */
+/******************************************************************************/
+#define MESSAGE_BUFFER_LENGTH   32
+#define FRAMING_TIME            10  /* Framing time between messages in milliseconds */
+
+/******************************************************************************/
+/* Variable Definitions                                                       */
+/******************************************************************************/
+typedef enum abpStatusEnum {
+    WAIT_FOR_FRAMING,
+    WAIT_FOR_ADDRESS,
+    WAIT_FOR_FUNCTION,
+    WAIT_FOR_LENGTH,
+    RECEIVE_MESSAGE
+}apbStatus_t;
+
+struct apbObjStruct {
+    void (*messageHandler)(uint8_t, uint8_t*, uint8_t);
+    void (*putsch)(uint8_t*, uint8_t);
+    uint8_t address;
+    uint8_t function;
+    uint8_t messageLength;
+    uint8_t message[MESSAGE_BUFFER_LENGTH];
+    uint8_t messageCount;
+    apbStatus_t apbStatus;
+    uint8_t framingTick;
+    uint8_t framingSetpoint;
+    int8_t error;
+    uint32_t errorTick;
+    uint32_t errorSetpoint;
+};
+
+/******************************************************************************/
+/* Variables                                                                  */
+/******************************************************************************/
+struct apbObjStruct apbInst;
 
 /******************************************************************************/
 /* Functions                                                                  */
 /******************************************************************************/
+void apb_restart();
+void apb_clearMessageBuffer();
+int8_t apb_checkCrc(uint8_t* message, int length);
+void apb_crc16(uint8_t* message, uint8_t* crc, int length);
+
 /*****Initialize***************************************************************/
-int8_t apb_init(apbObj inst,
-        void (*messageHandlerVar)(void),
+int8_t apb_init(void (*messageHandlerVar)(uint8_t, uint8_t*, uint8_t),
         void (*putschVar)(uint8_t*, uint8_t),
         uint8_t addressVar,
         uint8_t framingTimerTime,               /* In milliseconds */
         uint16_t errorTime)                     /* In seconds */
 {
-    if (inst == NULL) { 
-        return 0;
-    }
-    
     if (messageHandlerVar == NULL) {
         return 0;
     }
-    inst->messageHandler = messageHandlerVar;
+    apbInst.messageHandler = messageHandlerVar;
     
-    inst->address = addressVar;
-    inst->framingSetpoint = FRAMING_TIME / framingTimerTime;
-    
-    inst->errorSetpoint = errorTime * 4 / framingTimerTime;
+    apbInst.address = addressVar;
+    apbInst.framingSetpoint = FRAMING_TIME / framingTimerTime;
+    apbInst.error = 0;
+    apbInst.errorTick = 0;
+    apbInst.errorSetpoint = errorTime * 1000 / framingTimerTime;
     
     if (putschVar == NULL) {
         return 0;
     }
-    inst->putsch = putschVar;
+    apbInst.putsch = putschVar;
 
-    apb_restart(inst);
-
-    return -1;
+    apb_restart();
+    return 1;
 }
 
 /*****Run Time*****************************************************************/
-void apb_run(apbObj inst, uint8_t byte_received) {
-    inst->framingTick = 0;
+void apb_run(const uint8_t byte_received) {
+    /* Reset the framing tick */
+    apbInst.framingTick = 0;
     
-    switch (inst->apbStatus) {
+    switch (apbInst.apbStatus) {
         case WAIT_FOR_ADDRESS:
-            if (byte_received == inst->address) {
-                inst->message[0] = inst->address;
-                inst->messageCount = 1;
-                inst->apbStatus = ADDRESS_RECIEVED;
+            if (byte_received == apbInst.address) {
+                apbInst.message[0] = apbInst.address;
+                apbInst.messageCount = 1;
+                apbInst.apbStatus = WAIT_FOR_FUNCTION;
             } else {
-                inst->apbStatus = WAIT_FOR_FRAMING;
+                apbInst.apbStatus = WAIT_FOR_FRAMING;
             }
             
             break;
-        case ADDRESS_RECIEVED:
-            inst->function = byte_received;
-            inst->message[1] = inst->function;
-            inst->messageCount = 2;
-            inst->apbStatus = FUNCTION_RECIEVED;
+        case WAIT_FOR_FUNCTION:
+            apbInst.function = byte_received;
+            apbInst.message[1] = apbInst.function;
+            apbInst.messageCount = 2;
+            apbInst.apbStatus = WAIT_FOR_LENGTH;
             break;
-        case FUNCTION_RECIEVED:
-            inst->messageLength = byte_received;
-            inst->message[2] = inst->messageLength;
-            inst->messageCount = 3;
-            inst->apbStatus = MESSAGE_LENGTH_RECIEVED;
+        case WAIT_FOR_LENGTH:
+            apbInst.messageLength = byte_received;
+            apbInst.message[2] = apbInst.messageLength;
+            apbInst.messageCount = 3;
+            apbInst.apbStatus = RECEIVE_MESSAGE;
             break;
-        case MESSAGE_LENGTH_RECIEVED:
-            inst->message[inst->messageCount++] = byte_received;
-            if (inst->messageCount == inst->messageLength) {
-                if (apb_checkCrc(inst->message, inst->messageCount)) {
+        case RECEIVE_MESSAGE:
+            apbInst.message[apbInst.messageCount++] = byte_received;
+            if (apbInst.messageCount == apbInst.messageLength) {
+                if (apb_checkCrc(apbInst.message, apbInst.messageCount)) {
                     /* Handle the message */
-                    inst->messageHandler();
+                    apbInst.messageHandler(apbInst.function,
+                            apbInst.message,
+                            apbInst.messageLength);
                     /* Reset the error tick */
-                    inst->errorTick = 0;
+                    apbInst.errorTick = 0;
                 }
 
-                inst->apbStatus = WAIT_FOR_FRAMING;
+                apbInst.apbStatus = WAIT_FOR_FRAMING;
             }
 
             break;
@@ -107,104 +147,99 @@ void apb_run(apbObj inst, uint8_t byte_received) {
     }
 }
 
-void apb_framing(apbObj inst) {
+void apb_framing() {
     /* If not waiting for an address */
-    if (inst->apbStatus != WAIT_FOR_ADDRESS) {
+    if (apbInst.apbStatus != WAIT_FOR_ADDRESS) {
         /* Increase the framing count */
-        inst->framingTick++;
+        /* Framing tick is reset whenever a byte is received */
+        apbInst.framingTick++;
 
         /* Framing count greater than frame setpoint */
-        if (inst->framingTick >= inst->framingSetpoint) {
+        if (apbInst.framingTick >= apbInst.framingSetpoint) {
             /* Setup to receive message */
-            inst->messageCount = 0;
-            inst->messageLength = 0;
-            inst->function = 0;
-            inst->apbStatus = WAIT_FOR_ADDRESS;
+            apbInst.messageCount = 0;
+            apbInst.messageLength = 0;
+            apbInst.function = 0;
+            apbInst.apbStatus = WAIT_FOR_ADDRESS;
         }
     }
     
-    inst->timingTick = ++inst->timingTick % 250;
-    
-    /* Every 250mSecs */
-    if (inst->timingTick == 0) {
-        /* If not currently faulted */
-        if (!inst->error) {
-            /* Increment the error counter */
-            ++inst->errorTick;
-
-            /* If the counter is greater than the setpoint */
-            if (inst->errorTick >= inst->errorSetpoint) {
-                /* set communication fault flag */
-                inst->error = -1;
-                /* restart the module */
-                apb_restart(inst);
-            }
-        /* If currently faulted */
-        } else {
-            /* errorTick set to 0 if a message is successfully received */
-            if (inst->errorTick == 0) {
-                /* clear communication fault flag */
-                inst->error = 0;
-            }
+    /* If not currently faulted */
+    if (!apbInst.error) {
+        /* Increment the error tick */
+        apbInst.errorTick++;
+        
+        /* Error tick is greater than the error setpoint */
+        if (apbInst.errorTick >= apbInst.errorSetpoint) {
+            /* set communication fault flag */
+            apbInst.error = -1;
+            /* restart the module */
+            apb_restart();
+        }
+    /* If currently faulted */
+    } else {
+        /* errorTick set to 0 if a message is successfully received */
+        if (apbInst.errorTick == 0) {
+            /* clear communication fault flag */
+            apbInst.error = 0;
         }
     }
 }
 
-int8_t apb_isErrored(apbObj inst) {
-    return inst->error;
+int8_t apb_isErrored() {
+    return apbInst.error;
 }
 
 /* This clears the message buffer so make sure you have all the data stored from the command */
-void apb_sendDefualtResponse(apbObj inst) {
-    apb_initResponse (inst);
-    apb_sendResponse (inst);
+void apb_sendDefualtResponse() {
+    apb_initResponse ();
+    apb_sendResponse ();
 }
 
 /* This clears the message buffer so make sure you have all the data stored from the command */
-void apb_initResponse(apbObj inst) {
-    if (inst->apbStatus == MESSAGE_LENGTH_RECIEVED) {
-        apb_clearMessageBuffer (inst);
-        inst->message[0] = inst->address;
-        inst->message[1] = inst->function;
-        inst->messageLength = 3; /* 3 to include the length */
+void apb_initResponse() {
+    if (apbInst.apbStatus == RECEIVE_MESSAGE) {
+        apb_clearMessageBuffer();
+        apbInst.message[0] = apbInst.address;
+        apbInst.message[1] = apbInst.function;
+        apbInst.messageLength = 3; /* 3 to include the length */
     }
 }
 
-void apb_appendToResponse(apbObj inst, uint8_t data) {
-    inst->message[inst->messageLength++] = data;
+void apb_appendToResponse(uint8_t data) {
+    apbInst.message[apbInst.messageLength++] = data;
 }
 
-void apb_addToResponse(apbObj inst, void* data, size_t length) {
-    if (inst->apbStatus == MESSAGE_LENGTH_RECIEVED) {
-        memcpy(&(inst->message[inst->messageLength]), data, length);
-        inst->messageLength += (uint8_t)length;
+void apb_addToResponse(void* data, size_t length) {
+    if (apbInst.apbStatus == RECEIVE_MESSAGE) {
+        memcpy(&(apbInst.message[apbInst.messageLength]), data, length);
+        apbInst.messageLength += (uint8_t)length;
     }
 }
 
-void apb_sendResponse(apbObj inst) {
+void apb_sendResponse() {
     uint8_t crc[2];
-    inst->messageLength += 2; /* 2 for crc */
-    inst->message[2] = inst->messageLength;
-    apb_crc16(inst->message, crc, inst->messageLength);
-    inst->message[inst->messageLength - 2] = crc[0];
-    inst->message[inst->messageLength - 1] = crc[1];
-    inst->putsch(inst->message, inst->messageLength);
+    apbInst.messageLength += 2; /* 2 for crc */
+    apbInst.message[2] = apbInst.messageLength;
+    apb_crc16(apbInst.message, crc, apbInst.messageLength);
+    apbInst.message[apbInst.messageLength - 2] = crc[0];
+    apbInst.message[apbInst.messageLength - 1] = crc[1];
+    apbInst.putsch(apbInst.message, apbInst.messageLength);
 }
 
-/* Private */
-void apb_restart(apbObj inst) {
-    inst->messageCount = 0;
-    inst->messageLength = 0;
-    inst->function = 0;
-    inst->framingTick = 0;
-    inst->apbStatus = WAIT_FOR_FRAMING;
-    apb_clearMessageBuffer(inst);
+void apb_restart() {
+    apbInst.messageCount = 0;
+    apbInst.messageLength = 0;
+    apbInst.function = 0;
+    apbInst.framingTick = 0;
+    apbInst.apbStatus = WAIT_FOR_FRAMING;
+    apb_clearMessageBuffer();
 }
 
-void apb_clearMessageBuffer(apbObj inst) {
+void apb_clearMessageBuffer() {
     int i;
     for (i = 0; i < MESSAGE_BUFFER_LENGTH; ++i) {
-        inst->message[i] = 0;
+        apbInst.message[i] = 0;
     }
 }
 

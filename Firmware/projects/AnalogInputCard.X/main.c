@@ -1,6 +1,8 @@
-/*
+/*******************************************************************************
  * Analog Input Card - main.c
  *
+ * Goodtime Development 
+ * 
  * Created 2017 Skyler Brandt
  *
  * Description:
@@ -8,9 +10,12 @@
  * 
  * Device:
  *  PIC32MM0064GPM028
- */
+ ******************************************************************************/
 
-/*
+/******************************************************************************/
+/* License                                                                    */
+/******************************************************************************/
+/*******************************************************************************
  * Copyright (c) 2017 Goodtime Development
  *
  * This program is free software; you can redistribute it and/or
@@ -28,97 +33,112 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  * Optionally you can also view the license at <http://www.gnu.org/licenses/>.
- */
+ ******************************************************************************/
 
 #include "mcc_generated_files/mcc.h"
 #include "../../lib/aquaPicBus/aquaPicBus.h"
-#include "../../lib/led/led.h"
+#include "mcp3428/mcp3428.h"
 
-/*
- * Defines
- */
-
+/******************************************************************************/
+/* Defines                                                                    */
+/******************************************************************************/
 /* General Outputs and Inputs */
-#define RED_LED_PORT    &LATB
-#define GREEN_LED_PORT  &LATB
-#define YELLOW_LED_PORT &LATB
-
-#define RED_LED_PIN     0
-#define GREEN_LED_PIN   1
-#define YELLOW_LED_PIN  2
+/* Red LED is RB0 */
+#define RED_LED(state)      state ? IO_RB0_SetHigh() : IO_RB0_SetLow()
+/* Green LED is RB1 */
+#define GREEN_LED(state)    state ? IO_RB1_SetHigh() : IO_RB1_SetLow()
+/* Yellow LED is RB2 */
+#define YELLOW_LED(state)   state ? IO_RB2_SetHigh() : IO_RB2_SetLow()
+#define ON                  0
+#define OFF                 1
 
 /* AquaPic Bus Settings */
 #define APB_ADDRESS     0x50
 #define FRAMING_TIMER   1   /* Framing called from timer 2 at 1mSec */
 #define ERROR_TIME      10  /* 10 sec alarm   */
 
-/*
- * Functions
- */
-void initializeHardware(void);
-void apbMessageHandler(void);
-void setTransmitPin(uint8_t value);
+/* MCP3428 Settings */
+#define NUM_CHANNELS    4
+#define MCP3428_ADDRESS 0x68
+#define LPF_DEGREE      5
 
-/*
- * Variables
- */
-struct apbObjStruct apbInstStruct;
-apbObj apbInst = &apbInstStruct;
-uint16_t commCounter;
-uint8_t  apbError;
+/******************************************************************************/
+/* Functions                                                                  */
+/******************************************************************************/
+void initializeHardware(void);
+void apbMessageHandler(uint8_t function, uint8_t* message, uint8_t messageLength);
+void putsch(uint8_t* data, uint8_t length);
+
+/******************************************************************************/
+/* Variables                                                                  */
+/******************************************************************************/
+int8_t apbLastErrorState;
+
+int16_t channelValues[NUM_CHANNELS];
 
 void main(void) {
     /* initialize the device */
     SYSTEM_Initialize();
 
     /* AquaPic Bus initialization */
-    if (!apb_init(apbInst, 
-            &apbMessageHandler, 
+    if (!apb_init(&apbMessageHandler, 
             &putsch,
             APB_ADDRESS,
             FRAMING_TIMER,
             ERROR_TIME)) {
         while (1);
     }
+    apbLastErrorState = 0;
     
     /* Enable the Global Interrupts */
     INTERRUPT_GlobalEnable();
-
-    SET_LED(YELLOW_LED_PORT, YELLOW_LED_PIN, OFF);
-    SET_LED(GREEN_LED_PORT, GREEN_LED_PIN, ON);
+    
+    /* MCP3428 initialization */
+    if (!mcp3428_init(MCP3428_ADDRESS)) {
+        while (1);
+    }
+    
+    /* Start the timer, this has to happen after the MCP3428 starts because */
+    /* the timer interrupt accesses the MCP3428 memory and I don't want a race*/
+    /* condition */
+    TMR1_Start();
+    
+    YELLOW_LED(OFF);
+    GREEN_LED(ON);
     
     while (1) {
         while (!UART1_ReceiveBufferIsEmpty()) {
-            apb_run(apbInst, UART1_Read());
+            apb_run(UART1_Read());
         }
+        
+        int8_t apbError = apb_isErrored();
+        if (apbError && !apbLastErrorState) {
+            GREEN_LED(OFF);
+            RED_LED(ON);
+        } else if (apbError && !apbLastErrorState) {
+            RED_LED(OFF);
+            GREEN_LED(ON);
+        }
+        apbLastErrorState = apbError;
     }
 }
 
-void apbMessageHandler (void) {
-    commCounter = 0;
-    
-    switch (apbInst->function) {
+void apbMessageHandler(uint8_t function, uint8_t* message, uint8_t messageLength) {
+    switch (function) {
         case 10: { //read single channel value
-            uint8_t channel = apbInst->message [3];
-            uint16_t value  = ct[channel].average;
+            uint8_t channel = message [3];
             
-            apb_initResponse (apbInst);
-            apb_appendToResponse (apbInst, channel);
-            apb_addToResponse (apbInst, &value, sizeof(uint16_t));
-            apb_sendResponse (apbInst);
+            apb_initResponse ();
+            apb_appendToResponse (channel);
+            apb_addToResponse (&(channelValues[channel]), sizeof(int16_t));
+            apb_sendResponse ();
  
             break;
         }
         case 20: { //read all channels values     
-            uint16_t values [NUM_CHANNELS];
-
-            int i;
-            for (i = 0; i < NUM_CHANNELS; ++i) 
-                values [i] = ct[i].average;
-            
-            apb_initResponse (apbInst);
-            apb_addToResponse (apbInst, values, sizeof (uint16_t) * NUM_CHANNELS);
-            apb_sendResponse (apbInst);
+            apb_initResponse ();
+            apb_addToResponse (channelValues, sizeof (int16_t) * NUM_CHANNELS);
+            apb_sendResponse ();
 
             break;
         }
@@ -129,4 +149,21 @@ void apbMessageHandler (void) {
 
 void putsch(uint8_t* data, uint8_t length) {
     UART1_WriteBuffer(data, length);
+}
+
+/* Defined in tmr1.h */
+void TMR1_CallBack() {
+    /* AquaPic Bus framing */
+    apb_framing();
+    
+    /* MCP3428 Polling */
+    mcp3428_polling();
+    int16_t result = mcp3428_getResult();
+    if (result != -1) {
+        uint8_t channel = mcp3428_getChannel();
+        channelValues[channel] = (LPF_DEGREE * channelValues[channel] + result);
+        channelValues[channel] /= (LPF_DEGREE + 1);
+        channel = channel++ % NUM_CHANNELS;
+        mcp3428_setChannelAndStartConversion(channel);
+    }
 }

@@ -80,4 +80,9 @@ void INTERRUPT_Initialize (void)
         IPC13bits.U1RXIP = 1;
     //    Sub Priority: 0
         IPC13bits.U1RXIS = 0;
+    //    TI: Timer 1
+    //    Priority: 1
+        IPC4bits.T1IP = 1;
+    //    Sub Priority: 0
+        IPC4bits.T1IS = 0;
 }
