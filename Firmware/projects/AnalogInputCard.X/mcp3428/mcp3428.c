@@ -122,7 +122,8 @@ int8_t mcp3428_setChannelAndStartConversion(uint8_t channel) {
     return 0;
 }
 
-void mcp3428_polling() {
+/* Call at 1ms */
+int16_t mcp3428_polling() {
     switch (mcp3428Inst.mcp3428Status) {
         case START_CONVERSION:
             /* Waiting for the message to be done sending */
@@ -232,6 +233,8 @@ void mcp3428_polling() {
         default:
             break;
     }
+    
+    return mcp3428_getResult();
 }
 
 int8_t mcp3428_getChannel() {

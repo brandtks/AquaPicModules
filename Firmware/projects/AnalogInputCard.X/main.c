@@ -53,19 +53,18 @@
 #define OFF                 1
 
 /* AquaPic Bus Settings */
-#define APB_ADDRESS     0x50
-#define FRAMING_TIMER   1   /* Framing called from timer 2 at 1mSec */
-#define ERROR_TIME      10  /* 10 sec alarm   */
+#define APB_ADDRESS         0x50
+#define FRAMING_TIMER       1   /* Framing called from timer 1 at 1mSec */
+#define ERROR_TIME          10  /* 10 sec alarm   */
 
 /* MCP3428 Settings */
-#define NUM_CHANNELS    4
-#define MCP3428_ADDRESS 0x68
-#define LPF_DEGREE      5
+#define NUM_CHANNELS        4
+#define MCP3428_ADDRESS     0x68
+#define DEFAULT_LPF_FACTOR  5
 
 /******************************************************************************/
 /* Functions                                                                  */
 /******************************************************************************/
-void initializeHardware(void);
 void apbMessageHandler(uint8_t function, uint8_t* message, uint8_t messageLength);
 void putsch(uint8_t* data, uint8_t length);
 
@@ -73,8 +72,9 @@ void putsch(uint8_t* data, uint8_t length);
 /* Variables                                                                  */
 /******************************************************************************/
 int8_t apbLastErrorState;
-
-int16_t channelValues[NUM_CHANNELS];
+int16_t values[NUM_CHANNELS];
+uint8_t lpfFactors[NUM_CHANNELS];
+uint8_t i;
 
 void main(void) {
     /* initialize the device */
@@ -90,6 +90,10 @@ void main(void) {
     }
     apbLastErrorState = 0;
     
+    for (i = 0; i < NUM_CHANNELS; ++i) {
+        lpfFactors[i] = DEFAULT_LPF_FACTOR;
+    }
+    
     /* Enable the Global Interrupts */
     INTERRUPT_GlobalEnable();
     
@@ -99,7 +103,7 @@ void main(void) {
     }
     
     /* Start the timer, this has to happen after the MCP3428 starts because */
-    /* the timer interrupt accesses the MCP3428 memory and I don't want a race*/
+    /* the timer interrupt accesses the MCP3428 memory and could cause a race */
     /* condition */
     TMR1_Start();
     
@@ -125,23 +129,32 @@ void main(void) {
 
 void apbMessageHandler(uint8_t function, uint8_t* message, uint8_t messageLength) {
     switch (function) {
-        case 10: { //read single channel value
+        case 1: { /* set all channels low pass filter factors */
+            for (i = 0; i < NUM_CHANNELS; ++i) {
+                lpfFactors[i] = message[i + 3];
+            }
+            apb_sendDefualtResponse();
+            break;
+        }
+        case 2: /* set single channel low pass filter factor */
+            lpfFactors[message [3]] = message[4];
+            apb_sendDefualtResponse();
+            break;
+        case 10: { /* read single channel value */
             uint8_t channel = message [3];
             
-            apb_initResponse ();
-            apb_appendToResponse (channel);
-            apb_addToResponse (&(channelValues[channel]), sizeof(int16_t));
-            apb_sendResponse ();
+            apb_initResponse();
+            apb_appendToResponse(channel);
+            apb_addToResponse(&(values[channel]), sizeof(int16_t));
+            apb_sendResponse();
  
             break;
         }
-        case 20: { //read all channels values     
-            apb_initResponse ();
-            apb_addToResponse (channelValues, sizeof (int16_t) * NUM_CHANNELS);
-            apb_sendResponse ();
-
+        case 20: /* read all channels values */
+            apb_initResponse();
+            apb_addToResponse(values, sizeof (int16_t) * NUM_CHANNELS);
+            apb_sendResponse();
             break;
-        }
         default:
             break;
     }
@@ -157,12 +170,11 @@ void TMR1_CallBack() {
     apb_framing();
     
     /* MCP3428 Polling */
-    mcp3428_polling();
-    int16_t result = mcp3428_getResult();
+    int16_t result = mcp3428_polling();;
     if (result != -1) {
         uint8_t channel = mcp3428_getChannel();
-        channelValues[channel] = (LPF_DEGREE * channelValues[channel] + result);
-        channelValues[channel] /= (LPF_DEGREE + 1);
+        values[channel] = (lpfFactors[channel] * values[channel] + result);
+        values[channel] /= (lpfFactors[channel] + 1);
         channel = channel++ % NUM_CHANNELS;
         mcp3428_setChannelAndStartConversion(channel);
     }

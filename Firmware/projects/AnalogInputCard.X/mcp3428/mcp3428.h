@@ -48,7 +48,8 @@
 /******************************************************************************/
 int8_t mcp3428_init(uint8_t addressVar);
 int8_t mcp3428_setChannelAndStartConversion(uint8_t channel);
-void mcp3428_polling();
+/* Call at 1ms */
+int16_t mcp3428_polling();
 int8_t mcp3428_getChannel();
 int16_t mcp3428_getResult();
 

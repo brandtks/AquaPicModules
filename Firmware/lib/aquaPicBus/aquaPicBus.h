@@ -42,7 +42,7 @@ int8_t apb_init(void (*messageHandlerVar)(uint8_t, uint8_t*, uint8_t),
         uint16_t errorTime);                    /* In seconds */
 
 /*****Run Time*****************************************************************/
-void apb_run(const uint8_t byte_received);
+void apb_run(const uint8_t byteRecieved);
 void apb_framing();
 int8_t apb_isErrored();
 

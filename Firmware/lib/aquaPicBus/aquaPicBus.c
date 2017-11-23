@@ -61,7 +61,7 @@ struct apbObjStruct {
 /******************************************************************************/
 /* Variables                                                                  */
 /******************************************************************************/
-struct apbObjStruct apbInst;
+static struct apbObjStruct apbInst;
 
 /******************************************************************************/
 /* Functions                                                                  */
@@ -99,13 +99,13 @@ int8_t apb_init(void (*messageHandlerVar)(uint8_t, uint8_t*, uint8_t),
 }
 
 /*****Run Time*****************************************************************/
-void apb_run(const uint8_t byte_received) {
+void apb_run(const uint8_t byteRecieved) {
     /* Reset the framing tick */
     apbInst.framingTick = 0;
     
     switch (apbInst.apbStatus) {
         case WAIT_FOR_ADDRESS:
-            if (byte_received == apbInst.address) {
+            if (byteRecieved == apbInst.address) {
                 apbInst.message[0] = apbInst.address;
                 apbInst.messageCount = 1;
                 apbInst.apbStatus = WAIT_FOR_FUNCTION;
@@ -115,19 +115,19 @@ void apb_run(const uint8_t byte_received) {
             
             break;
         case WAIT_FOR_FUNCTION:
-            apbInst.function = byte_received;
+            apbInst.function = byteRecieved;
             apbInst.message[1] = apbInst.function;
             apbInst.messageCount = 2;
             apbInst.apbStatus = WAIT_FOR_LENGTH;
             break;
         case WAIT_FOR_LENGTH:
-            apbInst.messageLength = byte_received;
+            apbInst.messageLength = byteRecieved;
             apbInst.message[2] = apbInst.messageLength;
             apbInst.messageCount = 3;
             apbInst.apbStatus = RECEIVE_MESSAGE;
             break;
         case RECEIVE_MESSAGE:
-            apbInst.message[apbInst.messageCount++] = byte_received;
+            apbInst.message[apbInst.messageCount++] = byteRecieved;
             if (apbInst.messageCount == apbInst.messageLength) {
                 if (apb_checkCrc(apbInst.message, apbInst.messageCount)) {
                     /* Handle the message */
@@ -172,11 +172,11 @@ void apb_framing() {
         /* Error tick is greater than the error setpoint */
         if (apbInst.errorTick >= apbInst.errorSetpoint) {
             /* set communication fault flag */
-            apbInst.error = -1;
+            apbInst.error = 1;
             /* restart the module */
             apb_restart();
         }
-    /* If currently faulted */
+    /* Currently faulted */
     } else {
         /* errorTick set to 0 if a message is successfully received */
         if (apbInst.errorTick == 0) {

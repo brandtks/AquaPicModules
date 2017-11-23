@@ -2,6 +2,8 @@
 
 #XC8 compiler command or path to binary
 CC=xc8
+#XC32 compiler command or path to binary
+CC32=xc32
 #Command for making directories
 MKDIR=mkdir -p
 #Command for removing directories and files

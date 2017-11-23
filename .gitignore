@@ -24,3 +24,5 @@ nbproject/
 Makefile
 Settings/
 chips/
+mcc_generated_files/
+MyConfig.mc3
