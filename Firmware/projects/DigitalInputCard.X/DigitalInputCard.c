@@ -31,6 +31,7 @@
 #include "../../lib/common/common.h"
 #include "../../lib/led/led.h"
 #include "../../lib/pins/pins.h"
+#include "../../lib/PIC16F/uart/uart.h"
 #include "bsp.h"
 
 /******************************************************************************/
@@ -49,28 +50,27 @@
 /******************************************************************************/
 /* Functions                                                                  */
 /******************************************************************************/
-void initializeHardware (void);
-void apbMessageHandler (void);
+void initializeHardware(void);
+void apbMessageHandler(uint8_t function, uint8_t* message, uint8_t messageLength);
+void writeUart(uint8_t* data, uint8_t length);
 
 /******************************************************************************/
 /* Global Variables                                                           */
 /******************************************************************************/
-struct apbObjStruct apbInstStruct;
-apbObj apbInst = &apbInstStruct;
-uint16_t commCounter;
-uint8_t  commError;
+int8_t apbLastErrorState;
 
 void main (void) {
     initializeHardware ();
 
-    /* AquaPicBus Initialization */
-    apbInst = &apbInstStruct;
-    apb_init(apbInst, 
-            &apbMessageHandler, 
+    /* AquaPic Bus initialization */
+    if (!apb_init(&apbMessageHandler, 
+            &writeUart,
             APB_ADDRESS,
-            1,
-            TX_ENABLE_PORT,
-            TX_ENABLE_PIN);
+            FRAMING_TIMER,
+            ERROR_TIME)) {
+        while (1);
+    }
+    apbLastErrorState = 0;
 
     /* Enable UART */
     TXSTAbits.TXEN = 1; /* Transmit Enable, Transmit enabled */
@@ -95,7 +95,7 @@ void main (void) {
         /*apb_run might take a while so putting it in the main "loop" makes more sense*/
         if (RCIF) {
             uint8_t data = RCREG;
-            apb_run (apbInst, data);
+            apb_run (data);
         }
     }
 }
@@ -103,28 +103,18 @@ void main (void) {
 void interrupt ISR (void) {
     if (TMR2IF) {
         TMR2IF = 0; /* Clear flag */
-        apb_framing (apbInst);
-    }
-    
-    if (TMR4IF) {
-        TMR4IF = 0; /* Clear flag */
-        
-        if (!commError) {
-            ++commCounter;
-            
-            if (commCounter >= COMM_ERROR_SP) {
-                commError = -1;
-                SET_LED(GREEN_LED_PORT, GREEN_LED_PIN, OFF);
-                SET_LED(RED_LED_PORT, RED_LED_PIN, ON);
-                apb_restart (apbInst);
-            }
-        } else {
-            if (commCounter == 0) {
-                commError = 0;
-                SET_LED(RED_LED_PORT, RED_LED_PIN, OFF);
-                SET_LED(GREEN_LED_PORT, GREEN_LED_PIN, ON);
-            }
+
+        apb_framing();
+
+        int8_t apbError = apb_isErrored();
+        if (apbError && !apbLastErrorState) {
+            SET_LED(GREEN_LED_PORT, GREEN_LED_PIN, OFF);
+            SET_LED(RED_LED_PORT, RED_LED_PIN, ON);
+        } else if (apbError && !apbLastErrorState) {
+            SET_LED(RED_LED_PORT, RED_LED_PIN, OFF);
+            SET_LED(GREEN_LED_PORT, GREEN_LED_PIN, ON);
         }
+        apbLastErrorState = apbError;
     }
 }
 
@@ -206,19 +196,6 @@ void initializeHardware (void) {
             //*0000*** = T2OUTPS: Timer Output Postscaler Select, 1:1 Postscaler
             //*****1** = TMR2ON: Timer2 is on
             //******11 = T2CKPS: Timer2-type Clock Prescaler Select, Prescaler is 64
-    
-    /*Timer 4*/
-    PR4 = 0xC2; //Timer Period = 25mSec
-                //Timer Period = [PRx + 1] * 4 * Tosc * TxCKPS * TxOUTPS
-                //PRx = [Timer Period / (4 * Tosc * TxCKPS * TxOUTPS)] - 1
-                //PRx = 25mSec / (4 * (1 / 32MHz) * 64 * 16)] - 1
-                //PRx = 194.3125 or 194 or C2
-                //Note: Tosc = 1 / Fosc
-
-    T4CON = 0b01111111;
-            //*1111*** = T2OUTPS: Timer Output Postscaler Select, 1:16 Postscaler
-            //*****1** = TMR2ON: Timer2 is on
-            //******11 = T2CKPS: Timer2-type Clock Prescale Select, Prescaler is 64
 
     /*UART*/
     //Set to one for fast speed
@@ -249,21 +226,17 @@ void initializeHardware (void) {
     /*Interrupts*/
     TMR2IF = 0;     /* Clear Timer2 interrupt flag */
     TMR2IE = 1;     /* Enable Timer2 interrupts */
-    TMR4IF = 0;     /* Clear Timer4 interrupt flag */
-    TMR4IE = 1;     /* Enable Timer4 interrupts */
 }
 
-void apbMessageHandler(void) {
-    commCounter = 0;
-    
-    switch (apbInst->function) {
+void apbMessageHandler(uint8_t function, uint8_t* message, uint8_t messageLength) {
+    switch (function) {
         case 10: { /* read single channel value */
-            uint8_t channel = apbInst->message[3];
+            uint8_t channel = message[3];
             uint8_t value  = READ_PIN(&PORTB, channel);
             
-            apb_initResponse(apbInst);
-            apb_appendToResponse(apbInst, value);
-            apb_sendResponse(apbInst);
+            apb_initResponse();
+            apb_appendToResponse(value);
+            apb_sendResponse();
             break;
         }
         case 20: { /* read all channels values */
@@ -273,12 +246,18 @@ void apbMessageHandler(void) {
                 values |= READ_PIN(&PORTB, i);
             }
 
-            apb_initResponse(apbInst);
-            apb_appendToResponse(apbInst, values);
-            apb_sendResponse(apbInst);
+            apb_initResponse();
+            apb_appendToResponse(values);
+            apb_sendResponse();
             break;
         }
         default:
             break;
     }
+}
+
+void writeUart(uint8_t* data, uint8_t length) {
+    WRITE_PIN(TX_ENABLE_PORT, TX_ENABLE_PIN, HIGH);
+    putsch(data, length);
+    WRITE_PIN(TX_ENABLE_PORT, TX_ENABLE_PIN, LOW);
 }

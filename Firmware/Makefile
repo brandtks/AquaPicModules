@@ -13,17 +13,17 @@ $(POWER):
 	@$(CD) projects/PowerControl.X && make --file=makefile.mk
 
 $(ANALOGINPUT):
-	@$(CD) projects/Analog-Input-Card.X && make --file=makefile.mk
+	@$(CD) projects/AnalogInputCard.X && make --file=makefile.mk
 	
 $(ANALOGOUTPUT):
-	@$(CD) projects/Analog-Output-Card.X && make --file=makefile.mk
+	@$(CD) projects/AnalogOutputCard.X && make --file=makefile.mk
 	
 $(DIGITALINPUT):
-	@$(CD) projects/Digital-Input-Card.X && make --file=makefile.mk
+	@$(CD) projects/DigitalInputCard.X && make --file=makefile.mk
 	
 .PHONY : clean
 clean:
 	@$(CD) projects/PowerControl.X && make --file=makefile.mk clean
-	@$(CD) projects/Analog-Input-Card.X && make --file=makefile.mk clean
-	@$(CD) projects/Analog-Output-Card.X && make --file=makefile.mk clean
-	@$(CD) projects/Digital-Input-Card.X && make --file=makefile.mk clean
+	@$(CD) projects/AnalogInputCard.X && make --file=makefile.mk clean
+	@$(CD) projects/AnalogOutputCard.X && make --file=makefile.mk clean
+	@$(CD) projects/DigitalInputCard.X && make --file=makefile.mk clean

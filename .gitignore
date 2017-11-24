@@ -12,10 +12,6 @@ pHAndORP*/
 dist/
 debug/
 build/
-*.obj
-funclist
-.directory
-*.inc
 bin/
 disassembly/
 xbuild/
@@ -23,5 +19,11 @@ xdist/
 nbproject/
 Makefile
 Settings/
-chips/
+arch/
 mcc_generated_files/
+.vscode/
+
+*.obj
+funclist
+.directory
+*.inc

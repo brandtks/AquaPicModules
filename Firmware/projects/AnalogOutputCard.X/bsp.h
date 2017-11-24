@@ -69,8 +69,8 @@
 #define TX_ENABLE_PORT  &LATC
 #define TX_ENABLE_PIN   5
 #define APB_ADDRESS     0x20
-#define COMM_ERROR_SP   400 /* 25mSec timer interrupt, 10 sec alarm */
-                            /* 10,000mSec / 25mSec = 200 */
+#define FRAMING_TIMER   1       /* In milliseconds */
+#define ERROR_TIME      10      /* In secconds */
 
 #endif	/* BSP_H */
 

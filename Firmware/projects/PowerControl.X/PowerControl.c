@@ -27,7 +27,8 @@
 #include <string.h>     /* memcpy */
 #include <xc.h>         /* EEPROM */
 #include <pic16f1937.h>
-#include "../../lib/adc/adc.h"
+#include "../../lib/PIC16F/adc/adc.h"
+#include "../../lib/PIC16F/uart/uart.h"
 #include "../../lib/aquaPicBus/aquaPicBus.h"
 #include "../../lib/common/common.h"
 #include "../../lib/led/led.h"
@@ -70,17 +71,14 @@ typedef struct amperage_filter {
 /* Functions                                                                  */
 /******************************************************************************/
 void initializeHardware(void);
-void apbMessageHandler(void);
+void apbMessageHandler(uint8_t function, uint8_t* message, uint8_t messageLength);
+void writeUart(uint8_t* data, uint8_t length);
 
 /******************************************************************************/
 /* Global Variables                                                           */
 /******************************************************************************/
-struct apbObjStruct apbInstStruct;
-apbObj apbInst = &apbInstStruct;
-
-uint16_t commCounter;
-int8_t   commError;
-uint8_t  fallbackFlags;
+uint8_t fallbackFlags;
+int8_t  apbLastErrorState;
 
 #ifdef ENABLE_CURRENT
 amperageFilter ct[NUM_OUTLETS];
@@ -115,14 +113,15 @@ void main (void) {
     
     fallbackFlags = eeprom_read(OUTLET_FALLBACK_ADDRESS);
     
-    /* AquaPicBus Initialization */
-    apbInst = &apbInstStruct;
-    apb_init(apbInst, 
-            &apbMessageHandler, 
+    /* AquaPic Bus initialization */
+    if (!apb_init(&apbMessageHandler, 
+            &writeUart,
             APB_ADDRESS,
-            1,
-            TX_ENABLE_PORT,
-            TX_ENABLE_PIN);
+            FRAMING_TIMER,
+            ERROR_TIME)) {
+        while (1);
+    }
+    apbLastErrorState = 0;
     
     /* Enable UART */
     TXSTAbits.TXEN = 1; /* Transmit Enable, Transmit enabled */
@@ -140,7 +139,7 @@ void main (void) {
         /* apb_run might take a while so putting it in the main "loop" makes more sense */
         if (RCIF) {
             uint8_t data = RCREG;
-            apb_run (apbInst, data);
+            apb_run(data);
         }
     }
 }
@@ -168,37 +167,30 @@ void interrupt ISR(void) {
     
     if (TMR2IF) {
         TMR2IF = 0; //Clear flag
-        apb_framing (apbInst);
+        apb_framing ();
+
+        int8_t apbError = apb_isErrored();
+        if (apbError && !apbLastErrorState) {
+            LATD = fallbackFlags; /* set outlets to the fallback */
+            SET_LED(GREEN_LED_PORT, GREEN_LED_PIN, OFF);
+            SET_LED(RED_LED_PORT, RED_LED_PIN, ON);
+        } else if (apbError && !apbLastErrorState) {
+            SET_LED(RED_LED_PORT, RED_LED_PIN, OFF);
+            SET_LED(GREEN_LED_PORT, GREEN_LED_PIN, ON);
+        }
+        apbLastErrorState = apbError;
     }
     
+#ifdef ENABLE_CURRENT  
     if (TMR4IF) {
         TMR4IF = 0; //Clear flag
-        
-#ifdef ENABLE_CURRENT
+
         if (outletPtr != lastPtr) { /* the ADC isn't finished so don't start it */
             START_ADC();
             lastPtr = outletPtr;
         }
-#endif
-        
-        if (!commError) {
-            ++commCounter;
-            
-            if (commCounter >= COMM_ERROR_SP) {
-                LATD = fallbackFlags; /* set outlets to the fallback */
-                commError = -1;
-                SET_LED(GREEN_LED_PORT, GREEN_LED_PIN, OFF);
-                SET_LED(RED_LED_PORT, RED_LED_PIN, ON);
-                apb_restart(apbInst);
-            }
-        } else {
-            if (commCounter == 0) {
-                commError = 0;
-                SET_LED(RED_LED_PORT, RED_LED_PIN, OFF);
-                SET_LED(GREEN_LED_PORT, GREEN_LED_PIN, ON);
-            }
-        }
     }
+#endif
 }
 
 void initializeHardware(void) {
@@ -277,7 +269,8 @@ void initializeHardware(void) {
             //*0000*** = T2OUTPS: Timer Output Postscaler Select, 1:1 Postscaler
             //*****1** = TMR2ON: Timer2 is on
             //******11 = T2CKPS: Timer2-type Clock Prescaler Select, Prescaler is 64
-    
+
+#ifdef ENABLE_CURRENT  
     /****Timer 4****/
     PR4 = 0xC2; //Timer Period = 25mSec
                 //Timer Period = [PRx + 1] * 4 * Tosc * TxCKPS * TxOUTPS
@@ -290,6 +283,7 @@ void initializeHardware(void) {
             //*1111*** = T4OUTPS: Timer Output Postscaler Select, 1:16 Postscaler
             //*****1** = TMR4ON: Timer4 is on
             //******11 = T4CKPS: Timer4-type Clock Prescale Select, Prescaler is 64
+#endif
 
     /****UART****/
     /* Set BRG16 to one for fast speed */
@@ -324,63 +318,69 @@ void initializeHardware(void) {
 #endif
     TMR2IF = 0;     /* Clear Timer2 interrupt flag */
     TMR2IE = 1;     /* Enable Timer2 interrupts */
+#ifdef ENABLE_CURRENT 
     TMR4IF = 0;     /* Clear Timer4 interrupt flag */
     TMR4IE = 1;     /* Enable Timer4 interrupts */
+#endif
 }
 
-void apbMessageHandler(void) {
-    commCounter = 0;
-    
-    switch (apbInst->function) {
+void apbMessageHandler(uint8_t function, uint8_t* message, uint8_t messageLength) {
+    switch (function) {
         case 2: { /* setup single channel */
-            uint8_t outlet   = apbInst->message[3];
-            uint8_t fallback = apbInst->message[4];
-            bitFlagSet(fallbackFlags, outlet, fallback);
-            eeprom_write (OUTLET_FALLBACK_ADDRESS, fallbackFlags);
-            apb_sendDefualtResponse(apbInst);
+            uint8_t outlet   = message[3];
+            uint8_t fallback = message[4];
+            assignFlagStateBit(fallbackFlags, outlet, fallback);
+            eeprom_write(OUTLET_FALLBACK_ADDRESS, fallbackFlags);
+            apb_sendDefualtResponse();
             break;
         }
 #ifdef ENABLE_CURRENT
         case 10: { /* read outlet current */
-            uint8_t outlet   = apbInst->message[3];
+            uint8_t outlet   = message[3];
             uint16_t current = ct[outlet].average;
-            apb_initResponse(apbInst);
-            apb_appendToResponse(apbInst, outlet);
-            apb_addToResponse(apbInst, &current, sizeof(uint16_t));
-            apb_sendResponse(apbInst);
+            apb_initResponse();
+            apb_appendToResponse(outlet);
+            apb_addToResponse(&current, sizeof(uint16_t));
+            apb_sendResponse();
             break;
         }
 #endif
         case 20: { /* read status */
-            apb_initResponse(apbInst);
-            READ_PIN(POWER_AVAIL_PORT, POWER_AVAIL_PIN) ? apb_appendToResponse(apbInst, 0xFF) : apb_appendToResponse(apbInst, 0x00);
-            apb_appendToResponse(apbInst, LATD);
+            apb_initResponse();
+            READ_PIN(POWER_AVAIL_PORT, POWER_AVAIL_PIN) ? apb_appendToResponse(0xFF) : apb_appendToResponse(0x00);
+            apb_appendToResponse(LATD);
 #ifdef ENABLE_CURRENT
-            apb_appendToResponse(apbInst, 0xFF);
+            apb_appendToResponse(0xFF);
 #else
-            apb_appendToResponse(apbInst, 0x00);
+            apb_appendToResponse(0x00);
 #endif
-            apb_sendResponse(apbInst);
+            apb_sendResponse();
             break;
         }
 #ifdef ENABLE_CURRENT
         case 21: { /* read all current */
             int i;
-            apb_initResponse(apbInst);
+            apb_initResponse();
             for (i = 0; i < NUM_OUTLETS; ++i)
-                apb_addToResponse(apbInst, &(ct[i].average), sizeof(uint16_t));
-            apb_sendResponse(apbInst);
+                apb_addToResponse(&(ct[i].average), sizeof(uint16_t));
+            apb_sendResponse();
             break;
         }
 #endif
         case 30: { /* write outlet */
-            uint8_t outlet = apbInst->message[3];
-            uint8_t state  = apbInst->message[4];
+            uint8_t outlet = message[3];
+            uint8_t state  = message[4];
             WRITE_PIN(&LATD, outlet, state);
-            apb_sendDefualtResponse(apbInst);
+            apb_sendDefualtResponse();
             break;
         }
         default:
             break;
     }
+}
+
+void writeUart(uint8_t* data, uint8_t length) {
+    WRITE_PIN(TX_ENABLE_PORT, TX_ENABLE_PIN, HIGH);
+    putsch(data, length);
+    WRITE_PIN(TX_ENABLE_PORT, TX_ENABLE_PIN, LOW);
 }

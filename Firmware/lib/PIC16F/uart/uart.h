@@ -32,7 +32,7 @@
     #define BAUD_CON    BAUD1CON
     #define SP_BRGL     SP1BRGL
     #define SP_BRGH     SP1BRGH
-#elif _16F1936
+#elif _16F1936 || _16F1937
     #define TX_STA      TXSTA
     #define RC_STA      RCSTA
     #define BAUD_CON    BAUDCON

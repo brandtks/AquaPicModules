@@ -5,7 +5,7 @@ include ../../Makefile-defines.mk
 
 CHIP=16F1936
 OBJS=$(OBJ_DIR)/DigitalInputCard/DigitalInputCard.p1 $(OBJ_DIR)/uart/uart.p1 $(OBJ_DIR)/aquaPicBus/aquaPicBus.p1
-PROJ_DEPS=../../lib/aquaPicBus/aquaPicBus.h ../../lib/common/common.h ../../lib/led/led.h ../../lib/pins/pins.h bsp.h
+PROJ_DEPS=../../lib/aquaPicBus/aquaPicBus.h ../../lib/common/common.h ../../lib/led/led.h ../../lib/pins/pins.h ../../lib/PIC16F/uart/uart.h bsp.h
 
 $(DIST_DIR)/DigitalInputCard.hex : $(OBJS)
 	@$(RM) $(DIST_DIR)
@@ -17,12 +17,12 @@ $(OBJ_DIR)/DigitalInputCard/DigitalInputCard.p1 : DigitalInputCard.c $(PROJ_DEPS
 	@$(MKDIR) $(OBJ_DIR)/DigitalInputCard
 	$(CC) --pass1 --chip=$(CHIP) -Q --double=24 --float=24 --opt=$(OPT) --addrqual=ignore --mode=$(MODE) -P --warn=$(WARN) --asmlist --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,-download,-stackcall,+clib "--errformat=%f:%l: error: (%n) %s" "--warnformat=%f:%l: warning: (%n) %s" "--msgformat=%f:%l: advisory: (%n) %s" -O$(OBJ_DIR)/DigitalInputCard/DigitalInputCard.p1 DigitalInputCard.c
 
-$(OBJ_DIR)/uart/uart.p1 : ../../lib/uart/uart.c ../../lib/uart/uart.h
+$(OBJ_DIR)/uart/uart.p1 : ../../lib/PIC16F/uart/uart.c ../../lib/PIC16F/uart/uart.h
 	@$(RM) $(OBJ_DIR)/uart
 	@$(MKDIR) $(OBJ_DIR)/uart
-	$(CC) --pass1 --chip=$(CHIP) -Q --double=24 --float=24 --opt=$(OPT) --addrqual=ignore --mode=$(MODE) -P --warn=$(WARN) --asmlist --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,-download,-stackcall,+clib "--errformat=%f:%l: error: (%n) %s" "--warnformat=%f:%l: warning: (%n) %s" "--msgformat=%f:%l: advisory: (%n) %s" -O$(OBJ_DIR)/uart/uart.p1 ../../lib/uart/uart.c
+	$(CC) --pass1 --chip=$(CHIP) -Q --double=24 --float=24 --opt=$(OPT) --addrqual=ignore --mode=$(MODE) -P --warn=$(WARN) --asmlist --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,-download,-stackcall,+clib "--errformat=%f:%l: error: (%n) %s" "--warnformat=%f:%l: warning: (%n) %s" "--msgformat=%f:%l: advisory: (%n) %s" -O$(OBJ_DIR)/uart/uart.p1 ../../lib/PIC16F/uart/uart.c
 
-$(OBJ_DIR)/aquaPicBus/aquaPicBus.p1 : ../../lib/aquaPicBus/aquaPicBus.c ../../lib/aquaPicBus/aquaPicBus.h $(OBJ_DIR)/uart/uart.p1
+$(OBJ_DIR)/aquaPicBus/aquaPicBus.p1 : ../../lib/aquaPicBus/aquaPicBus.c ../../lib/aquaPicBus/aquaPicBus.h
 	@$(RM) $(OBJ_DIR)/aquaPicBus
 	@$(MKDIR) $(OBJ_DIR)/aquaPicBus
 	$(CC) --pass1 --chip=$(CHIP) -Q --double=24 --float=24 --opt=$(OPT) --addrqual=ignore --mode=$(MODE) -P --warn=$(WARN) --asmlist --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,-download,-stackcall,+clib "--errformat=%f:%l: error: (%n) %s" "--warnformat=%f:%l: warning: (%n) %s" "--msgformat=%f:%l: advisory: (%n) %s" -O$(OBJ_DIR)/aquaPicBus/aquaPicBus.p1 ../../lib/aquaPicBus/aquaPicBus.c

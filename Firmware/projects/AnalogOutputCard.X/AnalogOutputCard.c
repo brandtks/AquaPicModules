@@ -31,7 +31,8 @@
 #include "../../lib/common/common.h"
 #include "../../lib/led/led.h"
 #include "../../lib/pins/pins.h"
-#include "../../lib/pwm/pwm.h"
+#include "../../lib/PIC16F/pwm/pwm.h"
+#include "../../lib/PIC16F/uart/uart.h"
 #include "bsp.h"
 
 /******************************************************************************/
@@ -61,18 +62,16 @@ void eeprom_write(unsigned char address, unsigned char value);
 /******************************************************************************/
 /* Functions                                                                  */
 /******************************************************************************/
-void initializeHardware (void);
-void apbMessageHandler (void);
+void initializeHardware(void);
+void apbMessageHandler(uint8_t function, uint8_t* message, uint8_t messageLength);
+void writeUart(uint8_t* data, uint8_t length);
 
 /******************************************************************************/
 /* Global Variables                                                           */
 /******************************************************************************/
-struct apbObjStruct apbInstStruct;
-apbObj apbInst;
 struct pwmObjStruct pwmInstStruct[4];
 pwmObj pwmInst[4];
-uint16_t commCounter;
-uint8_t commError;
+int8_t apbLastErrorState;
 
 void main (void) {
     int i;
@@ -90,14 +89,15 @@ void main (void) {
     }
 #endif
 
-    /* AquaPicBus Initialization */
-    apbInst = &apbInstStruct;
-    apb_init(apbInst,
-            &apbMessageHandler,
+    /* AquaPic Bus initialization */
+    if (!apb_init(&apbMessageHandler, 
+            &writeUart,
             APB_ADDRESS,
-            1,
-            TX_ENABLE_PORT,
-            TX_ENABLE_PIN);
+            FRAMING_TIMER,
+            ERROR_TIME)) {
+        while (1);
+    }
+    apbLastErrorState = 0;
 
     /* Enable UART */
     TXSTAbits.TXEN = 1; /* Transmit Enable, Transmit enabled */
@@ -115,7 +115,7 @@ void main (void) {
         /* apb_run might take a while so putting it in the main "loop" makes more sense */
         if (RCIF) {
             uint8_t data = RCREG;
-            apb_run(apbInst, data);
+            apb_run(data);
         }
     }
 }
@@ -123,28 +123,17 @@ void main (void) {
 void interrupt ISR (void) {
     if (TMR6IF) {
         TMR6IF = 0; /* Clear flag */
-        apb_framing(apbInst);
-    }
+        apb_framing();
 
-    if (TMR4IF) {
-        TMR4IF = 0; //Clear flag
-
-        if (!commError) {
-            ++commCounter;
-
-            if (commCounter >= COMM_ERROR_SP) {
-                commError = -1;
-                SET_LED(GREEN_LED_PORT, GREEN_LED_PIN, OFF);
-                SET_LED(RED_LED_PORT, RED_LED_PIN, ON);
-                apb_restart (apbInst);
-            }
-        } else {
-            if (commCounter == 0) {
-                commError = 0;
-                SET_LED(RED_LED_PORT, RED_LED_PIN, OFF);
-                SET_LED(GREEN_LED_PORT, GREEN_LED_PIN, ON);
-            }
+        int8_t apbError = apb_isErrored();
+        if (apbError && !apbLastErrorState) {
+            SET_LED(GREEN_LED_PORT, GREEN_LED_PIN, OFF);
+            SET_LED(RED_LED_PORT, RED_LED_PIN, ON);
+        } else if (apbError && !apbLastErrorState) {
+            SET_LED(RED_LED_PORT, RED_LED_PIN, OFF);
+            SET_LED(GREEN_LED_PORT, GREEN_LED_PIN, ON);
         }
+        apbLastErrorState = apbError;
     }
 }
 
@@ -205,19 +194,6 @@ void initializeHardware (void) {
     TRISBbits.TRISB5 = 0; //Clear TRISB5 bit to enable PWM3 output on pin
     TRISBbits.TRISB0 = 0; //Clear TRISB0 bit to enable PWM4 output on pin
 
-    /* Timer 4 */
-    PR4 = 0xC2; //Timer Period = 25mSec
-                //Timer Period = [PRx + 1] * 4 * Tosc * TxCKPS * TxOUTPS
-                //PRx = [Timer Period / (4 * Tosc * TxCKPS * TxOUTPS)] - 1
-                //PRx = 25mSec / (4 * (1 / 32MHz) * 64 * 16)] - 1
-                //PRx = 194.3125 or 194 or C2
-                //Note: Tosc = 1 / Fosc
-
-    T4CON = 0b01111111;
-            //*1111*** = T4OUTPS: Timer Output Postscaler Select, 1:16 Postscaler
-            //*****1** = TMR4ON: Timer4 is on
-            //******11 = T4CKPS: Timer2-type Clock Prescale Select, Prescaler is 64
-
     /* Timer 6 */
     PR6 = 0x7C; //Timer Period = 1mSec
                 //Timer Period = [PRx + 1] * 4 * Tosc * TxCKPS * TxOUTPS
@@ -258,33 +234,29 @@ void initializeHardware (void) {
             //****0*** = ADDEN: Address Detect Enable, Disables address detection
 
     /* Interrupts */
-    TMR4IF = 0;     /* Clear Timer4 interrupt flag */
-    TMR4IE = 1;     /* Enable Timer2 interrupts */
     TMR6IF = 0;     /* Clear Timer6 interrupt flag */
     TMR6IE = 1;     /* Enable Timer6 interrupts */
 }
 
-void apbMessageHandler (void) {
-    commCounter = 0;
-
-    switch (apbInst->function) {
+void apbMessageHandler(uint8_t function, uint8_t* message, uint8_t messageLength) {
+    switch (function) {
 #if SELECTABLE_OUTPUT
         case 2: { /* setup single channel */
-            uint8_t channel = apbInst->message[3] + 1; //0 is channel 1
-            uint8_t type    = apbInst->message[4];
+            uint8_t channel = message[3] + 1; //0 is channel 1
+            uint8_t type    = message[4];
             //type 255 is PWM output so close relay to bypass filter
             WRITE_PIN(&PORTB, channel, type == 255);
             eeprom_write(channel - 1, type);
-            apb_sendDefualtResponse(apbInst);
+            apb_sendDefualtResponse();
             break;
         }
 #endif
         case 10: { /* read single channel value */
-            uint8_t channel = apbInst->message[3];
+            uint8_t channel = message[3];
             uint16_t value  = getPwmValue(pwmInst[channel]);
-            apb_initResponse(apbInst);
-            apb_addToResponse(apbInst, &value, sizeof(uint16_t));
-            apb_sendResponse(apbInst);
+            apb_initResponse();
+            apb_addToResponse(&value, sizeof(uint16_t));
+            apb_sendResponse();
 
             break;
         }
@@ -294,31 +266,37 @@ void apbMessageHandler (void) {
             for (i = 0; i < 4; ++i) {
                 values[i] = getPwmValue(pwmInst[i]);
             }
-            apb_initResponse(apbInst);
-            apb_addToResponse(apbInst, values, sizeof(uint16_t) * 4);
-            apb_sendResponse(apbInst);
+            apb_initResponse();
+            apb_addToResponse(values, sizeof(uint16_t) * 4);
+            apb_sendResponse();
             break;
         }
         case 30: { /* write all channels values */
             uint16_t values[4];
-            memcpy(values, &(apbInst->message[3]), sizeof(uint16_t) * 4);
+            memcpy(values, &(message[3]), sizeof(uint16_t) * 4);
             int i;
             for (i = 0; i < 4; ++i) {
                 setPwmValue(pwmInst[i], values [i]);
             }
-            apb_sendDefualtResponse(apbInst);
+            apb_sendDefualtResponse();
             break;
         }
         case 31: { /* write single channel value */
-            uint8_t channel = apbInst->message[3];
+            uint8_t channel = message[3];
             uint16_t value;
-            memcpy(&value, &(apbInst->message[4]), sizeof(uint16_t));
+            memcpy(&value, &(message[4]), sizeof(uint16_t));
             /* value = (value >> 8) | (value << 8); /* reverse the endianess */
             setPwmValue(pwmInst[channel], value);
-            apb_sendDefualtResponse(apbInst);
+            apb_sendDefualtResponse();
             break;
         }
         default:
             break;
     }
+}
+
+void writeUart(uint8_t* data, uint8_t length) {
+    WRITE_PIN(TX_ENABLE_PORT, TX_ENABLE_PIN, HIGH);
+    putsch(data, length);
+    WRITE_PIN(TX_ENABLE_PORT, TX_ENABLE_PIN, LOW);
 }

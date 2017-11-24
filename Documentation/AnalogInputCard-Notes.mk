@@ -9,8 +9,7 @@ The voltage divider servers two purposes:
  * First it limits current and 
  * Second it can be used to increase the measured voltage because most sensor devices don't output 5Vdc at full range. This is still limited. With RVx at 0R the minimum input voltage to reach full scale is 3.07V.
  
- ### TODO list
-  * Add individually programmable low pass filter degree values and add support so the main controller set those.
-  * Enable and disable channels.
-
+### TODO list
+ * Enable and disable channels.
+ * Add EEPROM emulation in flash to persist each channel's low pass filter factor value
 
