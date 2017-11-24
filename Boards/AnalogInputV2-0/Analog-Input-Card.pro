@@ -1,4 +1,4 @@
-update=Mon 30 Oct 2017 06:29:49 PM EDT
+update=Fri 24 Nov 2017 12:59:11 AM EST
 last_client=eeschema
 [cvpcb]
 version=1
@@ -43,16 +43,6 @@ LibName14=led
 LibName15=dip_sockets
 LibName16=pga_sockets
 LibName17=valves
-[schematic_editor]
-version=1
-PageLayoutDescrFile=
-PlotDirectoryName=C:/Users/sbrandt/Dropbox/AquaPicSchematics/PDF/
-SubpartIdSeparator=0
-SubpartFirstId=65
-NetFmtName=Pcbnew
-SpiceForceRefPrefix=0
-SpiceUseNetNumbers=0
-LabSize=60
 [eeschema]
 version=1
 LibDir=../../../KiCAD/Library
@@ -88,3 +78,13 @@ LibName28=atmel
 LibName29=contrib
 LibName30=valves
 LibName31=GoodtimeDev
+[schematic_editor]
+version=1
+PageLayoutDescrFile=
+PlotDirectoryName=../../Schematics/PDF/
+SubpartIdSeparator=0
+SubpartFirstId=65
+NetFmtName=Pcbnew
+SpiceForceRefPrefix=0
+SpiceUseNetNumbers=0
+LabSize=60
