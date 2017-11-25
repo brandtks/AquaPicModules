@@ -753,11 +753,11 @@ MicroController\n
 Text Label 2900 8700 2    60   ~ 0
 RX_LV
 Text Label 2900 7400 2    60   ~ 0
-LED_Y
+LED_R
 Text Label 2900 7300 2    60   ~ 0
 LED_G
 Text Label 2900 7200 2    60   ~ 0
-LED_R
+LED_Y
 $Comp
 L TRI-LED D1
 U 1 1 5A17EDD3
