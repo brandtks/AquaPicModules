@@ -44,13 +44,13 @@
 /******************************************************************************/
 /* General Outputs and Inputs */
 /* Red LED is RB0 */
-#define RED_LED(state)      state ? IO_RB0_SetHigh() : IO_RB0_SetLow()
+#define RED_LED(state)      state ? N_R_LED_SetLow() : N_R_LED_SetHigh()
 /* Green LED is RB1 */
-#define GREEN_LED(state)    state ? IO_RB1_SetHigh() : IO_RB1_SetLow()
+#define GREEN_LED(state)    state ? N_G_LED_SetLow() : N_G_LED_SetHigh()
 /* Yellow LED is RB2 */
-#define YELLOW_LED(state)   state ? IO_RB2_SetHigh() : IO_RB2_SetLow()
-#define ON                  0
-#define OFF                 1
+#define YELLOW_LED(state)   state ? N_Y_LED_SetLow() : N_Y_LED_SetHigh()
+#define ON                  1
+#define OFF                 0
 
 /* AquaPic Bus Settings */
 #define APB_ADDRESS         0x50

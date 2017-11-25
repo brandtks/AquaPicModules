@@ -13,12 +13,12 @@
          <string>class com.microchip.mcc.mcu16.modules.i2c.I2C</string>
       </entry>
       <entry>
-         <string>Pin Module</string>
-         <string>class com.microchip.mcc.mcu16.pinManager.PinManager</string>
-      </entry>
-      <entry>
          <string>WATCHDOG</string>
          <string>class com.microchip.mcc.mcu16.systemManager.wdt.Wdt</string>
+      </entry>
+      <entry>
+         <string>Pin Module</string>
+         <string>class com.microchip.mcc.mcu16.pinManager.PinManager</string>
       </entry>
       <entry>
          <string>ICD</string>
@@ -29,12 +29,12 @@
          <string>class com.microchip.mcc.mcu16.interruptManager_PIC32MM.InterruptManager_PIC32MM</string>
       </entry>
       <entry>
-         <string>UART1</string>
-         <string>class com.microchip.mcc.mcu16.modules.uart_irda_upb.UART</string>
-      </entry>
-      <entry>
          <string>TMR1</string>
          <string>class com.microchip.mcc.mcu16.modules.tmr_classa_pb.TMR</string>
+      </entry>
+      <entry>
+         <string>UART1</string>
+         <string>class com.microchip.mcc.mcu16.modules.uart_irda_upb.UART</string>
       </entry>
    </usedClasses>
    <usedLibraries class="java.util.ArrayList">
@@ -1390,12 +1390,12 @@
          <value>enabled</value>
       </entry>
       <entry>
-         <key class="com.microchip.mcc.core.tokenManager.OptionKey" moduleName="I2C1" registerAlias="I2CCON" settingAlias="A10M" alias="7 Bit"/>
-         <value>0</value>
-      </entry>
-      <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="UART1" registerAlias="UMODE" settingAlias="STSEL"/>
          <value>1</value>
+      </entry>
+      <entry>
+         <key class="com.microchip.mcc.core.tokenManager.OptionKey" moduleName="I2C1" registerAlias="I2CCON" settingAlias="A10M" alias="7 Bit"/>
+         <value>0</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.OptionKey" moduleName="Pin Module" registerAlias="CNEN1B" settingAlias="CNIE1B4" alias="enabled"/>
@@ -1511,11 +1511,11 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="Custom Name RB0"/>
-         <value>IO_RB0</value>
+         <value>N_R_LED</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="Custom Name RB1"/>
-         <value>IO_RB1</value>
+         <value>N_G_LED</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="TMR1" registerAlias="TI" settingAlias="flag"/>
@@ -4558,12 +4558,12 @@
          <value>1</value>
       </entry>
       <entry>
-         <key class="com.microchip.mcc.core.tokenManager.OptionKey" moduleName="I2C1" registerAlias="I2CSTAT" settingAlias="TBF" alias="enabled"/>
-         <value>1</value>
-      </entry>
-      <entry>
          <key class="com.microchip.mcc.core.tokenManager.OptionKey" moduleName="UART1" registerAlias="UMODE" settingAlias="CLKSEL" alias="REFCLKO"/>
          <value>3</value>
+      </entry>
+      <entry>
+         <key class="com.microchip.mcc.core.tokenManager.OptionKey" moduleName="I2C1" registerAlias="I2CSTAT" settingAlias="TBF" alias="enabled"/>
+         <value>1</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.OptionKey" moduleName="System Module" registerAlias="FWDT" settingAlias="WDTPS" alias="PS16"/>
@@ -4615,7 +4615,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.RegisterKey" moduleName="Pin Module" registerAlias="LATB"/>
-         <value>16388</value>
+         <value>16387</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="Pin Module" registerAlias="RPOR3" settingAlias="RP14R"/>
@@ -5243,7 +5243,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="Custom Name RB2"/>
-         <value>IO_RB2</value>
+         <value>N_Y_LED</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="Pin Module" registerAlias="CNCONC" settingAlias="CNSTYLE"/>
@@ -5731,11 +5731,11 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="customNameUserSet RB1"/>
-         <value>disabled</value>
+         <value>enabled</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="customNameUserSet RB2"/>
-         <value>disabled</value>
+         <value>enabled</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="customNameUserSet RB3"/>
@@ -5771,7 +5771,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="Pin Module" registerAlias="LATB" settingAlias="LATB1"/>
-         <value>clear</value>
+         <value>set</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.OptionKey" moduleName="System Module" registerAlias="FPOR" settingAlias="RETVR" alias="OFF"/>
@@ -5811,7 +5811,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="Pin Module" registerAlias="LATB" settingAlias="LATB2"/>
-         <value>set</value>
+         <value>clear</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.OptionKey" moduleName="Pin Module" registerAlias="TRISA" settingAlias="TRISA4" alias="output"/>
@@ -6023,7 +6023,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="Pin Module" registerAlias="LATB" settingAlias="LATB0"/>
-         <value>clear</value>
+         <value>set</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="UART1" name="inputmode"/>
@@ -6339,7 +6339,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="customNameUserSet RB0"/>
-         <value>disabled</value>
+         <value>enabled</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="customNameUserSet RA0"/>
@@ -6437,7 +6437,7 @@
       </entry>
       <entry>
          <file>mcc_generated_files/pin_manager.h</file>
-         <hash>11b5f094c41c8fda87457808d3571ac5a81f0b55a53aa4882ade1e40477bdc4c</hash>
+         <hash>7c13dab7f3e6e2643cb9d98c60487769b7ef769583112c6627dbab2b6a59d8c4</hash>
       </entry>
       <entry>
          <file>mcc_generated_files/tmr1.c</file>
@@ -6465,27 +6465,27 @@
       </entry>
       <entry>
          <file>mcc_generated_files/mcc.h</file>
-         <hash>15b52bb5bd74137337fba678b379b266389383ed7c921e03bf77692906ca86ee</hash>
+         <hash>092a05cc7e26af1d26dd88356ec484c0a1b440004f7f5581fdc41fbba8e166de</hash>
       </entry>
       <entry>
          <file>mcc_generated_files/interrupt_manager.c</file>
-         <hash>775d0c3dd43384b77889e818b6cf44620e9822f1bb2903a6ebc783e40d6a2469</hash>
+         <hash>1bc690de7b6454406c89353f0a32d5f181265d1aa37e04529b0962c92e4008bd</hash>
       </entry>
       <entry>
          <file>mcc_generated_files/mcc.c</file>
-         <hash>0629f1f4a2bd45bf62da15dd358dbbf4354c246d106f5821d84167da0d36f562</hash>
+         <hash>847471267199f96e3d051890b2b924959a6051488109f3b6dc9475309deceb01</hash>
       </entry>
       <entry>
          <file>mcc_generated_files/uart1.c</file>
          <hash>2d45573c819c439c53f7a2347026f424129688356f8d661d7c61f2bdfd12e0a6</hash>
       </entry>
       <entry>
-         <file>mcc_generated_files/i2c1.c</file>
-         <hash>a4abe21c18548cf7253f438e2a78e3f2538bdd0fcb4e3db35fccc41b4010e9d9</hash>
+         <file>mcc_generated_files/pin_manager.c</file>
+         <hash>375045e8502f2a2fa2fb2966bd6f46a913b730d6baf592183215dee729e56c5d</hash>
       </entry>
       <entry>
-         <file>mcc_generated_files/pin_manager.c</file>
-         <hash>7bb41d4925e5dd1060ec894a99e42fe3be17d81fb87c33194380cf48048713b7</hash>
+         <file>mcc_generated_files/i2c1.c</file>
+         <hash>a4abe21c18548cf7253f438e2a78e3f2538bdd0fcb4e3db35fccc41b4010e9d9</hash>
       </entry>
    </generatedFileHashHistoryMap>
 </config>
