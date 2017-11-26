@@ -1,12 +1,12 @@
 /*******************************************************************************
- * mcp3428->c
+ * ltc2483.c
  *
  * Goodtime Development 
  * 
  * Created 2017 Skyler Brandt
  *
  * Description:
- *  MCP3428 Analog to digital converter device driver
+ *  LTC2483 Analog to digital converter device driver
  ******************************************************************************/
 
 /******************************************************************************/

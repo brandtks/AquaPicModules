@@ -65,6 +65,9 @@
 #define ORP_CHANNEL         1
 #define ORP_ADDRESS         0x15
 
+#define ENABLE_PH(state)    state ? EN_PH_SetHigh() : EN_PH_SetLow()
+#define ENABLE_ORP(state)   state ? EN_ORP_SetHigh() : EN_ORP_SetLow()
+
 /******************************************************************************/
 /* Functions                                                                  */
 /******************************************************************************/
@@ -143,12 +146,19 @@ void apbMessageHandler(uint8_t function, uint8_t* message, uint8_t messageLength
                 lpfFactors[i] = message[i + 3];
                 enabled[i] = message[i + 5];
             }
+            ENABLE_PH(enabled[PH_CHANNEL]);
+            ENABLE_ORP(enabled[ORP_CHANNEL]);
             apb_sendDefualtResponse();
             break;
         }
         case 2: /* set single channel low pass filter factor */
             lpfFactors[message[3]] = message[4];
             enabled[message[3]] = message [5];
+            if (message[3] == PH_CHANNEL) {
+                ENABLE_PH(enabled[PH_CHANNEL]);
+            } else {
+                ENABLE_ORP(enabled[ORP_CHANNEL]);
+            }
             apb_sendDefualtResponse();
             break;
         case 10: { /* read single channel value */
