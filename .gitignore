@@ -26,3 +26,4 @@ mcc_generated_files/
 funclist
 .directory
 *.inc
+*.csv
