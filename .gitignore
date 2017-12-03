@@ -7,7 +7,6 @@ ActualCosts/
 OldVersions/
 MasterBOM/
 PDF/
-SerialInterface*/
 dist/
 debug/
 build/
@@ -18,7 +17,6 @@ xdist/
 nbproject/
 Makefile
 Settings/
-arch/
 .vscode/
 mcc_generated_files/
 

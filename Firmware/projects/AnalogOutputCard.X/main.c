@@ -38,6 +38,7 @@
 #include <string.h>     /* memcpy */
 #include "mcc_generated_files/mcc.h"
 #include "../../lib/aquaPicBus/aquaPicBus.h"
+#include "../../lib/PIC32MM/nvm/nvm.h"
 
 /******************************************************************************/
 /* Defines                                                                    */
