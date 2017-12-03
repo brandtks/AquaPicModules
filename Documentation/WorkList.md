@@ -30,7 +30,6 @@ Peripherals
 #### Firmware
  * Test on a board
  * Enable/disable channels
- * Add EEPROM emulation in flash to persist each channel's low pass filter factor value and enable state
 #### Hardware
 
 ## Analog Output
@@ -48,7 +47,6 @@ Peripherals
 ## pH/ORP 
 #### Firmware
  * Test on a board
- * Add EEPROM emulation in flash to persist each channel's low pass filter factor value and enable state
 #### Hardware
 
 ## Power

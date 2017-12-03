@@ -74,9 +74,6 @@ int8_t apbLastErrorState;
 void main(void) {
     /* initialize the device */
     SYSTEM_Initialize();
-    /* SYSTEM_Initialize enables the global interrupts but we want to setup a */
-    /* few things before interrupts can occur */
-    INTERRUPT_GlobalDisable();
     
     /* AquaPic Bus initialization */
     if (!apb_init(&apbMessageHandler, 
@@ -87,6 +84,12 @@ void main(void) {
         while (1);
     }
     apbLastErrorState = 0;
+    
+    /* Read saved output types and set relays accordingly */
+    nvm_read(0) ? RELAY0_SetHigh() : RELAY0_SetLow();
+    nvm_read(1) ? RELAY1_SetHigh() : RELAY1_SetLow();
+    nvm_read(2) ? RELAY2_SetHigh() : RELAY2_SetLow();
+    nvm_read(3) ? RELAY3_SetHigh() : RELAY3_SetLow();
     
     /* Start the PWM modules */
     SCCP4_COMPARE_Start();
@@ -112,7 +115,7 @@ void main(void) {
         if (apbError && !apbLastErrorState) {
             GREEN_LED(OFF);
             RED_LED(ON);
-        } else if (apbError && !apbLastErrorState) {
+        } else if (!apbError && apbLastErrorState) {
             RED_LED(OFF);
             GREEN_LED(ON);
         }
@@ -123,20 +126,21 @@ void main(void) {
 void apbMessageHandler(uint8_t function, uint8_t* message, uint8_t messageLength) {
     switch (function) {
         case 2: { /* setup single channel */
+            uint8_t channel = message[3];
             uint8_t type = message[4];
-            switch(message[3]) {
+            nvm_write(channel, type);
+            switch(channel) {
                 case 0:
-                    /* type 255 is PWM output so close relay to bypass filter */
-                    type == 255 ? RELAY0_SetHigh() : RELAY0_SetLow();
+                    type ? RELAY0_SetHigh() : RELAY0_SetLow();
                     break;
                 case 1:
-                    type == 255 ? RELAY1_SetHigh() : RELAY1_SetLow();
+                    type ? RELAY1_SetHigh() : RELAY1_SetLow();
                     break;
                 case 2:
-                    type == 255 ? RELAY2_SetHigh() : RELAY2_SetLow();
+                    type ? RELAY2_SetHigh() : RELAY2_SetLow();
                     break;
                 case 3:
-                    type == 255 ? RELAY3_SetHigh() : RELAY3_SetLow();
+                    type ? RELAY3_SetHigh() : RELAY3_SetLow();
                     break;
                 default:
                     break;

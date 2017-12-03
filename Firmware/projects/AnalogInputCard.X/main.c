@@ -37,6 +37,7 @@
 
 #include "mcc_generated_files/mcc.h"
 #include "../../lib/aquaPicBus/aquaPicBus.h"
+#include "../../lib/PIC32MM/nvm/nvm.h"
 #include "mcp3428/mcp3428.h"
 
 /******************************************************************************/
@@ -79,7 +80,7 @@ uint8_t i;
 void main(void) {
     /* initialize the device */
     SYSTEM_Initialize();
-
+    
     /* AquaPic Bus initialization */
     if (!apb_init(&apbMessageHandler, 
             &putsch,
@@ -91,7 +92,8 @@ void main(void) {
     apbLastErrorState = 0;
     
     for (i = 0; i < NUM_CHANNELS; ++i) {
-        lpfFactors[i] = DEFAULT_LPF_FACTOR;
+        values[i] = 0;
+        lpfFactors[i] = (uint8_t)nvm_read(i);
     }
     
     /* Enable the Global Interrupts */
@@ -119,7 +121,7 @@ void main(void) {
         if (apbError && !apbLastErrorState) {
             GREEN_LED(OFF);
             RED_LED(ON);
-        } else if (apbError && !apbLastErrorState) {
+        } else if (!apbError && apbLastErrorState) {
             RED_LED(OFF);
             GREEN_LED(ON);
         }
@@ -129,15 +131,9 @@ void main(void) {
 
 void apbMessageHandler(uint8_t function, uint8_t* message, uint8_t messageLength) {
     switch (function) {
-        case 1: { /* set all channels low pass filter factors */
-            for (i = 0; i < NUM_CHANNELS; ++i) {
-                lpfFactors[i] = message[i + 3];
-            }
-            apb_sendDefualtResponse();
-            break;
-        }
         case 2: /* set single channel low pass filter factor */
-            lpfFactors[message [3]] = message[4];
+            lpfFactors[message[3]] = message[4];
+            nvm_write(message[3], message[4]);
             apb_sendDefualtResponse();
             break;
         case 10: { /* read single channel value */

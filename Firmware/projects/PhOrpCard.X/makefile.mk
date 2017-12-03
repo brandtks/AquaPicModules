@@ -4,8 +4,8 @@
 include ../../Makefile-defines.mk
 
 MPROC=32MM0064GPM028
-OBJS=$(OBJ_DIR)/PhOrpCard/main.o $(OBJ_DIR)/aquaPicBus/aquaPicBus.o $(OBJ_DIR)/ltc2483/ltc2483.o
-PROJ_DEPS=../../lib/aquaPicBus/aquaPicBus.h ltc2483/ltc2483.h
+OBJS=$(OBJ_DIR)/PhOrpCard/main.o $(OBJ_DIR)/aquaPicBus/aquaPicBus.o $(OBJ_DIR)/ltc2483/ltc2483.o $(OBJ_DIR)/nvm/nvm.o
+PROJ_DEPS=../../lib/aquaPicBus/aquaPicBus.h ltc2483/ltc2483.h ../../lib/PIC32MM/nvm/nvm.h
 
 $(DIST_DIR)/PhOrpCard.hex : $(DIST_DIR)/PhOrpCard.elf
 	$(CC32_HEX) $(DIST_DIR)/PhOrpCard.elf
@@ -29,6 +29,11 @@ $(OBJ_DIR)/ltc2483/ltc2483.o : ltc2483/ltc2483.c ltc2483/ltc2483.h
 	@$(RM) $(OBJ_DIR)/ltc2483
 	@$(MKDIR) $(OBJ_DIR)/ltc2483
 	$(CC32) -g -x c -c -mprocessor=$(MPROC) -O1 -MMD -MF $(OBJ_DIR)/ltc2483/ltc2483.o.d -o $(OBJ_DIR)/ltc2483/ltc2483.o ltc2483/ltc2483.c -DXPRJ_default=default -legacy-libc 
+
+$(OBJ_DIR)/nvm/nvm.o : ../../lib/PIC32MM/nvm/nvm.c ../../lib/PIC32MM/nvm/nvm.h
+	@$(RM) $(OBJ_DIR)/nvm
+	@$(MKDIR) $(OBJ_DIR)/nvm
+	$(CC32) -g -x c -c -mprocessor=$(MPROC) -O1 -MMD -MF $(OBJ_DIR)/nvm/nvm.o.d -o $(OBJ_DIR)/nvm/nvm.o  ../../lib/PIC32MM/nvm/nvm.c -DXPRJ_default=default -legacy-libc 
 
 .PHONY : clean
 clean :

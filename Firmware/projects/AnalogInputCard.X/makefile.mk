@@ -4,8 +4,8 @@
 include ../../Makefile-defines.mk
 
 MPROC=32MM0064GPM028
-OBJS=$(OBJ_DIR)/AnalogInputCard/main.o $(OBJ_DIR)/aquaPicBus/aquaPicBus.o $(OBJ_DIR)/mcp3428/mcp3428.o
-PROJ_DEPS=../../lib/aquaPicBus/aquaPicBus.h mcp3428/mcp3428.h
+OBJS=$(OBJ_DIR)/AnalogInputCard/main.o $(OBJ_DIR)/aquaPicBus/aquaPicBus.o $(OBJ_DIR)/mcp3428/mcp3428.o $(OBJ_DIR)/nvm/nvm.o
+PROJ_DEPS=../../lib/aquaPicBus/aquaPicBus.h mcp3428/mcp3428.h ../../lib/PIC32MM/nvm/nvm.h
 
 $(DIST_DIR)/AnalogInputCard.hex : $(DIST_DIR)/AnalogInputCard.elf
 	$(CC32_HEX) $(DIST_DIR)/AnalogInputCard.elf
@@ -29,6 +29,11 @@ $(OBJ_DIR)/mcp3428/mcp3428.o : mcp3428/mcp3428.c mcp3428/mcp3428.h
 	@$(RM) $(OBJ_DIR)/mcp3428
 	@$(MKDIR) $(OBJ_DIR)/mcp3428
 	$(CC32) -g -x c -c -mprocessor=$(MPROC) -O1 -MMD -MF $(OBJ_DIR)/mcp3428/mcp3428.o.d -o $(OBJ_DIR)/mcp3428/mcp3428.o mcp3428/mcp3428.c -DXPRJ_default=default -legacy-libc 
+
+$(OBJ_DIR)/nvm/nvm.o : ../../lib/PIC32MM/nvm/nvm.c ../../lib/PIC32MM/nvm/nvm.h
+	@$(RM) $(OBJ_DIR)/nvm
+	@$(MKDIR) $(OBJ_DIR)/nvm
+	$(CC32) -g -x c -c -mprocessor=$(MPROC) -O1 -MMD -MF $(OBJ_DIR)/nvm/nvm.o.d -o $(OBJ_DIR)/nvm/nvm.o  ../../lib/PIC32MM/nvm/nvm.c -DXPRJ_default=default -legacy-libc 
 
 .PHONY : clean
 clean :

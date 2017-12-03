@@ -37,6 +37,7 @@
 
 #include "mcc_generated_files/mcc.h"
 #include "../../lib/aquaPicBus/aquaPicBus.h"
+#include "../../lib/PIC32MM/nvm/nvm.h"
 #include "ltc2483/ltc2483.h"
 
 /******************************************************************************/
@@ -84,7 +85,7 @@ struct ltc2483ObjStruct orpLtc2483InstStruct;
 ltc2483Obj orpLtc2483Inst;
 int16_t values[NUM_CHANNELS];
 uint8_t lpfFactors[NUM_CHANNELS];
-uint8_t enabled[NUM_CHANNELS];
+uint8_t enables[NUM_CHANNELS];
 uint8_t i;
 
 void main(void) {
@@ -111,8 +112,17 @@ void main(void) {
     
     for (i = 0; i < NUM_CHANNELS; ++i) {
         values[i] = 0;
-        lpfFactors[i] = DEFAULT_LPF_FACTOR;
-        enabled[i] = 0;
+        uint64_t memory = nvm_read(i);
+        lpfFactors[i] = (memory >> 8) & 0xFF;
+        enables[i] = memory & 0xFF;
+    }
+    
+    if (enables[PH_CHANNEL]) {
+        ENABLE_PH(1);
+    }
+    
+    if (enables[ORP_CHANNEL]) {
+        ENABLE_ORP(1);
     }
     
     /* Enable the Global Interrupts */
@@ -131,7 +141,7 @@ void main(void) {
         if (apbError && !apbLastErrorState) {
             GREEN_LED(OFF);
             RED_LED(ON);
-        } else if (apbError && !apbLastErrorState) {
+        } else if (!apbError && apbLastErrorState) {
             RED_LED(OFF);
             GREEN_LED(ON);
         }
@@ -141,26 +151,25 @@ void main(void) {
 
 void apbMessageHandler(uint8_t function, uint8_t* message, uint8_t messageLength) {
     switch (function) {
-        case 1: { /* set all channels low pass filter factors */
-            for (i = 0; i < NUM_CHANNELS; ++i) {
-                lpfFactors[i] = message[i + 3];
-                enabled[i] = message[i + 5];
+        case 2: { /* set single channel low pass filter factor */
+            uint8_t channel = message[3];
+            uint8_t lpfFactor = message[4];
+            uint8_t enable = message[5];
+            
+            lpfFactors[channel] = lpfFactor;
+            
+            enables[channel] = enable;
+            if (channel == PH_CHANNEL) {
+                ENABLE_PH(enable);
+            } else {
+                ENABLE_ORP(enable);
             }
-            ENABLE_PH(enabled[PH_CHANNEL]);
-            ENABLE_ORP(enabled[ORP_CHANNEL]);
+            
+            nvm_write(channel, (lpfFactor << 8) & enable);
+            
             apb_sendDefualtResponse();
             break;
         }
-        case 2: /* set single channel low pass filter factor */
-            lpfFactors[message[3]] = message[4];
-            enabled[message[3]] = message [5];
-            if (message[3] == PH_CHANNEL) {
-                ENABLE_PH(enabled[PH_CHANNEL]);
-            } else {
-                ENABLE_ORP(enabled[ORP_CHANNEL]);
-            }
-            apb_sendDefualtResponse();
-            break;
         case 10: { /* read single channel value */
             uint8_t channel = message[3];
             
@@ -190,7 +199,7 @@ void TMR1_CallBack() {
     /* AquaPic Bus framing */
     apb_framing();
     
-    if (enabled[PH_CHANNEL]) {
+    if (enables[PH_CHANNEL]) {
         /* pH LTC2483 Polling */
         int16_t result = ltc2483_polling(phLtc2483Inst);
         if (result != -1) {
@@ -199,7 +208,7 @@ void TMR1_CallBack() {
         }
     }
     
-    if (enabled[ORP_CHANNEL]) {
+    if (enables[ORP_CHANNEL]) {
         /* pH LTC2483 Polling */
         int16_t result = ltc2483_polling(orpLtc2483Inst);
         if (result != -1) {
