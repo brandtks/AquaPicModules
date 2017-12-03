@@ -6,8 +6,7 @@ Bugs
 Main Controller Software
 ========================
 ## Worklist 
- * Add programmable LPF constant for AI
- * Implement pH/ORP driver
+ * Add way to change LPF constant for AI
  * Enable/disable channels for AI
  * Refactor ATO to separate module
  * Add ATO scene

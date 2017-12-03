@@ -85,11 +85,12 @@ void main(void) {
     }
     apbLastErrorState = 0;
     
-    /* Read saved output types and set relays accordingly */
-    nvm_read(0) ? RELAY0_SetHigh() : RELAY0_SetLow();
-    nvm_read(1) ? RELAY1_SetHigh() : RELAY1_SetLow();
-    nvm_read(2) ? RELAY2_SetHigh() : RELAY2_SetLow();
-    nvm_read(3) ? RELAY3_SetHigh() : RELAY3_SetLow();
+    /* Read saved output types and set relays accordingly, read returns all */
+    /* 1's if the memory has never been written to */
+    (uint8_t)nvm_read(0) == 0x1234 ? RELAY0_SetHigh() : RELAY0_SetLow();
+    (uint8_t)nvm_read(1) == 0x1234 ? RELAY1_SetHigh() : RELAY1_SetLow();
+    (uint8_t)nvm_read(2) == 0x1234 ? RELAY2_SetHigh() : RELAY2_SetLow();
+    (uint8_t)nvm_read(3) == 0x1234 ? RELAY3_SetHigh() : RELAY3_SetLow();
     
     /* Start the PWM modules */
     SCCP4_COMPARE_Start();
@@ -128,7 +129,9 @@ void apbMessageHandler(uint8_t function, uint8_t* message, uint8_t messageLength
         case 2: { /* setup single channel */
             uint8_t channel = message[3];
             uint8_t type = message[4];
-            nvm_write(channel, type);
+            /* write a specific value to memory so the initialization has */
+            /* a specific value to compare against */
+            nvm_write(channel, type ? 0x1234 : 0);
             switch(channel) {
                 case 0:
                     type ? RELAY0_SetHigh() : RELAY0_SetLow();

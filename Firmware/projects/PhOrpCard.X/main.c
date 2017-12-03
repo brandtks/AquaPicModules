@@ -113,8 +113,11 @@ void main(void) {
     for (i = 0; i < NUM_CHANNELS; ++i) {
         values[i] = 0;
         uint64_t memory = nvm_read(i);
-        lpfFactors[i] = (memory >> 8) & 0xFF;
-        enables[i] = memory & 0xFF;
+        /* If the memory has never been written to it returns all 1's */
+        if (memory != 0xFFFFFFFFFFFFFFFF) {
+            lpfFactors[i] = (memory >> 8) & 0xFF;
+            enables[i] = memory & 0xFF;
+        }
     }
     
     if (enables[PH_CHANNEL]) {
@@ -153,8 +156,8 @@ void apbMessageHandler(uint8_t function, uint8_t* message, uint8_t messageLength
     switch (function) {
         case 2: { /* set single channel low pass filter factor */
             uint8_t channel = message[3];
-            uint8_t lpfFactor = message[4];
-            uint8_t enable = message[5];
+            uint8_t enable = message[4];
+            uint8_t lpfFactor = message[5];
             
             lpfFactors[channel] = lpfFactor;
             

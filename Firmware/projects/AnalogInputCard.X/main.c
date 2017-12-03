@@ -94,6 +94,11 @@ void main(void) {
     for (i = 0; i < NUM_CHANNELS; ++i) {
         values[i] = 0;
         lpfFactors[i] = (uint8_t)nvm_read(i);
+        /* erased memory is all 1's, i.e. a low pass filter factor has never */
+        /* been setup so use the default */
+        if (lpfFactors[i] == 0xFFFF) {
+            lpfFactors[i] = DEFAULT_LPF_FACTOR;
+        }
     }
     
     /* Enable the Global Interrupts */
