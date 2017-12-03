@@ -19,10 +19,11 @@ nbproject/
 Makefile
 Settings/
 arch/
-mcc_generated_files/
 .vscode/
+mcc_generated_files/
 
 *.obj
 funclist
 .directory
 *.inc
+*.csv
