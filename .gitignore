@@ -20,10 +20,10 @@ Makefile
 Settings/
 arch/
 .vscode/
+mcc_generated_files/
 
 *.obj
 funclist
 .directory
 *.inc
 *.csv
-mcc_generated_files/*.c
