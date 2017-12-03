@@ -62,7 +62,7 @@
 /******************************************************************************/
 void apbMessageHandler(uint8_t function, uint8_t* message, uint8_t messageLength);
 void putsch(uint8_t* data, uint8_t length);
-uint16_t getPwmValue(uint8_t channel);
+float getPwmValue(uint8_t channel);
 void setPwmValue(uint8_t channel, float value);
 
 /******************************************************************************/
@@ -144,21 +144,21 @@ void apbMessageHandler(uint8_t function, uint8_t* message, uint8_t messageLength
             break;
         }
         case 10: { /* read single channel value */
-            uint16_t value = getPwmValue(message[3]);
+            float value = getPwmValue(message[3]);
             apb_initResponse();
-            apb_addToResponse(&value, sizeof(uint16_t));
+            apb_addToResponse(&value, sizeof(float));
             apb_sendResponse();
 
             break;
         }
         case 20: { /* read all channels values */
-            uint16_t values[4];
+            float values[4];
             int i;
             for (i = 0; i < 4; ++i) {
                 values[i] = getPwmValue(i);
             }
             apb_initResponse();
-            apb_addToResponse(values, sizeof(uint16_t) * 4);
+            apb_addToResponse(values, sizeof(float) * 4);
             apb_sendResponse();
             break;
         }
@@ -189,20 +189,20 @@ void putsch(uint8_t* data, uint8_t length) {
     UART1_WriteBuffer(data, length);
 }
 
-uint16_t getPwmValue(uint8_t channel) {
-    uint16_t value;
+float getPwmValue(uint8_t channel) {
+    float value;
     switch(channel) {
         case 0:
-            value = CCP4RB;
+            value = (float)CCP4RB / (float)CCP4PR;
             break;
         case 1:
-            value = CCP5RB;
+            value = (float)CCP5RB / (float)CCP5PR;
             break;
         case 2:
-            value = CCP6RB;
+            value = (float)CCP6RB / (float)CCP6PR;
             break;
         case 3:
-            value = CCP7RB;
+            value = (float)CCP7RB / (float)CCP7PR;
             break;
         default:
             break;
@@ -218,19 +218,19 @@ void setPwmValue(uint8_t channel, float value) {
     uint16_t setpoint;
     switch(channel) {
         case 0:
-            setpoint = (uint16_t)((float)CCP4PR * value);
+            setpoint = (uint16_t)((float)CCP4PR * (value / 100.0));
             CCP4RB = setpoint;
             break;
         case 1:
-            setpoint = (uint16_t)((float)CCP5PR * value);
+            setpoint = (uint16_t)((float)CCP5PR * (value / 100.0));
             CCP5RB = setpoint;
             break;
         case 2:
-            setpoint = (uint16_t)((float)CCP6PR * value);
+            setpoint = (uint16_t)((float)CCP6PR * (value / 100.0));
             CCP6RB = setpoint;
             break;
         case 3:
-            setpoint = (uint16_t)((float)CCP7PR * value);
+            setpoint = (uint16_t)((float)CCP7PR * (value / 100.0));
             CCP7RB = setpoint;
             break;
         default:

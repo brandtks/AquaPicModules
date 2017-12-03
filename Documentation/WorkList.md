@@ -35,10 +35,9 @@ Peripherals
 
 ## Analog Output
 #### Firmware
- * Refactor processor to PIC32MM0064GPM028
+ * Test on a board
 #### Hardware
- * Refactor processor to PIC32MM0064GPM028
- * Figure out how to do different output types, ie 0-10 or PWM
+ * Test selectable output prior to manufacturing boards
 
 ## Digital Input
 #### Firmware
@@ -50,9 +49,7 @@ Peripherals
 #### Firmware
  * Test on a board
  * Add EEPROM emulation in flash to persist each channel's low pass filter factor value and enable state
- * _Maybe_ - Add hardware power enable to each channel
 #### Hardware
- * _Maybe_ - Add hardware power enable to each channel
 
 ## Power
 #### Firmware
@@ -64,6 +61,7 @@ Long Range Goals
 ================
  * Look at outlet current of heaters to determine what the setpoint of the heater is currently set at and then also check for stuck heater. 
  * Home server for data logging, and website. Home server will also issues commands to controller.
+ * Pump control card
  * Water change module
  * Dosing Pumps
  * Feeding
