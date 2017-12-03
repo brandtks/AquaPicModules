@@ -1,0 +1,23 @@
+Refs,Value,Footprint,Quantity,MFR,MPN,SPR,SPN
+C7;C3;C13;C8;C9;C14;C17;C18;C16;C15;C20;C2;C4;C1,100nF,Capacitors_SMD:C_0805,14,-,-,-,-
+C5;C11;C6;C12,220nF,Capacitors_SMD:C_0805,4,-,-,-,-
+C19;C10,4u7,Capacitors_SMD:C_0805,2,-,-,-,-
+U3,ST485EC,Housings_SOIC:SOIC-8_3.9x4.9mm_Pitch1.27mm,1,-,-,-,-
+Q2;Q1,AO3407A,Housings_SOT-23_SOT-143_TSOT-6:SOT-23,2,-,-,-,-
+IC1,PIC32MM0064GPM028,Housings_SSOP:SSOP-28_5.3x10.2mm_Pitch0.65mm,1,-,-,-,-
+U4;U5;U6;U7,DG469,Housings_SSOP:TSSOP-8_3x3mm_Pitch0.65mm,4,-,-,-,-
+U1;U2,LM358,Housings_SSOP:TSSOP-8_4.4x3mm_Pitch0.65mm,2,-,-,-,-
+D2;D3,APT2012,LEDs:LED-0805,2,-,-,-,-
+D1,SMTL4-RGY,MyFootPrints:PLCC-4,1,-,-,-,-
+X1,8MHz,MyFootPrints:Resonator_3.2x1.3,1,-,-,-,-
+P3,4x1 2.54,MyFootPrints:Screw_Header_1x4,1,-,-,-,-
+P1,8x1 2.54,MyFootPrints:Screw_Header_1x8,1,-,-,-,-
+P2,Stacked USBA,MyFootPrints:USB-1.1_Stacked,1,-,-,-,-
+P4,6x1 2.54 Pin Header,Pin_Headers:Pin_Header_Straight_1x06_Pitch2.54mm,1,-,-,-,-
+R5;R13;R7;R15,100K,Resistors_SMD:R_0805,4,-,-,-,-
+R6;R1;R2;R14;R10;R9;R8;R3;R4;R16;R12;R11;R25;R28,10K,Resistors_SMD:R_0805,14,-,-,-,-
+R17;R18;R19;R20,150R,Resistors_SMD:R_0805,4,-,-,-,-
+R24;R21,1K,Resistors_SMD:R_0805,2,-,-,-,-
+R32;R36;R31;R35;R22;R26;R29;R33;R23;R27;R30;R34,4K99,Resistors_SMD:R_0805,12,-,-,-,-
+U8,AP2114H,TO_SOT_Packages_SMD:SOT-223,1,-,-,-,-
+Q9;Q5;Q8;Q3;Q6;Q4;Q7,NX7002AK,TO_SOT_Packages_SMD:SOT-23,7,-,-,-,-
