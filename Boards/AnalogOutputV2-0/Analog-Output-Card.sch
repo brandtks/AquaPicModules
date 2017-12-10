@@ -846,14 +846,14 @@ F 3 "~" H 1950 6800 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L CONN_01X08 P1
+L Conn_01x08 P1
 U 1 1 557C01FE
-P 7900 5850
-F 0 "P1" H 7900 6300 50  0000 C CNN
-F 1 "8x1 2.54" V 8000 5850 50  0001 C CNN
-F 2 "MyFootPrints:Screw_Header_1x8" H 7900 5850 60  0001 C CNN
-F 3 "" H 7900 5850 60  0000 C CNN
-	1    7900 5850
+P 7900 5800
+F 0 "P1" H 7900 6200 50  0000 C CNN
+F 1 "1x8 2.54" V 8000 5800 50  0001 C CNN
+F 2 "MyFootPrints:Screw_Header_1x8" H 7900 5800 60  0001 C CNN
+F 3 "" H 7900 5800 60  0000 C CNN
+	1    7900 5800
 	1    0    0    -1  
 $EndComp
 Text Label 7200 5500 0    60   ~ 0
@@ -1135,14 +1135,14 @@ $EndComp
 Text Notes 8200 9100 2    60   ~ 0
 APB Connectors
 $Comp
-L CONN_01X06 P4
+L Conn_01x06 P4
 U 1 1 5A1BA3BF
-P 1350 5000
-F 0 "P4" H 1350 5350 50  0000 C CNN
-F 1 "6x1 2.54 Pin Header" V 1350 5000 50  0001 C CNN
-F 2 "Pin_Headers:Pin_Header_Straight_1x06_Pitch2.54mm" H 1350 5000 60  0001 C CNN
-F 3 "" H 1350 5000 60  0000 C CNN
-	1    1350 5000
+P 1350 4950
+F 0 "P4" H 1350 5250 50  0000 C CNN
+F 1 "2x3 1.27 Pin Header" V 1350 4950 50  0001 C CNN
+F 2 "Pin_Headers:Pin_Header_Straight_1x06_Pitch2.54mm" H 1350 4950 60  0001 C CNN
+F 3 "" H 1350 4950 60  0000 C CNN
+	1    1350 4950
 	-1   0    0    -1  
 $EndComp
 $Comp

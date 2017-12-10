@@ -3,29 +3,28 @@
 #################################
 include ../../Makefile-defines.mk
 
-CHIP=16F1936
-OBJS=$(OBJ_DIR)/DigitalInputCard/DigitalInputCard.p1 $(OBJ_DIR)/uart/uart.p1 $(OBJ_DIR)/aquaPicBus/aquaPicBus.p1
-PROJ_DEPS=../../lib/aquaPicBus/aquaPicBus.h ../../lib/common/common.h ../../lib/led/led.h ../../lib/pins/pins.h ../../lib/PIC16F/uart/uart.h bsp.h
+PROJECT=DigitalInputCard
+MPROC=32MM0064GPM028
+OBJS=$(OBJ_DIR)/$(PROJECT)/main.o $(OBJ_DIR)/aquaPicBus/aquaPicBus.o
+PROJ_DEPS=../../lib/aquaPicBus/aquaPicBus.h
 
-$(DIST_DIR)/DigitalInputCard.hex : $(OBJS)
+$(DIST_DIR)/$(PROJECT).hex : $(DIST_DIR)/$(PROJECT).elf
+	$(CC32_HEX) $(DIST_DIR)/$(PROJECT).elf
+
+$(DIST_DIR)/$(PROJECT).elf : $(OBJS)
 	@$(RM) $(DIST_DIR)
 	@$(MKDIR) $(DIST_DIR)
-	$(CC) --chip=$(CHIP) -Q -G${DIST_DIR}/DigitalInputCard.sym -M${DIST_DIR}/DigitalInputCard.map --double=24 --float=24 --opt=$(OPT) --addrqual=ignore --mode=free -P -N255 --warn=0 --asmlist -DXPRJ_default=default --summary=default,-psect,-class,+mem,-hex,-file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,-download,-stackcall,+clib --output=-mcof,+elf:multilocs "--errformat=%f:%l: error: (%n) %s" "--warnformat=%f:%l: warning: (%n) %s" "--msgformat=%f:%l: advisory: (%n) %s" --memorysummary $(DIST_DIR)/memoryfile.xml -O$(DIST_DIR)/DigitalInputCard.elf $(OBJS)
+	$(CC32) -mprocessor=$(MPROC) -o $(DIST_DIR)/$(PROJECT).elf $(OBJS) libmcc.a -DXPRJ_default=default -legacy-libc -Wl,--defsym=__MPLAB_BUILD=1,--no-code-in-dinit,--no-dinit-in-serial-mem,-Map="$(DIST_DIR)/$(PROJECT).map",--memorysummary,$(DIST_DIR)/memoryfile.xml
 
-$(OBJ_DIR)/DigitalInputCard/DigitalInputCard.p1 : DigitalInputCard.c $(PROJ_DEPS)
-	@$(RM) $(OBJ_DIR)/DigitalInputCard
-	@$(MKDIR) $(OBJ_DIR)/DigitalInputCard
-	$(CC) --pass1 --chip=$(CHIP) -Q --double=24 --float=24 --opt=$(OPT) --addrqual=ignore --mode=$(MODE) -P --warn=$(WARN) --asmlist --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,-download,-stackcall,+clib "--errformat=%f:%l: error: (%n) %s" "--warnformat=%f:%l: warning: (%n) %s" "--msgformat=%f:%l: advisory: (%n) %s" -O$(OBJ_DIR)/DigitalInputCard/DigitalInputCard.p1 DigitalInputCard.c
+$(OBJ_DIR)/$(PROJECT)/main.o : main.c $(PROJ_DEPS)
+	@$(RM) $(OBJ_DIR)/$(PROJECT)
+	@$(MKDIR) $(OBJ_DIR)/$(PROJECT)
+	$(CC32) -g -x c -c -mprocessor=$(MPROC) -O1 -MMD -MF $(OBJ_DIR)/$(PROJECT)/main.o.d -o $(OBJ_DIR)/$(PROJECT)/main.o main.c -DXPRJ_default=default -legacy-libc 
 
-$(OBJ_DIR)/uart/uart.p1 : ../../lib/PIC16F/uart/uart.c ../../lib/PIC16F/uart/uart.h
-	@$(RM) $(OBJ_DIR)/uart
-	@$(MKDIR) $(OBJ_DIR)/uart
-	$(CC) --pass1 --chip=$(CHIP) -Q --double=24 --float=24 --opt=$(OPT) --addrqual=ignore --mode=$(MODE) -P --warn=$(WARN) --asmlist --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,-download,-stackcall,+clib "--errformat=%f:%l: error: (%n) %s" "--warnformat=%f:%l: warning: (%n) %s" "--msgformat=%f:%l: advisory: (%n) %s" -O$(OBJ_DIR)/uart/uart.p1 ../../lib/PIC16F/uart/uart.c
-
-$(OBJ_DIR)/aquaPicBus/aquaPicBus.p1 : ../../lib/aquaPicBus/aquaPicBus.c ../../lib/aquaPicBus/aquaPicBus.h
+$(OBJ_DIR)/aquaPicBus/aquaPicBus.o : ../../lib/aquaPicBus/aquaPicBus.c ../../lib/aquaPicBus/aquaPicBus.h
 	@$(RM) $(OBJ_DIR)/aquaPicBus
 	@$(MKDIR) $(OBJ_DIR)/aquaPicBus
-	$(CC) --pass1 --chip=$(CHIP) -Q --double=24 --float=24 --opt=$(OPT) --addrqual=ignore --mode=$(MODE) -P --warn=$(WARN) --asmlist --runtime=default,+clear,+init,-keep,-no_startup,+osccal,-resetbits,-download,-stackcall,+clib "--errformat=%f:%l: error: (%n) %s" "--warnformat=%f:%l: warning: (%n) %s" "--msgformat=%f:%l: advisory: (%n) %s" -O$(OBJ_DIR)/aquaPicBus/aquaPicBus.p1 ../../lib/aquaPicBus/aquaPicBus.c
+	$(CC32) -g -x c -c -mprocessor=$(MPROC) -O1 -MMD -MF $(OBJ_DIR)/aquaPicBus/aquaPicBus.o.d -o $(OBJ_DIR)/aquaPicBus/aquaPicBus.o ../../lib/aquaPicBus/aquaPicBus.c -DXPRJ_default=default -legacy-libc 
 
 .PHONY : clean
 clean :

@@ -6,8 +6,10 @@ Bugs
 Main Controller Software
 ========================
 ## Worklist 
- * Add way to change LPF constant for AI
- * Enable/disable channels for AI
+ * Add way to change LPF constant for AI and pH/ORP
+ * Enable/disable channels for pH
+ * pH/ORP Scene
+ * pH/ORP calibration
  * Refactor ATO to separate module
  * Add ATO scene
  * RO/DI module
@@ -39,9 +41,8 @@ Peripherals
 
 ## Digital Input
 #### Firmware
- * Refactor processor to PIC32MM0064GPM028
+ * Test on a board
 #### Hardware
- * Refactor processor to PIC32MM0064GPM028
 
 ## pH/ORP 
 #### Firmware
