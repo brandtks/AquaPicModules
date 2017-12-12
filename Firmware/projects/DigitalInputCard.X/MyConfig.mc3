@@ -9,12 +9,12 @@
          <string>class com.microchip.mcc.mcu16.systemManager.clk.Clock</string>
       </entry>
       <entry>
-         <string>WATCHDOG</string>
-         <string>class com.microchip.mcc.mcu16.systemManager.wdt.Wdt</string>
-      </entry>
-      <entry>
          <string>Pin Module</string>
          <string>class com.microchip.mcc.mcu16.pinManager.PinManager</string>
+      </entry>
+      <entry>
+         <string>WATCHDOG</string>
+         <string>class com.microchip.mcc.mcu16.systemManager.wdt.Wdt</string>
       </entry>
       <entry>
          <string>ICD</string>
@@ -25,12 +25,12 @@
          <string>class com.microchip.mcc.mcu16.interruptManager_PIC32MM.InterruptManager_PIC32MM</string>
       </entry>
       <entry>
-         <string>TMR1</string>
-         <string>class com.microchip.mcc.mcu16.modules.tmr_classa_pb.TMR</string>
-      </entry>
-      <entry>
          <string>UART1</string>
          <string>class com.microchip.mcc.mcu16.modules.uart_irda_upb.UART</string>
+      </entry>
+      <entry>
+         <string>TMR1</string>
+         <string>class com.microchip.mcc.mcu16.modules.tmr_classa_pb.TMR</string>
       </entry>
    </usedClasses>
    <usedLibraries class="java.util.ArrayList">
@@ -1639,7 +1639,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.RegisterKey" moduleName="TMR1" registerAlias="TCON"/>
-         <value>32768</value>
+         <value>0</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.OptionKey" moduleName="Pin Module" registerAlias="CNEN1B" settingAlias="CNIE1B1" alias="enabled"/>
@@ -1775,7 +1775,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="TMR1" registerAlias="TCON" settingAlias="ON"/>
-         <value>enabled</value>
+         <value>disabled</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.OptionKey" moduleName="INTERNAL OSCILLATOR" registerAlias="RCON" settingAlias="IDLE" alias="enabled"/>
@@ -5852,12 +5852,12 @@
          <hash>0c169a31fd5928989f60e24214c39be4dc6e5a9a1c5de1e74ca9c9a5300bdaa0</hash>
       </entry>
       <entry>
-         <file>mcc_generated_files/tmr1.c</file>
-         <hash>6e4770c645db6d069773bff5913aa03809630bb2d08e0a9bf27db8cc12760d0a</hash>
-      </entry>
-      <entry>
          <file>mcc_generated_files/uart1.h</file>
          <hash>332ec5327a909410a1a3b9cdaeb4a29e52230534313636d389c1d44f7ec2c2b1</hash>
+      </entry>
+      <entry>
+         <file>mcc_generated_files/tmr1.c</file>
+         <hash>024fff5f3f7058f12b898869e7998d6ce2d351fc4624f837ee5aa86f8e2a9966</hash>
       </entry>
       <entry>
          <file>mcc_generated_files/exceptions.h</file>
@@ -5869,11 +5869,11 @@
       </entry>
       <entry>
          <file>mcc_generated_files/mcc.h</file>
-         <hash>caca8ae0ba8f7bf823ce88679ca2947c3512d1a345eca952de810c6fe51a0459</hash>
+         <hash>1b1133a25593ee1c3c01bb3dc08595e43b9d68c7a84eb94933275690484425f0</hash>
       </entry>
       <entry>
          <file>mcc_generated_files/interrupt_manager.c</file>
-         <hash>d96e1eaeebece9912f200b1b2bc9b6e3663864dd7646460b63b40024d075202f</hash>
+         <hash>bdff0adb612aff026448a083dc68b8432e04e6b724485cbf820570cc755de0f0</hash>
       </entry>
       <entry>
          <file>mcc_generated_files/uart1.c</file>
@@ -5881,7 +5881,7 @@
       </entry>
       <entry>
          <file>mcc_generated_files/mcc.c</file>
-         <hash>d5ecc8a02e6f384e468d74b1134acdfe575707104fb7717d077cd4e2fcafe2ea</hash>
+         <hash>626b146ffb6063eef69e0000b3b0e5b13da7cc05da5e39f5fa4297649c17898b</hash>
       </entry>
       <entry>
          <file>mcc_generated_files/pin_manager.c</file>

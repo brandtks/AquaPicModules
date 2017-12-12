@@ -48,14 +48,14 @@
 #include "pin_manager.h"
 #include <stdint.h>
 #include <stdbool.h>
-#include "uart1.h"
-#include "sccp7_compare.h"
-#include "interrupt_manager.h"
-#include "exceptions.h"
-#include "sccp6_compare.h"
-#include "sccp5_compare.h"
 #include "sccp4_compare.h"
 #include "tmr1.h"
+#include "uart1.h"
+#include "sccp7_compare.h"
+#include "sccp6_compare.h"
+#include "sccp5_compare.h"
+#include "interrupt_manager.h"
+#include "exceptions.h"
 
 #define _XTAL_FREQ  24000000UL
 

@@ -1,9 +1,0 @@
-README
-======
-Firmware for Power Version 5.0
-
-### Status
-**IMPORTANT**: Work in progress. Probably untested and very alpha quality.
-
-### Website
- * [HackADay Build Log](https://hackaday.io/project/1436-aquapic-aquarium-controller)
