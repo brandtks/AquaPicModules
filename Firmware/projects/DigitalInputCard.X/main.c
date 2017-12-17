@@ -49,7 +49,7 @@
 #define OFF                 0
 
 /* AquaPic Bus Settings */
-#define APB_ADDRESS         0x40
+#define APB_ADDRESS         0x30
 #define FRAMING_TIMER       1   /* Framing called from timer 1 at 1mSec */
 #define ERROR_TIME          10  /* 10 sec alarm   */
 
