@@ -171,8 +171,8 @@ void TMR1_CallBack() {
     int16_t result = mcp3428_polling();;
     if (result != -1) {
         uint8_t channel = mcp3428_getChannel();
-        values[channel] = (lpfFactors[channel] * values[channel] + result);
-        values[channel] /= (lpfFactors[channel] + 1);
+        values[channel] = lpfFactors[channel] * values[channel] + result;
+        values[channel] /= lpfFactors[channel] + 1;
         channel = channel++ % NUM_CHANNELS;
         mcp3428_setChannelAndStartConversion(channel);
     }

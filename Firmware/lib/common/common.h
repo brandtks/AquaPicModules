@@ -40,11 +40,11 @@
 #define assignFlagStateMask(word, mask, b)  b ? (word |= mask) : (word &= ~mask)
 #define setFlagMask(word, mask)     word |= mask
 #define resetFlagMask(word, mask)   word &= ~mask
-#define testFlagMask(word, mask)    (word & mask) ? -1 : 0
+#define testFlagMask(word, mask)    (word & mask) ? 1 : 0
 
 #define assignFlagStateBit(word, bit, b)    b ? (word |= (0x01 << bit)) : (word &= ~(0x01 << bit))
 #define setFlagBit(word, bit)       word |= (0x01 << bit)
 #define resetFlagBit(word, bit)     word &= ~(0x01 << bit)
-#define testFlagBit(word, bit)      (word & (0x01 << bit)) ? -1 : 0
+#define testFlagBit(word, bit)      (word & (0x01 << bit)) ? 1 : 0
 
 #endif  /* COMMON_H */

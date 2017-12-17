@@ -6,7 +6,7 @@
  * Created 2017 Skyler Brandt
  *
  * Description:
- *  Firmware for the analog input card
+ *  Firmware for the pH ORP card
  * 
  * Device:
  *  PIC32MM0064GPM028
@@ -203,8 +203,8 @@ void TMR1_CallBack() {
         /* pH LTC2483 Polling */
         int16_t result = ltc2483_polling(phLtc2483Inst);
         if (result != -1) {
-            values[PH_CHANNEL] = (lpfFactors[PH_CHANNEL] * values[PH_CHANNEL] + result);
-            values[PH_CHANNEL] /= (lpfFactors[PH_CHANNEL] + 1);
+            values[PH_CHANNEL] = lpfFactors[PH_CHANNEL] * values[PH_CHANNEL] + result;
+            values[PH_CHANNEL] /= lpfFactors[PH_CHANNEL] + 1;
         }
     }
     
@@ -212,8 +212,8 @@ void TMR1_CallBack() {
         /* pH LTC2483 Polling */
         int16_t result = ltc2483_polling(orpLtc2483Inst);
         if (result != -1) {
-            values[ORP_CHANNEL] = (lpfFactors[ORP_CHANNEL] * values[ORP_CHANNEL] + result);
-            values[ORP_CHANNEL] /= (lpfFactors[ORP_CHANNEL] + 1);
+            values[ORP_CHANNEL] = lpfFactors[ORP_CHANNEL] * values[ORP_CHANNEL] + result;
+            values[ORP_CHANNEL] /= lpfFactors[ORP_CHANNEL] + 1;
         }
     }
 }

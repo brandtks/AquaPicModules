@@ -84,10 +84,10 @@ void main(void) {
     
     /* Read saved output types and set relays accordingly, read returns all */
     /* 1's if the memory has never been written to */
-    (uint8_t)nvm_read(0) == 0x1234 ? RELAY0_SetHigh() : RELAY0_SetLow();
-    (uint8_t)nvm_read(1) == 0x1234 ? RELAY1_SetHigh() : RELAY1_SetLow();
-    (uint8_t)nvm_read(2) == 0x1234 ? RELAY2_SetHigh() : RELAY2_SetLow();
-    (uint8_t)nvm_read(3) == 0x1234 ? RELAY3_SetHigh() : RELAY3_SetLow();
+    (uint16_t)nvm_read(0) == 0x1234 ? RELAY0_SetHigh() : RELAY0_SetLow();
+    (uint16_t)nvm_read(1) == 0x1234 ? RELAY1_SetHigh() : RELAY1_SetLow();
+    (uint16_t)nvm_read(2) == 0x1234 ? RELAY2_SetHigh() : RELAY2_SetLow();
+    (uint16_t)nvm_read(3) == 0x1234 ? RELAY3_SetHigh() : RELAY3_SetLow();
     
     /* Start the PWM modules */
     SCCP4_COMPARE_Start();
