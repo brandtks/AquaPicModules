@@ -599,11 +599,11 @@ MicroController\n
 Text Label 4200 6700 2    60   ~ 0
 RX_LV
 Text Label 4200 9300 2    60   ~ 0
-LED_R
+LED_Y
 Text Label 4200 9400 2    60   ~ 0
 LED_G
 Text Label 4200 9500 2    60   ~ 0
-LED_Y
+LED_R
 $Comp
 L TRI-LED D17
 U 1 1 5A2F3C75
@@ -1520,37 +1520,37 @@ ZERO_CROSS
 Text Label 4400 9600 2    60   ~ 0
 AC_AVAIL
 Text Label 4200 7100 2    60   ~ 0
-RELAY_4
+RELAY_3
 Text Label 4200 7800 2    60   ~ 0
 RELAY_1
 Text Label 4200 6600 2    60   ~ 0
-RELAY_3
+RELAY_8
 Text Label 4200 6800 2    60   ~ 0
 RELAY_2
 Text Label 4200 8000 2    60   ~ 0
-RELAY_5
-Text Label 4200 8300 2    60   ~ 0
-RELAY_8
-Text Label 4200 8100 2    60   ~ 0
 RELAY_7
-Text Label 4200 9800 2    60   ~ 0
+Text Label 4200 8300 2    60   ~ 0
+RELAY_5
+Text Label 4200 8100 2    60   ~ 0
 RELAY_6
+Text Label 4200 9800 2    60   ~ 0
+RELAY_4
 Text Label 4400 7500 2    60   ~ 0
 CURRENT_2
 Wire Wire Line
 	3800 7700 4400 7700
 Text Label 4400 7700 2    60   ~ 0
-CURRENT_3
-Text Label 4400 7400 2    60   ~ 0
-CURRENT_4
-Text Label 4400 9000 2    60   ~ 0
-CURRENT_5
-Text Label 4400 6500 2    60   ~ 0
-CURRENT_6
-Text Label 4400 9100 2    60   ~ 0
-CURRENT_7
-Text Label 4400 6400 2    60   ~ 0
 CURRENT_8
+Text Label 4400 7400 2    60   ~ 0
+CURRENT_3
+Text Label 4400 9000 2    60   ~ 0
+CURRENT_7
+Text Label 4400 6500 2    60   ~ 0
+CURRENT_4
+Text Label 4400 9100 2    60   ~ 0
+CURRENT_6
+Text Label 4400 6400 2    60   ~ 0
+CURRENT_5
 NoConn ~ 3800 6900
 NoConn ~ 3800 7000
 NoConn ~ 3800 9200
@@ -3217,4 +3217,9 @@ Wire Wire Line
 	4200 6600 3800 6600
 Wire Wire Line
 	4200 7800 3800 7800
+NoConn ~ 3800 8400
+NoConn ~ 3800 8500
+NoConn ~ 3800 8600
+NoConn ~ 3800 8700
+NoConn ~ 3800 8800
 $EndSCHEMATC

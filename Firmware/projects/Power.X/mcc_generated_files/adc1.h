@@ -76,14 +76,14 @@
  */
 typedef enum 
 {
-    ADC1_CURRENT_1 =  0x0,
-    ADC1_CURRENT_2 =  0x1,
+    ADC1_CURRENT_5 =  0x0,
+    ADC1_CURRENT_4 =  0x1,
     ADC1_CURRENT_3 =  0x2,
-    ADC1_CURRENT_4 =  0x3,
-    ADC1_CURRENT_5 =  0x4,
-    ADC1_CURRENT_6 =  0xB,
+    ADC1_CURRENT_2 =  0x3,
+    ADC1_CURRENT_1 =  0x4,
+    ADC1_CURRENT_8 =  0xB,
     ADC1_CURRENT_7 =  0xC,
-    ADC1_CURRENT_8 =  0xD,
+    ADC1_CURRENT_6 =  0xD,
     ADC1_CHANNEL_VDD_CORE =  0x1B,
     ADC1_CHANNEL_VBG =  0x1C,
     ADC1_CHANNEL_AVSS =  0x1D,

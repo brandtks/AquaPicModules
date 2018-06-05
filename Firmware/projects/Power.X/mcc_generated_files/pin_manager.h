@@ -15,7 +15,7 @@
   @Description:
     This source file provides implementations for MPLAB(c) Code Configurator interrupts.
     Generation Information :
-        Product Revision  :  MPLAB(c) Code Configurator - 4.26
+        Product Revision  :  MPLAB(c) Code Configurator - 4.26.2
         Device            :  PIC32MM0064GPM048
     The generated drivers are tested against the following:
         Compiler          :  XC32 1.42
@@ -72,11 +72,11 @@
   @Example
     <code>
     // Set RA0 high (1)
-    CURRENT_1_SetHigh();
+    CURRENT_5_SetHigh();
     </code>
 
 */
-#define CURRENT_1_SetHigh()          ( LATASET = (1 << 0) )
+#define CURRENT_5_SetHigh()          ( LATASET = (1 << 0) )
 /**
   @Summary
     Sets the GPIO pin, RA0, low using LATAbits.LATA0.
@@ -96,11 +96,11 @@
   @Example
     <code>
     // Set RA0 low (0)
-    CURRENT_1_SetLow();
+    CURRENT_5_SetLow();
     </code>
 
 */
-#define CURRENT_1_SetLow()           ( LATACLR = (1 << 0) )
+#define CURRENT_5_SetLow()           ( LATACLR = (1 << 0) )
 /**
   @Summary
     Toggles the GPIO pin, RA0, using LATAbits.LATA0.
@@ -120,11 +120,11 @@
   @Example
     <code>
     // Toggle RA0
-    CURRENT_1_Toggle();
+    CURRENT_5_Toggle();
     </code>
 
 */
-#define CURRENT_1_Toggle()           ( LATAINV = (1 << 0) )
+#define CURRENT_5_Toggle()           ( LATAINV = (1 << 0) )
 /**
   @Summary
     Reads the value of the GPIO pin, RA0.
@@ -146,11 +146,11 @@
     uint16_t portValue;
 
     // Read RA0
-    postValue = CURRENT_1_GetValue();
+    postValue = CURRENT_5_GetValue();
     </code>
 
 */
-#define CURRENT_1_GetValue()         PORTAbits.RA0
+#define CURRENT_5_GetValue()         PORTAbits.RA0
 /**
   @Summary
     Configures the GPIO pin, RA0, as an input.
@@ -170,11 +170,11 @@
   @Example
     <code>
     // Sets the RA0 as an input
-    CURRENT_1_SetDigitalInput();
+    CURRENT_5_SetDigitalInput();
     </code>
 
 */
-#define CURRENT_1_SetDigitalInput()   ( TRISASET = (1 << 0) )
+#define CURRENT_5_SetDigitalInput()   ( TRISASET = (1 << 0) )
 /**
   @Summary
     Configures the GPIO pin, RA0, as an output.
@@ -194,11 +194,11 @@
   @Example
     <code>
     // Sets the RA0 as an output
-    CURRENT_1_SetDigitalOutput();
+    CURRENT_5_SetDigitalOutput();
     </code>
 
 */
-#define CURRENT_1_SetDigitalOutput()   ( TRISACLR = (1 << 0) )
+#define CURRENT_5_SetDigitalOutput()   ( TRISACLR = (1 << 0) )
 /**
   @Summary
     Sets the GPIO pin, RA1, high using LATAbits.LATA1.
@@ -218,11 +218,11 @@
   @Example
     <code>
     // Set RA1 high (1)
-    CURRENT_2_SetHigh();
+    CURRENT_4_SetHigh();
     </code>
 
 */
-#define CURRENT_2_SetHigh()          ( LATASET = (1 << 1) )
+#define CURRENT_4_SetHigh()          ( LATASET = (1 << 1) )
 /**
   @Summary
     Sets the GPIO pin, RA1, low using LATAbits.LATA1.
@@ -242,11 +242,11 @@
   @Example
     <code>
     // Set RA1 low (0)
-    CURRENT_2_SetLow();
+    CURRENT_4_SetLow();
     </code>
 
 */
-#define CURRENT_2_SetLow()           ( LATACLR = (1 << 1) )
+#define CURRENT_4_SetLow()           ( LATACLR = (1 << 1) )
 /**
   @Summary
     Toggles the GPIO pin, RA1, using LATAbits.LATA1.
@@ -266,11 +266,11 @@
   @Example
     <code>
     // Toggle RA1
-    CURRENT_2_Toggle();
+    CURRENT_4_Toggle();
     </code>
 
 */
-#define CURRENT_2_Toggle()           ( LATAINV = (1 << 1) )
+#define CURRENT_4_Toggle()           ( LATAINV = (1 << 1) )
 /**
   @Summary
     Reads the value of the GPIO pin, RA1.
@@ -292,11 +292,11 @@
     uint16_t portValue;
 
     // Read RA1
-    postValue = CURRENT_2_GetValue();
+    postValue = CURRENT_4_GetValue();
     </code>
 
 */
-#define CURRENT_2_GetValue()         PORTAbits.RA1
+#define CURRENT_4_GetValue()         PORTAbits.RA1
 /**
   @Summary
     Configures the GPIO pin, RA1, as an input.
@@ -316,11 +316,11 @@
   @Example
     <code>
     // Sets the RA1 as an input
-    CURRENT_2_SetDigitalInput();
+    CURRENT_4_SetDigitalInput();
     </code>
 
 */
-#define CURRENT_2_SetDigitalInput()   ( TRISASET = (1 << 1) )
+#define CURRENT_4_SetDigitalInput()   ( TRISASET = (1 << 1) )
 /**
   @Summary
     Configures the GPIO pin, RA1, as an output.
@@ -340,11 +340,11 @@
   @Example
     <code>
     // Sets the RA1 as an output
-    CURRENT_2_SetDigitalOutput();
+    CURRENT_4_SetDigitalOutput();
     </code>
 
 */
-#define CURRENT_2_SetDigitalOutput()   ( TRISACLR = (1 << 1) )
+#define CURRENT_4_SetDigitalOutput()   ( TRISACLR = (1 << 1) )
 /**
   @Summary
     Sets the GPIO pin, RA10, high using LATAbits.LATA10.
@@ -364,11 +364,11 @@
   @Example
     <code>
     // Set RA10 high (1)
-    RELAY_4_SetHigh();
+    RELAY_3_SetHigh();
     </code>
 
 */
-#define RELAY_4_SetHigh()          ( LATASET = (1 << 10) )
+#define RELAY_3_SetHigh()          ( LATASET = (1 << 10) )
 /**
   @Summary
     Sets the GPIO pin, RA10, low using LATAbits.LATA10.
@@ -388,11 +388,11 @@
   @Example
     <code>
     // Set RA10 low (0)
-    RELAY_4_SetLow();
+    RELAY_3_SetLow();
     </code>
 
 */
-#define RELAY_4_SetLow()           ( LATACLR = (1 << 10) )
+#define RELAY_3_SetLow()           ( LATACLR = (1 << 10) )
 /**
   @Summary
     Toggles the GPIO pin, RA10, using LATAbits.LATA10.
@@ -412,11 +412,11 @@
   @Example
     <code>
     // Toggle RA10
-    RELAY_4_Toggle();
+    RELAY_3_Toggle();
     </code>
 
 */
-#define RELAY_4_Toggle()           ( LATAINV = (1 << 10) )
+#define RELAY_3_Toggle()           ( LATAINV = (1 << 10) )
 /**
   @Summary
     Reads the value of the GPIO pin, RA10.
@@ -438,11 +438,11 @@
     uint16_t portValue;
 
     // Read RA10
-    postValue = RELAY_4_GetValue();
+    postValue = RELAY_3_GetValue();
     </code>
 
 */
-#define RELAY_4_GetValue()         PORTAbits.RA10
+#define RELAY_3_GetValue()         PORTAbits.RA10
 /**
   @Summary
     Configures the GPIO pin, RA10, as an input.
@@ -462,11 +462,11 @@
   @Example
     <code>
     // Sets the RA10 as an input
-    RELAY_4_SetDigitalInput();
+    RELAY_3_SetDigitalInput();
     </code>
 
 */
-#define RELAY_4_SetDigitalInput()   ( TRISASET = (1 << 10) )
+#define RELAY_3_SetDigitalInput()   ( TRISASET = (1 << 10) )
 /**
   @Summary
     Configures the GPIO pin, RA10, as an output.
@@ -486,20 +486,20 @@
   @Example
     <code>
     // Sets the RA10 as an output
-    RELAY_4_SetDigitalOutput();
+    RELAY_3_SetDigitalOutput();
     </code>
 
 */
-#define RELAY_4_SetDigitalOutput()   ( TRISACLR = (1 << 10) )
+#define RELAY_3_SetDigitalOutput()   ( TRISACLR = (1 << 10) )
 /**
   @Summary
-    Sets the GPIO pin, RA15, high using LATAbits.LATA15.
+    Sets the GPIO pin, RA4, high using LATAbits.LATA4.
 
   @Description
-    Sets the GPIO pin, RA15, high using LATAbits.LATA15.
+    Sets the GPIO pin, RA4, high using LATAbits.LATA4.
 
   @Preconditions
-    The RA15 must be set to an output.
+    The RA4 must be set to an output.
 
   @Returns
     None.
@@ -509,21 +509,21 @@
 
   @Example
     <code>
-    // Set RA15 high (1)
+    // Set RA4 high (1)
     RELAY_8_SetHigh();
     </code>
 
 */
-#define RELAY_8_SetHigh()          ( LATASET = (1 << 15) )
+#define RELAY_8_SetHigh()          ( LATASET = (1 << 4) )
 /**
   @Summary
-    Sets the GPIO pin, RA15, low using LATAbits.LATA15.
+    Sets the GPIO pin, RA4, low using LATAbits.LATA4.
 
   @Description
-    Sets the GPIO pin, RA15, low using LATAbits.LATA15.
+    Sets the GPIO pin, RA4, low using LATAbits.LATA4.
 
   @Preconditions
-    The RA15 must be set to an output.
+    The RA4 must be set to an output.
 
   @Returns
     None.
@@ -533,21 +533,21 @@
 
   @Example
     <code>
-    // Set RA15 low (0)
+    // Set RA4 low (0)
     RELAY_8_SetLow();
     </code>
 
 */
-#define RELAY_8_SetLow()           ( LATACLR = (1 << 15) )
+#define RELAY_8_SetLow()           ( LATACLR = (1 << 4) )
 /**
   @Summary
-    Toggles the GPIO pin, RA15, using LATAbits.LATA15.
+    Toggles the GPIO pin, RA4, using LATAbits.LATA4.
 
   @Description
-    Toggles the GPIO pin, RA15, using LATAbits.LATA15.
+    Toggles the GPIO pin, RA4, using LATAbits.LATA4.
 
   @Preconditions
-    The RA15 must be set to an output.
+    The RA4 must be set to an output.
 
   @Returns
     None.
@@ -557,18 +557,18 @@
 
   @Example
     <code>
-    // Toggle RA15
+    // Toggle RA4
     RELAY_8_Toggle();
     </code>
 
 */
-#define RELAY_8_Toggle()           ( LATAINV = (1 << 15) )
+#define RELAY_8_Toggle()           ( LATAINV = (1 << 4) )
 /**
   @Summary
-    Reads the value of the GPIO pin, RA15.
+    Reads the value of the GPIO pin, RA4.
 
   @Description
-    Reads the value of the GPIO pin, RA15.
+    Reads the value of the GPIO pin, RA4.
 
   @Preconditions
     None.
@@ -583,18 +583,18 @@
     <code>
     uint16_t portValue;
 
-    // Read RA15
+    // Read RA4
     postValue = RELAY_8_GetValue();
     </code>
 
 */
-#define RELAY_8_GetValue()         PORTAbits.RA15
+#define RELAY_8_GetValue()         PORTAbits.RA4
 /**
   @Summary
-    Configures the GPIO pin, RA15, as an input.
+    Configures the GPIO pin, RA4, as an input.
 
   @Description
-    Configures the GPIO pin, RA15, as an input.
+    Configures the GPIO pin, RA4, as an input.
 
   @Preconditions
     None.
@@ -607,18 +607,18 @@
 
   @Example
     <code>
-    // Sets the RA15 as an input
+    // Sets the RA4 as an input
     RELAY_8_SetDigitalInput();
     </code>
 
 */
-#define RELAY_8_SetDigitalInput()   ( TRISASET = (1 << 15) )
+#define RELAY_8_SetDigitalInput()   ( TRISASET = (1 << 4) )
 /**
   @Summary
-    Configures the GPIO pin, RA15, as an output.
+    Configures the GPIO pin, RA4, as an output.
 
   @Description
-    Configures the GPIO pin, RA15, as an output.
+    Configures the GPIO pin, RA4, as an output.
 
   @Preconditions
     None.
@@ -631,12 +631,12 @@
 
   @Example
     <code>
-    // Sets the RA15 as an output
+    // Sets the RA4 as an output
     RELAY_8_SetDigitalOutput();
     </code>
 
 */
-#define RELAY_8_SetDigitalOutput()   ( TRISACLR = (1 << 15) )
+#define RELAY_8_SetDigitalOutput()   ( TRISACLR = (1 << 4) )
 /**
   @Summary
     Sets the GPIO pin, RA7, high using LATAbits.LATA7.
@@ -656,11 +656,11 @@
   @Example
     <code>
     // Set RA7 high (1)
-    RELAY_3_SetHigh();
+    RELAY_2_SetHigh();
     </code>
 
 */
-#define RELAY_3_SetHigh()          ( LATASET = (1 << 7) )
+#define RELAY_2_SetHigh()          ( LATASET = (1 << 7) )
 /**
   @Summary
     Sets the GPIO pin, RA7, low using LATAbits.LATA7.
@@ -680,11 +680,11 @@
   @Example
     <code>
     // Set RA7 low (0)
-    RELAY_3_SetLow();
+    RELAY_2_SetLow();
     </code>
 
 */
-#define RELAY_3_SetLow()           ( LATACLR = (1 << 7) )
+#define RELAY_2_SetLow()           ( LATACLR = (1 << 7) )
 /**
   @Summary
     Toggles the GPIO pin, RA7, using LATAbits.LATA7.
@@ -704,11 +704,11 @@
   @Example
     <code>
     // Toggle RA7
-    RELAY_3_Toggle();
+    RELAY_2_Toggle();
     </code>
 
 */
-#define RELAY_3_Toggle()           ( LATAINV = (1 << 7) )
+#define RELAY_2_Toggle()           ( LATAINV = (1 << 7) )
 /**
   @Summary
     Reads the value of the GPIO pin, RA7.
@@ -730,11 +730,11 @@
     uint16_t portValue;
 
     // Read RA7
-    postValue = RELAY_3_GetValue();
+    postValue = RELAY_2_GetValue();
     </code>
 
 */
-#define RELAY_3_GetValue()         PORTAbits.RA7
+#define RELAY_2_GetValue()         PORTAbits.RA7
 /**
   @Summary
     Configures the GPIO pin, RA7, as an input.
@@ -754,11 +754,11 @@
   @Example
     <code>
     // Sets the RA7 as an input
-    RELAY_3_SetDigitalInput();
+    RELAY_2_SetDigitalInput();
     </code>
 
 */
-#define RELAY_3_SetDigitalInput()   ( TRISASET = (1 << 7) )
+#define RELAY_2_SetDigitalInput()   ( TRISASET = (1 << 7) )
 /**
   @Summary
     Configures the GPIO pin, RA7, as an output.
@@ -778,11 +778,11 @@
   @Example
     <code>
     // Sets the RA7 as an output
-    RELAY_3_SetDigitalOutput();
+    RELAY_2_SetDigitalOutput();
     </code>
 
 */
-#define RELAY_3_SetDigitalOutput()   ( TRISACLR = (1 << 7) )
+#define RELAY_2_SetDigitalOutput()   ( TRISACLR = (1 << 7) )
 /**
   @Summary
     Sets the GPIO pin, RB0, high using LATBbits.LATB0.
@@ -948,11 +948,11 @@
   @Example
     <code>
     // Set RB1 high (1)
-    CURRENT_4_SetHigh();
+    CURRENT_2_SetHigh();
     </code>
 
 */
-#define CURRENT_4_SetHigh()          ( LATBSET = (1 << 1) )
+#define CURRENT_2_SetHigh()          ( LATBSET = (1 << 1) )
 /**
   @Summary
     Sets the GPIO pin, RB1, low using LATBbits.LATB1.
@@ -972,11 +972,11 @@
   @Example
     <code>
     // Set RB1 low (0)
-    CURRENT_4_SetLow();
+    CURRENT_2_SetLow();
     </code>
 
 */
-#define CURRENT_4_SetLow()           ( LATBCLR = (1 << 1) )
+#define CURRENT_2_SetLow()           ( LATBCLR = (1 << 1) )
 /**
   @Summary
     Toggles the GPIO pin, RB1, using LATBbits.LATB1.
@@ -996,11 +996,11 @@
   @Example
     <code>
     // Toggle RB1
-    CURRENT_4_Toggle();
+    CURRENT_2_Toggle();
     </code>
 
 */
-#define CURRENT_4_Toggle()           ( LATBINV = (1 << 1) )
+#define CURRENT_2_Toggle()           ( LATBINV = (1 << 1) )
 /**
   @Summary
     Reads the value of the GPIO pin, RB1.
@@ -1022,11 +1022,11 @@
     uint16_t portValue;
 
     // Read RB1
-    postValue = CURRENT_4_GetValue();
+    postValue = CURRENT_2_GetValue();
     </code>
 
 */
-#define CURRENT_4_GetValue()         PORTBbits.RB1
+#define CURRENT_2_GetValue()         PORTBbits.RB1
 /**
   @Summary
     Configures the GPIO pin, RB1, as an input.
@@ -1046,11 +1046,11 @@
   @Example
     <code>
     // Sets the RB1 as an input
-    CURRENT_4_SetDigitalInput();
+    CURRENT_2_SetDigitalInput();
     </code>
 
 */
-#define CURRENT_4_SetDigitalInput()   ( TRISBSET = (1 << 1) )
+#define CURRENT_2_SetDigitalInput()   ( TRISBSET = (1 << 1) )
 /**
   @Summary
     Configures the GPIO pin, RB1, as an output.
@@ -1070,741 +1070,11 @@
   @Example
     <code>
     // Sets the RB1 as an output
-    CURRENT_4_SetDigitalOutput();
+    CURRENT_2_SetDigitalOutput();
     </code>
 
 */
-#define CURRENT_4_SetDigitalOutput()   ( TRISBCLR = (1 << 1) )
-/**
-  @Summary
-    Sets the GPIO pin, RB10, high using LATBbits.LATB10.
-
-  @Description
-    Sets the GPIO pin, RB10, high using LATBbits.LATB10.
-
-  @Preconditions
-    The RB10 must be set to an output.
-
-  @Returns
-    None.
-
-  @Param
-    None.
-
-  @Example
-    <code>
-    // Set RB10 high (1)
-    RELAY_7_SetHigh();
-    </code>
-
-*/
-#define RELAY_7_SetHigh()          ( LATBSET = (1 << 10) )
-/**
-  @Summary
-    Sets the GPIO pin, RB10, low using LATBbits.LATB10.
-
-  @Description
-    Sets the GPIO pin, RB10, low using LATBbits.LATB10.
-
-  @Preconditions
-    The RB10 must be set to an output.
-
-  @Returns
-    None.
-
-  @Param
-    None.
-
-  @Example
-    <code>
-    // Set RB10 low (0)
-    RELAY_7_SetLow();
-    </code>
-
-*/
-#define RELAY_7_SetLow()           ( LATBCLR = (1 << 10) )
-/**
-  @Summary
-    Toggles the GPIO pin, RB10, using LATBbits.LATB10.
-
-  @Description
-    Toggles the GPIO pin, RB10, using LATBbits.LATB10.
-
-  @Preconditions
-    The RB10 must be set to an output.
-
-  @Returns
-    None.
-
-  @Param
-    None.
-
-  @Example
-    <code>
-    // Toggle RB10
-    RELAY_7_Toggle();
-    </code>
-
-*/
-#define RELAY_7_Toggle()           ( LATBINV = (1 << 10) )
-/**
-  @Summary
-    Reads the value of the GPIO pin, RB10.
-
-  @Description
-    Reads the value of the GPIO pin, RB10.
-
-  @Preconditions
-    None.
-
-  @Returns
-    None.
-
-  @Param
-    None.
-
-  @Example
-    <code>
-    uint16_t portValue;
-
-    // Read RB10
-    postValue = RELAY_7_GetValue();
-    </code>
-
-*/
-#define RELAY_7_GetValue()         PORTBbits.RB10
-/**
-  @Summary
-    Configures the GPIO pin, RB10, as an input.
-
-  @Description
-    Configures the GPIO pin, RB10, as an input.
-
-  @Preconditions
-    None.
-
-  @Returns
-    None.
-
-  @Param
-    None.
-
-  @Example
-    <code>
-    // Sets the RB10 as an input
-    RELAY_7_SetDigitalInput();
-    </code>
-
-*/
-#define RELAY_7_SetDigitalInput()   ( TRISBSET = (1 << 10) )
-/**
-  @Summary
-    Configures the GPIO pin, RB10, as an output.
-
-  @Description
-    Configures the GPIO pin, RB10, as an output.
-
-  @Preconditions
-    None.
-
-  @Returns
-    None.
-
-  @Param
-    None.
-
-  @Example
-    <code>
-    // Sets the RB10 as an output
-    RELAY_7_SetDigitalOutput();
-    </code>
-
-*/
-#define RELAY_7_SetDigitalOutput()   ( TRISBCLR = (1 << 10) )
-/**
-  @Summary
-    Sets the GPIO pin, RB11, high using LATBbits.LATB11.
-
-  @Description
-    Sets the GPIO pin, RB11, high using LATBbits.LATB11.
-
-  @Preconditions
-    The RB11 must be set to an output.
-
-  @Returns
-    None.
-
-  @Param
-    None.
-
-  @Example
-    <code>
-    // Set RB11 high (1)
-    RELAY_6_SetHigh();
-    </code>
-
-*/
-#define RELAY_6_SetHigh()          ( LATBSET = (1 << 11) )
-/**
-  @Summary
-    Sets the GPIO pin, RB11, low using LATBbits.LATB11.
-
-  @Description
-    Sets the GPIO pin, RB11, low using LATBbits.LATB11.
-
-  @Preconditions
-    The RB11 must be set to an output.
-
-  @Returns
-    None.
-
-  @Param
-    None.
-
-  @Example
-    <code>
-    // Set RB11 low (0)
-    RELAY_6_SetLow();
-    </code>
-
-*/
-#define RELAY_6_SetLow()           ( LATBCLR = (1 << 11) )
-/**
-  @Summary
-    Toggles the GPIO pin, RB11, using LATBbits.LATB11.
-
-  @Description
-    Toggles the GPIO pin, RB11, using LATBbits.LATB11.
-
-  @Preconditions
-    The RB11 must be set to an output.
-
-  @Returns
-    None.
-
-  @Param
-    None.
-
-  @Example
-    <code>
-    // Toggle RB11
-    RELAY_6_Toggle();
-    </code>
-
-*/
-#define RELAY_6_Toggle()           ( LATBINV = (1 << 11) )
-/**
-  @Summary
-    Reads the value of the GPIO pin, RB11.
-
-  @Description
-    Reads the value of the GPIO pin, RB11.
-
-  @Preconditions
-    None.
-
-  @Returns
-    None.
-
-  @Param
-    None.
-
-  @Example
-    <code>
-    uint16_t portValue;
-
-    // Read RB11
-    postValue = RELAY_6_GetValue();
-    </code>
-
-*/
-#define RELAY_6_GetValue()         PORTBbits.RB11
-/**
-  @Summary
-    Configures the GPIO pin, RB11, as an input.
-
-  @Description
-    Configures the GPIO pin, RB11, as an input.
-
-  @Preconditions
-    None.
-
-  @Returns
-    None.
-
-  @Param
-    None.
-
-  @Example
-    <code>
-    // Sets the RB11 as an input
-    RELAY_6_SetDigitalInput();
-    </code>
-
-*/
-#define RELAY_6_SetDigitalInput()   ( TRISBSET = (1 << 11) )
-/**
-  @Summary
-    Configures the GPIO pin, RB11, as an output.
-
-  @Description
-    Configures the GPIO pin, RB11, as an output.
-
-  @Preconditions
-    None.
-
-  @Returns
-    None.
-
-  @Param
-    None.
-
-  @Example
-    <code>
-    // Sets the RB11 as an output
-    RELAY_6_SetDigitalOutput();
-    </code>
-
-*/
-#define RELAY_6_SetDigitalOutput()   ( TRISBCLR = (1 << 11) )
-/**
-  @Summary
-    Sets the GPIO pin, RB13, high using LATBbits.LATB13.
-
-  @Description
-    Sets the GPIO pin, RB13, high using LATBbits.LATB13.
-
-  @Preconditions
-    The RB13 must be set to an output.
-
-  @Returns
-    None.
-
-  @Param
-    None.
-
-  @Example
-    <code>
-    // Set RB13 high (1)
-    RELAY_5_SetHigh();
-    </code>
-
-*/
-#define RELAY_5_SetHigh()          ( LATBSET = (1 << 13) )
-/**
-  @Summary
-    Sets the GPIO pin, RB13, low using LATBbits.LATB13.
-
-  @Description
-    Sets the GPIO pin, RB13, low using LATBbits.LATB13.
-
-  @Preconditions
-    The RB13 must be set to an output.
-
-  @Returns
-    None.
-
-  @Param
-    None.
-
-  @Example
-    <code>
-    // Set RB13 low (0)
-    RELAY_5_SetLow();
-    </code>
-
-*/
-#define RELAY_5_SetLow()           ( LATBCLR = (1 << 13) )
-/**
-  @Summary
-    Toggles the GPIO pin, RB13, using LATBbits.LATB13.
-
-  @Description
-    Toggles the GPIO pin, RB13, using LATBbits.LATB13.
-
-  @Preconditions
-    The RB13 must be set to an output.
-
-  @Returns
-    None.
-
-  @Param
-    None.
-
-  @Example
-    <code>
-    // Toggle RB13
-    RELAY_5_Toggle();
-    </code>
-
-*/
-#define RELAY_5_Toggle()           ( LATBINV = (1 << 13) )
-/**
-  @Summary
-    Reads the value of the GPIO pin, RB13.
-
-  @Description
-    Reads the value of the GPIO pin, RB13.
-
-  @Preconditions
-    None.
-
-  @Returns
-    None.
-
-  @Param
-    None.
-
-  @Example
-    <code>
-    uint16_t portValue;
-
-    // Read RB13
-    postValue = RELAY_5_GetValue();
-    </code>
-
-*/
-#define RELAY_5_GetValue()         PORTBbits.RB13
-/**
-  @Summary
-    Configures the GPIO pin, RB13, as an input.
-
-  @Description
-    Configures the GPIO pin, RB13, as an input.
-
-  @Preconditions
-    None.
-
-  @Returns
-    None.
-
-  @Param
-    None.
-
-  @Example
-    <code>
-    // Sets the RB13 as an input
-    RELAY_5_SetDigitalInput();
-    </code>
-
-*/
-#define RELAY_5_SetDigitalInput()   ( TRISBSET = (1 << 13) )
-/**
-  @Summary
-    Configures the GPIO pin, RB13, as an output.
-
-  @Description
-    Configures the GPIO pin, RB13, as an output.
-
-  @Preconditions
-    None.
-
-  @Returns
-    None.
-
-  @Param
-    None.
-
-  @Example
-    <code>
-    // Sets the RB13 as an output
-    RELAY_5_SetDigitalOutput();
-    </code>
-
-*/
-#define RELAY_5_SetDigitalOutput()   ( TRISBCLR = (1 << 13) )
-/**
-  @Summary
-    Sets the GPIO pin, RB14, high using LATBbits.LATB14.
-
-  @Description
-    Sets the GPIO pin, RB14, high using LATBbits.LATB14.
-
-  @Preconditions
-    The RB14 must be set to an output.
-
-  @Returns
-    None.
-
-  @Param
-    None.
-
-  @Example
-    <code>
-    // Set RB14 high (1)
-    RELAY_2_SetHigh();
-    </code>
-
-*/
-#define RELAY_2_SetHigh()          ( LATBSET = (1 << 14) )
-/**
-  @Summary
-    Sets the GPIO pin, RB14, low using LATBbits.LATB14.
-
-  @Description
-    Sets the GPIO pin, RB14, low using LATBbits.LATB14.
-
-  @Preconditions
-    The RB14 must be set to an output.
-
-  @Returns
-    None.
-
-  @Param
-    None.
-
-  @Example
-    <code>
-    // Set RB14 low (0)
-    RELAY_2_SetLow();
-    </code>
-
-*/
-#define RELAY_2_SetLow()           ( LATBCLR = (1 << 14) )
-/**
-  @Summary
-    Toggles the GPIO pin, RB14, using LATBbits.LATB14.
-
-  @Description
-    Toggles the GPIO pin, RB14, using LATBbits.LATB14.
-
-  @Preconditions
-    The RB14 must be set to an output.
-
-  @Returns
-    None.
-
-  @Param
-    None.
-
-  @Example
-    <code>
-    // Toggle RB14
-    RELAY_2_Toggle();
-    </code>
-
-*/
-#define RELAY_2_Toggle()           ( LATBINV = (1 << 14) )
-/**
-  @Summary
-    Reads the value of the GPIO pin, RB14.
-
-  @Description
-    Reads the value of the GPIO pin, RB14.
-
-  @Preconditions
-    None.
-
-  @Returns
-    None.
-
-  @Param
-    None.
-
-  @Example
-    <code>
-    uint16_t portValue;
-
-    // Read RB14
-    postValue = RELAY_2_GetValue();
-    </code>
-
-*/
-#define RELAY_2_GetValue()         PORTBbits.RB14
-/**
-  @Summary
-    Configures the GPIO pin, RB14, as an input.
-
-  @Description
-    Configures the GPIO pin, RB14, as an input.
-
-  @Preconditions
-    None.
-
-  @Returns
-    None.
-
-  @Param
-    None.
-
-  @Example
-    <code>
-    // Sets the RB14 as an input
-    RELAY_2_SetDigitalInput();
-    </code>
-
-*/
-#define RELAY_2_SetDigitalInput()   ( TRISBSET = (1 << 14) )
-/**
-  @Summary
-    Configures the GPIO pin, RB14, as an output.
-
-  @Description
-    Configures the GPIO pin, RB14, as an output.
-
-  @Preconditions
-    None.
-
-  @Returns
-    None.
-
-  @Param
-    None.
-
-  @Example
-    <code>
-    // Sets the RB14 as an output
-    RELAY_2_SetDigitalOutput();
-    </code>
-
-*/
-#define RELAY_2_SetDigitalOutput()   ( TRISBCLR = (1 << 14) )
-/**
-  @Summary
-    Sets the GPIO pin, RB15, high using LATBbits.LATB15.
-
-  @Description
-    Sets the GPIO pin, RB15, high using LATBbits.LATB15.
-
-  @Preconditions
-    The RB15 must be set to an output.
-
-  @Returns
-    None.
-
-  @Param
-    None.
-
-  @Example
-    <code>
-    // Set RB15 high (1)
-    RELAY_1_SetHigh();
-    </code>
-
-*/
-#define RELAY_1_SetHigh()          ( LATBSET = (1 << 15) )
-/**
-  @Summary
-    Sets the GPIO pin, RB15, low using LATBbits.LATB15.
-
-  @Description
-    Sets the GPIO pin, RB15, low using LATBbits.LATB15.
-
-  @Preconditions
-    The RB15 must be set to an output.
-
-  @Returns
-    None.
-
-  @Param
-    None.
-
-  @Example
-    <code>
-    // Set RB15 low (0)
-    RELAY_1_SetLow();
-    </code>
-
-*/
-#define RELAY_1_SetLow()           ( LATBCLR = (1 << 15) )
-/**
-  @Summary
-    Toggles the GPIO pin, RB15, using LATBbits.LATB15.
-
-  @Description
-    Toggles the GPIO pin, RB15, using LATBbits.LATB15.
-
-  @Preconditions
-    The RB15 must be set to an output.
-
-  @Returns
-    None.
-
-  @Param
-    None.
-
-  @Example
-    <code>
-    // Toggle RB15
-    RELAY_1_Toggle();
-    </code>
-
-*/
-#define RELAY_1_Toggle()           ( LATBINV = (1 << 15) )
-/**
-  @Summary
-    Reads the value of the GPIO pin, RB15.
-
-  @Description
-    Reads the value of the GPIO pin, RB15.
-
-  @Preconditions
-    None.
-
-  @Returns
-    None.
-
-  @Param
-    None.
-
-  @Example
-    <code>
-    uint16_t portValue;
-
-    // Read RB15
-    postValue = RELAY_1_GetValue();
-    </code>
-
-*/
-#define RELAY_1_GetValue()         PORTBbits.RB15
-/**
-  @Summary
-    Configures the GPIO pin, RB15, as an input.
-
-  @Description
-    Configures the GPIO pin, RB15, as an input.
-
-  @Preconditions
-    None.
-
-  @Returns
-    None.
-
-  @Param
-    None.
-
-  @Example
-    <code>
-    // Sets the RB15 as an input
-    RELAY_1_SetDigitalInput();
-    </code>
-
-*/
-#define RELAY_1_SetDigitalInput()   ( TRISBSET = (1 << 15) )
-/**
-  @Summary
-    Configures the GPIO pin, RB15, as an output.
-
-  @Description
-    Configures the GPIO pin, RB15, as an output.
-
-  @Preconditions
-    None.
-
-  @Returns
-    None.
-
-  @Param
-    None.
-
-  @Example
-    <code>
-    // Sets the RB15 as an output
-    RELAY_1_SetDigitalOutput();
-    </code>
-
-*/
-#define RELAY_1_SetDigitalOutput()   ( TRISBCLR = (1 << 15) )
+#define CURRENT_2_SetDigitalOutput()   ( TRISBCLR = (1 << 1) )
 /**
   @Summary
     Sets the GPIO pin, RB2, high using LATBbits.LATB2.
@@ -1824,11 +1094,11 @@
   @Example
     <code>
     // Set RB2 high (1)
-    CURRENT_5_SetHigh();
+    CURRENT_1_SetHigh();
     </code>
 
 */
-#define CURRENT_5_SetHigh()          ( LATBSET = (1 << 2) )
+#define CURRENT_1_SetHigh()          ( LATBSET = (1 << 2) )
 /**
   @Summary
     Sets the GPIO pin, RB2, low using LATBbits.LATB2.
@@ -1848,11 +1118,11 @@
   @Example
     <code>
     // Set RB2 low (0)
-    CURRENT_5_SetLow();
+    CURRENT_1_SetLow();
     </code>
 
 */
-#define CURRENT_5_SetLow()           ( LATBCLR = (1 << 2) )
+#define CURRENT_1_SetLow()           ( LATBCLR = (1 << 2) )
 /**
   @Summary
     Toggles the GPIO pin, RB2, using LATBbits.LATB2.
@@ -1872,11 +1142,11 @@
   @Example
     <code>
     // Toggle RB2
-    CURRENT_5_Toggle();
+    CURRENT_1_Toggle();
     </code>
 
 */
-#define CURRENT_5_Toggle()           ( LATBINV = (1 << 2) )
+#define CURRENT_1_Toggle()           ( LATBINV = (1 << 2) )
 /**
   @Summary
     Reads the value of the GPIO pin, RB2.
@@ -1898,11 +1168,11 @@
     uint16_t portValue;
 
     // Read RB2
-    postValue = CURRENT_5_GetValue();
+    postValue = CURRENT_1_GetValue();
     </code>
 
 */
-#define CURRENT_5_GetValue()         PORTBbits.RB2
+#define CURRENT_1_GetValue()         PORTBbits.RB2
 /**
   @Summary
     Configures the GPIO pin, RB2, as an input.
@@ -1922,11 +1192,11 @@
   @Example
     <code>
     // Sets the RB2 as an input
-    CURRENT_5_SetDigitalInput();
+    CURRENT_1_SetDigitalInput();
     </code>
 
 */
-#define CURRENT_5_SetDigitalInput()   ( TRISBSET = (1 << 2) )
+#define CURRENT_1_SetDigitalInput()   ( TRISBSET = (1 << 2) )
 /**
   @Summary
     Configures the GPIO pin, RB2, as an output.
@@ -1946,11 +1216,11 @@
   @Example
     <code>
     // Sets the RB2 as an output
-    CURRENT_5_SetDigitalOutput();
+    CURRENT_1_SetDigitalOutput();
     </code>
 
 */
-#define CURRENT_5_SetDigitalOutput()   ( TRISBCLR = (1 << 2) )
+#define CURRENT_1_SetDigitalOutput()   ( TRISBCLR = (1 << 2) )
 /**
   @Summary
     Sets the GPIO pin, RB3, high using LATBbits.LATB3.
@@ -1970,11 +1240,11 @@
   @Example
     <code>
     // Set RB3 high (1)
-    CURRENT_6_SetHigh();
+    CURRENT_8_SetHigh();
     </code>
 
 */
-#define CURRENT_6_SetHigh()          ( LATBSET = (1 << 3) )
+#define CURRENT_8_SetHigh()          ( LATBSET = (1 << 3) )
 /**
   @Summary
     Sets the GPIO pin, RB3, low using LATBbits.LATB3.
@@ -1994,11 +1264,11 @@
   @Example
     <code>
     // Set RB3 low (0)
-    CURRENT_6_SetLow();
+    CURRENT_8_SetLow();
     </code>
 
 */
-#define CURRENT_6_SetLow()           ( LATBCLR = (1 << 3) )
+#define CURRENT_8_SetLow()           ( LATBCLR = (1 << 3) )
 /**
   @Summary
     Toggles the GPIO pin, RB3, using LATBbits.LATB3.
@@ -2018,11 +1288,11 @@
   @Example
     <code>
     // Toggle RB3
-    CURRENT_6_Toggle();
+    CURRENT_8_Toggle();
     </code>
 
 */
-#define CURRENT_6_Toggle()           ( LATBINV = (1 << 3) )
+#define CURRENT_8_Toggle()           ( LATBINV = (1 << 3) )
 /**
   @Summary
     Reads the value of the GPIO pin, RB3.
@@ -2044,11 +1314,11 @@
     uint16_t portValue;
 
     // Read RB3
-    postValue = CURRENT_6_GetValue();
+    postValue = CURRENT_8_GetValue();
     </code>
 
 */
-#define CURRENT_6_GetValue()         PORTBbits.RB3
+#define CURRENT_8_GetValue()         PORTBbits.RB3
 /**
   @Summary
     Configures the GPIO pin, RB3, as an input.
@@ -2068,11 +1338,11 @@
   @Example
     <code>
     // Sets the RB3 as an input
-    CURRENT_6_SetDigitalInput();
+    CURRENT_8_SetDigitalInput();
     </code>
 
 */
-#define CURRENT_6_SetDigitalInput()   ( TRISBSET = (1 << 3) )
+#define CURRENT_8_SetDigitalInput()   ( TRISBSET = (1 << 3) )
 /**
   @Summary
     Configures the GPIO pin, RB3, as an output.
@@ -2092,11 +1362,595 @@
   @Example
     <code>
     // Sets the RB3 as an output
-    CURRENT_6_SetDigitalOutput();
+    CURRENT_8_SetDigitalOutput();
     </code>
 
 */
-#define CURRENT_6_SetDigitalOutput()   ( TRISBCLR = (1 << 3) )
+#define CURRENT_8_SetDigitalOutput()   ( TRISBCLR = (1 << 3) )
+/**
+  @Summary
+    Sets the GPIO pin, RB4, high using LATBbits.LATB4.
+
+  @Description
+    Sets the GPIO pin, RB4, high using LATBbits.LATB4.
+
+  @Preconditions
+    The RB4 must be set to an output.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Set RB4 high (1)
+    RELAY_1_SetHigh();
+    </code>
+
+*/
+#define RELAY_1_SetHigh()          ( LATBSET = (1 << 4) )
+/**
+  @Summary
+    Sets the GPIO pin, RB4, low using LATBbits.LATB4.
+
+  @Description
+    Sets the GPIO pin, RB4, low using LATBbits.LATB4.
+
+  @Preconditions
+    The RB4 must be set to an output.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Set RB4 low (0)
+    RELAY_1_SetLow();
+    </code>
+
+*/
+#define RELAY_1_SetLow()           ( LATBCLR = (1 << 4) )
+/**
+  @Summary
+    Toggles the GPIO pin, RB4, using LATBbits.LATB4.
+
+  @Description
+    Toggles the GPIO pin, RB4, using LATBbits.LATB4.
+
+  @Preconditions
+    The RB4 must be set to an output.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Toggle RB4
+    RELAY_1_Toggle();
+    </code>
+
+*/
+#define RELAY_1_Toggle()           ( LATBINV = (1 << 4) )
+/**
+  @Summary
+    Reads the value of the GPIO pin, RB4.
+
+  @Description
+    Reads the value of the GPIO pin, RB4.
+
+  @Preconditions
+    None.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    uint16_t portValue;
+
+    // Read RB4
+    postValue = RELAY_1_GetValue();
+    </code>
+
+*/
+#define RELAY_1_GetValue()         PORTBbits.RB4
+/**
+  @Summary
+    Configures the GPIO pin, RB4, as an input.
+
+  @Description
+    Configures the GPIO pin, RB4, as an input.
+
+  @Preconditions
+    None.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Sets the RB4 as an input
+    RELAY_1_SetDigitalInput();
+    </code>
+
+*/
+#define RELAY_1_SetDigitalInput()   ( TRISBSET = (1 << 4) )
+/**
+  @Summary
+    Configures the GPIO pin, RB4, as an output.
+
+  @Description
+    Configures the GPIO pin, RB4, as an output.
+
+  @Preconditions
+    None.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Sets the RB4 as an output
+    RELAY_1_SetDigitalOutput();
+    </code>
+
+*/
+#define RELAY_1_SetDigitalOutput()   ( TRISBCLR = (1 << 4) )
+/**
+  @Summary
+    Sets the GPIO pin, RB6, high using LATBbits.LATB6.
+
+  @Description
+    Sets the GPIO pin, RB6, high using LATBbits.LATB6.
+
+  @Preconditions
+    The RB6 must be set to an output.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Set RB6 high (1)
+    RELAY_7_SetHigh();
+    </code>
+
+*/
+#define RELAY_7_SetHigh()          ( LATBSET = (1 << 6) )
+/**
+  @Summary
+    Sets the GPIO pin, RB6, low using LATBbits.LATB6.
+
+  @Description
+    Sets the GPIO pin, RB6, low using LATBbits.LATB6.
+
+  @Preconditions
+    The RB6 must be set to an output.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Set RB6 low (0)
+    RELAY_7_SetLow();
+    </code>
+
+*/
+#define RELAY_7_SetLow()           ( LATBCLR = (1 << 6) )
+/**
+  @Summary
+    Toggles the GPIO pin, RB6, using LATBbits.LATB6.
+
+  @Description
+    Toggles the GPIO pin, RB6, using LATBbits.LATB6.
+
+  @Preconditions
+    The RB6 must be set to an output.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Toggle RB6
+    RELAY_7_Toggle();
+    </code>
+
+*/
+#define RELAY_7_Toggle()           ( LATBINV = (1 << 6) )
+/**
+  @Summary
+    Reads the value of the GPIO pin, RB6.
+
+  @Description
+    Reads the value of the GPIO pin, RB6.
+
+  @Preconditions
+    None.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    uint16_t portValue;
+
+    // Read RB6
+    postValue = RELAY_7_GetValue();
+    </code>
+
+*/
+#define RELAY_7_GetValue()         PORTBbits.RB6
+/**
+  @Summary
+    Configures the GPIO pin, RB6, as an input.
+
+  @Description
+    Configures the GPIO pin, RB6, as an input.
+
+  @Preconditions
+    None.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Sets the RB6 as an input
+    RELAY_7_SetDigitalInput();
+    </code>
+
+*/
+#define RELAY_7_SetDigitalInput()   ( TRISBSET = (1 << 6) )
+/**
+  @Summary
+    Configures the GPIO pin, RB6, as an output.
+
+  @Description
+    Configures the GPIO pin, RB6, as an output.
+
+  @Preconditions
+    None.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Sets the RB6 as an output
+    RELAY_7_SetDigitalOutput();
+    </code>
+
+*/
+#define RELAY_7_SetDigitalOutput()   ( TRISBCLR = (1 << 6) )
+/**
+  @Summary
+    Sets the GPIO pin, RB7, high using LATBbits.LATB7.
+
+  @Description
+    Sets the GPIO pin, RB7, high using LATBbits.LATB7.
+
+  @Preconditions
+    The RB7 must be set to an output.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Set RB7 high (1)
+    RELAY_6_SetHigh();
+    </code>
+
+*/
+#define RELAY_6_SetHigh()          ( LATBSET = (1 << 7) )
+/**
+  @Summary
+    Sets the GPIO pin, RB7, low using LATBbits.LATB7.
+
+  @Description
+    Sets the GPIO pin, RB7, low using LATBbits.LATB7.
+
+  @Preconditions
+    The RB7 must be set to an output.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Set RB7 low (0)
+    RELAY_6_SetLow();
+    </code>
+
+*/
+#define RELAY_6_SetLow()           ( LATBCLR = (1 << 7) )
+/**
+  @Summary
+    Toggles the GPIO pin, RB7, using LATBbits.LATB7.
+
+  @Description
+    Toggles the GPIO pin, RB7, using LATBbits.LATB7.
+
+  @Preconditions
+    The RB7 must be set to an output.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Toggle RB7
+    RELAY_6_Toggle();
+    </code>
+
+*/
+#define RELAY_6_Toggle()           ( LATBINV = (1 << 7) )
+/**
+  @Summary
+    Reads the value of the GPIO pin, RB7.
+
+  @Description
+    Reads the value of the GPIO pin, RB7.
+
+  @Preconditions
+    None.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    uint16_t portValue;
+
+    // Read RB7
+    postValue = RELAY_6_GetValue();
+    </code>
+
+*/
+#define RELAY_6_GetValue()         PORTBbits.RB7
+/**
+  @Summary
+    Configures the GPIO pin, RB7, as an input.
+
+  @Description
+    Configures the GPIO pin, RB7, as an input.
+
+  @Preconditions
+    None.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Sets the RB7 as an input
+    RELAY_6_SetDigitalInput();
+    </code>
+
+*/
+#define RELAY_6_SetDigitalInput()   ( TRISBSET = (1 << 7) )
+/**
+  @Summary
+    Configures the GPIO pin, RB7, as an output.
+
+  @Description
+    Configures the GPIO pin, RB7, as an output.
+
+  @Preconditions
+    None.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Sets the RB7 as an output
+    RELAY_6_SetDigitalOutput();
+    </code>
+
+*/
+#define RELAY_6_SetDigitalOutput()   ( TRISBCLR = (1 << 7) )
+/**
+  @Summary
+    Sets the GPIO pin, RB9, high using LATBbits.LATB9.
+
+  @Description
+    Sets the GPIO pin, RB9, high using LATBbits.LATB9.
+
+  @Preconditions
+    The RB9 must be set to an output.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Set RB9 high (1)
+    RELAY_5_SetHigh();
+    </code>
+
+*/
+#define RELAY_5_SetHigh()          ( LATBSET = (1 << 9) )
+/**
+  @Summary
+    Sets the GPIO pin, RB9, low using LATBbits.LATB9.
+
+  @Description
+    Sets the GPIO pin, RB9, low using LATBbits.LATB9.
+
+  @Preconditions
+    The RB9 must be set to an output.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Set RB9 low (0)
+    RELAY_5_SetLow();
+    </code>
+
+*/
+#define RELAY_5_SetLow()           ( LATBCLR = (1 << 9) )
+/**
+  @Summary
+    Toggles the GPIO pin, RB9, using LATBbits.LATB9.
+
+  @Description
+    Toggles the GPIO pin, RB9, using LATBbits.LATB9.
+
+  @Preconditions
+    The RB9 must be set to an output.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Toggle RB9
+    RELAY_5_Toggle();
+    </code>
+
+*/
+#define RELAY_5_Toggle()           ( LATBINV = (1 << 9) )
+/**
+  @Summary
+    Reads the value of the GPIO pin, RB9.
+
+  @Description
+    Reads the value of the GPIO pin, RB9.
+
+  @Preconditions
+    None.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    uint16_t portValue;
+
+    // Read RB9
+    postValue = RELAY_5_GetValue();
+    </code>
+
+*/
+#define RELAY_5_GetValue()         PORTBbits.RB9
+/**
+  @Summary
+    Configures the GPIO pin, RB9, as an input.
+
+  @Description
+    Configures the GPIO pin, RB9, as an input.
+
+  @Preconditions
+    None.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Sets the RB9 as an input
+    RELAY_5_SetDigitalInput();
+    </code>
+
+*/
+#define RELAY_5_SetDigitalInput()   ( TRISBSET = (1 << 9) )
+/**
+  @Summary
+    Configures the GPIO pin, RB9, as an output.
+
+  @Description
+    Configures the GPIO pin, RB9, as an output.
+
+  @Preconditions
+    None.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Sets the RB9 as an output
+    RELAY_5_SetDigitalOutput();
+    </code>
+
+*/
+#define RELAY_5_SetDigitalOutput()   ( TRISBCLR = (1 << 9) )
 /**
   @Summary
     Sets the GPIO pin, RC0, high using LATCbits.LATC0.
@@ -2262,11 +2116,11 @@
   @Example
     <code>
     // Set RC1 high (1)
-    CURRENT_8_SetHigh();
+    CURRENT_6_SetHigh();
     </code>
 
 */
-#define CURRENT_8_SetHigh()          ( LATCSET = (1 << 1) )
+#define CURRENT_6_SetHigh()          ( LATCSET = (1 << 1) )
 /**
   @Summary
     Sets the GPIO pin, RC1, low using LATCbits.LATC1.
@@ -2286,11 +2140,11 @@
   @Example
     <code>
     // Set RC1 low (0)
-    CURRENT_8_SetLow();
+    CURRENT_6_SetLow();
     </code>
 
 */
-#define CURRENT_8_SetLow()           ( LATCCLR = (1 << 1) )
+#define CURRENT_6_SetLow()           ( LATCCLR = (1 << 1) )
 /**
   @Summary
     Toggles the GPIO pin, RC1, using LATCbits.LATC1.
@@ -2310,11 +2164,11 @@
   @Example
     <code>
     // Toggle RC1
-    CURRENT_8_Toggle();
+    CURRENT_6_Toggle();
     </code>
 
 */
-#define CURRENT_8_Toggle()           ( LATCINV = (1 << 1) )
+#define CURRENT_6_Toggle()           ( LATCINV = (1 << 1) )
 /**
   @Summary
     Reads the value of the GPIO pin, RC1.
@@ -2336,11 +2190,11 @@
     uint16_t portValue;
 
     // Read RC1
-    postValue = CURRENT_8_GetValue();
+    postValue = CURRENT_6_GetValue();
     </code>
 
 */
-#define CURRENT_8_GetValue()         PORTCbits.RC1
+#define CURRENT_6_GetValue()         PORTCbits.RC1
 /**
   @Summary
     Configures the GPIO pin, RC1, as an input.
@@ -2360,11 +2214,11 @@
   @Example
     <code>
     // Sets the RC1 as an input
-    CURRENT_8_SetDigitalInput();
+    CURRENT_6_SetDigitalInput();
     </code>
 
 */
-#define CURRENT_8_SetDigitalInput()   ( TRISCSET = (1 << 1) )
+#define CURRENT_6_SetDigitalInput()   ( TRISCSET = (1 << 1) )
 /**
   @Summary
     Configures the GPIO pin, RC1, as an output.
@@ -2384,11 +2238,11 @@
   @Example
     <code>
     // Sets the RC1 as an output
-    CURRENT_8_SetDigitalOutput();
+    CURRENT_6_SetDigitalOutput();
     </code>
 
 */
-#define CURRENT_8_SetDigitalOutput()   ( TRISCCLR = (1 << 1) )
+#define CURRENT_6_SetDigitalOutput()   ( TRISCCLR = (1 << 1) )
 /**
   @Summary
     Sets the GPIO pin, RC3, high using LATCbits.LATC3.
@@ -2408,11 +2262,11 @@
   @Example
     <code>
     // Set RC3 high (1)
-    N_R_LED_SetHigh();
+    N_Y_LED_SetHigh();
     </code>
 
 */
-#define N_R_LED_SetHigh()          ( LATCSET = (1 << 3) )
+#define N_Y_LED_SetHigh()          ( LATCSET = (1 << 3) )
 /**
   @Summary
     Sets the GPIO pin, RC3, low using LATCbits.LATC3.
@@ -2432,11 +2286,11 @@
   @Example
     <code>
     // Set RC3 low (0)
-    N_R_LED_SetLow();
+    N_Y_LED_SetLow();
     </code>
 
 */
-#define N_R_LED_SetLow()           ( LATCCLR = (1 << 3) )
+#define N_Y_LED_SetLow()           ( LATCCLR = (1 << 3) )
 /**
   @Summary
     Toggles the GPIO pin, RC3, using LATCbits.LATC3.
@@ -2456,11 +2310,11 @@
   @Example
     <code>
     // Toggle RC3
-    N_R_LED_Toggle();
+    N_Y_LED_Toggle();
     </code>
 
 */
-#define N_R_LED_Toggle()           ( LATCINV = (1 << 3) )
+#define N_Y_LED_Toggle()           ( LATCINV = (1 << 3) )
 /**
   @Summary
     Reads the value of the GPIO pin, RC3.
@@ -2482,11 +2336,11 @@
     uint16_t portValue;
 
     // Read RC3
-    postValue = N_R_LED_GetValue();
+    postValue = N_Y_LED_GetValue();
     </code>
 
 */
-#define N_R_LED_GetValue()         PORTCbits.RC3
+#define N_Y_LED_GetValue()         PORTCbits.RC3
 /**
   @Summary
     Configures the GPIO pin, RC3, as an input.
@@ -2506,11 +2360,11 @@
   @Example
     <code>
     // Sets the RC3 as an input
-    N_R_LED_SetDigitalInput();
+    N_Y_LED_SetDigitalInput();
     </code>
 
 */
-#define N_R_LED_SetDigitalInput()   ( TRISCSET = (1 << 3) )
+#define N_Y_LED_SetDigitalInput()   ( TRISCSET = (1 << 3) )
 /**
   @Summary
     Configures the GPIO pin, RC3, as an output.
@@ -2530,11 +2384,11 @@
   @Example
     <code>
     // Sets the RC3 as an output
-    N_R_LED_SetDigitalOutput();
+    N_Y_LED_SetDigitalOutput();
     </code>
 
 */
-#define N_R_LED_SetDigitalOutput()   ( TRISCCLR = (1 << 3) )
+#define N_Y_LED_SetDigitalOutput()   ( TRISCCLR = (1 << 3) )
 /**
   @Summary
     Sets the GPIO pin, RC4, high using LATCbits.LATC4.
@@ -2700,11 +2554,11 @@
   @Example
     <code>
     // Set RC5 high (1)
-    N_Y_LED_SetHigh();
+    N_R_LED_SetHigh();
     </code>
 
 */
-#define N_Y_LED_SetHigh()          ( LATCSET = (1 << 5) )
+#define N_R_LED_SetHigh()          ( LATCSET = (1 << 5) )
 /**
   @Summary
     Sets the GPIO pin, RC5, low using LATCbits.LATC5.
@@ -2724,11 +2578,11 @@
   @Example
     <code>
     // Set RC5 low (0)
-    N_Y_LED_SetLow();
+    N_R_LED_SetLow();
     </code>
 
 */
-#define N_Y_LED_SetLow()           ( LATCCLR = (1 << 5) )
+#define N_R_LED_SetLow()           ( LATCCLR = (1 << 5) )
 /**
   @Summary
     Toggles the GPIO pin, RC5, using LATCbits.LATC5.
@@ -2748,11 +2602,11 @@
   @Example
     <code>
     // Toggle RC5
-    N_Y_LED_Toggle();
+    N_R_LED_Toggle();
     </code>
 
 */
-#define N_Y_LED_Toggle()           ( LATCINV = (1 << 5) )
+#define N_R_LED_Toggle()           ( LATCINV = (1 << 5) )
 /**
   @Summary
     Reads the value of the GPIO pin, RC5.
@@ -2774,11 +2628,11 @@
     uint16_t portValue;
 
     // Read RC5
-    postValue = N_Y_LED_GetValue();
+    postValue = N_R_LED_GetValue();
     </code>
 
 */
-#define N_Y_LED_GetValue()         PORTCbits.RC5
+#define N_R_LED_GetValue()         PORTCbits.RC5
 /**
   @Summary
     Configures the GPIO pin, RC5, as an input.
@@ -2798,11 +2652,11 @@
   @Example
     <code>
     // Sets the RC5 as an input
-    N_Y_LED_SetDigitalInput();
+    N_R_LED_SetDigitalInput();
     </code>
 
 */
-#define N_Y_LED_SetDigitalInput()   ( TRISCSET = (1 << 5) )
+#define N_R_LED_SetDigitalInput()   ( TRISCSET = (1 << 5) )
 /**
   @Summary
     Configures the GPIO pin, RC5, as an output.
@@ -2822,11 +2676,11 @@
   @Example
     <code>
     // Sets the RC5 as an output
-    N_Y_LED_SetDigitalOutput();
+    N_R_LED_SetDigitalOutput();
     </code>
 
 */
-#define N_Y_LED_SetDigitalOutput()   ( TRISCCLR = (1 << 5) )
+#define N_R_LED_SetDigitalOutput()   ( TRISCCLR = (1 << 5) )
 /**
   @Summary
     Sets the GPIO pin, RC6, high using LATCbits.LATC6.
@@ -3119,6 +2973,152 @@
 
 */
 #define ZERO_CROSS_SetDigitalOutput()   ( TRISCCLR = (1 << 7) )
+/**
+  @Summary
+    Sets the GPIO pin, RC8, high using LATCbits.LATC8.
+
+  @Description
+    Sets the GPIO pin, RC8, high using LATCbits.LATC8.
+
+  @Preconditions
+    The RC8 must be set to an output.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Set RC8 high (1)
+    RELAY_4_SetHigh();
+    </code>
+
+*/
+#define RELAY_4_SetHigh()          ( LATCSET = (1 << 8) )
+/**
+  @Summary
+    Sets the GPIO pin, RC8, low using LATCbits.LATC8.
+
+  @Description
+    Sets the GPIO pin, RC8, low using LATCbits.LATC8.
+
+  @Preconditions
+    The RC8 must be set to an output.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Set RC8 low (0)
+    RELAY_4_SetLow();
+    </code>
+
+*/
+#define RELAY_4_SetLow()           ( LATCCLR = (1 << 8) )
+/**
+  @Summary
+    Toggles the GPIO pin, RC8, using LATCbits.LATC8.
+
+  @Description
+    Toggles the GPIO pin, RC8, using LATCbits.LATC8.
+
+  @Preconditions
+    The RC8 must be set to an output.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Toggle RC8
+    RELAY_4_Toggle();
+    </code>
+
+*/
+#define RELAY_4_Toggle()           ( LATCINV = (1 << 8) )
+/**
+  @Summary
+    Reads the value of the GPIO pin, RC8.
+
+  @Description
+    Reads the value of the GPIO pin, RC8.
+
+  @Preconditions
+    None.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    uint16_t portValue;
+
+    // Read RC8
+    postValue = RELAY_4_GetValue();
+    </code>
+
+*/
+#define RELAY_4_GetValue()         PORTCbits.RC8
+/**
+  @Summary
+    Configures the GPIO pin, RC8, as an input.
+
+  @Description
+    Configures the GPIO pin, RC8, as an input.
+
+  @Preconditions
+    None.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Sets the RC8 as an input
+    RELAY_4_SetDigitalInput();
+    </code>
+
+*/
+#define RELAY_4_SetDigitalInput()   ( TRISCSET = (1 << 8) )
+/**
+  @Summary
+    Configures the GPIO pin, RC8, as an output.
+
+  @Description
+    Configures the GPIO pin, RC8, as an output.
+
+  @Preconditions
+    None.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Sets the RC8 as an output
+    RELAY_4_SetDigitalOutput();
+    </code>
+
+*/
+#define RELAY_4_SetDigitalOutput()   ( TRISCCLR = (1 << 8) )
 
 /**
     Section: Function Prototypes
