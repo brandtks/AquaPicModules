@@ -593,7 +593,7 @@ U 1 1 5A2CFE53
 P 4350 1350
 F 0 "P1" H 4350 1650 50  0000 C CNN
 F 1 "ICSP" V 4350 1350 50  0001 C CNN
-F 2 "Pin_Headers:Pin_Header_Straight_1x06_Pitch2.54mm" H 4350 1350 60  0001 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Vertical" H 4350 1350 60  0001 C CNN
 F 3 "" H 4350 1350 60  0000 C CNN
 F 4 "1x6 2.54 Male Pin Header" H 200 0   50  0001 C CNN "Type"
 F 5 "-" H 200 0   50  0001 C CNN "Comments"
