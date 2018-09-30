@@ -1,0 +1,2561 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export version="D">
+  <design>
+    <source>/home/sbrandt/Dropbox/AquaPic/Boards/pHAndORPV1-0/pH-ORP-Card.sch</source>
+    <date>Sun 30 Sep 2018 01:47:55 PM EDT</date>
+    <tool>Eeschema 5.0.0-fee4fd1~66~ubuntu18.04.1</tool>
+    <sheet number="1" name="/" tstamps="/">
+      <title_block>
+        <title>pH and ORP Card</title>
+        <company>Goodtime Development</company>
+        <rev>1.0</rev>
+        <date>2017-11-24</date>
+        <source>pH-ORP-Card.sch</source>
+        <comment number="1" value="Skyler Brandt"/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+      </title_block>
+    </sheet>
+  </design>
+  <components>
+    <comp ref="P4">
+      <value>BNC</value>
+      <footprint>MyFootPrints:BNC_Socket_TYCO-AMP_LargePads</footprint>
+      <fields>
+        <field name="Comments">-</field>
+        <field name="Digi-Key Part Number">A97553-ND</field>
+        <field name="Manufacturer">TE</field>
+        <field name="Manufacturer Part Number">1-1337543-0</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="BNC" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>538CBCAD</tstamp>
+    </comp>
+    <comp ref="R14">
+      <value>10K</value>
+      <footprint>MyFootPrints:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal</footprint>
+      <fields>
+        <field name="Comments">Axial, 1/4W, 1%, Metal Film</field>
+        <field name="Digi-Key Part Number">RNF14FTD10K0CT-ND</field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RNF14FTD10K0</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="R" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>538CBCB3</tstamp>
+    </comp>
+    <comp ref="R18">
+      <value>221K</value>
+      <footprint>Resistors_SMD:R_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RMCF0805FT221KCT-ND</field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RMCF0805FT221K</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="R" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>538CBCB9</tstamp>
+    </comp>
+    <comp ref="R19">
+      <value>221K</value>
+      <footprint>Resistors_SMD:R_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RMCF0805FT221KCT-ND</field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RMCF0805FT221K</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="R" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>538CBCBF</tstamp>
+    </comp>
+    <comp ref="C11">
+      <value>100nF</value>
+      <footprint>Capacitors_SMD:C_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 50V, X7R, 10%</field>
+        <field name="Digi-Key Part Number">445-7534-1-ND</field>
+        <field name="Manufacturer">TDK</field>
+        <field name="Manufacturer Part Number">C2012X7R1H104K085AA</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="C" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>538CBCC5</tstamp>
+    </comp>
+    <comp ref="R17">
+      <value>221K</value>
+      <footprint>Resistors_SMD:R_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RMCF0805FT221KCT-ND</field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RMCF0805FT221K</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="R" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>538CBCCB</tstamp>
+    </comp>
+    <comp ref="R15">
+      <value>2M</value>
+      <footprint>Resistors_SMD:R_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RMCF0805FT2M00CT-ND</field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RMCF0805FT2M00</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="R" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>538CBCD1</tstamp>
+    </comp>
+    <comp ref="C8">
+      <value>33pF</value>
+      <footprint>Capacitors_SMD:C_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 50V, C0G/NP0, 10%</field>
+        <field name="Digi-Key Part Number">399-8062-1-ND</field>
+        <field name="Manufacturer">Kemet</field>
+        <field name="Manufacturer Part Number">C0805C330K5GACTU</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="C" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>538CBCD7</tstamp>
+    </comp>
+    <comp ref="R16">
+      <value>49K9</value>
+      <footprint>Resistors_SMD:R_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RNCP0805FTD49K9CT-ND</field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RNCP0805FTD49K9</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="R" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>538CBCE9</tstamp>
+    </comp>
+    <comp ref="C7">
+      <value>100nF</value>
+      <footprint>Capacitors_SMD:C_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 50V, X7R, 10%</field>
+        <field name="Digi-Key Part Number">445-7534-1-ND</field>
+        <field name="Manufacturer">TDK</field>
+        <field name="Manufacturer Part Number">C2012X7R1H104K085AA</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="C" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>538CBCFC</tstamp>
+    </comp>
+    <comp ref="C9">
+      <value>100nF</value>
+      <footprint>Capacitors_SMD:C_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 50V, X7R, 10%</field>
+        <field name="Digi-Key Part Number">445-7534-1-ND</field>
+        <field name="Manufacturer">TDK</field>
+        <field name="Manufacturer Part Number">C2012X7R1H104K085AA</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="C" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>538CBD02</tstamp>
+    </comp>
+    <comp ref="C19">
+      <value>10uF</value>
+      <footprint>Capacitors_SMD:C_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 10V, X7R, 10%</field>
+        <field name="Digi-Key Part Number">490-10516-1-ND</field>
+        <field name="Manufacturer">Murata</field>
+        <field name="Manufacturer Part Number">GRM21BR71A106KA73L</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="C" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>538CBED8</tstamp>
+    </comp>
+    <comp ref="R27">
+      <value>50R</value>
+      <footprint>Resistors_SMD:R_2512</footprint>
+      <fields>
+        <field name="Comments">2512, 1W, 1%, Thick Film</field>
+        <field name="Digi-Key Part Number">541-49.9AFCT-ND</field>
+        <field name="Manufacturer">Vishay Dale</field>
+        <field name="Manufacturer Part Number">CRCW251249R9FKEG</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="R" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>538CBEE7</tstamp>
+    </comp>
+    <comp ref="C18">
+      <value>4u7</value>
+      <footprint>Capacitors_SMD:C_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 10V, X7R, 10%</field>
+        <field name="Digi-Key Part Number">1276-2972-1-ND </field>
+        <field name="Manufacturer">Samsung</field>
+        <field name="Manufacturer Part Number">CL21B475KPFNNNE</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="C" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>538CC6F0</tstamp>
+    </comp>
+    <comp ref="U7">
+      <value>TC7660</value>
+      <footprint>Housings_SOIC:SOIC-8_3.9x4.9mm_Pitch1.27mm</footprint>
+      <fields>
+        <field name="Comments">8-SOIC 3.9mm</field>
+        <field name="Digi-Key Part Number">TC7660EOA-ND</field>
+        <field name="Manufacturer">Microchip</field>
+        <field name="Manufacturer Part Number">TC7660EOA</field>
+      </fields>
+      <libsource lib="GoodtimeDev" part="TC7660" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>538CD072</tstamp>
+    </comp>
+    <comp ref="U3">
+      <value>LMC6061</value>
+      <footprint>Housings_SOIC:SOIC-8_3.9x4.9mm_Pitch1.27mm</footprint>
+      <fields>
+        <field name="Comments">8-SOIC 3.9mm</field>
+        <field name="Digi-Key Part Number">LMC6061AIMX/NOPBCT-ND</field>
+        <field name="Manufacturer">Texas Instruments</field>
+        <field name="Manufacturer Part Number">LMC6061AIMX/NOPB</field>
+      </fields>
+      <libsource lib="GoodtimeDev" part="LMC6061" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>539594B8</tstamp>
+    </comp>
+    <comp ref="U4">
+      <value>TLV272</value>
+      <footprint>Housings_SOIC:SOIC-8_3.9x4.9mm_Pitch1.27mm</footprint>
+      <fields>
+        <field name="Comments">8-SOIC 3.9mm</field>
+        <field name="Digi-Key Part Number">TLV272IS-13DICT-ND</field>
+        <field name="Manufacturer">Diodes Inc</field>
+        <field name="Manufacturer Part Number">TLV272IS-13</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="LM358" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>539594FA</tstamp>
+    </comp>
+    <comp ref="R20">
+      <value>221K</value>
+      <footprint>Resistors_SMD:R_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RMCF0805FT221KCT-ND</field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RMCF0805FT221K</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="R" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>53959D60</tstamp>
+    </comp>
+    <comp ref="C10">
+      <value>100nF</value>
+      <footprint>Capacitors_SMD:C_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 50V, X7R, 10%</field>
+        <field name="Digi-Key Part Number">445-7534-1-ND</field>
+        <field name="Manufacturer">TDK</field>
+        <field name="Manufacturer Part Number">C2012X7R1H104K085AA</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="C" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5395A118</tstamp>
+    </comp>
+    <comp ref="C12">
+      <value>100nF</value>
+      <footprint>Capacitors_SMD:C_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 50V, X7R, 10%</field>
+        <field name="Digi-Key Part Number">445-7534-1-ND</field>
+        <field name="Manufacturer">TDK</field>
+        <field name="Manufacturer Part Number">C2012X7R1H104K085AA</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="C" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5395A11E</tstamp>
+    </comp>
+    <comp ref="RV2">
+      <value>10K</value>
+      <footprint>MyFootPrints:POTENTIAMETER_SMD</footprint>
+      <fields>
+        <field name="Comments">J Lead, 12T</field>
+        <field name="Digi-Key Part Number">987-1155-ND</field>
+        <field name="Manufacturer">TT</field>
+        <field name="Manufacturer Part Number">84WR10KLF</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="POT" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5395A144</tstamp>
+    </comp>
+    <comp ref="C17">
+      <value>10uF</value>
+      <footprint>Capacitors_SMD:C_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 10V, X7R, 10%</field>
+        <field name="Digi-Key Part Number">490-10516-1-ND</field>
+        <field name="Manufacturer">Murata</field>
+        <field name="Manufacturer Part Number">GRM21BR71A106KA73L</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="CP1" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5395A21F</tstamp>
+    </comp>
+    <comp ref="C20">
+      <value>10uF</value>
+      <footprint>Capacitors_SMD:C_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 10V, X7R, 10%</field>
+        <field name="Digi-Key Part Number">490-10516-1-ND</field>
+        <field name="Manufacturer">Murata</field>
+        <field name="Manufacturer Part Number">GRM21BR71A106KA73L</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="CP1" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5395A231</tstamp>
+    </comp>
+    <comp ref="R23">
+      <value>10K</value>
+      <footprint>Resistors_SMD:R_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RNCP0805FTD10K0CT-ND</field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RNCP0805FTD10K0</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="R" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5395A476</tstamp>
+    </comp>
+    <comp ref="R24">
+      <value>10K</value>
+      <footprint>Resistors_SMD:R_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RNCP0805FTD10K0CT-ND</field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RNCP0805FTD10K0</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="R" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5395A485</tstamp>
+    </comp>
+    <comp ref="C13">
+      <value>1uF</value>
+      <footprint>Capacitors_SMD:C_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 25V, X7R, 10%</field>
+        <field name="Digi-Key Part Number">1276-1066-1-ND</field>
+        <field name="Manufacturer">Samsung</field>
+        <field name="Manufacturer Part Number">CL21B105KAFNNNE</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="C" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5395A6E2</tstamp>
+    </comp>
+    <comp ref="RV1">
+      <value>50K</value>
+      <footprint>MyFootPrints:POTENTIAMETER_SMD</footprint>
+      <fields>
+        <field name="Comments">J Lead, 12T</field>
+        <field name="Digi-Key Part Number">987-1554-ND</field>
+        <field name="Manufacturer">TT</field>
+        <field name="Manufacturer Part Number">84WR50KLF</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="POT" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5395AF86</tstamp>
+    </comp>
+    <comp ref="R22">
+      <value>1K</value>
+      <footprint>Resistors_SMD:R_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RNCP0805FTD1K00CT-ND </field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RNCP0805FTD1K00</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="R" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5395B54D</tstamp>
+    </comp>
+    <comp ref="R26">
+      <value>4K99</value>
+      <footprint>Resistors_SMD:R_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RNCP0805FTD4K99CT-ND </field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RNCP0805FTD4K99</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="R" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5397F0C5</tstamp>
+    </comp>
+    <comp ref="C15">
+      <value>100nF</value>
+      <footprint>Capacitors_SMD:C_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 50V, X7R, 10%</field>
+        <field name="Digi-Key Part Number">445-7534-1-ND</field>
+        <field name="Manufacturer">TDK</field>
+        <field name="Manufacturer Part Number">C2012X7R1H104K085AA</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="C" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5397F60A</tstamp>
+    </comp>
+    <comp ref="C14">
+      <value>100nF</value>
+      <footprint>Capacitors_SMD:C_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 50V, X7R, 10%</field>
+        <field name="Digi-Key Part Number">445-7534-1-ND</field>
+        <field name="Manufacturer">TDK</field>
+        <field name="Manufacturer Part Number">C2012X7R1H104K085AA</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="C" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5397F916</tstamp>
+    </comp>
+    <comp ref="D3">
+      <value>DB2J310</value>
+      <footprint>Diodes_SMD:SOD-323</footprint>
+      <fields>
+        <field name="Comments">SOD-323, 200mA</field>
+        <field name="Digi-Key Part Number">DB2J31000LCT-ND</field>
+        <field name="Manufacturer">Panasonic</field>
+        <field name="Manufacturer Part Number">DB2J31000L</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="D_Schottky_ALT" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5398030F</tstamp>
+    </comp>
+    <comp ref="C16">
+      <value>100nF</value>
+      <footprint>Capacitors_SMD:C_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 50V, X7R, 10%</field>
+        <field name="Digi-Key Part Number">445-7534-1-ND</field>
+        <field name="Manufacturer">TDK</field>
+        <field name="Manufacturer Part Number">C2012X7R1H104K085AA</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="C" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>53981B9C</tstamp>
+    </comp>
+    <comp ref="PS2">
+      <value>R1SE-0505</value>
+      <footprint>MyFootPrints:8-SMD</footprint>
+      <fields>
+        <field name="Comments">8-SMD Module, 5 Leads</field>
+        <field name="Digi-Key Part Number">945-1659-1-ND</field>
+        <field name="Manufacturer">Recom</field>
+        <field name="Manufacturer Part Number">R1SE-0505-R</field>
+      </fields>
+      <libsource lib="GoodtimeDev" part="ROE-0505S" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>53982002</tstamp>
+    </comp>
+    <comp ref="U6">
+      <value>Si8602</value>
+      <footprint>Housings_SOIC:SOIC-8_3.9x4.9mm_Pitch1.27mm</footprint>
+      <fields>
+        <field name="Comments">8-SOIC 3.9mm</field>
+        <field name="Digi-Key Part Number">SI8602AB-B-IS-ND</field>
+        <field name="Manufacturer">Silicon Labs</field>
+        <field name="Manufacturer Part Number">SI8602AB-B-IS</field>
+      </fields>
+      <libsource lib="GoodtimeDev" part="Si8602" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>560D4023</tstamp>
+    </comp>
+    <comp ref="R25">
+      <value>4K99</value>
+      <footprint>Resistors_SMD:R_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RNCP0805FTD4K99CT-ND </field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RNCP0805FTD4K99</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="R" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>57B71219</tstamp>
+    </comp>
+    <comp ref="D1">
+      <value>SMTL4-RGY</value>
+      <footprint>MyFootPrints:PLCC-4</footprint>
+      <fields>
+        <field name="Comments">4-PLCC</field>
+        <field name="Digi-Key Part Number">492-2173-1-ND</field>
+        <field name="Manufacturer">Bivar</field>
+        <field name="Manufacturer Part Number">SMTL4-RGY </field>
+      </fields>
+      <libsource lib="GoodtimeDev" part="TRI-LED" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A17EDD3</tstamp>
+    </comp>
+    <comp ref="R3">
+      <value>150R</value>
+      <footprint>Resistors_SMD:R_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RNCP0805FTD150RCT-ND</field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RNCP0805FTD150R</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="R" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A17EDDA</tstamp>
+    </comp>
+    <comp ref="R4">
+      <value>150R</value>
+      <footprint>Resistors_SMD:R_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RNCP0805FTD150RCT-ND</field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RNCP0805FTD150R</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="R" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A17EDE1</tstamp>
+    </comp>
+    <comp ref="R5">
+      <value>150R</value>
+      <footprint>Resistors_SMD:R_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RNCP0805FTD150RCT-ND</field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RNCP0805FTD150R</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="R" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A17EDE8</tstamp>
+    </comp>
+    <comp ref="U2">
+      <value>ST485EC</value>
+      <footprint>Housings_SOIC:SOIC-8_3.9x4.9mm_Pitch1.27mm</footprint>
+      <fields>
+        <field name="Comments">8-SOIC</field>
+        <field name="Digi-Key Part Number">497-3735-1-ND</field>
+        <field name="Manufacturer">STMicro</field>
+        <field name="Manufacturer Part Number">ST485ECDR</field>
+      </fields>
+      <libsource lib="GoodtimeDev" part="SN75176B" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A17EDF3</tstamp>
+    </comp>
+    <comp ref="C6">
+      <value>100nF</value>
+      <footprint>Capacitors_SMD:C_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 50V, X7R, 10%</field>
+        <field name="Digi-Key Part Number">445-7534-1-ND</field>
+        <field name="Manufacturer">TDK</field>
+        <field name="Manufacturer Part Number">C2012X7R1H104K085AA</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="C" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A17EE0A</tstamp>
+    </comp>
+    <comp ref="P2">
+      <value>AquaPicBus</value>
+      <footprint>MyFootPrints:USB-1.1_Stacked</footprint>
+      <fields>
+        <field name="Comments">-</field>
+        <field name="Digi-Key Part Number">1175-1003-ND</field>
+        <field name="Manufacturer">CNC Tech</field>
+        <field name="Manufacturer Part Number">1001-004-01010</field>
+      </fields>
+      <libsource lib="GoodtimeDev" part="USB1.0_Stacked" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A17EE1D</tstamp>
+    </comp>
+    <comp ref="P1">
+      <value>1x6 2.54 Pin Header</value>
+      <footprint>Pin_Headers:Pin_Header_Straight_1x06_Pitch2.54mm</footprint>
+      <fields>
+        <field name="Comments">-</field>
+        <field name="Digi-Key Part Number">A105161CT-ND</field>
+        <field name="Manufacturer">TE</field>
+        <field name="Manufacturer Part Number">5-146868-1</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="CONN_01X06" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A17EE33</tstamp>
+    </comp>
+    <comp ref="X1">
+      <value>8MHz</value>
+      <footprint>MyFootPrints:Resonator_3.2x1.3</footprint>
+      <fields>
+        <field name="Comments">3-SMD, Non-Standard</field>
+        <field name="Digi-Key Part Number">490-1195-1-ND</field>
+        <field name="Manufacturer">Murata</field>
+        <field name="Manufacturer Part Number">CSTCE8M00G55-R0</field>
+      </fields>
+      <libsource lib="GoodtimeDev" part="RESONATOR" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A17EE3A</tstamp>
+    </comp>
+    <comp ref="R2">
+      <value>4K99</value>
+      <footprint>Resistors_SMD:R_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RNCP0805FTD4K99CT-ND </field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RNCP0805FTD4K99</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="R" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A17EE5B</tstamp>
+    </comp>
+    <comp ref="R1">
+      <value>4K99</value>
+      <footprint>Resistors_SMD:R_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RNCP0805FTD4K99CT-ND </field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RNCP0805FTD4K99</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="R" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A17EE62</tstamp>
+    </comp>
+    <comp ref="IC1">
+      <value>PIC32MM0064GPM028</value>
+      <footprint>Housings_DFN_QFN:QFN-28-1EP_6x6mm_Pitch0.65mm</footprint>
+      <fields>
+        <field name="Comments">28-QFN 6x6</field>
+        <field name="Digi-Key Part Number">PIC32MM0064GPM028T-I/MLCT-ND </field>
+        <field name="Manufacturer">Microchip</field>
+        <field name="Manufacturer Part Number">PIC32MM0064GPM028T-I/ML </field>
+      </fields>
+      <libsource lib="GoodtimeDev" part="PIC32MM0064GPM028_QFN" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A17EE78</tstamp>
+    </comp>
+    <comp ref="C2">
+      <value>100nF</value>
+      <footprint>Capacitors_SMD:C_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 50V, X7R, 10%</field>
+        <field name="Digi-Key Part Number">445-7534-1-ND</field>
+        <field name="Manufacturer">TDK</field>
+        <field name="Manufacturer Part Number">C2012X7R1H104K085AA</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="C_Small" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A17EE7F</tstamp>
+    </comp>
+    <comp ref="C3">
+      <value>100nF</value>
+      <footprint>Capacitors_SMD:C_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 50V, X7R, 10%</field>
+        <field name="Digi-Key Part Number">445-7534-1-ND</field>
+        <field name="Manufacturer">TDK</field>
+        <field name="Manufacturer Part Number">C2012X7R1H104K085AA</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="C_Small" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A17EE86</tstamp>
+    </comp>
+    <comp ref="Q3">
+      <value>NX7002AK</value>
+      <footprint>TO_SOT_Packages_SMD:SOT-23</footprint>
+      <fields>
+        <field name="Comments">SOT-23-3</field>
+        <field name="Digi-Key Part Number">1727-1289-6-ND </field>
+        <field name="Manufacturer">Nexperia</field>
+        <field name="Manufacturer Part Number">NX7002AK,215</field>
+      </fields>
+      <libsource lib="GoodtimeDev" part="MOSFET_N_SMALL" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A17EE9F</tstamp>
+    </comp>
+    <comp ref="R10">
+      <value>4K99</value>
+      <footprint>Resistors_SMD:R_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RNCP0805FTD4K99CT-ND </field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RNCP0805FTD4K99</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="R" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A17EEA8</tstamp>
+    </comp>
+    <comp ref="R12">
+      <value>4K99</value>
+      <footprint>Resistors_SMD:R_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RNCP0805FTD4K99CT-ND </field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RNCP0805FTD4K99</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="R" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A17EEAF</tstamp>
+    </comp>
+    <comp ref="Q1">
+      <value>NX7002AK</value>
+      <footprint>TO_SOT_Packages_SMD:SOT-23</footprint>
+      <fields>
+        <field name="Comments">SOT-23-3</field>
+        <field name="Digi-Key Part Number">1727-1289-6-ND </field>
+        <field name="Manufacturer">Nexperia</field>
+        <field name="Manufacturer Part Number">NX7002AK,215</field>
+      </fields>
+      <libsource lib="GoodtimeDev" part="MOSFET_N_SMALL" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A17EEB7</tstamp>
+    </comp>
+    <comp ref="R6">
+      <value>1K</value>
+      <footprint>Resistors_SMD:R_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RNCP0805FTD1K00CT-ND </field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RNCP0805FTD1K00</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="R" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A17EEBE</tstamp>
+    </comp>
+    <comp ref="R7">
+      <value>10K</value>
+      <footprint>Resistors_SMD:R_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RNCP0805FTD10K0CT-ND</field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RNCP0805FTD10K0</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="R" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A17EEC5</tstamp>
+    </comp>
+    <comp ref="R8">
+      <value>10K</value>
+      <footprint>Resistors_SMD:R_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RNCP0805FTD10K0CT-ND</field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RNCP0805FTD10K0</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="R" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A17EECC</tstamp>
+    </comp>
+    <comp ref="Q2">
+      <value>NX7002AK</value>
+      <footprint>TO_SOT_Packages_SMD:SOT-23</footprint>
+      <fields>
+        <field name="Comments">SOT-23-3</field>
+        <field name="Digi-Key Part Number">1727-1289-6-ND </field>
+        <field name="Manufacturer">Nexperia</field>
+        <field name="Manufacturer Part Number">NX7002AK,215</field>
+      </fields>
+      <libsource lib="GoodtimeDev" part="MOSFET_N_SMALL" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A17EF9D</tstamp>
+    </comp>
+    <comp ref="R9">
+      <value>4K99</value>
+      <footprint>Resistors_SMD:R_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RNCP0805FTD4K99CT-ND </field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RNCP0805FTD4K99</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="R" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A17EFA4</tstamp>
+    </comp>
+    <comp ref="R11">
+      <value>4K99</value>
+      <footprint>Resistors_SMD:R_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RNCP0805FTD4K99CT-ND </field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RNCP0805FTD4K99</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="R" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A17EFAB</tstamp>
+    </comp>
+    <comp ref="U1">
+      <value>AP2114H</value>
+      <footprint>TO_SOT_Packages_SMD:SOT-223</footprint>
+      <fields>
+        <field name="Comments">SOT-223</field>
+        <field name="Digi-Key Part Number">AP2114HA-2.5TRG1DICT-ND </field>
+        <field name="Manufacturer">Diodes</field>
+        <field name="Manufacturer Part Number">AP2114HA-2.5TRG1 </field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="AP1117-33" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A17EFD3</tstamp>
+    </comp>
+    <comp ref="C5">
+      <value>4u7</value>
+      <footprint>Capacitors_SMD:C_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 10V, X7R, 10%</field>
+        <field name="Digi-Key Part Number">1276-2972-1-ND </field>
+        <field name="Manufacturer">Samsung</field>
+        <field name="Manufacturer Part Number">CL21B475KPFNNNE</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="C_Small" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A17EFE2</tstamp>
+    </comp>
+    <comp ref="C4">
+      <value>4u7</value>
+      <footprint>Capacitors_SMD:C_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 10V, X7R, 10%</field>
+        <field name="Digi-Key Part Number">1276-2972-1-ND </field>
+        <field name="Manufacturer">Samsung</field>
+        <field name="Manufacturer Part Number">CL21B475KPFNNNE</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="C_Small" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A17EFEB</tstamp>
+    </comp>
+    <comp ref="D2">
+      <value>APT2012</value>
+      <footprint>LEDs:LED-0805</footprint>
+      <fields>
+        <field name="Comments">0805, 2V, 20mA</field>
+        <field name="Digi-Key Part Number">475-1278-1-ND</field>
+        <field name="Manufacturer">Osram</field>
+        <field name="Manufacturer Part Number">LS R976-NR-1</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="LED_ALT" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A1A7648</tstamp>
+    </comp>
+    <comp ref="R13">
+      <value>150R</value>
+      <footprint>Resistors_SMD:R_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RNCP0805FTD150RCT-ND</field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RNCP0805FTD150R</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="R" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A1A764F</tstamp>
+    </comp>
+    <comp ref="P3">
+      <value>1x2 2.54</value>
+      <footprint>MyFootPrints:Screw_Header_1x2</footprint>
+      <fields>
+        <field name="Comments">-</field>
+        <field name="Digi-Key Part Number">ED10561-ND</field>
+        <field name="Manufacturer">On Shore</field>
+        <field name="Manufacturer Part Number">OSTVN02A150</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="CONN_01X02" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A1A7663</tstamp>
+    </comp>
+    <comp ref="Q4">
+      <value>AO3407A</value>
+      <footprint>TO_SOT_Packages_SMD:SOT-23</footprint>
+      <fields>
+        <field name="Comments">SOT-23-3</field>
+        <field name="Digi-Key Part Number">785-1006-1-ND</field>
+        <field name="Manufacturer">Alpha Omega</field>
+        <field name="Manufacturer Part Number">AO3407A</field>
+      </fields>
+      <libsource lib="GoodtimeDev" part="MOSFET_P_SMALL" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A1A766A</tstamp>
+    </comp>
+    <comp ref="C1">
+      <value>100nF</value>
+      <footprint>Capacitors_SMD:C_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 50V, X7R, 10%</field>
+        <field name="Digi-Key Part Number">445-7534-1-ND</field>
+        <field name="Manufacturer">TDK</field>
+        <field name="Manufacturer Part Number">C2012X7R1H104K085AA</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="C_Small" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A1B1618</tstamp>
+    </comp>
+    <comp ref="PS1">
+      <value>R1SE-0505</value>
+      <footprint>MyFootPrints:8-SMD</footprint>
+      <fields>
+        <field name="Comments">8-SMD Module, 5 Leads</field>
+        <field name="Digi-Key Part Number">945-1659-1-ND</field>
+        <field name="Manufacturer">Recom</field>
+        <field name="Manufacturer Part Number">R1SE-0505-R</field>
+      </fields>
+      <libsource lib="GoodtimeDev" part="ROE-0505S" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>538CBEC9</tstamp>
+    </comp>
+    <comp ref="U5">
+      <value>LTC2483</value>
+      <footprint>MyFootPrints:DFN-10_3x3mm</footprint>
+      <fields>
+        <field name="Comments">10-DFN 3x3mm</field>
+        <field name="Digi-Key Part Number">LTC2483CDD#PBF-ND</field>
+        <field name="Manufacturer">Linear</field>
+        <field name="Manufacturer Part Number">LTC2483CDD#PBF</field>
+      </fields>
+      <libsource lib="GoodtimeDev" part="LTC2483" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>538CE839</tstamp>
+    </comp>
+    <comp ref="R40">
+      <value>4K99</value>
+      <footprint>Resistors_SMD:R_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RNCP0805FTD4K99CT-ND </field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RNCP0805FTD4K99</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="R" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A2325AA</tstamp>
+    </comp>
+    <comp ref="C29">
+      <value>100nF</value>
+      <footprint>Capacitors_SMD:C_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 50V, X7R, 10%</field>
+        <field name="Digi-Key Part Number">445-7534-1-ND</field>
+        <field name="Manufacturer">TDK</field>
+        <field name="Manufacturer Part Number">C2012X7R1H104K085AA</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="C" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A2325B7</tstamp>
+    </comp>
+    <comp ref="C28">
+      <value>100nF</value>
+      <footprint>Capacitors_SMD:C_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 50V, X7R, 10%</field>
+        <field name="Digi-Key Part Number">445-7534-1-ND</field>
+        <field name="Manufacturer">TDK</field>
+        <field name="Manufacturer Part Number">C2012X7R1H104K085AA</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="C" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A2325C9</tstamp>
+    </comp>
+    <comp ref="C30">
+      <value>100nF</value>
+      <footprint>Capacitors_SMD:C_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 50V, X7R, 10%</field>
+        <field name="Digi-Key Part Number">445-7534-1-ND</field>
+        <field name="Manufacturer">TDK</field>
+        <field name="Manufacturer Part Number">C2012X7R1H104K085AA</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="C" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A2325E8</tstamp>
+    </comp>
+    <comp ref="U11">
+      <value>Si8602</value>
+      <footprint>Housings_SOIC:SOIC-8_3.9x4.9mm_Pitch1.27mm</footprint>
+      <fields>
+        <field name="Comments">8-SOIC 3.9mm</field>
+        <field name="Digi-Key Part Number">SI8602AB-B-IS-ND</field>
+        <field name="Manufacturer">Silicon Labs</field>
+        <field name="Manufacturer Part Number">SI8602AB-B-IS</field>
+      </fields>
+      <libsource lib="GoodtimeDev" part="Si8602" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A2325FE</tstamp>
+    </comp>
+    <comp ref="R39">
+      <value>4K99</value>
+      <footprint>Resistors_SMD:R_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RNCP0805FTD4K99CT-ND </field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RNCP0805FTD4K99</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="R" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A23260A</tstamp>
+    </comp>
+    <comp ref="U10">
+      <value>LTC2483</value>
+      <footprint>MyFootPrints:DFN-10_3x3mm</footprint>
+      <fields>
+        <field name="Comments">10-DFN 3x3mm</field>
+        <field name="Digi-Key Part Number">LTC2483CDD#PBF-ND</field>
+        <field name="Manufacturer">Linear</field>
+        <field name="Manufacturer Part Number">LTC2483CDD#PBF</field>
+      </fields>
+      <libsource lib="GoodtimeDev" part="LTC2483" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A232639</tstamp>
+    </comp>
+    <comp ref="R21">
+      <value>221K</value>
+      <footprint>Resistors_SMD:R_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RMCF0805FT221KCT-ND</field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RMCF0805FT221K</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="R" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>53959564</tstamp>
+    </comp>
+    <comp ref="TP1">
+      <value>TEST</value>
+      <footprint>Measurement_Points:Measurement_Point_Round-SMD-Pad_Small</footprint>
+      <libsource lib="pH-ORP-Card-rescue" part="TEST_1P" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A296A71</tstamp>
+    </comp>
+    <comp ref="R28">
+      <value>10K</value>
+      <footprint>MyFootPrints:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal</footprint>
+      <fields>
+        <field name="Comments">Axial, 1/4W, 1%, Metal Film</field>
+        <field name="Digi-Key Part Number">RNF14FTD10K0CT-ND</field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RNF14FTD10K0</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="R" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A298B42</tstamp>
+    </comp>
+    <comp ref="R32">
+      <value>221K</value>
+      <footprint>Resistors_SMD:R_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RMCF0805FT221KCT-ND</field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RMCF0805FT221K</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="R" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A298B48</tstamp>
+    </comp>
+    <comp ref="R33">
+      <value>221K</value>
+      <footprint>Resistors_SMD:R_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RMCF0805FT221KCT-ND</field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RMCF0805FT221K</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="R" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A298B4E</tstamp>
+    </comp>
+    <comp ref="C25">
+      <value>100nF</value>
+      <footprint>Capacitors_SMD:C_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 50V, X7R, 10%</field>
+        <field name="Digi-Key Part Number">445-7534-1-ND</field>
+        <field name="Manufacturer">TDK</field>
+        <field name="Manufacturer Part Number">C2012X7R1H104K085AA</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="C" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A298B54</tstamp>
+    </comp>
+    <comp ref="R31">
+      <value>221K</value>
+      <footprint>Resistors_SMD:R_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RMCF0805FT221KCT-ND</field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RMCF0805FT221K</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="R" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A298B5A</tstamp>
+    </comp>
+    <comp ref="R29">
+      <value>2M</value>
+      <footprint>Resistors_SMD:R_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RMCF0805FT2M00CT-ND</field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RMCF0805FT2M00</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="R" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A298B60</tstamp>
+    </comp>
+    <comp ref="C22">
+      <value>33pF</value>
+      <footprint>Capacitors_SMD:C_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 50V, C0G/NP0, 10%</field>
+        <field name="Digi-Key Part Number">399-8062-1-ND</field>
+        <field name="Manufacturer">Kemet</field>
+        <field name="Manufacturer Part Number">C0805C330K5GACTU</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="C" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A298B66</tstamp>
+    </comp>
+    <comp ref="R30">
+      <value>100K</value>
+      <footprint>Resistors_SMD:R_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RMCF0805FT100KCT-ND</field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RMCF0805FT100K</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="R" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A298B6C</tstamp>
+    </comp>
+    <comp ref="C21">
+      <value>100nF</value>
+      <footprint>Capacitors_SMD:C_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 50V, X7R, 10%</field>
+        <field name="Digi-Key Part Number">445-7534-1-ND</field>
+        <field name="Manufacturer">TDK</field>
+        <field name="Manufacturer Part Number">C2012X7R1H104K085AA</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="C" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A298B79</tstamp>
+    </comp>
+    <comp ref="C23">
+      <value>100nF</value>
+      <footprint>Capacitors_SMD:C_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 50V, X7R, 10%</field>
+        <field name="Digi-Key Part Number">445-7534-1-ND</field>
+        <field name="Manufacturer">TDK</field>
+        <field name="Manufacturer Part Number">C2012X7R1H104K085AA</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="C" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A298B7F</tstamp>
+    </comp>
+    <comp ref="U8">
+      <value>LMC6061</value>
+      <footprint>Housings_SOIC:SOIC-8_3.9x4.9mm_Pitch1.27mm</footprint>
+      <fields>
+        <field name="Comments">8-SOIC 3.9mm</field>
+        <field name="Digi-Key Part Number">LMC6061AIMX/NOPBCT-ND</field>
+        <field name="Manufacturer">Texas Instruments</field>
+        <field name="Manufacturer Part Number">LMC6061AIMX/NOPB</field>
+      </fields>
+      <libsource lib="GoodtimeDev" part="LMC6061" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A298B8B</tstamp>
+    </comp>
+    <comp ref="U9">
+      <value>TLV272</value>
+      <footprint>Housings_SOIC:SOIC-8_3.9x4.9mm_Pitch1.27mm</footprint>
+      <fields>
+        <field name="Comments">8-SOIC 3.9mm</field>
+        <field name="Digi-Key Part Number">TLV272IS-13DICT-ND</field>
+        <field name="Manufacturer">Diodes Inc</field>
+        <field name="Manufacturer Part Number">TLV272IS-13</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="LM358" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A298B91</tstamp>
+    </comp>
+    <comp ref="R34">
+      <value>221K</value>
+      <footprint>Resistors_SMD:R_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RMCF0805FT221KCT-ND</field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RMCF0805FT221K</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="R" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A298B9D</tstamp>
+    </comp>
+    <comp ref="C24">
+      <value>100nF</value>
+      <footprint>Capacitors_SMD:C_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 50V, X7R, 10%</field>
+        <field name="Digi-Key Part Number">445-7534-1-ND</field>
+        <field name="Manufacturer">TDK</field>
+        <field name="Manufacturer Part Number">C2012X7R1H104K085AA</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="C" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A298BA3</tstamp>
+    </comp>
+    <comp ref="C26">
+      <value>100nF</value>
+      <footprint>Capacitors_SMD:C_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 50V, X7R, 10%</field>
+        <field name="Digi-Key Part Number">445-7534-1-ND</field>
+        <field name="Manufacturer">TDK</field>
+        <field name="Manufacturer Part Number">C2012X7R1H104K085AA</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="C" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A298BA9</tstamp>
+    </comp>
+    <comp ref="RV4">
+      <value>10K</value>
+      <footprint>MyFootPrints:POTENTIAMETER_SMD</footprint>
+      <fields>
+        <field name="Comments">J Lead, 12T</field>
+        <field name="Digi-Key Part Number">987-1155-ND</field>
+        <field name="Manufacturer">TT</field>
+        <field name="Manufacturer Part Number">84WR10KLF</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="POT" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A298BB5</tstamp>
+    </comp>
+    <comp ref="R37">
+      <value>10K</value>
+      <footprint>Resistors_SMD:R_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RNCP0805FTD10K0CT-ND</field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RNCP0805FTD10K0</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="R" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A298BBB</tstamp>
+    </comp>
+    <comp ref="R38">
+      <value>10K</value>
+      <footprint>Resistors_SMD:R_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RNCP0805FTD10K0CT-ND</field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RNCP0805FTD10K0</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="R" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A298BC1</tstamp>
+    </comp>
+    <comp ref="C27">
+      <value>1uF</value>
+      <footprint>Capacitors_SMD:C_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 25V, X7R, 10%</field>
+        <field name="Digi-Key Part Number">1276-1066-1-ND</field>
+        <field name="Manufacturer">Samsung</field>
+        <field name="Manufacturer Part Number">CL21B105KAFNNNE</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="C" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A298BC7</tstamp>
+    </comp>
+    <comp ref="RV3">
+      <value>50K</value>
+      <footprint>MyFootPrints:POTENTIAMETER_SMD</footprint>
+      <fields>
+        <field name="Comments">J Lead, 12T</field>
+        <field name="Digi-Key Part Number">987-1554-ND</field>
+        <field name="Manufacturer">TT</field>
+        <field name="Manufacturer Part Number">84WR50KLF</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="POT" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A298BCE</tstamp>
+    </comp>
+    <comp ref="R36">
+      <value>1K</value>
+      <footprint>Resistors_SMD:R_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RNCP0805FTD1K00CT-ND </field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RNCP0805FTD1K00</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="R" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A298BD5</tstamp>
+    </comp>
+    <comp ref="D4">
+      <value>DB2J310</value>
+      <footprint>Diodes_SMD:SOD-323</footprint>
+      <fields>
+        <field name="Comments">SOD-323, 200mA</field>
+        <field name="Digi-Key Part Number">DB2J31000LCT-ND</field>
+        <field name="Manufacturer">Panasonic</field>
+        <field name="Manufacturer Part Number">DB2J31000L</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="D_Schottky_ALT" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A298BEA</tstamp>
+    </comp>
+    <comp ref="R35">
+      <value>221K</value>
+      <footprint>Resistors_SMD:R_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RMCF0805FT221KCT-ND</field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RMCF0805FT221K</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="R" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A298C05</tstamp>
+    </comp>
+    <comp ref="TP2">
+      <value>TEST</value>
+      <footprint>Measurement_Points:Measurement_Point_Round-SMD-Pad_Small</footprint>
+      <libsource lib="pH-ORP-Card-rescue" part="TEST_1P" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A298C96</tstamp>
+    </comp>
+    <comp ref="P5">
+      <value>BNC</value>
+      <footprint>MyFootPrints:BNC_Socket_TYCO-AMP_LargePads</footprint>
+      <fields>
+        <field name="Comments">-</field>
+        <field name="Digi-Key Part Number">A97553-ND</field>
+        <field name="Manufacturer">TE</field>
+        <field name="Manufacturer Part Number">1-1337543-0</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="BNC" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A2E17CE</tstamp>
+    </comp>
+    <comp ref="C33">
+      <value>10uF</value>
+      <footprint>Capacitors_SMD:C_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 10V, X7R, 10%</field>
+        <field name="Digi-Key Part Number">490-10516-1-ND</field>
+        <field name="Manufacturer">Murata</field>
+        <field name="Manufacturer Part Number">GRM21BR71A106KA73L</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="C" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A2EA54E</tstamp>
+    </comp>
+    <comp ref="R41">
+      <value>50R</value>
+      <footprint>Resistors_SMD:R_2512</footprint>
+      <fields>
+        <field name="Comments">2512, 1W, 1%, Thick Film</field>
+        <field name="Digi-Key Part Number">541-49.9AFCT-ND</field>
+        <field name="Manufacturer">Vishay Dale</field>
+        <field name="Manufacturer Part Number">CRCW251249R9FKEG</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="R" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A2EA554</tstamp>
+    </comp>
+    <comp ref="C32">
+      <value>4u7</value>
+      <footprint>Capacitors_SMD:C_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 10V, X7R, 10%</field>
+        <field name="Digi-Key Part Number">1276-2972-1-ND </field>
+        <field name="Manufacturer">Samsung</field>
+        <field name="Manufacturer Part Number">CL21B475KPFNNNE</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="C" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A2EA55A</tstamp>
+    </comp>
+    <comp ref="U12">
+      <value>TC7660</value>
+      <footprint>Housings_SOIC:SOIC-8_3.9x4.9mm_Pitch1.27mm</footprint>
+      <fields>
+        <field name="Comments">8-SOIC 3.9mm</field>
+        <field name="Digi-Key Part Number">TC7660EOA-ND</field>
+        <field name="Manufacturer">Microchip</field>
+        <field name="Manufacturer Part Number">TC7660EOA</field>
+      </fields>
+      <libsource lib="GoodtimeDev" part="TC7660" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A2EA56D</tstamp>
+    </comp>
+    <comp ref="C31">
+      <value>10uF</value>
+      <footprint>Capacitors_SMD:C_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 10V, X7R, 10%</field>
+        <field name="Digi-Key Part Number">490-10516-1-ND</field>
+        <field name="Manufacturer">Murata</field>
+        <field name="Manufacturer Part Number">GRM21BR71A106KA73L</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="CP1" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A2EA57B</tstamp>
+    </comp>
+    <comp ref="C34">
+      <value>10uF</value>
+      <footprint>Capacitors_SMD:C_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 10V, X7R, 10%</field>
+        <field name="Digi-Key Part Number">490-10516-1-ND</field>
+        <field name="Manufacturer">Murata</field>
+        <field name="Manufacturer Part Number">GRM21BR71A106KA73L</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="CP1" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A2EA581</tstamp>
+    </comp>
+    <comp ref="R42">
+      <value>1K</value>
+      <footprint>Resistors_SMD:R_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RNCP0805FTD1K00CT-ND </field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RNCP0805FTD1K00</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="R" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A198271</tstamp>
+    </comp>
+    <comp ref="R43">
+      <value>1K</value>
+      <footprint>Resistors_SMD:R_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RNCP0805FTD1K00CT-ND </field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RNCP0805FTD1K00</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="R" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A1B0B4F</tstamp>
+    </comp>
+    <comp ref="Q6">
+      <value>NX7002AK</value>
+      <footprint>TO_SOT_Packages_SMD:SOT-23</footprint>
+      <fields>
+        <field name="Comments">SOT-23-3</field>
+        <field name="Digi-Key Part Number">1727-1289-6-ND </field>
+        <field name="Manufacturer">Nexperia</field>
+        <field name="Manufacturer Part Number">NX7002AK,215</field>
+      </fields>
+      <libsource lib="GoodtimeDev" part="MOSFET_N_SMALL" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5BB4A5FF</tstamp>
+    </comp>
+    <comp ref="R45">
+      <value>10K</value>
+      <footprint>Resistors_SMD:R_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RNCP0805FTD10K0CT-ND</field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RNCP0805FTD10K0</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5BB4B302</tstamp>
+    </comp>
+    <comp ref="R44">
+      <value>10K</value>
+      <footprint>Resistors_SMD:R_0805</footprint>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RNCP0805FTD10K0CT-ND</field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RNCP0805FTD10K0</field>
+      </fields>
+      <libsource lib="pH-ORP-Card-rescue" part="R" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5A198285</tstamp>
+    </comp>
+    <comp ref="Q5">
+      <value>NX7002AK</value>
+      <footprint>TO_SOT_Packages_SMD:SOT-23</footprint>
+      <fields>
+        <field name="Comments">SOT-23-3</field>
+        <field name="Digi-Key Part Number">1727-1289-6-ND </field>
+        <field name="Manufacturer">Nexperia</field>
+        <field name="Manufacturer Part Number">NX7002AK,215</field>
+      </fields>
+      <libsource lib="GoodtimeDev" part="MOSFET_N_SMALL" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5BC1DE17</tstamp>
+    </comp>
+  </components>
+  <libparts>
+    <libpart lib="Device" part="R">
+      <description>Resistor</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>R_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">R</field>
+        <field name="Value">R</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="GoodtimeDev" part="LMC6061">
+      <aliases>
+        <alias>LMC6082</alias>
+        <alias>LM358N</alias>
+        <alias>TL072</alias>
+        <alias>TL082</alias>
+      </aliases>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">LMC6061</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="NotConnected"/>
+        <pin num="2" name="-" type="input"/>
+        <pin num="3" name="+" type="input"/>
+        <pin num="4" name="V-" type="power_in"/>
+        <pin num="5" name="~" type="NotConnected"/>
+        <pin num="6" name="~" type="output"/>
+        <pin num="7" name="V+" type="power_in"/>
+        <pin num="8" name="~" type="NotConnected"/>
+      </pins>
+    </libpart>
+    <libpart lib="GoodtimeDev" part="LTC2483">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">LTC2483</field>
+      </fields>
+      <pins>
+        <pin num="1" name="REF+" type="input"/>
+        <pin num="2" name="Vcc" type="power_in"/>
+        <pin num="3" name="REF-" type="input"/>
+        <pin num="4" name="IN+" type="input"/>
+        <pin num="5" name="IN-" type="input"/>
+        <pin num="6" name="SCL" type="input"/>
+        <pin num="7" name="SDA" type="openCol"/>
+        <pin num="8" name="GND" type="power_in"/>
+        <pin num="9" name="CA1" type="input"/>
+        <pin num="10" name="CA0/Fo" type="input"/>
+        <pin num="PAD" name="~" type="NotConnected"/>
+      </pins>
+    </libpart>
+    <libpart lib="GoodtimeDev" part="MOSFET_N_SMALL">
+      <fields>
+        <field name="Reference">Q</field>
+        <field name="Value">MOSFET_N_SMALL</field>
+      </fields>
+      <pins>
+        <pin num="1" name="G" type="input"/>
+        <pin num="2" name="S" type="passive"/>
+        <pin num="3" name="D" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="GoodtimeDev" part="MOSFET_P_SMALL">
+      <fields>
+        <field name="Reference">Q</field>
+        <field name="Value">MOSFET_P_SMALL</field>
+      </fields>
+      <pins>
+        <pin num="1" name="G" type="input"/>
+        <pin num="2" name="S" type="passive"/>
+        <pin num="3" name="D" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="GoodtimeDev" part="PIC32MM0064GPM028_QFN">
+      <footprints>
+        <fp>QFN</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">IC</field>
+        <field name="Value">PIC32MM0064GPM028_QFN</field>
+      </fields>
+      <pins>
+        <pin num="1" name="RB0" type="BiDi"/>
+        <pin num="2" name="RB1" type="BiDi"/>
+        <pin num="3" name="RB2" type="BiDi"/>
+        <pin num="4" name="RB3" type="BiDi"/>
+        <pin num="5" name="Vss" type="power_in"/>
+        <pin num="6" name="RA2/OSC1" type="BiDi"/>
+        <pin num="7" name="RA3/OSC2" type="BiDi"/>
+        <pin num="8" name="RB4" type="BiDi"/>
+        <pin num="9" name="RA4" type="BiDi"/>
+        <pin num="10" name="Vdd" type="power_in"/>
+        <pin num="11" name="RB5" type="BiDi"/>
+        <pin num="12" name="RB6" type="BiDi"/>
+        <pin num="13" name="RB7" type="BiDi"/>
+        <pin num="14" name="RB8" type="BiDi"/>
+        <pin num="15" name="RB9" type="BiDi"/>
+        <pin num="16" name="RC9" type="BiDi"/>
+        <pin num="17" name="Vcap" type="power_out"/>
+        <pin num="18" name="RB10" type="BiDi"/>
+        <pin num="19" name="RB11" type="BiDi"/>
+        <pin num="20" name="RB12" type="BiDi"/>
+        <pin num="21" name="RB13" type="BiDi"/>
+        <pin num="22" name="RB14" type="BiDi"/>
+        <pin num="23" name="RB15" type="BiDi"/>
+        <pin num="24" name="AVss" type="power_in"/>
+        <pin num="25" name="AVdd" type="power_in"/>
+        <pin num="26" name="/MCLR" type="input"/>
+        <pin num="27" name="RA0" type="BiDi"/>
+        <pin num="28" name="RA1" type="BiDi"/>
+      </pins>
+    </libpart>
+    <libpart lib="GoodtimeDev" part="RESONATOR">
+      <fields>
+        <field name="Reference">X</field>
+        <field name="Value">RESONATOR</field>
+      </fields>
+      <pins>
+        <pin num="1" name="X2" type="BiDi"/>
+        <pin num="2" name="G" type="BiDi"/>
+        <pin num="3" name="X1" type="BiDi"/>
+      </pins>
+    </libpart>
+    <libpart lib="GoodtimeDev" part="ROE-0505S">
+      <fields>
+        <field name="Reference">PS</field>
+        <field name="Value">ROE-0505S</field>
+      </fields>
+      <pins>
+        <pin num="1" name="Vin-" type="power_in"/>
+        <pin num="2" name="Vin+" type="power_in"/>
+        <pin num="3" name="~" type="NotConnected"/>
+        <pin num="4" name="Vo-" type="power_out"/>
+        <pin num="5" name="Vo+" type="power_out"/>
+        <pin num="6" name="~" type="NotConnected"/>
+        <pin num="7" name="~" type="NotConnected"/>
+        <pin num="8" name="~" type="NotConnected"/>
+      </pins>
+    </libpart>
+    <libpart lib="GoodtimeDev" part="SN75176B">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">SN75176B</field>
+      </fields>
+      <pins>
+        <pin num="1" name="R" type="output"/>
+        <pin num="2" name="/RE" type="input"/>
+        <pin num="3" name="DE" type="input"/>
+        <pin num="4" name="D" type="input"/>
+        <pin num="5" name="GND" type="input"/>
+        <pin num="6" name="A" type="BiDi"/>
+        <pin num="7" name="B" type="BiDi"/>
+        <pin num="8" name="Vcc" type="input"/>
+      </pins>
+    </libpart>
+    <libpart lib="GoodtimeDev" part="Si8602">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">Si8602</field>
+      </fields>
+      <pins>
+        <pin num="1" name="Vdd1" type="power_in"/>
+        <pin num="2" name="SDA1" type="openCol"/>
+        <pin num="3" name="SCL1" type="input"/>
+        <pin num="4" name="GND1" type="power_in"/>
+        <pin num="5" name="GND2" type="power_in"/>
+        <pin num="6" name="SCL2" type="openCol"/>
+        <pin num="7" name="SDA2" type="openCol"/>
+        <pin num="8" name="Vdd2" type="power_in"/>
+      </pins>
+    </libpart>
+    <libpart lib="GoodtimeDev" part="TC7660">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">TC7660</field>
+      </fields>
+      <pins>
+        <pin num="1" name="NC" type="NotConnected"/>
+        <pin num="2" name="C+" type="power_out"/>
+        <pin num="3" name="GND" type="power_in"/>
+        <pin num="4" name="C-" type="power_in"/>
+        <pin num="5" name="Vout" type="power_out"/>
+        <pin num="6" name="LV" type="passive"/>
+        <pin num="7" name="OSC" type="passive"/>
+        <pin num="8" name="V+" type="power_in"/>
+      </pins>
+    </libpart>
+    <libpart lib="GoodtimeDev" part="TRI-LED">
+      <footprints>
+        <fp>LED-3MM</fp>
+        <fp>LED-5MM</fp>
+        <fp>LED-10MM</fp>
+        <fp>LED-0603</fp>
+        <fp>LED-0805</fp>
+        <fp>LED-1206</fp>
+        <fp>LEDV</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">D</field>
+        <field name="Value">TRI-LED</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+        <pin num="3" name="~" type="passive"/>
+        <pin num="4" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="GoodtimeDev" part="USB1.0_Stacked">
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">USB1.0_Stacked</field>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+        <pin num="3" name="3" type="passive"/>
+        <pin num="4" name="4" type="passive"/>
+        <pin num="5" name="1" type="passive"/>
+        <pin num="6" name="2" type="passive"/>
+        <pin num="7" name="3" type="passive"/>
+        <pin num="8" name="4" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="pH-ORP-Card-rescue" part="AP1117-33">
+      <footprints>
+        <fp>SOT?223*TabPin2*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">AP1117-33</field>
+        <field name="Footprint">TO_SOT_Packages_SMD:SOT-223-3Lead_TabPin2</field>
+      </fields>
+      <pins>
+        <pin num="1" name="GND" type="power_in"/>
+        <pin num="2" name="VO" type="passive"/>
+        <pin num="3" name="VI" type="power_in"/>
+      </pins>
+    </libpart>
+    <libpart lib="pH-ORP-Card-rescue" part="BNC">
+      <footprints>
+        <fp>BNC_*</fp>
+        <fp>bnc</fp>
+        <fp>bnc-*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">P</field>
+        <field name="Value">BNC</field>
+      </fields>
+      <pins>
+        <pin num="1" name="In" type="passive"/>
+        <pin num="2" name="Ext" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="pH-ORP-Card-rescue" part="C">
+      <footprints>
+        <fp>C?</fp>
+        <fp>C_????_*</fp>
+        <fp>C_????</fp>
+        <fp>SMD*_c</fp>
+        <fp>Capacitor*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">C</field>
+        <field name="Value">C</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="pH-ORP-Card-rescue" part="CONN_01X02">
+      <footprints>
+        <fp>Pin_Header_Straight_1X02</fp>
+        <fp>Pin_Header_Angled_1X02</fp>
+        <fp>Socket_Strip_Straight_1X02</fp>
+        <fp>Socket_Strip_Angled_1X02</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">P</field>
+        <field name="Value">CONN_01X02</field>
+      </fields>
+      <pins>
+        <pin num="1" name="P1" type="passive"/>
+        <pin num="2" name="P2" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="pH-ORP-Card-rescue" part="CONN_01X06">
+      <footprints>
+        <fp>Pin_Header_Straight_1X06</fp>
+        <fp>Pin_Header_Angled_1X06</fp>
+        <fp>Socket_Strip_Straight_1X06</fp>
+        <fp>Socket_Strip_Angled_1X06</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">P</field>
+        <field name="Value">CONN_01X06</field>
+      </fields>
+      <pins>
+        <pin num="1" name="P1" type="passive"/>
+        <pin num="2" name="P2" type="passive"/>
+        <pin num="3" name="P3" type="passive"/>
+        <pin num="4" name="P4" type="passive"/>
+        <pin num="5" name="P5" type="passive"/>
+        <pin num="6" name="P6" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="pH-ORP-Card-rescue" part="CP1">
+      <footprints>
+        <fp>SMD*_Pol</fp>
+        <fp>c_elec*</fp>
+        <fp>C*elec</fp>
+        <fp>TantalC*</fp>
+        <fp>Elko*</fp>
+        <fp>CP*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">C</field>
+        <field name="Value">CP1</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="pH-ORP-Card-rescue" part="C_Small">
+      <footprints>
+        <fp>C?</fp>
+        <fp>C_????_*</fp>
+        <fp>C_????</fp>
+        <fp>SMD*_c</fp>
+        <fp>Capacitor*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">C</field>
+        <field name="Value">C_Small</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="pH-ORP-Card-rescue" part="D_Schottky_ALT">
+      <footprints>
+        <fp>TO-???*</fp>
+        <fp>*SingleDiode</fp>
+        <fp>*_Diode_*</fp>
+        <fp>*SingleDiode*</fp>
+        <fp>D_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">D</field>
+        <field name="Value">D_Schottky_ALT</field>
+      </fields>
+      <pins>
+        <pin num="1" name="K" type="passive"/>
+        <pin num="2" name="A" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="pH-ORP-Card-rescue" part="LED_ALT">
+      <footprints>
+        <fp>LED*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">D</field>
+        <field name="Value">LED_ALT</field>
+      </fields>
+      <pins>
+        <pin num="1" name="K" type="passive"/>
+        <pin num="2" name="A" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="pH-ORP-Card-rescue" part="LM358">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">LM358</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="output"/>
+        <pin num="2" name="-" type="input"/>
+        <pin num="3" name="+" type="input"/>
+        <pin num="4" name="V-" type="power_in"/>
+        <pin num="5" name="+" type="input"/>
+        <pin num="6" name="-" type="input"/>
+        <pin num="7" name="~" type="output"/>
+        <pin num="8" name="V+" type="power_in"/>
+      </pins>
+    </libpart>
+    <libpart lib="pH-ORP-Card-rescue" part="POT">
+      <fields>
+        <field name="Reference">RV</field>
+        <field name="Value">POT</field>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+        <pin num="3" name="3" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="pH-ORP-Card-rescue" part="R">
+      <footprints>
+        <fp>R_*</fp>
+        <fp>Resistor_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">R</field>
+        <field name="Value">R</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="pH-ORP-Card-rescue" part="TEST_1P">
+      <fields>
+        <field name="Reference">W</field>
+        <field name="Value">TEST_1P</field>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+      </pins>
+    </libpart>
+  </libparts>
+  <libraries>
+    <library logical="Device">
+      <uri>/usr/share/kicad/library/Device.lib</uri>
+    </library>
+    <library logical="GoodtimeDev">
+      <uri>/home/sbrandt/Dropbox/KiCAD//Library/GoodtimeDev.lib</uri>
+    </library>
+    <library logical="pH-ORP-Card-rescue">
+      <uri>/home/sbrandt/Dropbox/AquaPic/Boards/pHAndORPV1-0/pH-ORP-Card-rescue.lib</uri>
+    </library>
+  </libraries>
+  <nets>
+    <net code="1" name="/RTS">
+      <node ref="R8" pin="2"/>
+      <node ref="Q1" pin="3"/>
+      <node ref="U2" pin="2"/>
+      <node ref="U2" pin="3"/>
+    </net>
+    <net code="2" name="/RX">
+      <node ref="R12" pin="2"/>
+      <node ref="Q3" pin="3"/>
+      <node ref="U2" pin="1"/>
+    </net>
+    <net code="3" name="/RX_LV">
+      <node ref="Q3" pin="2"/>
+      <node ref="IC1" pin="23"/>
+      <node ref="R10" pin="2"/>
+    </net>
+    <net code="4" name="/LED_R">
+      <node ref="IC1" pin="3"/>
+      <node ref="R5" pin="2"/>
+    </net>
+    <net code="5" name="/LED_G">
+      <node ref="R3" pin="2"/>
+      <node ref="IC1" pin="2"/>
+    </net>
+    <net code="6" name="/LED_Y">
+      <node ref="IC1" pin="1"/>
+      <node ref="R4" pin="2"/>
+    </net>
+    <net code="7" name="/B">
+      <node ref="U2" pin="7"/>
+      <node ref="P2" pin="7"/>
+      <node ref="P2" pin="3"/>
+      <node ref="P2" pin="3"/>
+      <node ref="P2" pin="3"/>
+      <node ref="P2" pin="3"/>
+    </net>
+    <net code="8" name="/A">
+      <node ref="P2" pin="6"/>
+      <node ref="U2" pin="6"/>
+      <node ref="P2" pin="2"/>
+      <node ref="P2" pin="2"/>
+      <node ref="P2" pin="2"/>
+      <node ref="P2" pin="2"/>
+    </net>
+    <net code="9" name="/TX">
+      <node ref="Q2" pin="3"/>
+      <node ref="R11" pin="2"/>
+      <node ref="U2" pin="4"/>
+    </net>
+    <net code="10" name="Net-(Q1-Pad1)">
+      <node ref="Q1" pin="1"/>
+      <node ref="R7" pin="1"/>
+      <node ref="R6" pin="1"/>
+    </net>
+    <net code="11" name="Net-(C3-Pad1)">
+      <node ref="IC1" pin="17"/>
+      <node ref="C3" pin="1"/>
+    </net>
+    <net code="12" name="//RTS">
+      <node ref="R6" pin="2"/>
+      <node ref="IC1" pin="15"/>
+      <node ref="IC1" pin="14"/>
+    </net>
+    <net code="13" name="Net-(C8-Pad2)">
+      <node ref="C8" pin="2"/>
+      <node ref="RV1" pin="2"/>
+      <node ref="U3" pin="6"/>
+      <node ref="R18" pin="1"/>
+    </net>
+    <net code="14" name="GNDD">
+      <node ref="C15" pin="2"/>
+      <node ref="C13" pin="1"/>
+      <node ref="R23" pin="1"/>
+      <node ref="D3" pin="2"/>
+      <node ref="C14" pin="2"/>
+      <node ref="R27" pin="2"/>
+      <node ref="U6" pin="5"/>
+      <node ref="C20" pin="1"/>
+      <node ref="C9" pin="1"/>
+      <node ref="P4" pin="2"/>
+      <node ref="R16" pin="2"/>
+      <node ref="C10" pin="2"/>
+      <node ref="C7" pin="2"/>
+      <node ref="U7" pin="3"/>
+      <node ref="C19" pin="2"/>
+      <node ref="U5" pin="5"/>
+      <node ref="U5" pin="3"/>
+      <node ref="C12" pin="1"/>
+      <node ref="U5" pin="8"/>
+      <node ref="PS1" pin="4"/>
+    </net>
+    <net code="15" name="Net-(C8-Pad1)">
+      <node ref="R15" pin="2"/>
+      <node ref="C8" pin="1"/>
+      <node ref="R16" pin="1"/>
+      <node ref="R17" pin="1"/>
+    </net>
+    <net code="16" name="Net-(R15-Pad1)">
+      <node ref="U3" pin="2"/>
+      <node ref="R15" pin="1"/>
+    </net>
+    <net code="17" name="-5V">
+      <node ref="C11" pin="2"/>
+      <node ref="U4" pin="4"/>
+      <node ref="U4" pin="4"/>
+      <node ref="U7" pin="5"/>
+      <node ref="U3" pin="4"/>
+      <node ref="R19" pin="2"/>
+      <node ref="R24" pin="2"/>
+      <node ref="C20" pin="2"/>
+      <node ref="C12" pin="2"/>
+      <node ref="C9" pin="2"/>
+    </net>
+    <net code="18" name="/PGD">
+      <node ref="P1" pin="4"/>
+      <node ref="IC1" pin="28"/>
+    </net>
+    <net code="19" name="Net-(R25-Pad2)">
+      <node ref="R25" pin="2"/>
+      <node ref="U6" pin="6"/>
+      <node ref="U5" pin="6"/>
+    </net>
+    <net code="20" name="Net-(R26-Pad2)">
+      <node ref="R26" pin="2"/>
+      <node ref="U5" pin="7"/>
+      <node ref="U6" pin="7"/>
+    </net>
+    <net code="21" name="//MCLR">
+      <node ref="IC1" pin="26"/>
+      <node ref="P1" pin="1"/>
+    </net>
+    <net code="22" name="/PGC">
+      <node ref="IC1" pin="27"/>
+      <node ref="P1" pin="5"/>
+    </net>
+    <net code="23" name="/TX_LV">
+      <node ref="IC1" pin="22"/>
+      <node ref="Q2" pin="2"/>
+      <node ref="R9" pin="2"/>
+    </net>
+    <net code="24" name="/A_pH">
+      <node ref="TP1" pin="1"/>
+      <node ref="U5" pin="4"/>
+      <node ref="R22" pin="2"/>
+    </net>
+    <net code="25" name="Net-(P4-Pad1)">
+      <node ref="P4" pin="1"/>
+      <node ref="R14" pin="1"/>
+    </net>
+    <net code="26" name="Net-(R14-Pad2)">
+      <node ref="R14" pin="2"/>
+      <node ref="U3" pin="3"/>
+    </net>
+    <net code="27" name="Net-(R17-Pad2)">
+      <node ref="RV1" pin="1"/>
+      <node ref="R17" pin="2"/>
+    </net>
+    <net code="28" name="Net-(C18-Pad2)">
+      <node ref="PS1" pin="1"/>
+      <node ref="C18" pin="2"/>
+      <node ref="Q5" pin="3"/>
+    </net>
+    <net code="29" name="Net-(R39-Pad2)">
+      <node ref="U11" pin="6"/>
+      <node ref="U10" pin="6"/>
+      <node ref="R39" pin="2"/>
+    </net>
+    <net code="30" name="Net-(R40-Pad2)">
+      <node ref="U10" pin="7"/>
+      <node ref="U11" pin="7"/>
+      <node ref="R40" pin="2"/>
+    </net>
+    <net code="31" name="/A_pH/ORP">
+      <node ref="R36" pin="2"/>
+      <node ref="U10" pin="4"/>
+      <node ref="TP2" pin="1"/>
+    </net>
+    <net code="32" name="+3V3">
+      <node ref="C5" pin="1"/>
+      <node ref="P1" pin="2"/>
+      <node ref="R13" pin="1"/>
+      <node ref="D1" pin="4"/>
+      <node ref="C1" pin="1"/>
+      <node ref="Q3" pin="1"/>
+      <node ref="Q2" pin="1"/>
+      <node ref="U1" pin="2"/>
+      <node ref="R1" pin="1"/>
+      <node ref="R2" pin="1"/>
+      <node ref="IC1" pin="25"/>
+      <node ref="C2" pin="1"/>
+      <node ref="IC1" pin="10"/>
+      <node ref="C30" pin="1"/>
+      <node ref="U11" pin="1"/>
+      <node ref="C16" pin="1"/>
+      <node ref="U6" pin="1"/>
+      <node ref="R9" pin="1"/>
+      <node ref="R10" pin="1"/>
+    </net>
+    <net code="33" name="Net-(D2-Pad2)">
+      <node ref="D2" pin="2"/>
+      <node ref="R13" pin="2"/>
+    </net>
+    <net code="34" name="Net-(P3-Pad1)">
+      <node ref="P3" pin="1"/>
+      <node ref="Q4" pin="3"/>
+    </net>
+    <net code="35" name="Net-(C17-Pad2)">
+      <node ref="C17" pin="2"/>
+      <node ref="U7" pin="4"/>
+    </net>
+    <net code="36" name="Net-(C17-Pad1)">
+      <node ref="U7" pin="2"/>
+      <node ref="C17" pin="1"/>
+    </net>
+    <net code="37" name="Net-(C31-Pad1)">
+      <node ref="U12" pin="2"/>
+      <node ref="C31" pin="1"/>
+    </net>
+    <net code="38" name="Net-(C32-Pad2)">
+      <node ref="PS2" pin="1"/>
+      <node ref="Q6" pin="3"/>
+      <node ref="C32" pin="2"/>
+    </net>
+    <net code="39" name="GND">
+      <node ref="P3" pin="2"/>
+      <node ref="P2" pin="8"/>
+      <node ref="R7" pin="2"/>
+      <node ref="U2" pin="5"/>
+      <node ref="Q4" pin="1"/>
+      <node ref="C1" pin="2"/>
+      <node ref="C30" pin="2"/>
+      <node ref="U11" pin="4"/>
+      <node ref="Q1" pin="2"/>
+      <node ref="D2" pin="1"/>
+      <node ref="C6" pin="2"/>
+      <node ref="IC1" pin="5"/>
+      <node ref="C4" pin="2"/>
+      <node ref="X1" pin="2"/>
+      <node ref="P2" pin="4"/>
+      <node ref="P1" pin="3"/>
+      <node ref="C16" pin="2"/>
+      <node ref="C5" pin="2"/>
+      <node ref="C2" pin="2"/>
+      <node ref="U1" pin="1"/>
+      <node ref="C3" pin="2"/>
+      <node ref="P2" pin="4"/>
+      <node ref="U6" pin="4"/>
+      <node ref="P2" pin="4"/>
+      <node ref="P2" pin="4"/>
+      <node ref="IC1" pin="24"/>
+      <node ref="R45" pin="2"/>
+      <node ref="Q6" pin="2"/>
+      <node ref="R44" pin="2"/>
+      <node ref="Q5" pin="2"/>
+    </net>
+    <net code="40" name="Net-(C31-Pad2)">
+      <node ref="C31" pin="2"/>
+      <node ref="U12" pin="4"/>
+    </net>
+    <net code="41" name="Net-(U12-Pad7)">
+      <node ref="U12" pin="7"/>
+    </net>
+    <net code="42" name="Net-(U12-Pad6)">
+      <node ref="U12" pin="6"/>
+    </net>
+    <net code="43" name="+5VA">
+      <node ref="U9" pin="8"/>
+      <node ref="C24" pin="1"/>
+      <node ref="U9" pin="8"/>
+      <node ref="R41" pin="1"/>
+      <node ref="U12" pin="8"/>
+      <node ref="U8" pin="7"/>
+      <node ref="C21" pin="1"/>
+      <node ref="C28" pin="1"/>
+      <node ref="U10" pin="1"/>
+      <node ref="U10" pin="2"/>
+      <node ref="C33" pin="1"/>
+      <node ref="R39" pin="1"/>
+      <node ref="C29" pin="1"/>
+      <node ref="PS2" pin="5"/>
+      <node ref="R40" pin="1"/>
+      <node ref="U11" pin="8"/>
+    </net>
+    <net code="44" name="+5V">
+      <node ref="P2" pin="1"/>
+      <node ref="P2" pin="5"/>
+      <node ref="P2" pin="1"/>
+      <node ref="P2" pin="1"/>
+      <node ref="U1" pin="3"/>
+      <node ref="P2" pin="1"/>
+      <node ref="C18" pin="1"/>
+      <node ref="R11" pin="1"/>
+      <node ref="U2" pin="8"/>
+      <node ref="C6" pin="1"/>
+      <node ref="PS2" pin="2"/>
+      <node ref="Q4" pin="2"/>
+      <node ref="PS1" pin="2"/>
+      <node ref="C32" pin="1"/>
+      <node ref="R8" pin="1"/>
+      <node ref="R12" pin="1"/>
+      <node ref="C4" pin="1"/>
+    </net>
+    <net code="45" name="GNDA">
+      <node ref="U10" pin="8"/>
+      <node ref="U11" pin="5"/>
+      <node ref="R41" pin="2"/>
+      <node ref="C33" pin="2"/>
+      <node ref="U10" pin="9"/>
+      <node ref="U10" pin="3"/>
+      <node ref="U10" pin="5"/>
+      <node ref="P5" pin="2"/>
+      <node ref="PS2" pin="4"/>
+      <node ref="D4" pin="2"/>
+      <node ref="R37" pin="1"/>
+      <node ref="U12" pin="3"/>
+      <node ref="C26" pin="1"/>
+      <node ref="C34" pin="1"/>
+      <node ref="C21" pin="2"/>
+      <node ref="C23" pin="1"/>
+      <node ref="R30" pin="2"/>
+      <node ref="C24" pin="2"/>
+      <node ref="C29" pin="2"/>
+      <node ref="C28" pin="2"/>
+      <node ref="C27" pin="1"/>
+    </net>
+    <net code="46" name="-5VA">
+      <node ref="R33" pin="2"/>
+      <node ref="C25" pin="2"/>
+      <node ref="C34" pin="2"/>
+      <node ref="U12" pin="5"/>
+      <node ref="R38" pin="2"/>
+      <node ref="C26" pin="2"/>
+      <node ref="U8" pin="4"/>
+      <node ref="C23" pin="2"/>
+      <node ref="U9" pin="4"/>
+      <node ref="U9" pin="4"/>
+    </net>
+    <net code="47" name="Net-(P5-Pad1)">
+      <node ref="P5" pin="1"/>
+      <node ref="R28" pin="1"/>
+    </net>
+    <net code="48" name="Net-(U12-Pad1)">
+      <node ref="U12" pin="1"/>
+    </net>
+    <net code="49" name="/En_pH">
+      <node ref="R42" pin="2"/>
+      <node ref="IC1" pin="4"/>
+    </net>
+    <net code="50" name="Net-(Q6-Pad1)">
+      <node ref="Q6" pin="1"/>
+      <node ref="R45" pin="1"/>
+      <node ref="R43" pin="1"/>
+    </net>
+    <net code="51" name="/En_pH/ORP">
+      <node ref="IC1" pin="8"/>
+      <node ref="R43" pin="2"/>
+    </net>
+    <net code="52" name="Net-(Q5-Pad1)">
+      <node ref="R44" pin="1"/>
+      <node ref="R42" pin="1"/>
+      <node ref="Q5" pin="1"/>
+    </net>
+    <net code="53" name="Net-(RV3-Pad3)">
+      <node ref="RV3" pin="3"/>
+    </net>
+    <net code="54" name="Net-(R31-Pad2)">
+      <node ref="R31" pin="2"/>
+      <node ref="RV3" pin="1"/>
+    </net>
+    <net code="55" name="Net-(C27-Pad2)">
+      <node ref="U9" pin="5"/>
+      <node ref="C27" pin="2"/>
+      <node ref="RV4" pin="2"/>
+    </net>
+    <net code="56" name="Net-(D4-Pad1)">
+      <node ref="D4" pin="1"/>
+      <node ref="R35" pin="2"/>
+      <node ref="R36" pin="1"/>
+      <node ref="U9" pin="1"/>
+    </net>
+    <net code="57" name="Net-(R38-Pad1)">
+      <node ref="RV4" pin="1"/>
+      <node ref="R38" pin="1"/>
+    </net>
+    <net code="58" name="Net-(R37-Pad2)">
+      <node ref="R37" pin="2"/>
+      <node ref="RV4" pin="3"/>
+    </net>
+    <net code="59" name="Net-(C25-Pad1)">
+      <node ref="R33" pin="1"/>
+      <node ref="C25" pin="1"/>
+      <node ref="R32" pin="2"/>
+      <node ref="U9" pin="3"/>
+    </net>
+    <net code="60" name="Net-(U8-Pad5)">
+      <node ref="U8" pin="5"/>
+    </net>
+    <net code="61" name="Net-(R28-Pad2)">
+      <node ref="R28" pin="2"/>
+      <node ref="U8" pin="3"/>
+    </net>
+    <net code="62" name="Net-(R29-Pad1)">
+      <node ref="R29" pin="1"/>
+      <node ref="U8" pin="2"/>
+    </net>
+    <net code="63" name="Net-(U8-Pad1)">
+      <node ref="U8" pin="1"/>
+    </net>
+    <net code="64" name="Net-(C22-Pad2)">
+      <node ref="C22" pin="2"/>
+      <node ref="RV3" pin="2"/>
+      <node ref="U8" pin="6"/>
+      <node ref="R32" pin="1"/>
+    </net>
+    <net code="65" name="Net-(U8-Pad8)">
+      <node ref="U8" pin="8"/>
+    </net>
+    <net code="66" name="Net-(R34-Pad1)">
+      <node ref="R34" pin="1"/>
+      <node ref="R35" pin="1"/>
+      <node ref="U9" pin="2"/>
+    </net>
+    <net code="67" name="Net-(R34-Pad2)">
+      <node ref="R34" pin="2"/>
+      <node ref="U9" pin="6"/>
+      <node ref="U9" pin="7"/>
+    </net>
+    <net code="68" name="Net-(C22-Pad1)">
+      <node ref="R31" pin="1"/>
+      <node ref="C22" pin="1"/>
+      <node ref="R30" pin="1"/>
+      <node ref="R29" pin="2"/>
+    </net>
+    <net code="69" name="Net-(D1-Pad3)">
+      <node ref="R5" pin="1"/>
+      <node ref="D1" pin="3"/>
+    </net>
+    <net code="70" name="Net-(D1-Pad2)">
+      <node ref="R4" pin="1"/>
+      <node ref="D1" pin="2"/>
+    </net>
+    <net code="71" name="Net-(D1-Pad1)">
+      <node ref="R3" pin="1"/>
+      <node ref="D1" pin="1"/>
+    </net>
+    <net code="72" name="Net-(P1-Pad6)">
+      <node ref="P1" pin="6"/>
+    </net>
+    <net code="73" name="/SCL">
+      <node ref="IC1" pin="16"/>
+      <node ref="U6" pin="3"/>
+      <node ref="R2" pin="2"/>
+      <node ref="U11" pin="3"/>
+    </net>
+    <net code="74" name="/SDA">
+      <node ref="IC1" pin="11"/>
+      <node ref="U11" pin="2"/>
+      <node ref="R1" pin="2"/>
+      <node ref="U6" pin="2"/>
+    </net>
+    <net code="75" name="Net-(IC1-Pad6)">
+      <node ref="X1" pin="3"/>
+      <node ref="IC1" pin="6"/>
+    </net>
+    <net code="76" name="Net-(IC1-Pad7)">
+      <node ref="X1" pin="1"/>
+      <node ref="IC1" pin="7"/>
+    </net>
+    <net code="77" name="Net-(IC1-Pad12)">
+      <node ref="IC1" pin="12"/>
+    </net>
+    <net code="78" name="Net-(IC1-Pad21)">
+      <node ref="IC1" pin="21"/>
+    </net>
+    <net code="79" name="Net-(IC1-Pad20)">
+      <node ref="IC1" pin="20"/>
+    </net>
+    <net code="80" name="Net-(IC1-Pad9)">
+      <node ref="IC1" pin="9"/>
+    </net>
+    <net code="81" name="+5VD">
+      <node ref="U6" pin="8"/>
+      <node ref="C7" pin="1"/>
+      <node ref="PS1" pin="5"/>
+      <node ref="R25" pin="1"/>
+      <node ref="C14" pin="1"/>
+      <node ref="U4" pin="8"/>
+      <node ref="U5" pin="1"/>
+      <node ref="U5" pin="2"/>
+      <node ref="U7" pin="8"/>
+      <node ref="U5" pin="9"/>
+      <node ref="U3" pin="7"/>
+      <node ref="C10" pin="1"/>
+      <node ref="U4" pin="8"/>
+      <node ref="R27" pin="1"/>
+      <node ref="C19" pin="1"/>
+      <node ref="R26" pin="1"/>
+      <node ref="C15" pin="1"/>
+    </net>
+    <net code="82" name="Net-(U3-Pad1)">
+      <node ref="U3" pin="1"/>
+    </net>
+    <net code="83" name="Net-(U7-Pad7)">
+      <node ref="U7" pin="7"/>
+    </net>
+    <net code="84" name="Net-(U7-Pad6)">
+      <node ref="U7" pin="6"/>
+    </net>
+    <net code="85" name="Net-(U7-Pad1)">
+      <node ref="U7" pin="1"/>
+    </net>
+    <net code="86" name="Net-(U3-Pad8)">
+      <node ref="U3" pin="8"/>
+    </net>
+    <net code="87" name="Net-(U3-Pad5)">
+      <node ref="U3" pin="5"/>
+    </net>
+    <net code="88" name="Net-(C11-Pad1)">
+      <node ref="R18" pin="2"/>
+      <node ref="C11" pin="1"/>
+      <node ref="R19" pin="1"/>
+      <node ref="U4" pin="3"/>
+    </net>
+    <net code="89" name="Net-(U5-Pad10)">
+      <node ref="U5" pin="10"/>
+    </net>
+    <net code="90" name="Net-(PS2-Pad3)">
+      <node ref="PS2" pin="3"/>
+    </net>
+    <net code="91" name="Net-(PS2-Pad8)">
+      <node ref="PS2" pin="8"/>
+    </net>
+    <net code="92" name="Net-(PS2-Pad7)">
+      <node ref="PS2" pin="7"/>
+    </net>
+    <net code="93" name="Net-(PS2-Pad6)">
+      <node ref="PS2" pin="6"/>
+    </net>
+    <net code="94" name="Net-(R24-Pad1)">
+      <node ref="R24" pin="1"/>
+      <node ref="RV2" pin="1"/>
+    </net>
+    <net code="95" name="Net-(R23-Pad2)">
+      <node ref="RV2" pin="3"/>
+      <node ref="R23" pin="2"/>
+    </net>
+    <net code="96" name="Net-(C13-Pad2)">
+      <node ref="U4" pin="5"/>
+      <node ref="RV2" pin="2"/>
+      <node ref="C13" pin="2"/>
+    </net>
+    <net code="97" name="Net-(IC1-Pad13)">
+      <node ref="IC1" pin="13"/>
+    </net>
+    <net code="98" name="Net-(RV1-Pad3)">
+      <node ref="RV1" pin="3"/>
+    </net>
+    <net code="99" name="Net-(D3-Pad1)">
+      <node ref="D3" pin="1"/>
+      <node ref="R22" pin="1"/>
+      <node ref="R21" pin="2"/>
+      <node ref="U4" pin="1"/>
+    </net>
+    <net code="100" name="Net-(U10-PadPAD)">
+      <node ref="U10" pin="PAD"/>
+    </net>
+    <net code="101" name="Net-(U10-Pad10)">
+      <node ref="U10" pin="10"/>
+    </net>
+    <net code="102" name="Net-(U5-PadPAD)">
+      <node ref="U5" pin="PAD"/>
+    </net>
+    <net code="103" name="Net-(R20-Pad1)">
+      <node ref="R20" pin="1"/>
+      <node ref="U4" pin="2"/>
+      <node ref="R21" pin="1"/>
+    </net>
+    <net code="104" name="Net-(R20-Pad2)">
+      <node ref="U4" pin="7"/>
+      <node ref="R20" pin="2"/>
+      <node ref="U4" pin="6"/>
+    </net>
+    <net code="105" name="Net-(IC1-Pad19)">
+      <node ref="IC1" pin="19"/>
+    </net>
+    <net code="106" name="Net-(IC1-Pad18)">
+      <node ref="IC1" pin="18"/>
+    </net>
+    <net code="107" name="Net-(PS1-Pad8)">
+      <node ref="PS1" pin="8"/>
+    </net>
+    <net code="108" name="Net-(PS1-Pad7)">
+      <node ref="PS1" pin="7"/>
+    </net>
+    <net code="109" name="Net-(PS1-Pad6)">
+      <node ref="PS1" pin="6"/>
+    </net>
+    <net code="110" name="Net-(PS1-Pad3)">
+      <node ref="PS1" pin="3"/>
+    </net>
+  </nets>
+</export>

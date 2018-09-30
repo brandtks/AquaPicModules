@@ -26,4 +26,4 @@ funclist
 *.csv
 rescue-backup/
 *.save
-
+bom.ini
