@@ -1,0 +1,4 @@
+(sym_lib_table
+  (lib (name pH-ORP-Card-rescue)(type Legacy)(uri ${KIPRJMOD}/pH-ORP-Card-rescue.lib)(options "")(descr ""))
+  (lib (name GoodtimeDev)(type Legacy)(uri ${KIUSER}/Library/GoodtimeDev.lib)(options "")(descr ""))
+)

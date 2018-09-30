@@ -19,9 +19,11 @@ Makefile
 Settings/
 .vscode/
 mcc_generated_files/
-
 *.obj
 funclist
 .directory
 *.inc
 *.csv
+rescue-backup/
+*.save
+
