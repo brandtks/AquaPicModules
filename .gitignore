@@ -27,3 +27,5 @@ funclist
 rescue-backup/
 *.save
 bom.ini
+BillOfMaterials/
+Schematics/

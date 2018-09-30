@@ -6,8 +6,8 @@ $Descr User 14000 10000
 encoding utf-8
 Sheet 1 1
 Title "pH and ORP Card"
-Date "2017-11-24"
-Rev "1.0"
+Date "2018-09-30"
+Rev "1.1"
 Comp "Goodtime Development"
 Comment1 "Skyler Brandt"
 Comment2 ""
@@ -19,13 +19,14 @@ L pH-ORP-Card-rescue:BNC P4
 U 1 1 538CBCAD
 P 950 1100
 F 0 "P4" H 960 1220 60  0000 C CNN
-F 1 "BNC" V 1060 1040 40  0001 C CNN
+F 1 "pH" V 1060 1040 40  0001 C CNN
 F 2 "MyFootPrints:BNC_Socket_TYCO-AMP_LargePads" H 950 1100 60  0001 C CNN
 F 3 "" H 950 1100 60  0000 C CNN
 F 4 "-" H 0   0   50  0001 C CNN "Comments"
 F 5 "A97553-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "TE" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "1-1337543-0" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "BNC" H 0   0   50  0001 C CNN "Type"
 	1    950  1100
 	-1   0    0    -1  
 $EndComp
@@ -41,6 +42,7 @@ F 4 "Axial, 1/4W, 1%, Metal Film" H 0   0   50  0001 C CNN "Comments"
 F 5 "RNF14FTD10K0CT-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Stackpole" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "RNF14FTD10K0" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Resistor" H 0   0   50  0001 C CNN "Type"
 	1    1350 1100
 	0    -1   -1   0   
 $EndComp
@@ -56,6 +58,7 @@ F 4 "0805, 1/4W, 1%, Thin Film" H 0   0   50  0001 C CNN "Comments"
 F 5 "RMCF0805FT221KCT-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Stackpole" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "RMCF0805FT221K" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Resistor" H 0   0   50  0001 C CNN "Type"
 	1    2450 1200
 	0    -1   -1   0   
 $EndComp
@@ -71,6 +74,7 @@ F 4 "0805, 1/4W, 1%, Thin Film" H 0   0   50  0001 C CNN "Comments"
 F 5 "RMCF0805FT221KCT-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Stackpole" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "RMCF0805FT221K" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Resistor" H 0   0   50  0001 C CNN "Type"
 	1    2700 1400
 	1    0    0    -1  
 $EndComp
@@ -86,6 +90,7 @@ F 4 "0805, 50V, X7R, 10%" H 0   0   50  0001 C CNN "Comments"
 F 5 "445-7534-1-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "TDK" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "C2012X7R1H104K085AA" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Capacitor" H 0   0   50  0001 C CNN "Type"
 	1    3000 1400
 	1    0    0    -1  
 $EndComp
@@ -101,6 +106,7 @@ F 4 "0805, 1/4W, 1%, Thin Film" H 0   0   50  0001 C CNN "Comments"
 F 5 "RMCF0805FT221KCT-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Stackpole" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "RMCF0805FT221K" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Resistor" H 0   0   50  0001 C CNN "Type"
 	1    1800 2100
 	0    -1   -1   0   
 $EndComp
@@ -116,6 +122,7 @@ F 4 "0805, 1/4W, 1%, Thin Film" H 0   0   50  0001 C CNN "Comments"
 F 5 "RMCF0805FT2M00CT-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Stackpole" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "RMCF0805FT2M00" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Resistor" H 0   0   50  0001 C CNN "Type"
 	1    1550 1550
 	1    0    0    -1  
 $EndComp
@@ -131,6 +138,7 @@ F 4 "0805, 50V, C0G/NP0, 10%" H 0   0   50  0001 C CNN "Comments"
 F 5 "399-8062-1-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Kemet" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "C0805C330K5GACTU" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Capacitor" H 0   0   50  0001 C CNN "Type"
 	1    1900 1800
 	0    -1   -1   0   
 $EndComp
@@ -146,6 +154,7 @@ F 4 "0805, 1/4W, 1%, Thin Film" H 0   0   50  0001 C CNN "Comments"
 F 5 "RNCP0805FTD49K9CT-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Stackpole" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "RNCP0805FTD49K9" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Resistor" H 0   0   50  0001 C CNN "Type"
 	1    1550 2300
 	1    0    0    -1  
 $EndComp
@@ -174,6 +183,7 @@ F 4 "0805, 50V, X7R, 10%" H 0   0   50  0001 C CNN "Comments"
 F 5 "445-7534-1-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "TDK" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "C2012X7R1H104K085AA" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Capacitor" H 0   0   50  0001 C CNN "Type"
 	1    1800 2800
 	1    0    0    -1  
 $EndComp
@@ -189,6 +199,7 @@ F 4 "0805, 50V, X7R, 10%" H 0   0   50  0001 C CNN "Comments"
 F 5 "445-7534-1-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "TDK" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "C2012X7R1H104K085AA" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Capacitor" H 0   0   50  0001 C CNN "Type"
 	1    2100 2800
 	1    0    0    -1  
 $EndComp
@@ -215,6 +226,7 @@ F 4 "0805, 10V, X7R, 10%" H 100 0   50  0001 C CNN "Comments"
 F 5 "490-10516-1-ND" H 100 0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Murata" H 100 0   50  0001 C CNN "Manufacturer"
 F 7 "GRM21BR71A106KA73L" H 100 0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Capacitor" H 0   0   50  0001 C CNN "Type"
 	1    12550 1400
 	1    0    0    -1  
 $EndComp
@@ -230,6 +242,7 @@ F 4 "2512, 1W, 1%, Thick Film" H 100 0   50  0001 C CNN "Comments"
 F 5 "541-49.9AFCT-ND" H 100 0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Vishay Dale" H 100 0   50  0001 C CNN "Manufacturer"
 F 7 "CRCW251249R9FKEG" H 100 0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Resistor" H 0   0   50  0001 C CNN "Type"
 	1    12800 1400
 	1    0    0    -1  
 $EndComp
@@ -245,6 +258,7 @@ F 4 "0805, 10V, X7R, 10%" H 100 0   50  0001 C CNN "Comments"
 F 5 "1276-2972-1-ND " H 100 0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Samsung" H 100 0   50  0001 C CNN "Manufacturer"
 F 7 "CL21B475KPFNNNE" H 100 0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Capacitor" H 0   0   50  0001 C CNN "Type"
 	1    11450 1400
 	1    0    0    -1  
 $EndComp
@@ -273,6 +287,7 @@ F 4 "8-SOIC 3.9mm" H 100 0   50  0001 C CNN "Comments"
 F 5 "TC7660EOA-ND" H 100 0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Microchip" H 100 0   50  0001 C CNN "Manufacturer"
 F 7 "TC7660EOA" H 100 0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Power Convertor" H 0   0   50  0001 C CNN "Type"
 	1    12200 2750
 	1    0    0    -1  
 $EndComp
@@ -301,6 +316,7 @@ F 4 "8-SOIC 3.9mm" H 0   0   50  0001 C CNN "Comments"
 F 5 "LMC6061AIMX/NOPBCT-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Texas Instruments" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "LMC6061AIMX/NOPB" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "OpAmp" H 0   0   50  0001 C CNN "Type"
 	1    1900 1200
 	1    0    0    -1  
 $EndComp
@@ -316,6 +332,7 @@ F 4 "8-SOIC 3.9mm" H 0   0   50  0001 C CNN "Comments"
 F 5 "TLV272IS-13DICT-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Diodes Inc" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "TLV272IS-13" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "OpAmp" H 0   0   50  0001 C CNN "Type"
 	1    3600 1300
 	1    0    0    -1  
 $EndComp
@@ -331,6 +348,7 @@ F 4 "8-SOIC 3.9mm" H 0   0   50  0001 C CNN "Comments"
 F 5 "TLV272IS-13DICT-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Diodes Inc" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "TLV272IS-13" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "OpAmp" H 0   0   50  0001 C CNN "Type"
 	2    3600 2600
 	-1   0    0    -1  
 $EndComp
@@ -346,6 +364,7 @@ F 4 "0805, 1/4W, 1%, Thin Film" H 0   0   50  0001 C CNN "Comments"
 F 5 "RMCF0805FT221KCT-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Stackpole" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "RMCF0805FT221K" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Resistor" H 0   0   50  0001 C CNN "Type"
 	1    3250 2250
 	1    0    0    -1  
 $EndComp
@@ -361,6 +380,7 @@ F 4 "0805, 50V, X7R, 10%" H 0   0   50  0001 C CNN "Comments"
 F 5 "445-7534-1-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "TDK" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "C2012X7R1H104K085AA" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Capacitor" H 0   0   50  0001 C CNN "Type"
 	1    2700 2800
 	1    0    0    -1  
 $EndComp
@@ -376,6 +396,7 @@ F 4 "0805, 50V, X7R, 10%" H 0   0   50  0001 C CNN "Comments"
 F 5 "445-7534-1-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "TDK" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "C2012X7R1H104K085AA" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Capacitor" H 0   0   50  0001 C CNN "Type"
 	1    3000 2800
 	1    0    0    -1  
 $EndComp
@@ -402,6 +423,7 @@ F 4 "J Lead, 12T" H 0   0   50  0001 C CNN "Comments"
 F 5 "987-1155-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "TT" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "84WR10KLF" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Potentiomenter" H 0   0   50  0001 C CNN "Type"
 	1    4550 2500
 	0    -1   -1   0   
 $EndComp
@@ -417,6 +439,7 @@ F 4 "0805, 10V, X7R, 10%" H 100 0   50  0001 C CNN "Comments"
 F 5 "490-10516-1-ND" H 100 0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Murata" H 100 0   50  0001 C CNN "Manufacturer"
 F 7 "GRM21BR71A106KA73L" H 100 0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Capacitor" H 0   0   50  0001 C CNN "Type"
 	1    11400 2900
 	-1   0    0    -1  
 $EndComp
@@ -432,6 +455,7 @@ F 4 "0805, 10V, X7R, 10%" H 100 0   50  0001 C CNN "Comments"
 F 5 "490-10516-1-ND" H 100 0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Murata" H 100 0   50  0001 C CNN "Manufacturer"
 F 7 "GRM21BR71A106KA73L" H 100 0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Capacitor" H 0   0   50  0001 C CNN "Type"
 	1    12850 2700
 	1    0    0    -1  
 $EndComp
@@ -447,6 +471,7 @@ F 4 "0805, 1/4W, 1%, Thin Film" H 0   0   50  0001 C CNN "Comments"
 F 5 "RNCP0805FTD10K0CT-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Stackpole" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "RNCP0805FTD10K0" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Resistor" H 0   0   50  0001 C CNN "Type"
 	1    4550 2200
 	1    0    0    -1  
 $EndComp
@@ -462,6 +487,7 @@ F 4 "0805, 1/4W, 1%, Thin Film" H 0   0   50  0001 C CNN "Comments"
 F 5 "RNCP0805FTD10K0CT-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Stackpole" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "RNCP0805FTD10K0" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Resistor" H 0   0   50  0001 C CNN "Type"
 	1    4550 2800
 	1    0    0    -1  
 $EndComp
@@ -477,6 +503,7 @@ F 4 "0805, 25V, X7R, 10%" H 0   0   50  0001 C CNN "Comments"
 F 5 "1276-1066-1-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Samsung" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "CL21B105KAFNNNE" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Capacitor" H 0   0   50  0001 C CNN "Type"
 	1    4300 2300
 	1    0    0    -1  
 $EndComp
@@ -494,6 +521,7 @@ F 4 "J Lead, 12T" H 0   0   50  0001 C CNN "Comments"
 F 5 "987-1554-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "TT" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "84WR50KLF" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Potentiomenter" H 0   0   50  0001 C CNN "Type"
 	1    2250 2100
 	1    0    0    -1  
 $EndComp
@@ -510,6 +538,7 @@ F 4 "0805, 1/4W, 1%, Thin Film" H 0   0   50  0001 C CNN "Comments"
 F 5 "RNCP0805FTD1K00CT-ND " H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Stackpole" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "RNCP0805FTD1K00" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Resistor" H 0   0   50  0001 C CNN "Type"
 	1    4450 1300
 	0    -1   -1   0   
 $EndComp
@@ -553,6 +582,7 @@ F 4 "0805, 1/4W, 1%, Thin Film" H 0   0   50  0001 C CNN "Comments"
 F 5 "RNCP0805FTD4K99CT-ND " H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Stackpole" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "RNCP0805FTD4K99" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Resistor" H 0   0   50  0001 C CNN "Type"
 	1    7800 1700
 	1    0    0    -1  
 $EndComp
@@ -581,6 +611,7 @@ F 4 "0805, 50V, X7R, 10%" H 0   0   50  0001 C CNN "Comments"
 F 5 "445-7534-1-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "TDK" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "C2012X7R1H104K085AA" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Capacitor" H 0   0   50  0001 C CNN "Type"
 	1    8200 1300
 	1    0    0    -1  
 $EndComp
@@ -618,6 +649,7 @@ F 4 "0805, 50V, X7R, 10%" H 0   0   50  0001 C CNN "Comments"
 F 5 "445-7534-1-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "TDK" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "C2012X7R1H104K085AA" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Capacitor" H 0   0   50  0001 C CNN "Type"
 	1    6500 1300
 	1    0    0    -1  
 $EndComp
@@ -655,6 +687,7 @@ F 4 "SOD-323, 200mA" H 0   0   50  0001 C CNN "Comments"
 F 5 "DB2J31000LCT-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Panasonic" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "DB2J31000L" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Schottky Diode" H 0   0   50  0001 C CNN "Type"
 	1    4200 1500
 	0    1    1    0   
 $EndComp
@@ -684,6 +717,7 @@ F 4 "0805, 50V, X7R, 10%" H 0   0   50  0001 C CNN "Comments"
 F 5 "445-7534-1-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "TDK" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "C2012X7R1H104K085AA" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Capacitor" H 0   0   50  0001 C CNN "Type"
 	1    9200 1300
 	1    0    0    -1  
 $EndComp
@@ -710,6 +744,7 @@ F 4 "Recom" H 12000 4300 50  0001 C CNN "Manufacturer"
 F 5 "R1SE-0505-R" H 12000 4300 50  0001 C CNN "Manufacturer Part Number"
 F 6 "945-1659-1-ND" H 12000 4300 50  0001 C CNN "Digi-Key Part Number"
 F 7 "8-SMD Module, 5 Leads" H 12000 4300 50  0001 C CNN "Comments"
+F 8 "1W Isolated Power Supply" H 0   0   50  0001 C CNN "Type"
 	1    12000 4300
 	1    0    0    -1  
 $EndComp
@@ -745,6 +780,7 @@ F 4 "8-SOIC 3.9mm" H 0   0   50  0001 C CNN "Comments"
 F 5 "SI8602AB-B-IS-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Silicon Labs" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "SI8602AB-B-IS" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "I2C Isolator" H 0   0   50  0001 C CNN "Type"
 	1    8700 1950
 	-1   0    0    -1  
 $EndComp
@@ -793,6 +829,7 @@ F 4 "0805, 1/4W, 1%, Thin Film" H 0   0   50  0001 C CNN "Comments"
 F 5 "RNCP0805FTD4K99CT-ND " H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Stackpole" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "RNCP0805FTD4K99" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Resistor" H 0   0   50  0001 C CNN "Type"
 	1    7600 1700
 	1    0    0    -1  
 $EndComp
@@ -877,6 +914,7 @@ F 4 "4-PLCC" H 0   0   50  0001 C CNN "Comments"
 F 5 "492-2173-1-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Bivar" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "SMTL4-RGY " H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "LED (Red, Green, Yellow)" H 0   0   50  0001 C CNN "Type"
 	1    4050 7250
 	1    0    0    -1  
 $EndComp
@@ -892,6 +930,7 @@ F 4 "0805, 1/4W, 1%, Thin Film" H 0   0   50  0001 C CNN "Comments"
 F 5 "RNCP0805FTD150RCT-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Stackpole" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "RNCP0805FTD150R" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Resistor" H 0   0   50  0001 C CNN "Type"
 	1    4450 7000
 	0    -1   -1   0   
 $EndComp
@@ -907,6 +946,7 @@ F 4 "0805, 1/4W, 1%, Thin Film" H 0   0   50  0001 C CNN "Comments"
 F 5 "RNCP0805FTD150RCT-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Stackpole" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "RNCP0805FTD150R" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Resistor" H 0   0   50  0001 C CNN "Type"
 	1    4450 7250
 	0    -1   -1   0   
 $EndComp
@@ -922,6 +962,7 @@ F 4 "0805, 1/4W, 1%, Thin Film" H 0   0   50  0001 C CNN "Comments"
 F 5 "RNCP0805FTD150RCT-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Stackpole" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "RNCP0805FTD150R" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Resistor" H 0   0   50  0001 C CNN "Type"
 	1    4450 7500
 	0    -1   -1   0   
 $EndComp
@@ -945,6 +986,7 @@ F 4 "8-SOIC" H 0   0   50  0001 C CNN "Comments"
 F 5 "497-3735-1-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "STMicro" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "ST485ECDR" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "RS485 Transceiver" H 0   0   50  0001 C CNN "Type"
 	1    11000 7250
 	1    0    0    -1  
 $EndComp
@@ -990,6 +1032,7 @@ F 4 "0805, 50V, X7R, 10%" H 0   0   50  0001 C CNN "Comments"
 F 5 "445-7534-1-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "TDK" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "C2012X7R1H104K085AA" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Capacitor" H 0   0   50  0001 C CNN "Type"
 	1    10100 6800
 	1    0    0    -1  
 $EndComp
@@ -1028,6 +1071,7 @@ F 4 "-" H 0   0   50  0001 C CNN "Comments"
 F 5 "1175-1003-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "CNC Tech" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "1001-004-01010" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "USB 1.1 Type A" H 0   0   50  0001 C CNN "Type"
 	1    12400 7200
 	1    0    0    -1  
 $EndComp
@@ -1064,13 +1108,14 @@ L pH-ORP-Card-rescue:CONN_01X06 P1
 U 1 1 5A17EE33
 P 3950 8500
 F 0 "P1" H 3950 8850 50  0000 C CNN
-F 1 "1x6 2.54 Pin Header" V 4050 8500 50  0001 C CNN
+F 1 "ICSP" V 4050 8500 50  0001 C CNN
 F 2 "Pin_Headers:Pin_Header_Straight_1x06_Pitch2.54mm" H 3950 8500 60  0001 C CNN
 F 3 "" H 3950 8500 60  0000 C CNN
 F 4 "-" H 0   0   50  0001 C CNN "Comments"
 F 5 "A105161CT-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "TE" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "5-146868-1" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "1x6 2.54 Male Pin Header" H 0   0   50  0001 C CNN "Type"
 	1    3950 8500
 	-1   0    0    -1  
 $EndComp
@@ -1086,6 +1131,7 @@ F 4 "3-SMD, Non-Standard" H 0   0   50  0001 C CNN "Comments"
 F 5 "490-1195-1-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Murata" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "CSTCE8M00G55-R0" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Resonator" H 0   0   50  0001 C CNN "Type"
 	1    1050 8050
 	1    0    0    -1  
 $EndComp
@@ -1116,6 +1162,7 @@ F 4 "0805, 1/4W, 1%, Thin Film" H 0   0   50  0001 C CNN "Comments"
 F 5 "RNCP0805FTD4K99CT-ND " H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Stackpole" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "RNCP0805FTD4K99" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Resistor" H 0   0   50  0001 C CNN "Type"
 	1    3100 8800
 	1    0    0    -1  
 $EndComp
@@ -1131,6 +1178,7 @@ F 4 "0805, 1/4W, 1%, Thin Film" H 0   0   50  0001 C CNN "Comments"
 F 5 "RNCP0805FTD4K99CT-ND " H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Stackpole" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "RNCP0805FTD4K99" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Resistor" H 0   0   50  0001 C CNN "Type"
 	1    3200 7500
 	1    0    0    -1  
 $EndComp
@@ -1164,10 +1212,11 @@ F 0 "IC1" H 1600 9150 60  0000 C CNN
 F 1 "PIC32MM0064GPM028" H 1900 6650 60  0000 C CNN
 F 2 "Housings_DFN_QFN:QFN-28-1EP_6x6mm_Pitch0.65mm" H 2200 7450 60  0001 C CNN
 F 3 "" H 2200 7450 60  0001 C CNN
-F 4 "28-QFN 6x6" H 0   0   50  0001 C CNN "Comments"
-F 5 "PIC32MM0064GPM028T-I/MLCT-ND " H 0   0   50  0001 C CNN "Digi-Key Part Number"
+F 4 "Microcontroller" H 1900 7900 50  0001 C CNN "Type"
+F 5 "PIC32MM0064GPM028T-I/ML " H 0   0   50  0001 C CNN "Manufacturer Part Number"
 F 6 "Microchip" H 0   0   50  0001 C CNN "Manufacturer"
-F 7 "PIC32MM0064GPM028T-I/ML " H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 7 "PIC32MM0064GPM028T-I/MLCT-ND " H 0   0   50  0001 C CNN "Digi-Key Part Number"
+F 8 "28-QFN 6x6" H 0   0   50  0001 C CNN "Comments"
 	1    1900 7900
 	1    0    0    -1  
 $EndComp
@@ -1183,6 +1232,7 @@ F 4 "0805, 50V, X7R, 10%" H 0   0   50  0001 C CNN "Comments"
 F 5 "445-7534-1-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "TDK" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "C2012X7R1H104K085AA" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Capacitor" H 0   0   50  0001 C CNN "Type"
 	1    1100 7150
 	1    0    0    -1  
 $EndComp
@@ -1198,6 +1248,7 @@ F 4 "0805, 50V, X7R, 10%" H 0   0   50  0001 C CNN "Comments"
 F 5 "445-7534-1-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "TDK" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "C2012X7R1H104K085AA" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Capacitor" H 0   0   50  0001 C CNN "Type"
 	1    1200 7600
 	1    0    0    -1  
 $EndComp
@@ -1237,6 +1288,7 @@ F 4 "SOT-23-3" H 0   0   50  0001 C CNN "Comments"
 F 5 "1727-1289-6-ND " H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Nexperia" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "NX7002AK,215" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "N-Channel MOSFET" H 0   0   50  0001 C CNN "Type"
 	1    8200 8900
 	0    1    1    0   
 $EndComp
@@ -1256,6 +1308,7 @@ F 4 "0805, 1/4W, 1%, Thin Film" H 0   0   50  0001 C CNN "Comments"
 F 5 "RNCP0805FTD4K99CT-ND " H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Stackpole" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "RNCP0805FTD4K99" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Resistor" H 0   0   50  0001 C CNN "Type"
 	1    7900 8850
 	1    0    0    -1  
 $EndComp
@@ -1271,6 +1324,7 @@ F 4 "0805, 1/4W, 1%, Thin Film" H 0   0   50  0001 C CNN "Comments"
 F 5 "RNCP0805FTD4K99CT-ND " H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Stackpole" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "RNCP0805FTD4K99" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Resistor" H 0   0   50  0001 C CNN "Type"
 	1    8500 8850
 	1    0    0    -1  
 $EndComp
@@ -1288,6 +1342,7 @@ F 4 "SOT-23-3" H 0   0   50  0001 C CNN "Comments"
 F 5 "1727-1289-6-ND " H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Nexperia" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "NX7002AK,215" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "N-Channel MOSFET" H 0   0   50  0001 C CNN "Type"
 	1    6800 8600
 	1    0    0    -1  
 $EndComp
@@ -1303,6 +1358,7 @@ F 4 "0805, 1/4W, 1%, Thin Film" H 0   0   50  0001 C CNN "Comments"
 F 5 "RNCP0805FTD1K00CT-ND " H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Stackpole" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "RNCP0805FTD1K00" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Resistor" H 0   0   50  0001 C CNN "Type"
 	1    6250 8700
 	0    1    1    0   
 $EndComp
@@ -1318,6 +1374,7 @@ F 4 "0805, 1/4W, 1%, Thin Film" H 0   0   50  0001 C CNN "Comments"
 F 5 "RNCP0805FTD10K0CT-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Stackpole" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "RNCP0805FTD10K0" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Resistor" H 0   0   50  0001 C CNN "Type"
 	1    6500 8950
 	1    0    0    -1  
 $EndComp
@@ -1333,6 +1390,7 @@ F 4 "0805, 1/4W, 1%, Thin Film" H 0   0   50  0001 C CNN "Comments"
 F 5 "RNCP0805FTD10K0CT-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Stackpole" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "RNCP0805FTD10K0" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Resistor" H 0   0   50  0001 C CNN "Type"
 	1    6900 8050
 	1    0    0    -1  
 $EndComp
@@ -1449,6 +1507,7 @@ F 4 "SOT-23-3" H 0   0   50  0001 C CNN "Comments"
 F 5 "1727-1289-6-ND " H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Nexperia" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "NX7002AK,215" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "N-Channel MOSFET" H 0   0   50  0001 C CNN "Type"
 	1    8200 8100
 	0    1    1    0   
 $EndComp
@@ -1464,6 +1523,7 @@ F 4 "0805, 1/4W, 1%, Thin Film" H 0   0   50  0001 C CNN "Comments"
 F 5 "RNCP0805FTD4K99CT-ND " H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Stackpole" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "RNCP0805FTD4K99" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Resistor" H 0   0   50  0001 C CNN "Type"
 	1    7900 8050
 	1    0    0    -1  
 $EndComp
@@ -1479,6 +1539,7 @@ F 4 "0805, 1/4W, 1%, Thin Film" H 0   0   50  0001 C CNN "Comments"
 F 5 "RNCP0805FTD4K99CT-ND " H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Stackpole" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "RNCP0805FTD4K99" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Resistor" H 0   0   50  0001 C CNN "Type"
 	1    8500 8050
 	1    0    0    -1  
 $EndComp
@@ -1531,6 +1592,7 @@ F 4 "SOT-223" H 0   0   50  0001 C CNN "Comments"
 F 5 "AP2114HA-2.5TRG1DICT-ND " H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Diodes" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "AP2114HA-2.5TRG1 " H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Linear Regulator" H 0   0   50  0001 C CNN "Type"
 	1    7300 6750
 	1    0    0    -1  
 $EndComp
@@ -1557,6 +1619,7 @@ F 4 "0805, 10V, X7R, 10%" H 0   0   50  0001 C CNN "Comments"
 F 5 "1276-2972-1-ND " H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Samsung" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "CL21B475KPFNNNE" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Capacitor" H 0   0   50  0001 C CNN "Type"
 	1    7700 6950
 	1    0    0    -1  
 $EndComp
@@ -1572,6 +1635,7 @@ F 4 "0805, 10V, X7R, 10%" H 0   0   50  0001 C CNN "Comments"
 F 5 "1276-2972-1-ND " H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Samsung" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "CL21B475KPFNNNE" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Capacitor" H 0   0   50  0001 C CNN "Type"
 	1    6900 6950
 	1    0    0    -1  
 $EndComp
@@ -1624,6 +1688,7 @@ F 4 "0805, 2V, 20mA" H 0   0   50  0001 C CNN "Comments"
 F 5 "475-1278-1-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Osram" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "LS R976-NR-1" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "LED (Red)" H 0   0   50  0001 C CNN "Type"
 	1    6050 6900
 	-1   0    0    1   
 $EndComp
@@ -1639,6 +1704,7 @@ F 4 "0805, 1/4W, 1%, Thin Film" H 0   0   50  0001 C CNN "Comments"
 F 5 "RNCP0805FTD150RCT-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Stackpole" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "RNCP0805FTD150R" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Resistor" H 0   0   50  0001 C CNN "Type"
 	1    5650 6900
 	0    -1   -1   0   
 $EndComp
@@ -1660,13 +1726,14 @@ L pH-ORP-Card-rescue:CONN_01X02 P3
 U 1 1 5A1A7663
 P 8400 6750
 F 0 "P3" H 8400 6900 50  0000 C CNN
-F 1 "1x2 2.54" V 8500 6750 50  0001 C CNN
+F 1 "Power" V 8500 6750 50  0001 C CNN
 F 2 "MyFootPrints:Screw_Header_1x2" H 8400 6750 60  0001 C CNN
 F 3 "" H 8400 6750 60  0000 C CNN
 F 4 "-" H 0   0   50  0001 C CNN "Comments"
 F 5 "ED10561-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "On Shore" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "OSTVN02A150" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "1x2 2.54 Screw Header" H 0   0   50  0001 C CNN "Type"
 	1    8400 6750
 	-1   0    0    -1  
 $EndComp
@@ -1682,6 +1749,7 @@ F 4 "SOT-23-3" H 0   0   50  0001 C CNN "Comments"
 F 5 "785-1006-1-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Alpha Omega" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "AO3407A" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "P-Channel MOSFET" H 0   0   50  0001 C CNN "Type"
 	1    9000 6800
 	0    -1   -1   0   
 $EndComp
@@ -1730,6 +1798,7 @@ F 4 "0805, 50V, X7R, 10%" H 0   0   50  0001 C CNN "Comments"
 F 5 "445-7534-1-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "TDK" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "C2012X7R1H104K085AA" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Capacitor" H 0   0   50  0001 C CNN "Type"
 	1    800  7150
 	1    0    0    -1  
 $EndComp
@@ -1811,6 +1880,7 @@ F 4 "8-SMD Module, 5 Leads" H 100 0   50  0001 C CNN "Comments"
 F 5 "945-1659-1-ND" H 100 0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Recom" H 100 0   50  0001 C CNN "Manufacturer"
 F 7 "R1SE-0505-R" H 100 0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "1W Isolated Power Supply" H 0   0   50  0001 C CNN "Type"
 	1    12000 1400
 	1    0    0    -1  
 $EndComp
@@ -1837,6 +1907,7 @@ F 4 "10-DFN 3x3mm" H 0   0   50  0001 C CNN "Comments"
 F 5 "LTC2483CDD#PBF-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Linear" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "LTC2483CDD#PBF" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "DeltaSigma ADC" H 0   0   50  0001 C CNN "Type"
 	1    7000 2100
 	1    0    0    -1  
 $EndComp
@@ -1874,6 +1945,7 @@ F 4 "0805, 1/4W, 1%, Thin Film" H 0   0   50  0001 C CNN "Comments"
 F 5 "RNCP0805FTD4K99CT-ND " H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Stackpole" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "RNCP0805FTD4K99" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Resistor" H 0   0   50  0001 C CNN "Type"
 	1    7800 4600
 	1    0    0    -1  
 $EndComp
@@ -1889,6 +1961,7 @@ F 4 "0805, 50V, X7R, 10%" H 0   0   50  0001 C CNN "Comments"
 F 5 "445-7534-1-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "TDK" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "C2012X7R1H104K085AA" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Capacitor" H 0   0   50  0001 C CNN "Type"
 	1    8200 4200
 	1    0    0    -1  
 $EndComp
@@ -1904,6 +1977,7 @@ F 4 "0805, 50V, X7R, 10%" H 0   0   50  0001 C CNN "Comments"
 F 5 "445-7534-1-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "TDK" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "C2012X7R1H104K085AA" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Capacitor" H 0   0   50  0001 C CNN "Type"
 	1    6500 4200
 	1    0    0    -1  
 $EndComp
@@ -1931,6 +2005,7 @@ F 4 "0805, 50V, X7R, 10%" H 0   0   50  0001 C CNN "Comments"
 F 5 "445-7534-1-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "TDK" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "C2012X7R1H104K085AA" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Capacitor" H 0   0   50  0001 C CNN "Type"
 	1    9200 4200
 	1    0    0    -1  
 $EndComp
@@ -1965,6 +2040,7 @@ F 4 "8-SOIC 3.9mm" H 0   0   50  0001 C CNN "Comments"
 F 5 "SI8602AB-B-IS-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Silicon Labs" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "SI8602AB-B-IS" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "I2C Isolator" H 0   0   50  0001 C CNN "Type"
 	1    8700 4850
 	-1   0    0    -1  
 $EndComp
@@ -1980,6 +2056,7 @@ F 4 "0805, 1/4W, 1%, Thin Film" H 0   0   50  0001 C CNN "Comments"
 F 5 "RNCP0805FTD4K99CT-ND " H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Stackpole" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "RNCP0805FTD4K99" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Resistor" H 0   0   50  0001 C CNN "Type"
 	1    7600 4600
 	1    0    0    -1  
 $EndComp
@@ -1995,6 +2072,7 @@ F 4 "10-DFN 3x3mm" H 0   0   50  0001 C CNN "Comments"
 F 5 "LTC2483CDD#PBF-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Linear" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "LTC2483CDD#PBF" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "DeltaSigma ADC" H 0   0   50  0001 C CNN "Type"
 	1    7000 5000
 	1    0    0    -1  
 $EndComp
@@ -2197,6 +2275,7 @@ F 4 "0805, 1/4W, 1%, Thin Film" H 0   0   50  0001 C CNN "Comments"
 F 5 "RMCF0805FT221KCT-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Stackpole" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "RMCF0805FT221K" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Resistor" H 0   0   50  0001 C CNN "Type"
 	1    3600 1900
 	0    -1   -1   0   
 $EndComp
@@ -2966,6 +3045,11 @@ F 0 "TP1" H 5150 1550 50  0000 C BNN
 F 1 "TEST" H 5150 1500 50  0000 C CNN
 F 2 "Measurement_Points:Measurement_Point_Round-SMD-Pad_Small" H 5150 1250 50  0001 C CNN
 F 3 "" H 5150 1250 50  0001 C CNN
+F 4 "-" H 0   0   50  0001 C CNN "Comments"
+F 5 "-" H 0   0   50  0001 C CNN "Digi-Key Part Number"
+F 6 "-" H 0   0   50  0001 C CNN "Manufacturer"
+F 7 "-" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "-" H 0   0   50  0001 C CNN "Type"
 	1    5150 1250
 	1    0    0    -1  
 $EndComp
@@ -2981,6 +3065,7 @@ F 4 "Axial, 1/4W, 1%, Metal Film" H 0   0   50  0001 C CNN "Comments"
 F 5 "RNF14FTD10K0CT-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Stackpole" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "RNF14FTD10K0" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Resistor" H 0   0   50  0001 C CNN "Type"
 	1    1350 4000
 	0    -1   -1   0   
 $EndComp
@@ -2996,6 +3081,7 @@ F 4 "0805, 1/4W, 1%, Thin Film" H 0   0   50  0001 C CNN "Comments"
 F 5 "RMCF0805FT221KCT-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Stackpole" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "RMCF0805FT221K" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Resistor" H 0   0   50  0001 C CNN "Type"
 	1    2450 4100
 	0    -1   -1   0   
 $EndComp
@@ -3011,6 +3097,7 @@ F 4 "0805, 1/4W, 1%, Thin Film" H 0   0   50  0001 C CNN "Comments"
 F 5 "RMCF0805FT221KCT-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Stackpole" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "RMCF0805FT221K" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Resistor" H 0   0   50  0001 C CNN "Type"
 	1    2700 4300
 	1    0    0    -1  
 $EndComp
@@ -3026,6 +3113,7 @@ F 4 "0805, 50V, X7R, 10%" H 0   0   50  0001 C CNN "Comments"
 F 5 "445-7534-1-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "TDK" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "C2012X7R1H104K085AA" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Capacitor" H 0   0   50  0001 C CNN "Type"
 	1    3000 4300
 	1    0    0    -1  
 $EndComp
@@ -3041,6 +3129,7 @@ F 4 "0805, 1/4W, 1%, Thin Film" H 0   0   50  0001 C CNN "Comments"
 F 5 "RMCF0805FT221KCT-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Stackpole" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "RMCF0805FT221K" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Resistor" H 0   0   50  0001 C CNN "Type"
 	1    1800 5000
 	0    -1   -1   0   
 $EndComp
@@ -3056,6 +3145,7 @@ F 4 "0805, 1/4W, 1%, Thin Film" H 0   0   50  0001 C CNN "Comments"
 F 5 "RMCF0805FT2M00CT-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Stackpole" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "RMCF0805FT2M00" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Resistor" H 0   0   50  0001 C CNN "Type"
 	1    1550 4450
 	1    0    0    -1  
 $EndComp
@@ -3071,6 +3161,7 @@ F 4 "0805, 50V, C0G/NP0, 10%" H 0   0   50  0001 C CNN "Comments"
 F 5 "399-8062-1-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Kemet" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "C0805C330K5GACTU" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Capacitor" H 0   0   50  0001 C CNN "Type"
 	1    1900 4700
 	0    -1   -1   0   
 $EndComp
@@ -3086,6 +3177,7 @@ F 4 "0805, 1/4W, 1%, Thin Film" H 0   0   50  0001 C CNN "Comments"
 F 5 "RMCF0805FT100KCT-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Stackpole" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "RMCF0805FT100K" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Resistor" H 0   0   50  0001 C CNN "Type"
 	1    1550 5200
 	1    0    0    -1  
 $EndComp
@@ -3103,6 +3195,7 @@ F 4 "0805, 50V, X7R, 10%" H 0   0   50  0001 C CNN "Comments"
 F 5 "445-7534-1-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "TDK" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "C2012X7R1H104K085AA" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Capacitor" H 0   0   50  0001 C CNN "Type"
 	1    1800 5700
 	1    0    0    -1  
 $EndComp
@@ -3118,6 +3211,7 @@ F 4 "0805, 50V, X7R, 10%" H 0   0   50  0001 C CNN "Comments"
 F 5 "445-7534-1-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "TDK" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "C2012X7R1H104K085AA" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Capacitor" H 0   0   50  0001 C CNN "Type"
 	1    2100 5700
 	1    0    0    -1  
 $EndComp
@@ -3133,6 +3227,7 @@ F 4 "8-SOIC 3.9mm" H 0   0   50  0001 C CNN "Comments"
 F 5 "LMC6061AIMX/NOPBCT-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Texas Instruments" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "LMC6061AIMX/NOPB" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "OpAmp" H 0   0   50  0001 C CNN "Type"
 	1    1900 4100
 	1    0    0    -1  
 $EndComp
@@ -3148,6 +3243,7 @@ F 4 "8-SOIC 3.9mm" H 0   0   50  0001 C CNN "Comments"
 F 5 "TLV272IS-13DICT-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Diodes Inc" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "TLV272IS-13" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "OpAmp" H 0   0   50  0001 C CNN "Type"
 	1    3600 4200
 	1    0    0    -1  
 $EndComp
@@ -3163,6 +3259,7 @@ F 4 "8-SOIC 3.9mm" H 0   0   50  0001 C CNN "Comments"
 F 5 "TLV272IS-13DICT-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Diodes Inc" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "TLV272IS-13" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "OpAmp" H 0   0   50  0001 C CNN "Type"
 	2    3600 5500
 	-1   0    0    -1  
 $EndComp
@@ -3178,6 +3275,7 @@ F 4 "0805, 1/4W, 1%, Thin Film" H 0   0   50  0001 C CNN "Comments"
 F 5 "RMCF0805FT221KCT-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Stackpole" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "RMCF0805FT221K" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Resistor" H 0   0   50  0001 C CNN "Type"
 	1    3250 5150
 	1    0    0    -1  
 $EndComp
@@ -3193,6 +3291,7 @@ F 4 "0805, 50V, X7R, 10%" H 0   0   50  0001 C CNN "Comments"
 F 5 "445-7534-1-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "TDK" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "C2012X7R1H104K085AA" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Capacitor" H 0   0   50  0001 C CNN "Type"
 	1    2700 5700
 	1    0    0    -1  
 $EndComp
@@ -3208,6 +3307,7 @@ F 4 "0805, 50V, X7R, 10%" H 0   0   50  0001 C CNN "Comments"
 F 5 "445-7534-1-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "TDK" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "C2012X7R1H104K085AA" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Capacitor" H 0   0   50  0001 C CNN "Type"
 	1    3000 5700
 	1    0    0    -1  
 $EndComp
@@ -3223,6 +3323,7 @@ F 4 "J Lead, 12T" H 0   0   50  0001 C CNN "Comments"
 F 5 "987-1155-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "TT" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "84WR10KLF" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Potentiomenter" H 0   0   50  0001 C CNN "Type"
 	1    4550 5400
 	0    -1   -1   0   
 $EndComp
@@ -3238,6 +3339,7 @@ F 4 "0805, 1/4W, 1%, Thin Film" H 0   0   50  0001 C CNN "Comments"
 F 5 "RNCP0805FTD10K0CT-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Stackpole" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "RNCP0805FTD10K0" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Resistor" H 0   0   50  0001 C CNN "Type"
 	1    4550 5100
 	1    0    0    -1  
 $EndComp
@@ -3253,6 +3355,7 @@ F 4 "0805, 1/4W, 1%, Thin Film" H 0   0   50  0001 C CNN "Comments"
 F 5 "RNCP0805FTD10K0CT-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Stackpole" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "RNCP0805FTD10K0" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Resistor" H 0   0   50  0001 C CNN "Type"
 	1    4550 5700
 	1    0    0    -1  
 $EndComp
@@ -3268,6 +3371,7 @@ F 4 "0805, 25V, X7R, 10%" H 0   0   50  0001 C CNN "Comments"
 F 5 "1276-1066-1-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Samsung" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "CL21B105KAFNNNE" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Capacitor" H 0   0   50  0001 C CNN "Type"
 	1    4300 5200
 	1    0    0    -1  
 $EndComp
@@ -3285,6 +3389,7 @@ F 4 "J Lead, 12T" H 0   0   50  0001 C CNN "Comments"
 F 5 "987-1554-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "TT" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "84WR50KLF" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Potentiomenter" H 0   0   50  0001 C CNN "Type"
 	1    2250 5000
 	1    0    0    -1  
 $EndComp
@@ -3301,6 +3406,7 @@ F 4 "0805, 1/4W, 1%, Thin Film" H 0   0   50  0001 C CNN "Comments"
 F 5 "RNCP0805FTD1K00CT-ND " H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Stackpole" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "RNCP0805FTD1K00" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Resistor" H 0   0   50  0001 C CNN "Type"
 	1    4450 4200
 	0    -1   -1   0   
 $EndComp
@@ -3320,6 +3426,7 @@ F 4 "SOD-323, 200mA" H 0   0   50  0001 C CNN "Comments"
 F 5 "DB2J31000LCT-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Panasonic" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "DB2J31000L" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Schottky Diode" H 0   0   50  0001 C CNN "Type"
 	1    4200 4400
 	0    1    1    0   
 $EndComp
@@ -3339,6 +3446,7 @@ F 4 "0805, 1/4W, 1%, Thin Film" H 0   0   50  0001 C CNN "Comments"
 F 5 "RMCF0805FT221KCT-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Stackpole" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "RMCF0805FT221K" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Resistor" H 0   0   50  0001 C CNN "Type"
 	1    3600 4800
 	0    -1   -1   0   
 $EndComp
@@ -3460,6 +3568,11 @@ F 0 "TP2" H 5150 4450 50  0000 C BNN
 F 1 "TEST" H 5150 4400 50  0000 C CNN
 F 2 "Measurement_Points:Measurement_Point_Round-SMD-Pad_Small" H 5150 4150 50  0001 C CNN
 F 3 "" H 5150 4150 50  0001 C CNN
+F 4 "-" H 0   0   50  0001 C CNN "Comments"
+F 5 "-" H 0   0   50  0001 C CNN "Digi-Key Part Number"
+F 6 "-" H 0   0   50  0001 C CNN "Manufacturer"
+F 7 "-" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "-" H 0   0   50  0001 C CNN "Type"
 	1    5150 4150
 	1    0    0    -1  
 $EndComp
@@ -3712,13 +3825,14 @@ L pH-ORP-Card-rescue:BNC P5
 U 1 1 5A2E17CE
 P 950 4000
 F 0 "P5" H 960 4120 60  0000 C CNN
-F 1 "BNC" V 1060 3940 40  0001 C CNN
+F 1 "pH/ORP" V 1060 3940 40  0001 C CNN
 F 2 "MyFootPrints:BNC_Socket_TYCO-AMP_LargePads" H 950 4000 60  0001 C CNN
 F 3 "" H 950 4000 60  0000 C CNN
 F 4 "-" H 0   0   50  0001 C CNN "Comments"
 F 5 "A97553-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "TE" H 0   0   50  0001 C CNN "Manufacturer"
 F 7 "1-1337543-0" H 0   0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "BNC" H 0   0   50  0001 C CNN "Type"
 	1    950  4000
 	-1   0    0    -1  
 $EndComp
@@ -3734,6 +3848,7 @@ F 4 "0805, 10V, X7R, 10%" H 100 0   50  0001 C CNN "Comments"
 F 5 "490-10516-1-ND" H 100 0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Murata" H 100 0   50  0001 C CNN "Manufacturer"
 F 7 "GRM21BR71A106KA73L" H 100 0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Capacitor" H 0   0   50  0001 C CNN "Type"
 	1    12550 4300
 	1    0    0    -1  
 $EndComp
@@ -3749,6 +3864,7 @@ F 4 "2512, 1W, 1%, Thick Film" H 100 0   50  0001 C CNN "Comments"
 F 5 "541-49.9AFCT-ND" H 100 0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Vishay Dale" H 100 0   50  0001 C CNN "Manufacturer"
 F 7 "CRCW251249R9FKEG" H 100 0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Resistor" H 0   0   50  0001 C CNN "Type"
 	1    12800 4300
 	1    0    0    -1  
 $EndComp
@@ -3764,6 +3880,7 @@ F 4 "0805, 10V, X7R, 10%" H 100 0   50  0001 C CNN "Comments"
 F 5 "1276-2972-1-ND " H 100 0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Samsung" H 100 0   50  0001 C CNN "Manufacturer"
 F 7 "CL21B475KPFNNNE" H 100 0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Capacitor" H 0   0   50  0001 C CNN "Type"
 	1    11450 4300
 	1    0    0    -1  
 $EndComp
@@ -3781,6 +3898,7 @@ F 4 "8-SOIC 3.9mm" H 100 0   50  0001 C CNN "Comments"
 F 5 "TC7660EOA-ND" H 100 0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Microchip" H 100 0   50  0001 C CNN "Manufacturer"
 F 7 "TC7660EOA" H 100 0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Power Convertor" H 0   0   50  0001 C CNN "Type"
 	1    12200 5650
 	1    0    0    -1  
 $EndComp
@@ -3798,6 +3916,7 @@ F 4 "0805, 10V, X7R, 10%" H 100 0   50  0001 C CNN "Comments"
 F 5 "490-10516-1-ND" H 100 0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Murata" H 100 0   50  0001 C CNN "Manufacturer"
 F 7 "GRM21BR71A106KA73L" H 100 0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Capacitor" H 0   0   50  0001 C CNN "Type"
 	1    11400 5800
 	-1   0    0    -1  
 $EndComp
@@ -3813,6 +3932,7 @@ F 4 "0805, 10V, X7R, 10%" H 100 0   50  0001 C CNN "Comments"
 F 5 "490-10516-1-ND" H 100 0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Murata" H 100 0   50  0001 C CNN "Manufacturer"
 F 7 "GRM21BR71A106KA73L" H 100 0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Capacitor" H 0   0   50  0001 C CNN "Type"
 	1    12850 5600
 	1    0    0    -1  
 $EndComp
@@ -3980,6 +4100,7 @@ F 4 "0805, 1/4W, 1%, Thin Film" H 100 0   50  0001 C CNN "Comments"
 F 5 "RNCP0805FTD1K00CT-ND " H 100 0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Stackpole" H 100 0   50  0001 C CNN "Manufacturer"
 F 7 "RNCP0805FTD1K00" H 100 0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Resistor" H 0   0   50  0001 C CNN "Type"
 	1    10900 2050
 	0    1    1    0   
 $EndComp
@@ -4021,6 +4142,7 @@ F 4 "0805, 1/4W, 1%, Thin Film" H 100 0   50  0001 C CNN "Comments"
 F 5 "RNCP0805FTD1K00CT-ND " H 100 0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Stackpole" H 100 0   50  0001 C CNN "Manufacturer"
 F 7 "RNCP0805FTD1K00" H 100 0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Resistor" H 0   0   50  0001 C CNN "Type"
 	1    10900 4950
 	0    1    1    0   
 $EndComp
@@ -4059,6 +4181,7 @@ F 4 "SOT-23-3" H 100 0   50  0001 C CNN "Comments"
 F 5 "1727-1289-6-ND " H 100 0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Nexperia" H 100 0   50  0001 C CNN "Manufacturer"
 F 7 "NX7002AK,215" H 100 0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "N-Channel MOSFET" H 0   0   50  0001 C CNN "Type"
 	1    11350 4850
 	1    0    0    -1  
 $EndComp
@@ -4092,6 +4215,7 @@ F 4 "0805, 1/4W, 1%, Thin Film" H 100 0   50  0001 C CNN "Comments"
 F 5 "RNCP0805FTD10K0CT-ND" H 100 0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Stackpole" H 100 0   50  0001 C CNN "Manufacturer"
 F 7 "RNCP0805FTD10K0" H 100 0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "Resistor" H 0   0   50  0001 C CNN "Type"
 	1    11100 2250
 	1    0    0    -1  
 $EndComp
@@ -4107,6 +4231,7 @@ F 4 "SOT-23-3" H 100 0   50  0001 C CNN "Comments"
 F 5 "1727-1289-6-ND " H 100 0   50  0001 C CNN "Digi-Key Part Number"
 F 6 "Nexperia" H 100 0   50  0001 C CNN "Manufacturer"
 F 7 "NX7002AK,215" H 100 0   50  0001 C CNN "Manufacturer Part Number"
+F 8 "N-Channel MOSFET" H 0   0   50  0001 C CNN "Type"
 	1    11350 1950
 	1    0    0    -1  
 $EndComp
@@ -4129,6 +4254,7 @@ F 4 "0805, 1/4W, 1%, Thin Film" H 100 2900 50  0001 C CNN "Comments"
 F 5 "RNCP0805FTD10K0CT-ND" H 100 2900 50  0001 C CNN "Digi-Key Part Number"
 F 6 "Stackpole" H 100 2900 50  0001 C CNN "Manufacturer"
 F 7 "RNCP0805FTD10K0" H 100 2900 50  0001 C CNN "Manufacturer Part Number"
+F 8 "Resistor" H 0   0   50  0001 C CNN "Type"
 	1    11100 5150
 	1    0    0    -1  
 $EndComp
