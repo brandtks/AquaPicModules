@@ -1,0 +1,4 @@
+(sym_lib_table
+  (lib (name Digital-Input-Card-rescue)(type Legacy)(uri ${KIPRJMOD}/Digital-Input-Card-rescue.lib)(options "")(descr ""))
+  (lib (name GoodtimeDev)(type Legacy)(uri ${KIUSER}/Library/GoodtimeDev.lib)(options "")(descr ""))
+)
