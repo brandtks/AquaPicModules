@@ -1109,7 +1109,7 @@ U 1 1 5A17EE33
 P 3950 8500
 F 0 "P1" H 3950 8850 50  0000 C CNN
 F 1 "ICSP" V 4050 8500 50  0001 C CNN
-F 2 "Pin_Headers:Pin_Header_Straight_1x06_Pitch2.54mm" H 3950 8500 60  0001 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Vertical" H 3950 8500 60  0001 C CNN
 F 3 "" H 3950 8500 60  0000 C CNN
 F 4 "-" H 0   0   50  0001 C CNN "Comments"
 F 5 "A105161CT-ND" H 0   0   50  0001 C CNN "Digi-Key Part Number"
@@ -2516,11 +2516,8 @@ Wire Wire Line
 	7600 2300 7600 2250
 Wire Wire Line
 	7500 2300 7600 2300
-Connection ~ 11450 1700
 Wire Wire Line
 	11450 1700 11500 1700
-Wire Wire Line
-	11450 1550 11450 1700
 Wire Wire Line
 	11450 1700 11450 1750
 Connection ~ 11450 1100
@@ -3041,9 +3038,9 @@ $Comp
 L pH-ORP-Card-rescue:TEST_1P TP1
 U 1 1 5A296A71
 P 5150 1250
-F 0 "TP1" H 5150 1550 50  0000 C BNN
-F 1 "TEST" H 5150 1500 50  0000 C CNN
-F 2 "Measurement_Points:Measurement_Point_Round-SMD-Pad_Small" H 5150 1250 50  0001 C CNN
+F 0 "TP1" H 5150 1500 50  0000 C BNN
+F 1 "pH" H 5150 1450 50  0000 C CNN
+F 2 "TestPoint:TestPoint_Pad_D1.5mm" H 5150 1250 50  0001 C CNN
 F 3 "" H 5150 1250 50  0001 C CNN
 F 4 "-" H 0   0   50  0001 C CNN "Comments"
 F 5 "-" H 0   0   50  0001 C CNN "Digi-Key Part Number"
@@ -3564,9 +3561,9 @@ $Comp
 L pH-ORP-Card-rescue:TEST_1P TP2
 U 1 1 5A298C96
 P 5150 4150
-F 0 "TP2" H 5150 4450 50  0000 C BNN
-F 1 "TEST" H 5150 4400 50  0000 C CNN
-F 2 "Measurement_Points:Measurement_Point_Round-SMD-Pad_Small" H 5150 4150 50  0001 C CNN
+F 0 "TP2" H 5150 4400 50  0000 C BNN
+F 1 "pH/ORP" H 5150 4350 50  0000 C CNN
+F 2 "TestPoint:TestPoint_Pad_D1.5mm" H 5150 4150 50  0001 C CNN
 F 3 "" H 5150 4150 50  0001 C CNN
 F 4 "-" H 0   0   50  0001 C CNN "Comments"
 F 5 "-" H 0   0   50  0001 C CNN "Digi-Key Part Number"
@@ -3947,11 +3944,8 @@ F 3 "~" H 11450 5050 60  0000 C CNN
 	1    11450 5050
 	1    0    0    -1  
 $EndComp
-Connection ~ 11450 4600
 Wire Wire Line
 	11450 4600 11500 4600
-Wire Wire Line
-	11450 4450 11450 4600
 Wire Wire Line
 	11450 4600 11450 4650
 Connection ~ 11450 4000
@@ -4256,6 +4250,28 @@ F 6 "Stackpole" H 100 2900 50  0001 C CNN "Manufacturer"
 F 7 "RNCP0805FTD10K0" H 100 2900 50  0001 C CNN "Manufacturer Part Number"
 F 8 "Resistor" H 0   0   50  0001 C CNN "Type"
 	1    11100 5150
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5BB39D3C
+P 11450 1550
+F 0 "#PWR?" H 11450 1550 30  0001 C CNN
+F 1 "GND" H 11450 1480 30  0001 C CNN
+F 2 "~" H 11450 1550 60  0001 C CNN
+F 3 "~" H 11450 1550 60  0000 C CNN
+	1    11450 1550
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5BB3EDF1
+P 11450 4450
+F 0 "#PWR?" H 11450 4450 30  0001 C CNN
+F 1 "GND" H 11450 4380 30  0001 C CNN
+F 2 "~" H 11450 4450 60  0001 C CNN
+F 3 "~" H 11450 4450 60  0000 C CNN
+	1    11450 4450
 	1    0    0    -1  
 $EndComp
 $EndSCHEMATC
