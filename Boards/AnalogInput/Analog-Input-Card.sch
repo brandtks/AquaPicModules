@@ -144,7 +144,7 @@ RX
 Text Label 1200 6550 0    60   ~ 0
 TX
 $Comp
-L C-RESCUE-Analog-Input-Card C2
+L Analog-Input-Card-rescue:C_Small C2
 U 1 1 558FD6D4
 P 900 6300
 F 0 "C2" H 900 6400 40  0000 L CNN
@@ -157,12 +157,12 @@ $EndComp
 $Comp
 L power:GND #PWR08
 U 1 1 558FD6DB
-P 900 6500
-F 0 "#PWR08" H 900 6500 30  0001 C CNN
-F 1 "GND" H 900 6430 30  0001 C CNN
-F 2 "~" H 900 6500 60  0000 C CNN
-F 3 "~" H 900 6500 60  0000 C CNN
-	1    900  6500
+P 900 6400
+F 0 "#PWR08" H 900 6400 30  0001 C CNN
+F 1 "GND" H 900 6330 30  0001 C CNN
+F 2 "~" H 900 6400 60  0000 C CNN
+F 3 "~" H 900 6400 60  0000 C CNN
+	1    900  6400
 	1    0    0    -1  
 $EndComp
 Text Notes 2600 7600 2    60   ~ 0
@@ -219,7 +219,7 @@ $EndComp
 Text Notes 4300 7600 2    60   ~ 0
 APB Connectors
 $Comp
-L Conn_01x02 P4
+L Analog-Input-Card-rescue:Conn_01x02 P4
 U 1 1 558FFC76
 P 9350 5500
 F 0 "P4" H 9350 5600 50  0000 C CNN
@@ -254,7 +254,7 @@ F 3 "" H 10200 1000 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Conn_01x16 P2
+L Analog-Input-Card-rescue:Conn_01x16 P2
 U 1 1 5601E606
 P 10800 1800
 F 0 "P2" H 10800 2600 50  0000 C CNN
@@ -265,7 +265,7 @@ F 3 "" H 10800 1800 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Conn_01x02 P3
+L Analog-Input-Card-rescue:Conn_01x02 P3
 U 1 1 5601FC6C
 P 10800 2900
 F 0 "P3" H 10800 3000 50  0000 C CNN
@@ -276,7 +276,7 @@ F 3 "" H 10800 2900 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L CONN_01X06 P5
+L Analog-Input-Card-rescue:CONN_01X06 P5
 U 1 1 5681CCD0
 P 4950 3200
 F 0 "P5" H 4950 3550 50  0000 C CNN
@@ -298,7 +298,7 @@ F 3 "" H 1450 2250 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L MCP3428 U2
+L Analog-Input-Card-rescue:MCP3428 U2
 U 1 1 59F7C7E9
 P 5500 1500
 F 0 "U2" H 5350 1950 50  0000 R CNN
@@ -317,7 +317,7 @@ Ch3
 Text Label 6400 1800 2    60   ~ 0
 Ch4
 $Comp
-L C-RESCUE-Analog-Input-Card C3
+L Analog-Input-Card-rescue:C_Small C3
 U 1 1 59F802E0
 P 4500 1200
 F 0 "C3" H 4500 1300 40  0000 L CNN
@@ -328,7 +328,7 @@ F 3 "~" H 4500 1200 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L R R7
+L Analog-Input-Card-rescue:R R7
 U 1 1 59F90487
 P 8250 1500
 F 0 "R7" V 8330 1500 50  0000 C CNN
@@ -340,7 +340,7 @@ F 4 "0805, 1/4W, 1%, Thin Film" V 8250 1500 60  0001 C CNN "Comment"
 	0    1    1    0   
 $EndComp
 $Comp
-L R R8
+L Analog-Input-Card-rescue:R R8
 U 1 1 59F90597
 P 8000 1750
 F 0 "R8" V 8080 1750 50  0000 C CNN
@@ -354,7 +354,7 @@ $EndComp
 Text Label 6400 1200 2    60   ~ 0
 Ch1
 $Comp
-L POT RV1
+L Analog-Input-Card-rescue:POT RV1
 U 1 1 59F90BCA
 P 8650 1500
 F 0 "RV1" H 8650 1400 50  0000 C CNN
@@ -369,7 +369,7 @@ Ch1
 Text Label 9300 2300 2    60   ~ 0
 Input2
 $Comp
-L R R9
+L Analog-Input-Card-rescue:R R9
 U 1 1 59F9219B
 P 8250 2300
 F 0 "R9" V 8330 2300 50  0000 C CNN
@@ -381,7 +381,7 @@ F 4 "0805, 1/4W, 1%, Thin Film" V 8250 2300 60  0001 C CNN "Comment"
 	0    1    1    0   
 $EndComp
 $Comp
-L R R10
+L Analog-Input-Card-rescue:R R10
 U 1 1 59F921A1
 P 8000 2550
 F 0 "R10" V 8080 2550 50  0000 C CNN
@@ -393,7 +393,7 @@ F 4 "0805, 1/4W, 1%, Thin Film" V 8000 2550 60  0001 C CNN "Comment"
 	-1   0    0    1   
 $EndComp
 $Comp
-L POT RV2
+L Analog-Input-Card-rescue:POT RV2
 U 1 1 59F921A7
 P 8650 2300
 F 0 "RV2" H 8650 2200 50  0000 C CNN
@@ -406,7 +406,7 @@ $EndComp
 Text Label 9300 3100 2    60   ~ 0
 Input3
 $Comp
-L R R11
+L Analog-Input-Card-rescue:R R11
 U 1 1 59F9230C
 P 8250 3100
 F 0 "R11" V 8330 3100 50  0000 C CNN
@@ -418,7 +418,7 @@ F 4 "0805, 1/4W, 1%, Thin Film" V 8250 3100 60  0001 C CNN "Comment"
 	0    1    1    0   
 $EndComp
 $Comp
-L R R12
+L Analog-Input-Card-rescue:R R12
 U 1 1 59F92312
 P 8000 3350
 F 0 "R12" V 8080 3350 50  0000 C CNN
@@ -430,7 +430,7 @@ F 4 "0805, 1/4W, 1%, Thin Film" V 8000 3350 60  0001 C CNN "Comment"
 	-1   0    0    1   
 $EndComp
 $Comp
-L POT RV3
+L Analog-Input-Card-rescue:POT RV3
 U 1 1 59F92318
 P 8650 3100
 F 0 "RV3" H 8650 3000 50  0000 C CNN
@@ -445,7 +445,7 @@ Ch3
 Text Label 9300 3900 2    60   ~ 0
 Input4
 $Comp
-L R R13
+L Analog-Input-Card-rescue:R R13
 U 1 1 59F930E9
 P 8250 3900
 F 0 "R13" V 8330 3900 50  0000 C CNN
@@ -457,7 +457,7 @@ F 4 "0805, 1/4W, 1%, Thin Film" V 8250 3900 60  0001 C CNN "Comment"
 	0    1    1    0   
 $EndComp
 $Comp
-L R R14
+L Analog-Input-Card-rescue:R R14
 U 1 1 59F930EF
 P 8000 4150
 F 0 "R14" V 8080 4150 50  0000 C CNN
@@ -469,7 +469,7 @@ F 4 "0805, 1/4W, 1%, Thin Film" V 8000 4150 60  0001 C CNN "Comment"
 	-1   0    0    1   
 $EndComp
 $Comp
-L POT RV4
+L Analog-Input-Card-rescue:POT RV4
 U 1 1 59F930F5
 P 8650 3900
 F 0 "RV4" H 8650 3800 50  0000 C CNN
@@ -484,12 +484,12 @@ Ch4
 $Comp
 L power:+5V #PWR012
 U 1 1 59F95AC2
-P 900 6100
-F 0 "#PWR012" H 900 6190 20  0001 C CNN
-F 1 "+5V" H 900 6190 30  0000 C CNN
-F 2 "~" H 900 6100 60  0000 C CNN
-F 3 "~" H 900 6100 60  0000 C CNN
-	1    900  6100
+P 900 6200
+F 0 "#PWR012" H 900 6290 20  0001 C CNN
+F 1 "+5V" H 900 6290 30  0000 C CNN
+F 2 "~" H 900 6200 60  0000 C CNN
+F 3 "~" H 900 6200 60  0000 C CNN
+	1    900  6200
 	1    0    0    -1  
 $EndComp
 Text Label 3300 1900 2    60   ~ 0
@@ -497,7 +497,7 @@ SDA
 Text Label 3300 3000 2    60   ~ 0
 SCL
 $Comp
-L R R5
+L Analog-Input-Card-rescue:R R5
 U 1 1 59F9BA38
 P 3500 2800
 F 0 "R5" V 3580 2800 50  0000 C CNN
@@ -508,7 +508,7 @@ F 3 "" H 3500 2800 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L R R6
+L Analog-Input-Card-rescue:R R6
 U 1 1 59F9BC5D
 P 3500 1700
 F 0 "R6" V 3580 1700 50  0000 C CNN
@@ -527,7 +527,7 @@ SDA
 Text Notes 9400 4600 2    60   ~ 0
 Input Protection and Voltage Dividers
 $Comp
-L D_TVS_ALT D4
+L Analog-Input-Card-rescue:D_TVS_ALT D4
 U 1 1 5A08195A
 P 8900 1750
 F 0 "D4" H 8900 1850 50  0000 C CNN
@@ -538,7 +538,7 @@ F 3 "" H 8900 1750 50  0001 C CNN
 	0    -1   1    0   
 $EndComp
 $Comp
-L D_Zener_ALT D3
+L Analog-Input-Card-rescue:D_Zener_ALT D3
 U 1 1 5A08C32C
 P 7650 1750
 F 0 "D3" H 7650 1650 50  0000 C CNN
@@ -549,7 +549,7 @@ F 3 "" V 7650 1750 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L C_Small C4
+L Analog-Input-Card-rescue:C_Small C4
 U 1 1 5A08F843
 P 7200 1750
 F 0 "C4" H 7210 1820 50  0000 L CNN
@@ -560,7 +560,7 @@ F 3 "" H 7200 1750 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L D_Zener_ALT D5
+L Analog-Input-Card-rescue:D_Zener_ALT D5
 U 1 1 5A09261E
 P 7600 2550
 F 0 "D5" H 7600 2640 50  0000 C CNN
@@ -571,7 +571,7 @@ F 3 "" V 7600 2550 50  0001 C CNN
 	0    -1   1    0   
 $EndComp
 $Comp
-L C_Small C5
+L Analog-Input-Card-rescue:C_Small C5
 U 1 1 5A092627
 P 7200 2550
 F 0 "C5" H 7210 2620 50  0000 L CNN
@@ -584,7 +584,7 @@ $EndComp
 Text Label 6900 2300 0    60   ~ 0
 Ch2
 $Comp
-L D_TVS_ALT D6
+L Analog-Input-Card-rescue:D_TVS_ALT D6
 U 1 1 5A0929BA
 P 8900 2550
 F 0 "D6" H 8900 2650 50  0000 C CNN
@@ -595,7 +595,7 @@ F 3 "" H 8900 2550 50  0001 C CNN
 	0    -1   1    0   
 $EndComp
 $Comp
-L D_Zener_ALT D7
+L Analog-Input-Card-rescue:D_Zener_ALT D7
 U 1 1 5A092CB1
 P 7600 3350
 F 0 "D7" H 7600 3440 50  0000 C CNN
@@ -606,7 +606,7 @@ F 3 "" V 7600 3350 50  0001 C CNN
 	0    -1   1    0   
 $EndComp
 $Comp
-L C_Small C6
+L Analog-Input-Card-rescue:C_Small C6
 U 1 1 5A092CBA
 P 7200 3350
 F 0 "C6" H 7210 3420 50  0000 L CNN
@@ -617,7 +617,7 @@ F 3 "" H 7200 3350 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L D_TVS_ALT D8
+L Analog-Input-Card-rescue:D_TVS_ALT D8
 U 1 1 5A092CC9
 P 8900 3350
 F 0 "D8" H 8900 3450 50  0000 C CNN
@@ -628,7 +628,7 @@ F 3 "" H 8900 3350 50  0001 C CNN
 	0    -1   1    0   
 $EndComp
 $Comp
-L D_Zener_ALT D9
+L Analog-Input-Card-rescue:D_Zener_ALT D9
 U 1 1 5A0938BC
 P 7600 4150
 F 0 "D9" H 7600 4240 50  0000 C CNN
@@ -639,7 +639,7 @@ F 3 "" V 7600 4150 50  0001 C CNN
 	0    -1   1    0   
 $EndComp
 $Comp
-L C_Small C7
+L Analog-Input-Card-rescue:C_Small C7
 U 1 1 5A0938C5
 P 7200 4150
 F 0 "C7" H 7210 4220 50  0000 L CNN
@@ -650,7 +650,7 @@ F 3 "" H 7200 4150 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L D_TVS_ALT D10
+L Analog-Input-Card-rescue:D_TVS_ALT D10
 U 1 1 5A0938D3
 P 8900 4150
 F 0 "D10" H 8900 4250 50  0000 C CNN
@@ -716,7 +716,7 @@ F 3 "" H 2600 1550 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C_Small C1
+L Analog-Input-Card-rescue:C_Small C1
 U 1 1 5A0A460A
 P 1350 1100
 F 0 "C1" H 1360 1170 50  0000 L CNN
@@ -727,7 +727,7 @@ F 3 "" H 1350 1100 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C_Small C8
+L Analog-Input-Card-rescue:C_Small C8
 U 1 1 5A0A5112
 P 1600 1500
 F 0 "C8" H 1610 1570 50  0000 L CNN
@@ -778,7 +778,7 @@ RX
 Text Label 2500 5200 0    60   ~ 0
 RX_LV
 $Comp
-L R R17
+L Analog-Input-Card-rescue:R R17
 U 1 1 5A099F8F
 P 2900 5050
 F 0 "R17" V 2980 5050 50  0000 C CNN
@@ -789,7 +789,7 @@ F 3 "" H 2900 5050 30  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L R R18
+L Analog-Input-Card-rescue:R R18
 U 1 1 5A099F95
 P 3500 5050
 F 0 "R18" V 3580 5050 50  0000 C CNN
@@ -813,7 +813,7 @@ F 3 "" H 1800 4800 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L R R19
+L Analog-Input-Card-rescue:R R19
 U 1 1 5A09A531
 P 1250 4900
 F 0 "R19" V 1330 4900 50  0000 C CNN
@@ -824,7 +824,7 @@ F 3 "" H 1250 4900 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L R R20
+L Analog-Input-Card-rescue:R R20
 U 1 1 5A09A66C
 P 1500 5150
 F 0 "R20" V 1580 5150 50  0000 C CNN
@@ -835,7 +835,7 @@ F 3 "" H 1500 5150 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L R R21
+L Analog-Input-Card-rescue:R R21
 U 1 1 5A09A792
 P 1900 4250
 F 0 "R21" V 1980 4250 50  0000 C CNN
@@ -1070,12 +1070,12 @@ $EndComp
 $Comp
 L power:GND #PWR038
 U 1 1 5A0A3B87
-P 4500 1400
-F 0 "#PWR038" H 4500 1400 30  0001 C CNN
-F 1 "GND" H 4500 1330 30  0001 C CNN
-F 2 "~" H 4500 1400 60  0000 C CNN
-F 3 "~" H 4500 1400 60  0000 C CNN
-	1    4500 1400
+P 4500 1300
+F 0 "#PWR038" H 4500 1300 30  0001 C CNN
+F 1 "GND" H 4500 1230 30  0001 C CNN
+F 2 "~" H 4500 1300 60  0000 C CNN
+F 3 "~" H 4500 1300 60  0000 C CNN
+	1    4500 1300
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -1147,12 +1147,12 @@ $EndComp
 $Comp
 L power:+3.3V #PWR045
 U 1 1 5A0AC36B
-P 4500 1000
-F 0 "#PWR045" H 4500 850 50  0001 C CNN
-F 1 "+3.3V" H 4500 1100 30  0000 C CNN
-F 2 "" H 4500 1000 50  0001 C CNN
-F 3 "" H 4500 1000 50  0001 C CNN
-	1    4500 1000
+P 4500 1100
+F 0 "#PWR045" H 4500 950 50  0001 C CNN
+F 1 "+3.3V" H 4500 1200 30  0000 C CNN
+F 2 "" H 4500 1100 50  0001 C CNN
+F 3 "" H 4500 1100 50  0001 C CNN
+	1    4500 1100
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -1651,7 +1651,7 @@ F 3 "" H 3200 4300 60  0000 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L R R15
+L Analog-Input-Card-rescue:R R15
 U 1 1 5A0D44F0
 P 2900 4250
 F 0 "R15" V 2980 4250 50  0000 C CNN
@@ -1662,7 +1662,7 @@ F 3 "" H 2900 4250 30  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L R R16
+L Analog-Input-Card-rescue:R R16
 U 1 1 5A0D44F6
 P 3500 4250
 F 0 "R16" V 3580 4250 50  0000 C CNN
@@ -1739,7 +1739,7 @@ Wire Notes Line
 Wire Notes Line
 	700  5600 3900 5600
 $Comp
-L AP1117-33 U3
+L Analog-Input-Card-rescue:AP1117-33 U3
 U 1 1 5A0E5871
 P 5400 6150
 F 0 "U3" H 5250 6275 50  0000 C CNN
@@ -1776,7 +1776,7 @@ Wire Wire Line
 Wire Wire Line
 	5000 6150 5100 6150
 $Comp
-L C_Small C10
+L Analog-Input-Card-rescue:C_Small C10
 U 1 1 5A0E619E
 P 5800 6350
 F 0 "C10" H 5810 6420 50  0000 L CNN
@@ -1791,7 +1791,7 @@ Wire Wire Line
 Wire Wire Line
 	5800 6150 5700 6150
 $Comp
-L C_Small C9
+L Analog-Input-Card-rescue:C_Small C9
 U 1 1 5A0E6464
 P 5000 6350
 F 0 "C9" H 5010 6420 50  0000 L CNN
@@ -1879,7 +1879,7 @@ Wire Wire Line
 Wire Wire Line
 	1650 1800 1700 1800
 $Comp
-L C_Small C11
+L Analog-Input-Card-rescue:C_Small C11
 U 1 1 5A20C8F1
 P 1150 1100
 F 0 "C11" H 1160 1170 50  0000 L CNN
@@ -1923,7 +1923,7 @@ F 3 "~" H 5150 4900 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L R R1
+L Analog-Input-Card-rescue:R R1
 U 1 1 5A20DA87
 P 5550 4400
 F 0 "R1" V 5630 4400 40  0000 C CNN
@@ -1934,7 +1934,7 @@ F 3 "~" H 5550 4400 30  0000 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L R R2
+L Analog-Input-Card-rescue:R R2
 U 1 1 5A20DA8E
 P 5550 4650
 F 0 "R2" V 5630 4650 40  0000 C CNN
@@ -1945,7 +1945,7 @@ F 3 "~" H 5550 4650 30  0000 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L R R3
+L Analog-Input-Card-rescue:R R3
 U 1 1 5A20DA95
 P 5550 4900
 F 0 "R3" V 5630 4900 40  0000 C CNN
@@ -1975,7 +1975,7 @@ F 3 "" H 4800 4550 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L LED_ALT D2
+L Analog-Input-Card-rescue:LED_ALT D2
 U 1 1 5A20DAA6
 P 7800 5600
 F 0 "D2" H 7800 5700 50  0000 C CNN
@@ -1986,7 +1986,7 @@ F 3 "~" H 7800 5600 60  0000 C CNN
 	-1   0    0    -1  
 $EndComp
 $Comp
-L R R4
+L Analog-Input-Card-rescue:R R4
 U 1 1 5A20DAAD
 P 7400 5600
 F 0 "R4" V 7480 5600 40  0000 C CNN
