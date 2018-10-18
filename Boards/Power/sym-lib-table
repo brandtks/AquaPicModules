@@ -1,0 +1,4 @@
+(sym_lib_table
+  (lib (name Power-rescue)(type Legacy)(uri ${KIPRJMOD}/Power-rescue.lib)(options "")(descr ""))
+  (lib (name GoodtimeDev)(type Legacy)(uri ${KIUSER}/Library/GoodtimeDev.lib)(options "")(descr ""))
+)
