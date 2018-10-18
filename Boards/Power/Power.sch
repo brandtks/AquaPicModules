@@ -550,7 +550,7 @@ L Power-rescue:Relay(Mech_SSR) K1
 U 1 1 58086EAA
 P 2500 1500
 F 0 "K1" H 2800 1150 60  0000 C CNN
-F 1 "Relay(Mech/SSR)" H 2800 1300 60  0000 C CNN
+F 1 "Relay(Mech)" H 2800 1300 60  0000 C CNN
 F 2 "MyFootPrints:Relay-Mech-SSR" H 3800 500 60  0001 C CNN
 F 3 "" H 3800 500 60  0000 C CNN
 F 4 "-" H 0   0   50  0001 C CNN "Comments"
@@ -2005,7 +2005,7 @@ L Power-rescue:Relay(Mech_SSR) K2
 U 1 1 5A3A885A
 P 5600 1500
 F 0 "K2" H 5900 1150 60  0000 C CNN
-F 1 "Relay(Mech/SSR)" H 5900 1300 60  0000 C CNN
+F 1 "Relay(Mech)" H 5900 1300 60  0000 C CNN
 F 2 "MyFootPrints:Relay-Mech-SSR" H 6900 500 60  0001 C CNN
 F 3 "" H 6900 500 60  0000 C CNN
 F 4 "-" H 0   0   50  0001 C CNN "Comments"
@@ -2230,7 +2230,7 @@ L Power-rescue:Relay(Mech_SSR) K3
 U 1 1 5A3A9438
 P 8700 1500
 F 0 "K3" H 9000 1150 60  0000 C CNN
-F 1 "Relay(Mech/SSR)" H 9000 1300 60  0000 C CNN
+F 1 "Relay(SSR)" H 9000 1300 60  0000 C CNN
 F 2 "MyFootPrints:Relay-Mech-SSR" H 10000 500 60  0001 C CNN
 F 3 "" H 10000 500 60  0000 C CNN
 F 4 "-" H 8700 1500 50  0001 C CNN "Comments"
@@ -2455,7 +2455,7 @@ L Power-rescue:Relay(Mech_SSR) K4
 U 1 1 5A3A94A5
 P 11800 1500
 F 0 "K4" H 12100 1150 60  0000 C CNN
-F 1 "Relay(Mech/SSR)" H 12100 1300 60  0000 C CNN
+F 1 "Relay(SSR)" H 12100 1300 60  0000 C CNN
 F 2 "MyFootPrints:Relay-Mech-SSR" H 13100 500 60  0001 C CNN
 F 3 "" H 13100 500 60  0000 C CNN
 F 4 "-" H 0   0   50  0001 C CNN "Comments"
@@ -2680,7 +2680,7 @@ L Power-rescue:Relay(Mech_SSR) K5
 U 1 1 5A3A9BBE
 P 2500 3900
 F 0 "K5" H 2800 3550 60  0000 C CNN
-F 1 "Relay(Mech/SSR)" H 2800 3700 60  0000 C CNN
+F 1 "Relay(SSR)" H 2800 3700 60  0000 C CNN
 F 2 "MyFootPrints:Relay-Mech-SSR" H 3800 2900 60  0001 C CNN
 F 3 "" H 3800 2900 60  0000 C CNN
 F 4 "-" H 0   0   50  0001 C CNN "Comments"
@@ -2905,7 +2905,7 @@ L Power-rescue:Relay(Mech_SSR) K6
 U 1 1 5A3A9C2B
 P 5600 3900
 F 0 "K6" H 5900 3550 60  0000 C CNN
-F 1 "Relay(Mech/SSR)" H 5900 3700 60  0000 C CNN
+F 1 "Relay(SSR)" H 5900 3700 60  0000 C CNN
 F 2 "MyFootPrints:Relay-Mech-SSR" H 6900 2900 60  0001 C CNN
 F 3 "" H 6900 2900 60  0000 C CNN
 F 4 "-" H 0   0   50  0001 C CNN "Comments"
@@ -3130,7 +3130,7 @@ L Power-rescue:Relay(Mech_SSR) K7
 U 1 1 5A3A9C98
 P 8700 3900
 F 0 "K7" H 9000 3550 60  0000 C CNN
-F 1 "Relay(Mech/SSR)" H 9000 3700 60  0000 C CNN
+F 1 "Relay(SSR)" H 9000 3700 60  0000 C CNN
 F 2 "MyFootPrints:Relay-Mech-SSR" H 10000 2900 60  0001 C CNN
 F 3 "" H 10000 2900 60  0000 C CNN
 F 4 "-" H 0   0   50  0001 C CNN "Comments"
@@ -3355,7 +3355,7 @@ L Power-rescue:Relay(Mech_SSR) K8
 U 1 1 5A3A9D05
 P 11800 3900
 F 0 "K8" H 12100 3550 60  0000 C CNN
-F 1 "Relay(Mech/SSR)" H 12100 3700 60  0000 C CNN
+F 1 "Relay(SSR)" H 12100 3700 60  0000 C CNN
 F 2 "MyFootPrints:Relay-Mech-SSR" H 13100 2900 60  0001 C CNN
 F 3 "" H 13100 2900 60  0000 C CNN
 F 4 "-" H 0   0   50  0001 C CNN "Comments"

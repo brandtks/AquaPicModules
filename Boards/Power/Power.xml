@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <export version="D">
   <design>
-    <source>/home/sbrandt/Dropbox/AquaPic/Boards/PowerV6/Power.sch</source>
-    <date>Wed 06 Jun 2018 01:16:52 AM EDT</date>
-    <tool>Eeschema 4.0.2+dfsg1-stable</tool>
+    <source>/home/sbrandt/Dropbox/AquaPic/Boards/Power/Power.sch</source>
+    <date>Thu 18 Oct 2018 05:20:41 PM EDT</date>
+    <tool>Eeschema 5.0.1-33cea8e~67~ubuntu18.04.1</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
         <title>Power</title>
@@ -22,895 +22,1627 @@
     <comp ref="R36">
       <value>1M</value>
       <footprint>Resistors_SMD:R_2010</footprint>
-      <libsource lib="device" part="R"/>
+      <fields>
+        <field name="Comments">2010, 3/4W, 5%, Thick Film</field>
+        <field name="Digi-Key Part Number">P1.0MWCT-ND</field>
+        <field name="Manufacturer">Panasonic</field>
+        <field name="Manufacturer Part Number">P1.0MW</field>
+        <field name="Type">Resistor</field>
+      </fields>
+      <libsource lib="Power-rescue" part="R" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>54D49F9F</tstamp>
     </comp>
     <comp ref="R37">
       <value>1K</value>
       <footprint>Resistors_SMD:R_2512</footprint>
-      <libsource lib="device" part="R"/>
+      <fields>
+        <field name="Comments">2512, 1W, 1%, Thick Film</field>
+        <field name="Digi-Key Part Number">541-1.00KAFCT-ND </field>
+        <field name="Manufacturer">Vishay Dale</field>
+        <field name="Manufacturer Part Number">CRCW25121K00FKEG</field>
+        <field name="Type">Resistor</field>
+      </fields>
+      <libsource lib="Power-rescue" part="R" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>54D49FB8</tstamp>
     </comp>
     <comp ref="C8">
       <value>470nF</value>
       <footprint>Capacitors_SMD:C_1812</footprint>
-      <libsource lib="device" part="C"/>
+      <fields>
+        <field name="Comments">1812, 400V, X7T, 20%</field>
+        <field name="Digi-Key Part Number">445-13461-1-ND</field>
+        <field name="Manufacturer">TDK</field>
+        <field name="Manufacturer Part Number">C4532X7T2W474M230KA</field>
+        <field name="Type">Capacitor</field>
+      </fields>
+      <libsource lib="Power-rescue" part="C_Small" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>54D49FD1</tstamp>
     </comp>
     <comp ref="R38">
       <value>150R</value>
       <footprint>Resistors_SMD:R_0805</footprint>
-      <libsource lib="device" part="R"/>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RNCP0805FTD150RCT-ND </field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RNCP0805FTD150R</field>
+        <field name="Type">Resistor</field>
+      </fields>
+      <libsource lib="Power-rescue" part="R" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>54D49FEF</tstamp>
     </comp>
     <comp ref="R39">
       <value>10K</value>
       <footprint>Resistors_SMD:R_0805</footprint>
-      <libsource lib="device" part="R"/>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RNCP0805FTD10K0CT-ND</field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RNCP0805FTD10K0</field>
+        <field name="Type">Resistor</field>
+      </fields>
+      <libsource lib="Power-rescue" part="R" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>54D4B187</tstamp>
     </comp>
     <comp ref="D19">
-      <value>APT2012</value>
+      <value>LED (RED)</value>
       <footprint>LEDs:LED_0805</footprint>
-      <libsource lib="Power-cache" part="LED_ALT"/>
+      <fields>
+        <field name="Comments">0805, 2V, 20mA</field>
+        <field name="Digi-Key Part Number">475-1278-1-ND</field>
+        <field name="Manufacturer">Osram</field>
+        <field name="Manufacturer Part Number">LS R976-NR-1</field>
+        <field name="Type">LED (RED)</field>
+      </fields>
+      <libsource lib="Power-rescue" part="LED_ALT" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>558FE896</tstamp>
     </comp>
-    <comp ref="P12">
-      <value>1x2 5.08</value>
+    <comp ref="P19">
+      <value>Mains</value>
       <footprint>MyFootPrints:Screw_Header_1x2_5.08</footprint>
-      <libsource lib="Power-cache" part="Conn_01x02"/>
+      <fields>
+        <field name="Comments">-</field>
+        <field name="Digi-Key Part Number">ED2580-ND </field>
+        <field name="Manufacturer">On Shore</field>
+        <field name="Manufacturer Part Number">OSTTA024163 </field>
+        <field name="Type">1x2 5.08 Screw Header</field>
+      </fields>
+      <libsource lib="Power-rescue" part="Conn_01x02" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5659E437</tstamp>
     </comp>
     <comp ref="Q1">
       <value>NX7002AK</value>
       <footprint>TO_SOT_Packages_SMD:SOT-23</footprint>
-      <libsource lib="GoodtimeDev" part="MOSFET_N_SMALL"/>
+      <fields>
+        <field name="Comments">SOT-23-3</field>
+        <field name="Digi-Key Part Number">1727-1289-6-ND </field>
+        <field name="Manufacturer">Nexperia</field>
+        <field name="Manufacturer Part Number"> NX7002AK,215 </field>
+        <field name="Type">N-Channel MOSFET</field>
+      </fields>
+      <libsource lib="GoodtimeDev" part="MOSFET_N_SMALL" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5659E441</tstamp>
     </comp>
     <comp ref="R3">
-      <value>100R</value>
+      <value>150R</value>
       <footprint>Resistors_SMD:R_0805</footprint>
-      <libsource lib="device" part="R"/>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RNCP0805FTD150RCT-ND </field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RNCP0805FTD150R</field>
+        <field name="Type">Resistor</field>
+      </fields>
+      <libsource lib="Power-rescue" part="R" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5659E448</tstamp>
     </comp>
     <comp ref="R2">
       <value>10K</value>
       <footprint>Resistors_SMD:R_0805</footprint>
-      <libsource lib="device" part="R"/>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RNCP0805FTD10K0CT-ND</field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RNCP0805FTD10K0</field>
+        <field name="Type">Resistor</field>
+      </fields>
+      <libsource lib="Power-rescue" part="R" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5659E44F</tstamp>
     </comp>
     <comp ref="R1">
       <value>1K</value>
       <footprint>Resistors_SMD:R_0805</footprint>
-      <libsource lib="device" part="R"/>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RNCP0805FTD1K00CT-ND </field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RNCP0805FTD1K00</field>
+        <field name="Type">Resistor</field>
+      </fields>
+      <libsource lib="Power-rescue" part="R" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5659E456</tstamp>
     </comp>
     <comp ref="R41">
       <value>13K</value>
       <footprint>Resistors_SMD:R_2512</footprint>
-      <libsource lib="device" part="R"/>
+      <fields>
+        <field name="Comments">2512, 1W, 1%, Thick Film</field>
+        <field name="Digi-Key Part Number">RHM13.7KBBCT-ND</field>
+        <field name="Manufacturer">Rohm</field>
+        <field name="Manufacturer Part Number">MCR100JZHF1372</field>
+        <field name="Type">Resistor</field>
+      </fields>
+      <libsource lib="Power-rescue" part="R" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5662B28F</tstamp>
     </comp>
     <comp ref="R40">
       <value>13K</value>
       <footprint>Resistors_SMD:R_2512</footprint>
-      <libsource lib="device" part="R"/>
+      <fields>
+        <field name="Comments">2512, 1W, 1%, Thick Film</field>
+        <field name="Digi-Key Part Number">RHM13.7KBBCT-ND</field>
+        <field name="Manufacturer">Rohm</field>
+        <field name="Manufacturer Part Number">MCR100JZHF1372</field>
+        <field name="Type">Resistor</field>
+      </fields>
+      <libsource lib="Power-rescue" part="R" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5662BAFA</tstamp>
     </comp>
     <comp ref="U4">
       <value>LTV-826</value>
       <footprint>MyFootPrints:8_SMD_GULL_WING</footprint>
-      <libsource lib="GoodtimeDev" part="LTV-826"/>
+      <fields>
+        <field name="Comments">8-SMD</field>
+        <field name="Digi-Key Part Number">160-1363-5-ND</field>
+        <field name="Manufacturer">Lite-On</field>
+        <field name="Manufacturer Part Number">LTV-826S</field>
+        <field name="Type">Dual Opto-Isolator</field>
+      </fields>
+      <libsource lib="GoodtimeDev" part="LTV-826" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>565C100E</tstamp>
     </comp>
     <comp ref="U3">
       <value>LTV-826</value>
       <footprint>MyFootPrints:8_SMD_GULL_WING</footprint>
-      <libsource lib="GoodtimeDev" part="LTV-826"/>
+      <fields>
+        <field name="Comments">8-SMD</field>
+        <field name="Digi-Key Part Number">160-1363-5-ND</field>
+        <field name="Manufacturer">Lite-On</field>
+        <field name="Manufacturer Part Number">LTV-826S</field>
+        <field name="Type">Dual Opto-Isolator</field>
+      </fields>
+      <libsource lib="GoodtimeDev" part="LTV-826" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>565CA187</tstamp>
     </comp>
     <comp ref="P1">
-      <value>Stab and 1x3</value>
+      <value>Output</value>
       <footprint>MyFootPrints:Current_Board</footprint>
-      <libsource lib="Power-cache" part="Conn_01x04"/>
+      <fields>
+        <field name="Comments">-</field>
+        <field name="Digi-Key Part Number">A29937CT-ND</field>
+        <field name="Manufacturer">TE</field>
+        <field name="Manufacturer Part Number">63823-1</field>
+        <field name="Type">Stab</field>
+      </fields>
+      <libsource lib="Connector_Generic" part="Conn_01x01" description="Generic connector, single row, 01x01, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>57A90BAD</tstamp>
     </comp>
-    <comp ref="P13">
-      <value>1x2 5.08</value>
+    <comp ref="P20">
+      <value>Mains</value>
       <footprint>MyFootPrints:Screw_Header_1x2_5.08</footprint>
-      <libsource lib="Power-cache" part="Conn_01x02"/>
+      <fields>
+        <field name="Comments">-</field>
+        <field name="Digi-Key Part Number">ED2580-ND </field>
+        <field name="Manufacturer">On Shore</field>
+        <field name="Manufacturer Part Number">OSTTA024163 </field>
+        <field name="Type">1x2 5.08 Screw Header</field>
+      </fields>
+      <libsource lib="Power-rescue" part="Conn_01x02" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>57ACA819</tstamp>
     </comp>
     <comp ref="D2">
       <value>STPS130A</value>
       <footprint>Diodes_SMD:D_SMA</footprint>
-      <libsource lib="Power-cache" part="DIODESCH"/>
+      <fields>
+        <field name="Comments">DO-214AC</field>
+        <field name="Digi-Key Part Number">497-3755-1-ND</field>
+        <field name="Manufacturer">STMicroelectronics</field>
+        <field name="Manufacturer Part Number">STPS130A</field>
+        <field name="Type">Schottky Diode</field>
+      </fields>
+      <libsource lib="Power-rescue" part="DIODESCH" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>58086E86</tstamp>
     </comp>
     <comp ref="K1">
-      <value>Relay(Mech/SSR)</value>
+      <value>Relay(Mech)</value>
       <footprint>MyFootPrints:Relay-Mech-SSR</footprint>
-      <libsource lib="GoodtimeDev" part="Relay(Mech/SSR)"/>
+      <fields>
+        <field name="Comments">-</field>
+        <field name="Digi-Key Part Number">255-3559-ND</field>
+        <field name="Manufacturer">Panasonic</field>
+        <field name="Manufacturer Part Number">ALQ305</field>
+        <field name="Type">Mechanical Relay</field>
+      </fields>
+      <libsource lib="Power-rescue" part="Relay(Mech_SSR)" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>58086EAA</tstamp>
     </comp>
     <comp ref="D1">
-      <value>APT2012</value>
+      <value>LED (BLUE)</value>
       <footprint>LEDs:LED_0805</footprint>
-      <libsource lib="Power-cache" part="LED_ALT"/>
+      <fields>
+        <field name="Comments">0805, 3.2V, 20mA</field>
+        <field name="Digi-Key Part Number">732-4982-1-ND </field>
+        <field name="Manufacturer">Wurth</field>
+        <field name="Manufacturer Part Number">150080BS75000</field>
+        <field name="Type">LED (BLUE)</field>
+      </fields>
+      <libsource lib="Power-rescue" part="LED_ALT" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5659E3FC</tstamp>
     </comp>
     <comp ref="R32">
       <value>150R</value>
       <footprint>Resistors_SMD:R_0805</footprint>
-      <libsource lib="device" part="R"/>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RNCP0805FTD150RCT-ND </field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RNCP0805FTD150R</field>
+        <field name="Type">Resistor</field>
+      </fields>
+      <libsource lib="Power-rescue" part="R" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A2F3BE3</tstamp>
     </comp>
     <comp ref="R33">
       <value>150R</value>
       <footprint>Resistors_SMD:R_0805</footprint>
-      <libsource lib="device" part="R"/>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RNCP0805FTD150RCT-ND </field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RNCP0805FTD150R</field>
+        <field name="Type">Resistor</field>
+      </fields>
+      <libsource lib="Power-rescue" part="R" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A2F3BEA</tstamp>
     </comp>
     <comp ref="R34">
       <value>150R</value>
       <footprint>Resistors_SMD:R_0805</footprint>
-      <libsource lib="device" part="R"/>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RNCP0805FTD150RCT-ND </field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RNCP0805FTD150R</field>
+        <field name="Type">Resistor</field>
+      </fields>
+      <libsource lib="Power-rescue" part="R" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A2F3BF1</tstamp>
     </comp>
     <comp ref="D17">
       <value>SMTL4-RGY</value>
       <footprint>MyFootPrints:PLCC-4</footprint>
-      <libsource lib="GoodtimeDev" part="TRI-LED"/>
+      <fields>
+        <field name="Comments">4-PLCC</field>
+        <field name="Digi-Key Part Number">492-2173-1-ND</field>
+        <field name="Manufacturer">Bivar</field>
+        <field name="Manufacturer Part Number">SMTL4-RGY </field>
+        <field name="Type">LED (Red, Green, Yellow)</field>
+      </fields>
+      <libsource lib="GoodtimeDev" part="TRI-LED" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A2F3C75</tstamp>
     </comp>
     <comp ref="U1">
       <value>ST485EC</value>
       <footprint>Housings_SOIC:SOIC-8_3.9x4.9mm_Pitch1.27mm</footprint>
-      <libsource lib="GoodtimeDev" part="SN75176B"/>
+      <fields>
+        <field name="Comments">8-SOIC 3.9mm</field>
+        <field name="Digi-Key Part Number">497-3735-1-ND</field>
+        <field name="Manufacturer">STMicro</field>
+        <field name="Manufacturer Part Number">ST485ECDR</field>
+        <field name="Type">RS485 Transceiver</field>
+      </fields>
+      <libsource lib="GoodtimeDev" part="SN75176B" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A2F3C80</tstamp>
     </comp>
     <comp ref="C5">
       <value>100nF</value>
       <footprint>Capacitors_SMD:C_0805</footprint>
-      <libsource lib="device" part="C"/>
+      <fields>
+        <field name="Comments">0805, 50V, X7R, 10%</field>
+        <field name="Digi-Key Part Number">445-7534-1-ND</field>
+        <field name="Manufacturer">TDK</field>
+        <field name="Manufacturer Part Number">C2012X7R1H104K085AA</field>
+        <field name="Type">Capacitor</field>
+      </fields>
+      <libsource lib="Power-rescue" part="C_Small" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A2F3C97</tstamp>
     </comp>
-    <comp ref="P11">
-      <value>Stacked USBA</value>
+    <comp ref="P10">
+      <value>AquaPicBus</value>
       <footprint>MyFootPrints:USB-1.1_Stacked</footprint>
-      <libsource lib="GoodtimeDev" part="USB1.0_Stacked"/>
+      <fields>
+        <field name="Comments">-</field>
+        <field name="Digi-Key Part Number">1175-1003-ND</field>
+        <field name="Manufacturer">CNC Tech</field>
+        <field name="Manufacturer Part Number">1001-004-01010</field>
+        <field name="Type">USB 1.1 Type A</field>
+      </fields>
+      <libsource lib="GoodtimeDev" part="USB1.0_Stacked" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A2F3CAA</tstamp>
     </comp>
-    <comp ref="P10">
-      <value>1x6 2.54 Pin Header</value>
+    <comp ref="P9">
+      <value>ICSP</value>
       <footprint>Pin_Headers:Pin_Header_Straight_1x06_Pitch2.54mm</footprint>
-      <libsource lib="Power-cache" part="Conn_01x06"/>
+      <fields>
+        <field name="Comments">-</field>
+        <field name="Digi-Key Part Number">A105161CT-ND</field>
+        <field name="Manufacturer">TE</field>
+        <field name="Manufacturer Part Number">A105161CT-ND</field>
+        <field name="Type">1x6 2.54 Male Pin Header</field>
+      </fields>
+      <libsource lib="Power-rescue" part="Conn_01x06" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A2F3CC0</tstamp>
     </comp>
     <comp ref="X1">
       <value>8MHz</value>
       <footprint>MyFootPrints:Resonator_3.2x1.3</footprint>
-      <libsource lib="GoodtimeDev" part="RESONATOR"/>
+      <fields>
+        <field name="Comments">3-SMD, Non-Standard</field>
+        <field name="Digi-Key Part Number">490-1195-1-ND</field>
+        <field name="Manufacturer">Murata</field>
+        <field name="Manufacturer Part Number">CSTCE8M00G55-R0</field>
+        <field name="Type">Resonator</field>
+      </fields>
+      <libsource lib="GoodtimeDev" part="RESONATOR" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A2F3CC7</tstamp>
     </comp>
     <comp ref="C3">
       <value>100nF</value>
       <footprint>Capacitors_SMD:C_0805</footprint>
-      <libsource lib="device" part="C_Small"/>
+      <fields>
+        <field name="Comments">0805, 50V, X7R, 10%</field>
+        <field name="Digi-Key Part Number">445-7534-1-ND</field>
+        <field name="Manufacturer">TDK</field>
+        <field name="Manufacturer Part Number">C2012X7R1H104K085AA</field>
+        <field name="Type">Capacitor</field>
+      </fields>
+      <libsource lib="Power-rescue" part="C_Small" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A2F3CE0</tstamp>
     </comp>
     <comp ref="Q11">
       <value>NX7002AK</value>
       <footprint>TO_SOT_Packages_SMD:SOT-23</footprint>
-      <libsource lib="GoodtimeDev" part="MOSFET_N_SMALL"/>
+      <fields>
+        <field name="Comments">SOT-23-3</field>
+        <field name="Digi-Key Part Number">1727-1289-6-ND </field>
+        <field name="Manufacturer">Nexperia</field>
+        <field name="Manufacturer Part Number"> NX7002AK,215 </field>
+        <field name="Type">N-Channel MOSFET</field>
+      </fields>
+      <libsource lib="GoodtimeDev" part="MOSFET_N_SMALL" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A2F3CF7</tstamp>
     </comp>
     <comp ref="R29">
       <value>4K99</value>
       <footprint>Resistors_SMD:R_0805</footprint>
-      <libsource lib="device" part="R"/>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RNCP0805FTD4K99CT-ND </field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RNCP0805FTD4K99</field>
+        <field name="Type">Resistor</field>
+      </fields>
+      <libsource lib="Power-rescue" part="R" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A2F3D00</tstamp>
     </comp>
     <comp ref="R31">
       <value>4K99</value>
       <footprint>Resistors_SMD:R_0805</footprint>
-      <libsource lib="device" part="R"/>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RNCP0805FTD4K99CT-ND </field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RNCP0805FTD4K99</field>
+        <field name="Type">Resistor</field>
+      </fields>
+      <libsource lib="Power-rescue" part="R" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A2F3D07</tstamp>
     </comp>
     <comp ref="Q9">
       <value>NX7002AK</value>
       <footprint>TO_SOT_Packages_SMD:SOT-23</footprint>
-      <libsource lib="GoodtimeDev" part="MOSFET_N_SMALL"/>
+      <fields>
+        <field name="Comments">SOT-23-3</field>
+        <field name="Digi-Key Part Number">1727-1289-6-ND </field>
+        <field name="Manufacturer">Nexperia</field>
+        <field name="Manufacturer Part Number"> NX7002AK,215 </field>
+        <field name="Type">N-Channel MOSFET</field>
+      </fields>
+      <libsource lib="GoodtimeDev" part="MOSFET_N_SMALL" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A2F3D0F</tstamp>
     </comp>
     <comp ref="R25">
       <value>1K</value>
       <footprint>Resistors_SMD:R_0805</footprint>
-      <libsource lib="device" part="R"/>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RNCP0805FTD1K00CT-ND </field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RNCP0805FTD1K00</field>
+        <field name="Type">Resistor</field>
+      </fields>
+      <libsource lib="Power-rescue" part="R" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A2F3D16</tstamp>
     </comp>
     <comp ref="R26">
       <value>10K</value>
       <footprint>Resistors_SMD:R_0805</footprint>
-      <libsource lib="device" part="R"/>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RNCP0805FTD10K0CT-ND</field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RNCP0805FTD10K0</field>
+        <field name="Type">Resistor</field>
+      </fields>
+      <libsource lib="Power-rescue" part="R" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A2F3D1D</tstamp>
     </comp>
     <comp ref="R27">
       <value>10K</value>
       <footprint>Resistors_SMD:R_0805</footprint>
-      <libsource lib="device" part="R"/>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RNCP0805FTD10K0CT-ND</field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RNCP0805FTD10K0</field>
+        <field name="Type">Resistor</field>
+      </fields>
+      <libsource lib="Power-rescue" part="R" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A2F3D24</tstamp>
     </comp>
     <comp ref="Q10">
       <value>NX7002AK</value>
       <footprint>TO_SOT_Packages_SMD:SOT-23</footprint>
-      <libsource lib="GoodtimeDev" part="MOSFET_N_SMALL"/>
+      <fields>
+        <field name="Comments">SOT-23-3</field>
+        <field name="Digi-Key Part Number">1727-1289-6-ND </field>
+        <field name="Manufacturer">Nexperia</field>
+        <field name="Manufacturer Part Number"> NX7002AK,215 </field>
+        <field name="Type">N-Channel MOSFET</field>
+      </fields>
+      <libsource lib="GoodtimeDev" part="MOSFET_N_SMALL" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A2F3D56</tstamp>
     </comp>
     <comp ref="R28">
       <value>4K99</value>
       <footprint>Resistors_SMD:R_0805</footprint>
-      <libsource lib="device" part="R"/>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RNCP0805FTD4K99CT-ND </field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RNCP0805FTD4K99</field>
+        <field name="Type">Resistor</field>
+      </fields>
+      <libsource lib="Power-rescue" part="R" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A2F3D5D</tstamp>
     </comp>
     <comp ref="R30">
       <value>4K99</value>
       <footprint>Resistors_SMD:R_0805</footprint>
-      <libsource lib="device" part="R"/>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RNCP0805FTD4K99CT-ND </field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RNCP0805FTD4K99</field>
+        <field name="Type">Resistor</field>
+      </fields>
+      <libsource lib="Power-rescue" part="R" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A2F3D64</tstamp>
     </comp>
     <comp ref="U2">
       <value>AP2114H</value>
       <footprint>TO_SOT_Packages_SMD:SOT-223</footprint>
-      <libsource lib="Power-cache" part="AP1117-33"/>
+      <fields>
+        <field name="Comments">SOT-223</field>
+        <field name="Digi-Key Part Number">AP2114HA-2.5TRG1DICT-ND </field>
+        <field name="Manufacturer">Diodes</field>
+        <field name="Manufacturer Part Number">AP2114HA-2.5TRG1 </field>
+        <field name="Type">Linear Regulator</field>
+      </fields>
+      <libsource lib="Power-rescue" part="AP1117-33" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A2F3D7F</tstamp>
     </comp>
     <comp ref="C7">
       <value>4u7</value>
       <footprint>Capacitors_SMD:C_0805</footprint>
-      <libsource lib="device" part="C_Small"/>
+      <fields>
+        <field name="Comments">0805, 10V, X7R, 10%</field>
+        <field name="Digi-Key Part Number">1276-2972-1-ND </field>
+        <field name="Manufacturer">Samsung</field>
+        <field name="Manufacturer Part Number">CL21B475KPFNNNE</field>
+        <field name="Type">Capacitor</field>
+      </fields>
+      <libsource lib="Power-rescue" part="C_Small" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A2F3D8C</tstamp>
     </comp>
     <comp ref="C6">
       <value>4u7</value>
       <footprint>Capacitors_SMD:C_0805</footprint>
-      <libsource lib="device" part="C_Small"/>
+      <fields>
+        <field name="Comments">0805, 10V, X7R, 10%</field>
+        <field name="Digi-Key Part Number">1276-2972-1-ND </field>
+        <field name="Manufacturer">Samsung</field>
+        <field name="Manufacturer Part Number">CL21B475KPFNNNE</field>
+        <field name="Type">Capacitor</field>
+      </fields>
+      <libsource lib="Power-rescue" part="C_Small" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A2F3D93</tstamp>
     </comp>
     <comp ref="D18">
-      <value>APT2012</value>
+      <value>LED (RED)</value>
       <footprint>LEDs:LED_0805</footprint>
-      <libsource lib="Power-cache" part="LED_ALT"/>
+      <fields>
+        <field name="Comments">0805, 2V, 20mA</field>
+        <field name="Digi-Key Part Number">475-1278-1-ND</field>
+        <field name="Manufacturer">Osram</field>
+        <field name="Manufacturer Part Number">LS R976-NR-1</field>
+        <field name="Type">LED (RED)</field>
+      </fields>
+      <libsource lib="Power-rescue" part="LED_ALT" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A2F3DAE</tstamp>
     </comp>
     <comp ref="R35">
       <value>150R</value>
       <footprint>Resistors_SMD:R_0805</footprint>
-      <libsource lib="device" part="R"/>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RNCP0805FTD150RCT-ND </field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RNCP0805FTD150R</field>
+        <field name="Type">Resistor</field>
+      </fields>
+      <libsource lib="Power-rescue" part="R" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A2F3DB5</tstamp>
     </comp>
     <comp ref="C2">
       <value>100nF</value>
       <footprint>Capacitors_SMD:C_0805</footprint>
-      <libsource lib="device" part="C_Small"/>
+      <fields>
+        <field name="Comments">0805, 50V, X7R, 10%</field>
+        <field name="Digi-Key Part Number">445-7534-1-ND</field>
+        <field name="Manufacturer">TDK</field>
+        <field name="Manufacturer Part Number">C2012X7R1H104K085AA</field>
+        <field name="Type">Capacitor</field>
+      </fields>
+      <libsource lib="Power-rescue" part="C_Small" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A2F3DC3</tstamp>
     </comp>
     <comp ref="IC1">
       <value>PIC32MM0064GPM048</value>
       <footprint>Housings_QFP:TQFP-48_7x7mm_Pitch0.5mm</footprint>
-      <libsource lib="GoodtimeDev" part="PIC32MM0064GPM048_QFN"/>
+      <fields>
+        <field name="Comments">48-TQFP 7mm</field>
+        <field name="Digi-Key Part Number"> PIC32MM0064GPM048T-I/PTCT-ND </field>
+        <field name="Manufacturer">Microchip</field>
+        <field name="Manufacturer Part Number"> PIC32MM0064GPM048T-I/PT</field>
+        <field name="Type">Microcontroller</field>
+      </fields>
+      <libsource lib="GoodtimeDev" part="PIC32MM0064GPM048_QFN" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A347B0D</tstamp>
     </comp>
     <comp ref="C1">
       <value>100nF</value>
       <footprint>Capacitors_SMD:C_0805</footprint>
-      <libsource lib="device" part="C_Small"/>
+      <fields>
+        <field name="Comments">0805, 50V, X7R, 10%</field>
+        <field name="Digi-Key Part Number">445-7534-1-ND</field>
+        <field name="Manufacturer">TDK</field>
+        <field name="Manufacturer Part Number">C2012X7R1H104K085AA</field>
+        <field name="Type">Capacitor</field>
+      </fields>
+      <libsource lib="Power-rescue" part="C_Small" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A380036</tstamp>
     </comp>
     <comp ref="C4">
       <value>100nF</value>
       <footprint>Capacitors_SMD:C_0805</footprint>
-      <libsource lib="device" part="C_Small"/>
+      <fields>
+        <field name="Comments">0805, 50V, X7R, 10%</field>
+        <field name="Digi-Key Part Number">445-7534-1-ND</field>
+        <field name="Manufacturer">TDK</field>
+        <field name="Manufacturer Part Number">C2012X7R1H104K085AA</field>
+        <field name="Type">Capacitor</field>
+      </fields>
+      <libsource lib="Power-rescue" part="C_Small" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A387D1B</tstamp>
     </comp>
     <comp ref="Q2">
       <value>NX7002AK</value>
       <footprint>TO_SOT_Packages_SMD:SOT-23</footprint>
-      <libsource lib="GoodtimeDev" part="MOSFET_N_SMALL"/>
+      <fields>
+        <field name="Comments">SOT-23-3</field>
+        <field name="Digi-Key Part Number">1727-1289-6-ND </field>
+        <field name="Manufacturer">Nexperia</field>
+        <field name="Manufacturer Part Number"> NX7002AK,215 </field>
+        <field name="Type">N-Channel MOSFET</field>
+      </fields>
+      <libsource lib="GoodtimeDev" part="MOSFET_N_SMALL" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A3A880A</tstamp>
     </comp>
     <comp ref="R6">
-      <value>100R</value>
+      <value>150R</value>
       <footprint>Resistors_SMD:R_0805</footprint>
-      <libsource lib="device" part="R"/>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RNCP0805FTD150RCT-ND </field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RNCP0805FTD150R</field>
+        <field name="Type">Resistor</field>
+      </fields>
+      <libsource lib="Power-rescue" part="R" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A3A8810</tstamp>
     </comp>
     <comp ref="R5">
       <value>10K</value>
       <footprint>Resistors_SMD:R_0805</footprint>
-      <libsource lib="device" part="R"/>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RNCP0805FTD10K0CT-ND</field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RNCP0805FTD10K0</field>
+        <field name="Type">Resistor</field>
+      </fields>
+      <libsource lib="Power-rescue" part="R" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A3A8816</tstamp>
     </comp>
     <comp ref="R4">
       <value>1K</value>
       <footprint>Resistors_SMD:R_0805</footprint>
-      <libsource lib="device" part="R"/>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RNCP0805FTD1K00CT-ND </field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RNCP0805FTD1K00</field>
+        <field name="Type">Resistor</field>
+      </fields>
+      <libsource lib="Power-rescue" part="R" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A3A881C</tstamp>
     </comp>
     <comp ref="P2">
-      <value>Stab and 1x3</value>
+      <value>Output</value>
       <footprint>MyFootPrints:Current_Board</footprint>
-      <libsource lib="Power-cache" part="Conn_01x04"/>
+      <fields>
+        <field name="Comments">-</field>
+        <field name="Digi-Key Part Number">A29937CT-ND</field>
+        <field name="Manufacturer">TE</field>
+        <field name="Manufacturer Part Number">63823-1</field>
+        <field name="Type">Stab</field>
+      </fields>
+      <libsource lib="Connector_Generic" part="Conn_01x01" description="Generic connector, single row, 01x01, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A3A882D</tstamp>
     </comp>
     <comp ref="D4">
       <value>STPS130A</value>
       <footprint>Diodes_SMD:D_SMA</footprint>
-      <libsource lib="Power-cache" part="DIODESCH"/>
+      <fields>
+        <field name="Comments">DO-214AC</field>
+        <field name="Digi-Key Part Number">497-3755-1-ND</field>
+        <field name="Manufacturer">STMicroelectronics</field>
+        <field name="Manufacturer Part Number">STPS130A</field>
+        <field name="Type">Schottky Diode</field>
+      </fields>
+      <libsource lib="Power-rescue" part="DIODESCH" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A3A8839</tstamp>
     </comp>
     <comp ref="K2">
-      <value>Relay(Mech/SSR)</value>
+      <value>Relay(Mech)</value>
       <footprint>MyFootPrints:Relay-Mech-SSR</footprint>
-      <libsource lib="GoodtimeDev" part="Relay(Mech/SSR)"/>
+      <fields>
+        <field name="Comments">-</field>
+        <field name="Digi-Key Part Number">255-3559-ND</field>
+        <field name="Manufacturer">Panasonic</field>
+        <field name="Manufacturer Part Number">ALQ305</field>
+        <field name="Type">Mechanical Relay</field>
+      </fields>
+      <libsource lib="Power-rescue" part="Relay(Mech_SSR)" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A3A885A</tstamp>
     </comp>
     <comp ref="D3">
-      <value>APT2012</value>
+      <value>LED (BLUE)</value>
       <footprint>LEDs:LED_0805</footprint>
-      <libsource lib="Power-cache" part="LED_ALT"/>
+      <fields>
+        <field name="Comments">0805, 3.2V, 20mA</field>
+        <field name="Digi-Key Part Number">732-4982-1-ND </field>
+        <field name="Manufacturer">Wurth</field>
+        <field name="Manufacturer Part Number">150080BS75000</field>
+        <field name="Type">LED (BLUE)</field>
+      </fields>
+      <libsource lib="Power-rescue" part="LED_ALT" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A3A8860</tstamp>
     </comp>
     <comp ref="Q3">
       <value>NX7002AK</value>
       <footprint>TO_SOT_Packages_SMD:SOT-23</footprint>
-      <libsource lib="GoodtimeDev" part="MOSFET_N_SMALL"/>
+      <fields>
+        <field name="Comments">SOT-23-3</field>
+        <field name="Digi-Key Part Number">1727-1289-6-ND </field>
+        <field name="Manufacturer">Nexperia</field>
+        <field name="Manufacturer Part Number"> NX7002AK,215 </field>
+        <field name="Type">N-Channel MOSFET</field>
+      </fields>
+      <libsource lib="GoodtimeDev" part="MOSFET_N_SMALL" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A3A93E8</tstamp>
     </comp>
     <comp ref="R9">
-      <value>100R</value>
+      <value>150R</value>
       <footprint>Resistors_SMD:R_0805</footprint>
-      <libsource lib="device" part="R"/>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RNCP0805FTD150RCT-ND </field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RNCP0805FTD150R</field>
+        <field name="Type">Resistor</field>
+      </fields>
+      <libsource lib="Power-rescue" part="R" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A3A93EE</tstamp>
     </comp>
     <comp ref="R8">
       <value>10K</value>
       <footprint>Resistors_SMD:R_0805</footprint>
-      <libsource lib="device" part="R"/>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RNCP0805FTD10K0CT-ND</field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RNCP0805FTD10K0</field>
+        <field name="Type">Resistor</field>
+      </fields>
+      <libsource lib="Power-rescue" part="R" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A3A93F4</tstamp>
     </comp>
     <comp ref="R7">
       <value>1K</value>
       <footprint>Resistors_SMD:R_0805</footprint>
-      <libsource lib="device" part="R"/>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RNCP0805FTD1K00CT-ND </field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RNCP0805FTD1K00</field>
+        <field name="Type">Resistor</field>
+      </fields>
+      <libsource lib="Power-rescue" part="R" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A3A93FA</tstamp>
     </comp>
     <comp ref="P3">
-      <value>Stab and 1x3</value>
+      <value>Output</value>
       <footprint>MyFootPrints:Current_Board</footprint>
-      <libsource lib="Power-cache" part="Conn_01x04"/>
+      <fields>
+        <field name="Comments">-</field>
+        <field name="Digi-Key Part Number">A29937CT-ND</field>
+        <field name="Manufacturer">TE</field>
+        <field name="Manufacturer Part Number">63823-1</field>
+        <field name="Type">Stab</field>
+      </fields>
+      <libsource lib="Connector_Generic" part="Conn_01x01" description="Generic connector, single row, 01x01, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A3A940B</tstamp>
     </comp>
     <comp ref="D6">
       <value>STPS130A</value>
       <footprint>Diodes_SMD:D_SMA</footprint>
-      <libsource lib="Power-cache" part="DIODESCH"/>
+      <fields>
+        <field name="Comments">DO-214AC</field>
+        <field name="Digi-Key Part Number">497-3755-1-ND</field>
+        <field name="Manufacturer">STMicroelectronics</field>
+        <field name="Manufacturer Part Number">STPS130A</field>
+        <field name="Type">Schottky Diode</field>
+      </fields>
+      <libsource lib="Power-rescue" part="DIODESCH" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A3A9417</tstamp>
     </comp>
     <comp ref="K3">
-      <value>Relay(Mech/SSR)</value>
+      <value>Relay(SSR)</value>
       <footprint>MyFootPrints:Relay-Mech-SSR</footprint>
-      <libsource lib="GoodtimeDev" part="Relay(Mech/SSR)"/>
+      <fields>
+        <field name="Comments">-</field>
+        <field name="Digi-Key Part Number">-</field>
+        <field name="Manufacturer">Mager</field>
+        <field name="Manufacturer Part Number">GJ-5-L</field>
+        <field name="Type">SSR Relay</field>
+      </fields>
+      <libsource lib="Power-rescue" part="Relay(Mech_SSR)" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A3A9438</tstamp>
     </comp>
     <comp ref="D5">
-      <value>APT2012</value>
+      <value>LED (BLUE)</value>
       <footprint>LEDs:LED_0805</footprint>
-      <libsource lib="Power-cache" part="LED_ALT"/>
+      <fields>
+        <field name="Comments">0805, 3.2V, 20mA</field>
+        <field name="Digi-Key Part Number">732-4982-1-ND </field>
+        <field name="Manufacturer">Wurth</field>
+        <field name="Manufacturer Part Number">150080BS75000</field>
+        <field name="Type">LED (BLUE)</field>
+      </fields>
+      <libsource lib="Power-rescue" part="LED_ALT" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A3A943E</tstamp>
     </comp>
     <comp ref="Q4">
       <value>NX7002AK</value>
       <footprint>TO_SOT_Packages_SMD:SOT-23</footprint>
-      <libsource lib="GoodtimeDev" part="MOSFET_N_SMALL"/>
+      <fields>
+        <field name="Comments">SOT-23-3</field>
+        <field name="Digi-Key Part Number">1727-1289-6-ND </field>
+        <field name="Manufacturer">Nexperia</field>
+        <field name="Manufacturer Part Number"> NX7002AK,215 </field>
+        <field name="Type">N-Channel MOSFET</field>
+      </fields>
+      <libsource lib="GoodtimeDev" part="MOSFET_N_SMALL" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A3A9455</tstamp>
     </comp>
     <comp ref="R12">
-      <value>100R</value>
+      <value>150R</value>
       <footprint>Resistors_SMD:R_0805</footprint>
-      <libsource lib="device" part="R"/>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RNCP0805FTD150RCT-ND </field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RNCP0805FTD150R</field>
+        <field name="Type">Resistor</field>
+      </fields>
+      <libsource lib="Power-rescue" part="R" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A3A945B</tstamp>
     </comp>
     <comp ref="R11">
       <value>10K</value>
       <footprint>Resistors_SMD:R_0805</footprint>
-      <libsource lib="device" part="R"/>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RNCP0805FTD10K0CT-ND</field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RNCP0805FTD10K0</field>
+        <field name="Type">Resistor</field>
+      </fields>
+      <libsource lib="Power-rescue" part="R" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A3A9461</tstamp>
     </comp>
     <comp ref="R10">
       <value>1K</value>
       <footprint>Resistors_SMD:R_0805</footprint>
-      <libsource lib="device" part="R"/>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RNCP0805FTD1K00CT-ND </field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RNCP0805FTD1K00</field>
+        <field name="Type">Resistor</field>
+      </fields>
+      <libsource lib="Power-rescue" part="R" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A3A9467</tstamp>
     </comp>
     <comp ref="P4">
-      <value>Stab and 1x3</value>
+      <value>Output</value>
       <footprint>MyFootPrints:Current_Board</footprint>
-      <libsource lib="Power-cache" part="Conn_01x04"/>
+      <fields>
+        <field name="Comments">-</field>
+        <field name="Digi-Key Part Number">A29937CT-ND</field>
+        <field name="Manufacturer">TE</field>
+        <field name="Manufacturer Part Number">63823-1</field>
+        <field name="Type">Stab</field>
+      </fields>
+      <libsource lib="Connector_Generic" part="Conn_01x01" description="Generic connector, single row, 01x01, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A3A9478</tstamp>
     </comp>
     <comp ref="D8">
       <value>STPS130A</value>
       <footprint>Diodes_SMD:D_SMA</footprint>
-      <libsource lib="Power-cache" part="DIODESCH"/>
+      <fields>
+        <field name="Comments">DO-214AC</field>
+        <field name="Digi-Key Part Number">497-3755-1-ND</field>
+        <field name="Manufacturer">STMicroelectronics</field>
+        <field name="Manufacturer Part Number">STPS130A</field>
+        <field name="Type">Schottky Diode</field>
+      </fields>
+      <libsource lib="Power-rescue" part="DIODESCH" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A3A9484</tstamp>
     </comp>
     <comp ref="K4">
-      <value>Relay(Mech/SSR)</value>
+      <value>Relay(SSR)</value>
       <footprint>MyFootPrints:Relay-Mech-SSR</footprint>
-      <libsource lib="GoodtimeDev" part="Relay(Mech/SSR)"/>
+      <fields>
+        <field name="Comments">-</field>
+        <field name="Digi-Key Part Number">-</field>
+        <field name="Manufacturer">Mager</field>
+        <field name="Manufacturer Part Number">GJ-5-L</field>
+        <field name="Type">SSR Relay</field>
+      </fields>
+      <libsource lib="Power-rescue" part="Relay(Mech_SSR)" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A3A94A5</tstamp>
     </comp>
     <comp ref="D7">
-      <value>APT2012</value>
+      <value>LED (BLUE)</value>
       <footprint>LEDs:LED_0805</footprint>
-      <libsource lib="Power-cache" part="LED_ALT"/>
+      <fields>
+        <field name="Comments">0805, 3.2V, 20mA</field>
+        <field name="Digi-Key Part Number">732-4982-1-ND </field>
+        <field name="Manufacturer">Wurth</field>
+        <field name="Manufacturer Part Number">150080BS75000</field>
+        <field name="Type">LED (BLUE)</field>
+      </fields>
+      <libsource lib="Power-rescue" part="LED_ALT" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A3A94AB</tstamp>
     </comp>
     <comp ref="Q5">
       <value>NX7002AK</value>
       <footprint>TO_SOT_Packages_SMD:SOT-23</footprint>
-      <libsource lib="GoodtimeDev" part="MOSFET_N_SMALL"/>
+      <fields>
+        <field name="Comments">SOT-23-3</field>
+        <field name="Digi-Key Part Number">1727-1289-6-ND </field>
+        <field name="Manufacturer">Nexperia</field>
+        <field name="Manufacturer Part Number"> NX7002AK,215 </field>
+        <field name="Type">N-Channel MOSFET</field>
+      </fields>
+      <libsource lib="GoodtimeDev" part="MOSFET_N_SMALL" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A3A9B6E</tstamp>
     </comp>
     <comp ref="R15">
-      <value>100R</value>
+      <value>150R</value>
       <footprint>Resistors_SMD:R_0805</footprint>
-      <libsource lib="device" part="R"/>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RNCP0805FTD150RCT-ND </field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RNCP0805FTD150R</field>
+        <field name="Type">Resistor</field>
+      </fields>
+      <libsource lib="Power-rescue" part="R" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A3A9B74</tstamp>
     </comp>
     <comp ref="R14">
       <value>10K</value>
       <footprint>Resistors_SMD:R_0805</footprint>
-      <libsource lib="device" part="R"/>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RNCP0805FTD10K0CT-ND</field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RNCP0805FTD10K0</field>
+        <field name="Type">Resistor</field>
+      </fields>
+      <libsource lib="Power-rescue" part="R" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A3A9B7A</tstamp>
     </comp>
     <comp ref="R13">
       <value>1K</value>
       <footprint>Resistors_SMD:R_0805</footprint>
-      <libsource lib="device" part="R"/>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RNCP0805FTD1K00CT-ND </field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RNCP0805FTD1K00</field>
+        <field name="Type">Resistor</field>
+      </fields>
+      <libsource lib="Power-rescue" part="R" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A3A9B80</tstamp>
     </comp>
     <comp ref="P5">
-      <value>Stab and 1x3</value>
+      <value>Output</value>
       <footprint>MyFootPrints:Current_Board</footprint>
-      <libsource lib="Power-cache" part="Conn_01x04"/>
+      <fields>
+        <field name="Comments">-</field>
+        <field name="Digi-Key Part Number">A29937CT-ND</field>
+        <field name="Manufacturer">TE</field>
+        <field name="Manufacturer Part Number">63823-1</field>
+        <field name="Type">Stab</field>
+      </fields>
+      <libsource lib="Connector_Generic" part="Conn_01x01" description="Generic connector, single row, 01x01, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A3A9B91</tstamp>
     </comp>
     <comp ref="D10">
       <value>STPS130A</value>
       <footprint>Diodes_SMD:D_SMA</footprint>
-      <libsource lib="Power-cache" part="DIODESCH"/>
+      <fields>
+        <field name="Comments">DO-214AC</field>
+        <field name="Digi-Key Part Number">497-3755-1-ND</field>
+        <field name="Manufacturer">STMicroelectronics</field>
+        <field name="Manufacturer Part Number">STPS130A</field>
+        <field name="Type">Schottky Diode</field>
+      </fields>
+      <libsource lib="Power-rescue" part="DIODESCH" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A3A9B9D</tstamp>
     </comp>
     <comp ref="K5">
-      <value>Relay(Mech/SSR)</value>
+      <value>Relay(SSR)</value>
       <footprint>MyFootPrints:Relay-Mech-SSR</footprint>
-      <libsource lib="GoodtimeDev" part="Relay(Mech/SSR)"/>
+      <fields>
+        <field name="Comments">-</field>
+        <field name="Digi-Key Part Number">-</field>
+        <field name="Manufacturer">Mager</field>
+        <field name="Manufacturer Part Number">GJ-5-L</field>
+        <field name="Type">SSR Relay</field>
+      </fields>
+      <libsource lib="Power-rescue" part="Relay(Mech_SSR)" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A3A9BBE</tstamp>
     </comp>
     <comp ref="D9">
-      <value>APT2012</value>
+      <value>LED (BLUE)</value>
       <footprint>LEDs:LED_0805</footprint>
-      <libsource lib="Power-cache" part="LED_ALT"/>
+      <fields>
+        <field name="Comments">0805, 3.2V, 20mA</field>
+        <field name="Digi-Key Part Number">732-4982-1-ND </field>
+        <field name="Manufacturer">Wurth</field>
+        <field name="Manufacturer Part Number">150080BS75000</field>
+        <field name="Type">LED (BLUE)</field>
+      </fields>
+      <libsource lib="Power-rescue" part="LED_ALT" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A3A9BC4</tstamp>
     </comp>
     <comp ref="Q6">
       <value>NX7002AK</value>
       <footprint>TO_SOT_Packages_SMD:SOT-23</footprint>
-      <libsource lib="GoodtimeDev" part="MOSFET_N_SMALL"/>
+      <fields>
+        <field name="Comments">SOT-23-3</field>
+        <field name="Digi-Key Part Number">1727-1289-6-ND </field>
+        <field name="Manufacturer">Nexperia</field>
+        <field name="Manufacturer Part Number"> NX7002AK,215 </field>
+        <field name="Type">N-Channel MOSFET</field>
+      </fields>
+      <libsource lib="GoodtimeDev" part="MOSFET_N_SMALL" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A3A9BDB</tstamp>
     </comp>
     <comp ref="R18">
-      <value>100R</value>
+      <value>150R</value>
       <footprint>Resistors_SMD:R_0805</footprint>
-      <libsource lib="device" part="R"/>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RNCP0805FTD150RCT-ND </field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RNCP0805FTD150R</field>
+        <field name="Type">Resistor</field>
+      </fields>
+      <libsource lib="Power-rescue" part="R" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A3A9BE1</tstamp>
     </comp>
     <comp ref="R17">
       <value>10K</value>
       <footprint>Resistors_SMD:R_0805</footprint>
-      <libsource lib="device" part="R"/>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RNCP0805FTD10K0CT-ND</field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RNCP0805FTD10K0</field>
+        <field name="Type">Resistor</field>
+      </fields>
+      <libsource lib="Power-rescue" part="R" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A3A9BE7</tstamp>
     </comp>
     <comp ref="R16">
       <value>1K</value>
       <footprint>Resistors_SMD:R_0805</footprint>
-      <libsource lib="device" part="R"/>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RNCP0805FTD1K00CT-ND </field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RNCP0805FTD1K00</field>
+        <field name="Type">Resistor</field>
+      </fields>
+      <libsource lib="Power-rescue" part="R" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A3A9BED</tstamp>
     </comp>
     <comp ref="P6">
-      <value>Stab and 1x3</value>
+      <value>Output</value>
       <footprint>MyFootPrints:Current_Board</footprint>
-      <libsource lib="Power-cache" part="Conn_01x04"/>
+      <fields>
+        <field name="Comments">-</field>
+        <field name="Digi-Key Part Number">A29937CT-ND</field>
+        <field name="Manufacturer">TE</field>
+        <field name="Manufacturer Part Number">63823-1</field>
+        <field name="Type">Stab</field>
+      </fields>
+      <libsource lib="Connector_Generic" part="Conn_01x01" description="Generic connector, single row, 01x01, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A3A9BFE</tstamp>
     </comp>
     <comp ref="D12">
       <value>STPS130A</value>
       <footprint>Diodes_SMD:D_SMA</footprint>
-      <libsource lib="Power-cache" part="DIODESCH"/>
+      <fields>
+        <field name="Comments">DO-214AC</field>
+        <field name="Digi-Key Part Number">497-3755-1-ND</field>
+        <field name="Manufacturer">STMicroelectronics</field>
+        <field name="Manufacturer Part Number">STPS130A</field>
+        <field name="Type">Schottky Diode</field>
+      </fields>
+      <libsource lib="Power-rescue" part="DIODESCH" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A3A9C0A</tstamp>
     </comp>
     <comp ref="K6">
-      <value>Relay(Mech/SSR)</value>
+      <value>Relay(SSR)</value>
       <footprint>MyFootPrints:Relay-Mech-SSR</footprint>
-      <libsource lib="GoodtimeDev" part="Relay(Mech/SSR)"/>
+      <fields>
+        <field name="Comments">-</field>
+        <field name="Digi-Key Part Number">-</field>
+        <field name="Manufacturer">Mager</field>
+        <field name="Manufacturer Part Number">GJ-5-L</field>
+        <field name="Type">SSR Relay</field>
+      </fields>
+      <libsource lib="Power-rescue" part="Relay(Mech_SSR)" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A3A9C2B</tstamp>
     </comp>
     <comp ref="D11">
-      <value>APT2012</value>
+      <value>LED (BLUE)</value>
       <footprint>LEDs:LED_0805</footprint>
-      <libsource lib="Power-cache" part="LED_ALT"/>
+      <fields>
+        <field name="Comments">0805, 3.2V, 20mA</field>
+        <field name="Digi-Key Part Number">732-4982-1-ND </field>
+        <field name="Manufacturer">Wurth</field>
+        <field name="Manufacturer Part Number">150080BS75000</field>
+        <field name="Type">LED (BLUE)</field>
+      </fields>
+      <libsource lib="Power-rescue" part="LED_ALT" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A3A9C31</tstamp>
     </comp>
     <comp ref="Q7">
       <value>NX7002AK</value>
       <footprint>TO_SOT_Packages_SMD:SOT-23</footprint>
-      <libsource lib="GoodtimeDev" part="MOSFET_N_SMALL"/>
+      <fields>
+        <field name="Comments">SOT-23-3</field>
+        <field name="Digi-Key Part Number">1727-1289-6-ND </field>
+        <field name="Manufacturer">Nexperia</field>
+        <field name="Manufacturer Part Number"> NX7002AK,215 </field>
+        <field name="Type">N-Channel MOSFET</field>
+      </fields>
+      <libsource lib="GoodtimeDev" part="MOSFET_N_SMALL" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A3A9C48</tstamp>
     </comp>
     <comp ref="R21">
-      <value>100R</value>
+      <value>150R</value>
       <footprint>Resistors_SMD:R_0805</footprint>
-      <libsource lib="device" part="R"/>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RNCP0805FTD150RCT-ND </field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RNCP0805FTD150R</field>
+        <field name="Type">Resistor</field>
+      </fields>
+      <libsource lib="Power-rescue" part="R" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A3A9C4E</tstamp>
     </comp>
     <comp ref="R20">
       <value>10K</value>
       <footprint>Resistors_SMD:R_0805</footprint>
-      <libsource lib="device" part="R"/>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RNCP0805FTD10K0CT-ND</field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RNCP0805FTD10K0</field>
+        <field name="Type">Resistor</field>
+      </fields>
+      <libsource lib="Power-rescue" part="R" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A3A9C54</tstamp>
     </comp>
     <comp ref="R19">
       <value>1K</value>
       <footprint>Resistors_SMD:R_0805</footprint>
-      <libsource lib="device" part="R"/>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RNCP0805FTD1K00CT-ND </field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RNCP0805FTD1K00</field>
+        <field name="Type">Resistor</field>
+      </fields>
+      <libsource lib="Power-rescue" part="R" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A3A9C5A</tstamp>
     </comp>
     <comp ref="P7">
-      <value>Stab and 1x3</value>
+      <value>Output</value>
       <footprint>MyFootPrints:Current_Board</footprint>
-      <libsource lib="Power-cache" part="Conn_01x04"/>
+      <fields>
+        <field name="Comments">-</field>
+        <field name="Digi-Key Part Number">A29937CT-ND</field>
+        <field name="Manufacturer">TE</field>
+        <field name="Manufacturer Part Number">63823-1</field>
+        <field name="Type">Stab</field>
+      </fields>
+      <libsource lib="Connector_Generic" part="Conn_01x01" description="Generic connector, single row, 01x01, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A3A9C6B</tstamp>
     </comp>
     <comp ref="D14">
       <value>STPS130A</value>
       <footprint>Diodes_SMD:D_SMA</footprint>
-      <libsource lib="Power-cache" part="DIODESCH"/>
+      <fields>
+        <field name="Comments">DO-214AC</field>
+        <field name="Digi-Key Part Number">497-3755-1-ND</field>
+        <field name="Manufacturer">STMicroelectronics</field>
+        <field name="Manufacturer Part Number">STPS130A</field>
+        <field name="Type">Schottky Diode</field>
+      </fields>
+      <libsource lib="Power-rescue" part="DIODESCH" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A3A9C77</tstamp>
     </comp>
     <comp ref="K7">
-      <value>Relay(Mech/SSR)</value>
+      <value>Relay(SSR)</value>
       <footprint>MyFootPrints:Relay-Mech-SSR</footprint>
-      <libsource lib="GoodtimeDev" part="Relay(Mech/SSR)"/>
+      <fields>
+        <field name="Comments">-</field>
+        <field name="Digi-Key Part Number">-</field>
+        <field name="Manufacturer">Mager</field>
+        <field name="Manufacturer Part Number">GJ-5-L</field>
+        <field name="Type">SSR Relay</field>
+      </fields>
+      <libsource lib="Power-rescue" part="Relay(Mech_SSR)" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A3A9C98</tstamp>
     </comp>
     <comp ref="D13">
-      <value>APT2012</value>
+      <value>LED (BLUE)</value>
       <footprint>LEDs:LED_0805</footprint>
-      <libsource lib="Power-cache" part="LED_ALT"/>
+      <fields>
+        <field name="Comments">0805, 3.2V, 20mA</field>
+        <field name="Digi-Key Part Number">732-4982-1-ND </field>
+        <field name="Manufacturer">Wurth</field>
+        <field name="Manufacturer Part Number">150080BS75000</field>
+        <field name="Type">LED (BLUE)</field>
+      </fields>
+      <libsource lib="Power-rescue" part="LED_ALT" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A3A9C9E</tstamp>
     </comp>
     <comp ref="Q8">
       <value>NX7002AK</value>
       <footprint>TO_SOT_Packages_SMD:SOT-23</footprint>
-      <libsource lib="GoodtimeDev" part="MOSFET_N_SMALL"/>
+      <fields>
+        <field name="Comments">SOT-23-3</field>
+        <field name="Digi-Key Part Number">1727-1289-6-ND </field>
+        <field name="Manufacturer">Nexperia</field>
+        <field name="Manufacturer Part Number"> NX7002AK,215 </field>
+        <field name="Type">N-Channel MOSFET</field>
+      </fields>
+      <libsource lib="GoodtimeDev" part="MOSFET_N_SMALL" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A3A9CB5</tstamp>
     </comp>
     <comp ref="R24">
-      <value>100R</value>
+      <value>150R</value>
       <footprint>Resistors_SMD:R_0805</footprint>
-      <libsource lib="device" part="R"/>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RNCP0805FTD150RCT-ND </field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RNCP0805FTD150R</field>
+        <field name="Type">Resistor</field>
+      </fields>
+      <libsource lib="Power-rescue" part="R" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A3A9CBB</tstamp>
     </comp>
     <comp ref="R23">
       <value>10K</value>
       <footprint>Resistors_SMD:R_0805</footprint>
-      <libsource lib="device" part="R"/>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RNCP0805FTD10K0CT-ND</field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RNCP0805FTD10K0</field>
+        <field name="Type">Resistor</field>
+      </fields>
+      <libsource lib="Power-rescue" part="R" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A3A9CC1</tstamp>
     </comp>
     <comp ref="R22">
       <value>1K</value>
       <footprint>Resistors_SMD:R_0805</footprint>
-      <libsource lib="device" part="R"/>
+      <fields>
+        <field name="Comments">0805, 1/4W, 1%, Thin Film</field>
+        <field name="Digi-Key Part Number">RNCP0805FTD1K00CT-ND </field>
+        <field name="Manufacturer">Stackpole</field>
+        <field name="Manufacturer Part Number">RNCP0805FTD1K00</field>
+        <field name="Type">Resistor</field>
+      </fields>
+      <libsource lib="Power-rescue" part="R" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A3A9CC7</tstamp>
     </comp>
     <comp ref="P8">
-      <value>Stab and 1x3</value>
+      <value>Output</value>
       <footprint>MyFootPrints:Current_Board</footprint>
-      <libsource lib="Power-cache" part="Conn_01x04"/>
+      <fields>
+        <field name="Comments">-</field>
+        <field name="Digi-Key Part Number">A29937CT-ND</field>
+        <field name="Manufacturer">TE</field>
+        <field name="Manufacturer Part Number">63823-1</field>
+        <field name="Type">Stab</field>
+      </fields>
+      <libsource lib="Connector_Generic" part="Conn_01x01" description="Generic connector, single row, 01x01, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A3A9CD8</tstamp>
     </comp>
     <comp ref="D16">
       <value>STPS130A</value>
       <footprint>Diodes_SMD:D_SMA</footprint>
-      <libsource lib="Power-cache" part="DIODESCH"/>
+      <fields>
+        <field name="Comments">DO-214AC</field>
+        <field name="Digi-Key Part Number">497-3755-1-ND</field>
+        <field name="Manufacturer">STMicroelectronics</field>
+        <field name="Manufacturer Part Number">STPS130A</field>
+        <field name="Type">Schottky Diode</field>
+      </fields>
+      <libsource lib="Power-rescue" part="DIODESCH" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A3A9CE4</tstamp>
     </comp>
     <comp ref="K8">
-      <value>Relay(Mech/SSR)</value>
+      <value>Relay(SSR)</value>
       <footprint>MyFootPrints:Relay-Mech-SSR</footprint>
-      <libsource lib="GoodtimeDev" part="Relay(Mech/SSR)"/>
+      <fields>
+        <field name="Comments">-</field>
+        <field name="Digi-Key Part Number">-</field>
+        <field name="Manufacturer">Mager</field>
+        <field name="Manufacturer Part Number">GJ-5-L</field>
+        <field name="Type">SSR Relay</field>
+      </fields>
+      <libsource lib="Power-rescue" part="Relay(Mech_SSR)" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A3A9D05</tstamp>
     </comp>
     <comp ref="D15">
-      <value>APT2012</value>
+      <value>LED (BLUE)</value>
       <footprint>LEDs:LED_0805</footprint>
-      <libsource lib="Power-cache" part="LED_ALT"/>
+      <fields>
+        <field name="Comments">0805, 3.2V, 20mA</field>
+        <field name="Digi-Key Part Number">732-4982-1-ND </field>
+        <field name="Manufacturer">Wurth</field>
+        <field name="Manufacturer Part Number">150080BS75000</field>
+        <field name="Type">LED (BLUE)</field>
+      </fields>
+      <libsource lib="Power-rescue" part="LED_ALT" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>5A3A9D0B</tstamp>
     </comp>
+    <comp ref="P11">
+      <value>Current</value>
+      <footprint>Connector_PinSocket_2.54mm:PinSocket_1x03_P2.54mm_Vertical</footprint>
+      <fields>
+        <field name="Comments">-</field>
+        <field name="Digi-Key Part Number">S7036-ND </field>
+        <field name="Manufacturer">Sullins</field>
+        <field name="Manufacturer Part Number">PPPC031LFBN-RC </field>
+        <field name="Type">1x3 2.54 Female Pin Header</field>
+      </fields>
+      <libsource lib="Connector_Generic" part="Conn_01x03" description="Generic connector, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5BD57766</tstamp>
+    </comp>
+    <comp ref="P12">
+      <value>Current</value>
+      <footprint>Connector_PinSocket_2.54mm:PinSocket_1x03_P2.54mm_Vertical</footprint>
+      <fields>
+        <field name="Comments">-</field>
+        <field name="Digi-Key Part Number">S7036-ND </field>
+        <field name="Manufacturer">Sullins</field>
+        <field name="Manufacturer Part Number">PPPC031LFBN-RC </field>
+        <field name="Type">1x3 2.54 Female Pin Header</field>
+      </fields>
+      <libsource lib="Connector_Generic" part="Conn_01x03" description="Generic connector, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5BD99104</tstamp>
+    </comp>
+    <comp ref="P13">
+      <value>Current</value>
+      <footprint>Connector_PinSocket_2.54mm:PinSocket_1x03_P2.54mm_Vertical</footprint>
+      <fields>
+        <field name="Comments">-</field>
+        <field name="Digi-Key Part Number">S7036-ND </field>
+        <field name="Manufacturer">Sullins</field>
+        <field name="Manufacturer Part Number">PPPC031LFBN-RC </field>
+        <field name="Type">1x3 2.54 Female Pin Header</field>
+      </fields>
+      <libsource lib="Connector_Generic" part="Conn_01x03" description="Generic connector, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5BECD0C9</tstamp>
+    </comp>
+    <comp ref="P14">
+      <value>Current</value>
+      <footprint>Connector_PinSocket_2.54mm:PinSocket_1x03_P2.54mm_Vertical</footprint>
+      <fields>
+        <field name="Comments">-</field>
+        <field name="Digi-Key Part Number">S7036-ND </field>
+        <field name="Manufacturer">Sullins</field>
+        <field name="Manufacturer Part Number">PPPC031LFBN-RC </field>
+        <field name="Type">1x3 2.54 Female Pin Header</field>
+      </fields>
+      <libsource lib="Connector_Generic" part="Conn_01x03" description="Generic connector, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5C0B407B</tstamp>
+    </comp>
+    <comp ref="P18">
+      <value>Current</value>
+      <footprint>Connector_PinSocket_2.54mm:PinSocket_1x03_P2.54mm_Vertical</footprint>
+      <fields>
+        <field name="Comments">-</field>
+        <field name="Digi-Key Part Number">S7036-ND </field>
+        <field name="Manufacturer">Sullins</field>
+        <field name="Manufacturer Part Number">PPPC031LFBN-RC </field>
+        <field name="Type">1x3 2.54 Female Pin Header</field>
+      </fields>
+      <libsource lib="Connector_Generic" part="Conn_01x03" description="Generic connector, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5C12F1CC</tstamp>
+    </comp>
+    <comp ref="P17">
+      <value>Current</value>
+      <footprint>Connector_PinSocket_2.54mm:PinSocket_1x03_P2.54mm_Vertical</footprint>
+      <fields>
+        <field name="Comments">-</field>
+        <field name="Digi-Key Part Number">S7036-ND </field>
+        <field name="Manufacturer">Sullins</field>
+        <field name="Manufacturer Part Number">PPPC031LFBN-RC </field>
+        <field name="Type">1x3 2.54 Female Pin Header</field>
+      </fields>
+      <libsource lib="Connector_Generic" part="Conn_01x03" description="Generic connector, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5C16D00E</tstamp>
+    </comp>
+    <comp ref="P16">
+      <value>Current</value>
+      <footprint>Connector_PinSocket_2.54mm:PinSocket_1x03_P2.54mm_Vertical</footprint>
+      <fields>
+        <field name="Comments">-</field>
+        <field name="Digi-Key Part Number">S7036-ND </field>
+        <field name="Manufacturer">Sullins</field>
+        <field name="Manufacturer Part Number">PPPC031LFBN-RC </field>
+        <field name="Type">1x3 2.54 Female Pin Header</field>
+      </fields>
+      <libsource lib="Connector_Generic" part="Conn_01x03" description="Generic connector, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5C1AB762</tstamp>
+    </comp>
+    <comp ref="P15">
+      <value>Current</value>
+      <footprint>Connector_PinSocket_2.54mm:PinSocket_1x03_P2.54mm_Vertical</footprint>
+      <fields>
+        <field name="Comments">-</field>
+        <field name="Digi-Key Part Number">S7036-ND </field>
+        <field name="Manufacturer">Sullins</field>
+        <field name="Manufacturer Part Number">PPPC031LFBN-RC </field>
+        <field name="Type">1x3 2.54 Female Pin Header</field>
+      </fields>
+      <libsource lib="Connector_Generic" part="Conn_01x03" description="Generic connector, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5C1EF961</tstamp>
+    </comp>
+    <comp ref="N1">
+      <value>Housing</value>
+      <fields>
+        <field name="Digi-Key Part Number">HM111-ND </field>
+        <field name="Manufacturer">Hammond</field>
+        <field name="Manufacturer Part Number">1591USBK </field>
+        <field name="Type">Enclosure</field>
+      </fields>
+      <libsource lib="Mechanical" part="Housing" description="Housing"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5C1FBE19</tstamp>
+    </comp>
   </components>
   <libparts>
-    <libpart lib="Power-cache" part="AP1117-15">
-      <aliases>
-        <alias>AP1117-18</alias>
-        <alias>AP1117-25</alias>
-        <alias>AP1117-33</alias>
-        <alias>AP1117-50</alias>
-        <alias>LD1117S33TR_SOT223</alias>
-        <alias>LD1117S12TR_SOT223</alias>
-        <alias>LD1117S18TR_SOT223</alias>
-        <alias>LD1117S25TR_SOT223</alias>
-        <alias>LD1117S50TR_SOT223</alias>
-        <alias>NCP1117-12_SOT223</alias>
-        <alias>NCP1117-1.5_SOT223</alias>
-        <alias>NCP1117-1.8_SOT223</alias>
-        <alias>NCP1117-2.0_SOT223</alias>
-        <alias>NCP1117-2.5_SOT223</alias>
-        <alias>NCP1117-2.85_SOT223</alias>
-        <alias>NCP1117-3.3_SOT223</alias>
-        <alias>NCP1117-5.0_SOT223</alias>
-      </aliases>
+    <libpart lib="Connector_Generic" part="Conn_01x01">
+      <description>Generic connector, single row, 01x01, script generated (kicad-library-utils/schlib/autogen/connector/)</description>
+      <docs>~</docs>
       <footprints>
-        <fp>SOT?223*TabPin2*</fp>
-      </footprints>
-      <fields>
-        <field name="Reference">U</field>
-        <field name="Value">AP1117-15</field>
-        <field name="Footprint">TO_SOT_Packages_SMD:SOT-223-3Lead_TabPin2</field>
-      </fields>
-      <pins>
-        <pin num="1" name="GND" type="power_in"/>
-        <pin num="2" name="VO" type="passive"/>
-        <pin num="3" name="VI" type="power_in"/>
-      </pins>
-    </libpart>
-    <libpart lib="device" part="C">
-      <description>Unpolarized capacitor</description>
-      <footprints>
-        <fp>C?</fp>
-        <fp>C_????_*</fp>
-        <fp>C_????</fp>
-        <fp>SMD*_c</fp>
-        <fp>Capacitor*</fp>
-      </footprints>
-      <fields>
-        <field name="Reference">C</field>
-        <field name="Value">C</field>
-      </fields>
-      <pins>
-        <pin num="1" name="~" type="passive"/>
-        <pin num="2" name="~" type="passive"/>
-      </pins>
-    </libpart>
-    <libpart lib="device" part="C_Small">
-      <description>Unpolarized capacitor</description>
-      <footprints>
-        <fp>C?</fp>
-        <fp>C_????_*</fp>
-        <fp>C_????</fp>
-        <fp>SMD*_c</fp>
-        <fp>Capacitor*</fp>
-      </footprints>
-      <fields>
-        <field name="Reference">C</field>
-        <field name="Value">C_Small</field>
-      </fields>
-      <pins>
-        <pin num="1" name="~" type="passive"/>
-        <pin num="2" name="~" type="passive"/>
-      </pins>
-    </libpart>
-    <libpart lib="Power-cache" part="Conn_01x02">
-      <footprints>
-        <fp>Connector*:*_??x*mm*</fp>
-        <fp>Connector*:*1x??x*mm*</fp>
-        <fp>Pin?Header?Straight?1X*</fp>
-        <fp>Pin?Header?Angled?1X*</fp>
-        <fp>Socket?Strip?Straight?1X*</fp>
-        <fp>Socket?Strip?Angled?1X*</fp>
+        <fp>Connector*:*</fp>
       </footprints>
       <fields>
         <field name="Reference">J</field>
-        <field name="Value">Conn_01x02</field>
+        <field name="Value">Conn_01x01</field>
       </fields>
       <pins>
         <pin num="1" name="Pin_1" type="passive"/>
-        <pin num="2" name="Pin_2" type="passive"/>
       </pins>
     </libpart>
-    <libpart lib="Power-cache" part="Conn_01x04">
+    <libpart lib="Connector_Generic" part="Conn_01x03">
+      <description>Generic connector, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)</description>
+      <docs>~</docs>
       <footprints>
-        <fp>Connector*:*_??x*mm*</fp>
-        <fp>Connector*:*1x??x*mm*</fp>
-        <fp>Pin?Header?Straight?1X*</fp>
-        <fp>Pin?Header?Angled?1X*</fp>
-        <fp>Socket?Strip?Straight?1X*</fp>
-        <fp>Socket?Strip?Angled?1X*</fp>
+        <fp>Connector*:*_1x??_*</fp>
       </footprints>
       <fields>
         <field name="Reference">J</field>
-        <field name="Value">Conn_01x04</field>
+        <field name="Value">Conn_01x03</field>
       </fields>
       <pins>
         <pin num="1" name="Pin_1" type="passive"/>
         <pin num="2" name="Pin_2" type="passive"/>
         <pin num="3" name="Pin_3" type="passive"/>
-        <pin num="4" name="Pin_4" type="passive"/>
-      </pins>
-    </libpart>
-    <libpart lib="Power-cache" part="Conn_01x06">
-      <footprints>
-        <fp>Connector*:*_??x*mm*</fp>
-        <fp>Connector*:*1x??x*mm*</fp>
-        <fp>Pin?Header?Straight?1X*</fp>
-        <fp>Pin?Header?Angled?1X*</fp>
-        <fp>Socket?Strip?Straight?1X*</fp>
-        <fp>Socket?Strip?Angled?1X*</fp>
-      </footprints>
-      <fields>
-        <field name="Reference">J</field>
-        <field name="Value">Conn_01x06</field>
-      </fields>
-      <pins>
-        <pin num="1" name="Pin_1" type="passive"/>
-        <pin num="2" name="Pin_2" type="passive"/>
-        <pin num="3" name="Pin_3" type="passive"/>
-        <pin num="4" name="Pin_4" type="passive"/>
-        <pin num="5" name="Pin_5" type="passive"/>
-        <pin num="6" name="Pin_6" type="passive"/>
-      </pins>
-    </libpart>
-    <libpart lib="Power-cache" part="DIODESCH">
-      <footprints>
-        <fp>D?</fp>
-        <fp>S*</fp>
-      </footprints>
-      <fields>
-        <field name="Reference">D</field>
-        <field name="Value">DIODESCH</field>
-      </fields>
-      <pins>
-        <pin num="1" name="A" type="passive"/>
-        <pin num="2" name="K" type="passive"/>
-      </pins>
-    </libpart>
-    <libpart lib="Power-cache" part="LED_ALT">
-      <footprints>
-        <fp>LED*</fp>
-      </footprints>
-      <fields>
-        <field name="Reference">D</field>
-        <field name="Value">LED_ALT</field>
-      </fields>
-      <pins>
-        <pin num="1" name="K" type="passive"/>
-        <pin num="2" name="A" type="passive"/>
       </pins>
     </libpart>
     <libpart lib="GoodtimeDev" part="LTV-826">
@@ -999,21 +1731,6 @@
         <pin num="48" name="RB8" type="BiDi"/>
       </pins>
     </libpart>
-    <libpart lib="device" part="R">
-      <description>Resistor</description>
-      <footprints>
-        <fp>R_*</fp>
-        <fp>Resistor_*</fp>
-      </footprints>
-      <fields>
-        <field name="Reference">R</field>
-        <field name="Value">R</field>
-      </fields>
-      <pins>
-        <pin num="1" name="~" type="passive"/>
-        <pin num="2" name="~" type="passive"/>
-      </pins>
-    </libpart>
     <libpart lib="GoodtimeDev" part="RESONATOR">
       <fields>
         <field name="Reference">X</field>
@@ -1023,22 +1740,6 @@
         <pin num="1" name="X2" type="BiDi"/>
         <pin num="2" name="G" type="BiDi"/>
         <pin num="3" name="X1" type="BiDi"/>
-      </pins>
-    </libpart>
-    <libpart lib="GoodtimeDev" part="Relay(Mech/SSR)">
-      <fields>
-        <field name="Reference">K</field>
-        <field name="Value">Relay(Mech/SSR)</field>
-      </fields>
-      <pins>
-        <pin num="1-1" name="~" type="BiDi"/>
-        <pin num="1-2" name="~" type="BiDi"/>
-        <pin num="2-1" name="~" type="BiDi"/>
-        <pin num="2-2" name="~" type="BiDi"/>
-        <pin num="3-1" name="~" type="input"/>
-        <pin num="3-2" name="~" type="input"/>
-        <pin num="4-1" name="~" type="input"/>
-        <pin num="4-2" name="~" type="output"/>
       </pins>
     </libpart>
     <libpart lib="GoodtimeDev" part="SN75176B">
@@ -1094,573 +1795,721 @@
         <pin num="8" name="4" type="passive"/>
       </pins>
     </libpart>
+    <libpart lib="Mechanical" part="Housing">
+      <description>Housing</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>Enclosure*</fp>
+        <fp>Housing*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">N</field>
+        <field name="Value">Housing</field>
+      </fields>
+    </libpart>
+    <libpart lib="Power-rescue" part="AP1117-33">
+      <footprints>
+        <fp>SOT?223*TabPin2*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">AP1117-33</field>
+        <field name="Footprint">TO_SOT_Packages_SMD:SOT-223-3Lead_TabPin2</field>
+      </fields>
+      <pins>
+        <pin num="1" name="GND" type="power_in"/>
+        <pin num="2" name="VO" type="passive"/>
+        <pin num="3" name="VI" type="power_in"/>
+      </pins>
+    </libpart>
+    <libpart lib="Power-rescue" part="C_Small">
+      <footprints>
+        <fp>C?</fp>
+        <fp>C_????_*</fp>
+        <fp>C_????</fp>
+        <fp>SMD*_c</fp>
+        <fp>Capacitor*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">C</field>
+        <field name="Value">C_Small</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Power-rescue" part="Conn_01x02">
+      <footprints>
+        <fp>Connector*:*_??x*mm*</fp>
+        <fp>Connector*:*1x??x*mm*</fp>
+        <fp>Pin?Header?Straight?1X*</fp>
+        <fp>Pin?Header?Angled?1X*</fp>
+        <fp>Socket?Strip?Straight?1X*</fp>
+        <fp>Socket?Strip?Angled?1X*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">Conn_01x02</field>
+      </fields>
+      <pins>
+        <pin num="1" name="Pin_1" type="passive"/>
+        <pin num="2" name="Pin_2" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Power-rescue" part="Conn_01x06">
+      <footprints>
+        <fp>Connector*:*_??x*mm*</fp>
+        <fp>Connector*:*1x??x*mm*</fp>
+        <fp>Pin?Header?Straight?1X*</fp>
+        <fp>Pin?Header?Angled?1X*</fp>
+        <fp>Socket?Strip?Straight?1X*</fp>
+        <fp>Socket?Strip?Angled?1X*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">Conn_01x06</field>
+      </fields>
+      <pins>
+        <pin num="1" name="Pin_1" type="passive"/>
+        <pin num="2" name="Pin_2" type="passive"/>
+        <pin num="3" name="Pin_3" type="passive"/>
+        <pin num="4" name="Pin_4" type="passive"/>
+        <pin num="5" name="Pin_5" type="passive"/>
+        <pin num="6" name="Pin_6" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Power-rescue" part="DIODESCH">
+      <footprints>
+        <fp>D?</fp>
+        <fp>S*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">D</field>
+        <field name="Value">DIODESCH</field>
+      </fields>
+      <pins>
+        <pin num="1" name="A" type="passive"/>
+        <pin num="2" name="K" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Power-rescue" part="LED_ALT">
+      <footprints>
+        <fp>LED*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">D</field>
+        <field name="Value">LED_ALT</field>
+      </fields>
+      <pins>
+        <pin num="1" name="K" type="passive"/>
+        <pin num="2" name="A" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Power-rescue" part="R">
+      <footprints>
+        <fp>R_*</fp>
+        <fp>Resistor_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">R</field>
+        <field name="Value">R</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Power-rescue" part="Relay(Mech_SSR)">
+      <fields>
+        <field name="Reference">K</field>
+        <field name="Value">Relay(Mech_SSR)</field>
+      </fields>
+      <pins>
+        <pin num="1-1" name="~" type="BiDi"/>
+        <pin num="1-2" name="~" type="BiDi"/>
+        <pin num="2-1" name="~" type="BiDi"/>
+        <pin num="2-2" name="~" type="BiDi"/>
+        <pin num="3-1" name="~" type="input"/>
+        <pin num="3-2" name="~" type="input"/>
+        <pin num="4-1" name="~" type="input"/>
+        <pin num="4-2" name="~" type="output"/>
+      </pins>
+    </libpart>
   </libparts>
   <libraries>
+    <library logical="Connector_Generic">
+      <uri>/usr/share/kicad/library/Connector_Generic.lib</uri>
+    </library>
     <library logical="GoodtimeDev">
-      <uri>/home/sbrandt/Dropbox/KiCAD/Library/GoodtimeDev.lib</uri>
+      <uri>/home/sbrandt/Dropbox/KiCAD//Library/GoodtimeDev.lib</uri>
     </library>
-    <library logical="device">
-      <uri>/usr/share/kicad/library/device.lib</uri>
+    <library logical="Mechanical">
+      <uri>/usr/share/kicad/library/Mechanical.lib</uri>
     </library>
-    <library logical="Power-cache">
-      <uri>/home/sbrandt/Dropbox/AquaPic/Boards/PowerV6/Power-cache.lib</uri>
+    <library logical="Power-rescue">
+      <uri>/home/sbrandt/Dropbox/AquaPic/Boards/Power/Power-rescue.lib</uri>
     </library>
   </libraries>
   <nets>
-    <net code="1" name="/L">
-      <node ref="K3" pin="1-1"/>
-      <node ref="K3" pin="1-2"/>
-      <node ref="K1" pin="1-2"/>
-      <node ref="K1" pin="1-1"/>
-      <node ref="K7" pin="1-1"/>
-      <node ref="K5" pin="1-1"/>
-      <node ref="K5" pin="1-2"/>
-      <node ref="K7" pin="1-2"/>
-      <node ref="K2" pin="1-1"/>
-      <node ref="C8" pin="1"/>
-      <node ref="R36" pin="2"/>
-      <node ref="K2" pin="1-2"/>
-      <node ref="P12" pin="1"/>
-      <node ref="R40" pin="2"/>
-      <node ref="P13" pin="1"/>
-      <node ref="K8" pin="1-2"/>
-      <node ref="K6" pin="1-2"/>
-      <node ref="K6" pin="1-1"/>
-      <node ref="K8" pin="1-1"/>
-      <node ref="K4" pin="1-1"/>
-      <node ref="K4" pin="1-2"/>
-    </net>
-    <net code="2" name="GND">
+    <net code="1" name="GND">
+      <node ref="P10" pin="8"/>
+      <node ref="P10" pin="4"/>
+      <node ref="C1" pin="2"/>
       <node ref="R5" pin="2"/>
-      <node ref="P11" pin="4"/>
-      <node ref="P11" pin="4"/>
-      <node ref="P11" pin="4"/>
-      <node ref="C5" pin="2"/>
-      <node ref="P2" pin="4"/>
+      <node ref="P12" pin="3"/>
       <node ref="X1" pin="2"/>
-      <node ref="U3" pin="5"/>
-      <node ref="Q2" pin="2"/>
-      <node ref="U3" pin="7"/>
+      <node ref="P9" pin="3"/>
       <node ref="U4" pin="5"/>
-      <node ref="P8" pin="4"/>
-      <node ref="R23" pin="2"/>
-      <node ref="P3" pin="4"/>
-      <node ref="R20" pin="2"/>
-      <node ref="Q7" pin="2"/>
-      <node ref="P6" pin="4"/>
-      <node ref="P7" pin="4"/>
-      <node ref="P11" pin="8"/>
-      <node ref="Q8" pin="2"/>
-      <node ref="P10" pin="3"/>
-      <node ref="C3" pin="2"/>
-      <node ref="Q3" pin="2"/>
-      <node ref="R8" pin="2"/>
-      <node ref="U1" pin="5"/>
-      <node ref="C2" pin="2"/>
-      <node ref="U2" pin="1"/>
-      <node ref="C7" pin="2"/>
-      <node ref="R17" pin="2"/>
-      <node ref="C6" pin="2"/>
-      <node ref="Q6" pin="2"/>
+      <node ref="U3" pin="5"/>
+      <node ref="C4" pin="2"/>
+      <node ref="U3" pin="7"/>
       <node ref="D18" pin="1"/>
-      <node ref="P5" pin="4"/>
-      <node ref="Q5" pin="2"/>
+      <node ref="C3" pin="2"/>
+      <node ref="IC1" pin="17"/>
+      <node ref="P10" pin="4"/>
+      <node ref="P10" pin="4"/>
+      <node ref="P10" pin="4"/>
+      <node ref="C5" pin="2"/>
       <node ref="R11" pin="2"/>
       <node ref="Q4" pin="2"/>
-      <node ref="P4" pin="4"/>
-      <node ref="Q9" pin="2"/>
-      <node ref="R26" pin="2"/>
-      <node ref="IC1" pin="17"/>
-      <node ref="IC1" pin="11"/>
-      <node ref="IC1" pin="6"/>
-      <node ref="R2" pin="2"/>
-      <node ref="IC1" pin="31"/>
-      <node ref="Q1" pin="2"/>
-      <node ref="C4" pin="2"/>
-      <node ref="C1" pin="2"/>
-      <node ref="P1" pin="4"/>
+      <node ref="U1" pin="5"/>
+      <node ref="U2" pin="1"/>
+      <node ref="C6" pin="2"/>
+      <node ref="C7" pin="2"/>
       <node ref="IC1" pin="42"/>
+      <node ref="Q2" pin="2"/>
+      <node ref="Q3" pin="2"/>
+      <node ref="R26" pin="2"/>
+      <node ref="IC1" pin="31"/>
+      <node ref="R8" pin="2"/>
+      <node ref="IC1" pin="11"/>
+      <node ref="Q9" pin="2"/>
+      <node ref="IC1" pin="6"/>
+      <node ref="Q5" pin="2"/>
       <node ref="R14" pin="2"/>
+      <node ref="P13" pin="3"/>
+      <node ref="P14" pin="3"/>
+      <node ref="Q7" pin="2"/>
+      <node ref="P16" pin="3"/>
+      <node ref="R17" pin="2"/>
+      <node ref="P17" pin="3"/>
+      <node ref="P18" pin="3"/>
+      <node ref="R20" pin="2"/>
+      <node ref="Q6" pin="2"/>
+      <node ref="R2" pin="2"/>
+      <node ref="Q1" pin="2"/>
+      <node ref="R23" pin="2"/>
+      <node ref="P11" pin="3"/>
+      <node ref="C2" pin="2"/>
+      <node ref="Q8" pin="2"/>
+      <node ref="P15" pin="3"/>
     </net>
-    <net code="3" name="/RELAY_5">
-      <node ref="R13" pin="2"/>
-      <node ref="IC1" pin="1"/>
-    </net>
-    <net code="4" name="Net-(D7-Pad2)">
-      <node ref="D7" pin="2"/>
-      <node ref="R12" pin="2"/>
-    </net>
-    <net code="5" name="/L4">
-      <node ref="K4" pin="2-2"/>
-      <node ref="K4" pin="2-1"/>
-      <node ref="P4" pin="1"/>
-    </net>
-    <net code="6" name="Net-(Q4-Pad1)">
-      <node ref="R11" pin="1"/>
-      <node ref="R10" pin="1"/>
-      <node ref="Q4" pin="1"/>
-    </net>
-    <net code="7" name="/RELAY_4">
-      <node ref="IC1" pin="4"/>
-      <node ref="R10" pin="2"/>
-    </net>
-    <net code="8" name="+5V">
-      <node ref="R21" pin="1"/>
-      <node ref="K7" pin="3-1"/>
-      <node ref="K6" pin="3-1"/>
-      <node ref="P1" pin="2"/>
-      <node ref="R3" pin="1"/>
-      <node ref="D2" pin="2"/>
-      <node ref="K6" pin="3-2"/>
-      <node ref="P7" pin="2"/>
-      <node ref="U2" pin="3"/>
-      <node ref="C6" pin="1"/>
-      <node ref="P11" pin="1"/>
-      <node ref="P11" pin="1"/>
-      <node ref="U1" pin="8"/>
-      <node ref="K1" pin="3-1"/>
-      <node ref="R31" pin="1"/>
-      <node ref="K1" pin="3-2"/>
-      <node ref="P11" pin="5"/>
-      <node ref="D12" pin="2"/>
-      <node ref="R30" pin="1"/>
-      <node ref="P6" pin="2"/>
-      <node ref="R27" pin="1"/>
-      <node ref="C5" pin="1"/>
-      <node ref="K7" pin="3-2"/>
-      <node ref="P8" pin="2"/>
-      <node ref="R24" pin="1"/>
-      <node ref="D14" pin="2"/>
-      <node ref="P11" pin="1"/>
-      <node ref="K2" pin="3-2"/>
-      <node ref="D4" pin="2"/>
-      <node ref="D10" pin="2"/>
-      <node ref="P5" pin="2"/>
-      <node ref="D16" pin="2"/>
-      <node ref="D6" pin="2"/>
-      <node ref="P3" pin="2"/>
-      <node ref="R9" pin="1"/>
-      <node ref="K3" pin="3-1"/>
-      <node ref="K3" pin="3-2"/>
-      <node ref="P2" pin="2"/>
-      <node ref="R6" pin="1"/>
-      <node ref="K2" pin="3-1"/>
-      <node ref="R18" pin="1"/>
-      <node ref="K5" pin="3-2"/>
-      <node ref="K8" pin="3-1"/>
-      <node ref="K5" pin="3-1"/>
-      <node ref="D8" pin="2"/>
-      <node ref="K8" pin="3-2"/>
-      <node ref="P4" pin="2"/>
-      <node ref="R15" pin="1"/>
-      <node ref="R12" pin="1"/>
-      <node ref="K4" pin="3-2"/>
-      <node ref="K4" pin="3-1"/>
-    </net>
-    <net code="9" name="Net-(D7-Pad1)">
-      <node ref="Q4" pin="3"/>
-      <node ref="K4" pin="4-1"/>
-      <node ref="K4" pin="4-2"/>
-      <node ref="D8" pin="1"/>
-      <node ref="D7" pin="1"/>
-    </net>
-    <net code="10" name="Net-(D9-Pad2)">
-      <node ref="D9" pin="2"/>
-      <node ref="R15" pin="2"/>
-    </net>
-    <net code="11" name="Net-(Q6-Pad1)">
-      <node ref="Q6" pin="1"/>
-      <node ref="R16" pin="1"/>
+    <net code="2" name="Net-(Q6-Pad1)">
       <node ref="R17" pin="1"/>
+      <node ref="R16" pin="1"/>
+      <node ref="Q6" pin="1"/>
     </net>
-    <net code="12" name="/CURRENT_5">
-      <node ref="IC1" pin="21"/>
-      <node ref="P5" pin="3"/>
-    </net>
-    <net code="13" name="/L5">
-      <node ref="P5" pin="1"/>
-      <node ref="K5" pin="2-2"/>
-      <node ref="K5" pin="2-1"/>
-    </net>
-    <net code="14" name="Net-(Q5-Pad1)">
-      <node ref="Q5" pin="1"/>
-      <node ref="R13" pin="1"/>
-      <node ref="R14" pin="1"/>
-    </net>
-    <net code="15" name="Net-(D10-Pad1)">
-      <node ref="D10" pin="1"/>
-      <node ref="Q5" pin="3"/>
-      <node ref="K5" pin="4-1"/>
-      <node ref="K5" pin="4-2"/>
-      <node ref="D9" pin="1"/>
-    </net>
-    <net code="16" name="/L2">
-      <node ref="K2" pin="2-2"/>
-      <node ref="P2" pin="1"/>
-      <node ref="K2" pin="2-1"/>
-    </net>
-    <net code="17" name="Net-(D3-Pad1)">
-      <node ref="D3" pin="1"/>
-      <node ref="K2" pin="4-2"/>
-      <node ref="D4" pin="1"/>
-      <node ref="K2" pin="4-1"/>
-      <node ref="Q2" pin="3"/>
-    </net>
-    <net code="18" name="Net-(D3-Pad2)">
-      <node ref="D3" pin="2"/>
-      <node ref="R6" pin="2"/>
-    </net>
-    <net code="19" name="+3V3">
-      <node ref="C7" pin="1"/>
-      <node ref="C3" pin="1"/>
-      <node ref="U4" pin="8"/>
-      <node ref="R29" pin="1"/>
-      <node ref="IC1" pin="43"/>
-      <node ref="C1" pin="1"/>
-      <node ref="P10" pin="2"/>
-      <node ref="IC1" pin="18"/>
-      <node ref="Q11" pin="1"/>
-      <node ref="R35" pin="1"/>
-      <node ref="R38" pin="2"/>
-      <node ref="R39" pin="1"/>
-      <node ref="U2" pin="2"/>
-      <node ref="Q10" pin="1"/>
-      <node ref="C2" pin="1"/>
-      <node ref="R28" pin="1"/>
-      <node ref="D17" pin="4"/>
-      <node ref="IC1" pin="30"/>
-    </net>
-    <net code="20" name="/RELAY_2">
-      <node ref="R4" pin="2"/>
-      <node ref="IC1" pin="14"/>
-    </net>
-    <net code="21" name="Net-(Q2-Pad1)">
-      <node ref="Q2" pin="1"/>
-      <node ref="R5" pin="1"/>
-      <node ref="R4" pin="1"/>
-    </net>
-    <net code="22" name="Net-(D5-Pad1)">
-      <node ref="K3" pin="4-1"/>
-      <node ref="D6" pin="1"/>
-      <node ref="K3" pin="4-2"/>
-      <node ref="Q3" pin="3"/>
-      <node ref="D5" pin="1"/>
-    </net>
-    <net code="23" name="Net-(D5-Pad2)">
-      <node ref="D5" pin="2"/>
-      <node ref="R9" pin="2"/>
-    </net>
-    <net code="24" name="/RELAY_3">
-      <node ref="IC1" pin="13"/>
-      <node ref="R7" pin="2"/>
-    </net>
-    <net code="25" name="/L3">
-      <node ref="K3" pin="2-1"/>
-      <node ref="P3" pin="1"/>
-      <node ref="K3" pin="2-2"/>
-    </net>
-    <net code="26" name="/RELAY_6">
-      <node ref="R16" pin="2"/>
-      <node ref="IC1" pin="47"/>
-    </net>
-    <net code="27" name="Net-(Q3-Pad1)">
-      <node ref="R8" pin="1"/>
-      <node ref="R7" pin="1"/>
-      <node ref="Q3" pin="1"/>
-    </net>
-    <net code="28" name="/CURRENT_2">
-      <node ref="P2" pin="3"/>
-      <node ref="IC1" pin="24"/>
-    </net>
-    <net code="29" name="/CURRENT_1">
-      <node ref="IC1" pin="25"/>
-      <node ref="P1" pin="3"/>
-    </net>
-    <net code="30" name="Net-(D15-Pad2)">
-      <node ref="D15" pin="2"/>
-      <node ref="R24" pin="2"/>
-    </net>
-    <net code="31" name="/CURRENT_3">
-      <node ref="IC1" pin="23"/>
-      <node ref="P3" pin="3"/>
-    </net>
-    <net code="32" name="/L8">
-      <node ref="K8" pin="2-1"/>
-      <node ref="K8" pin="2-2"/>
-      <node ref="P8" pin="1"/>
-    </net>
-    <net code="33" name="/CURRENT_4">
-      <node ref="IC1" pin="22"/>
-      <node ref="P4" pin="3"/>
-    </net>
-    <net code="34" name="Net-(D15-Pad1)">
-      <node ref="D15" pin="1"/>
-      <node ref="K8" pin="4-1"/>
-      <node ref="Q8" pin="3"/>
-      <node ref="K8" pin="4-2"/>
-      <node ref="D16" pin="1"/>
-    </net>
-    <net code="35" name="/CURRENT_6">
-      <node ref="P6" pin="3"/>
-      <node ref="IC1" pin="28"/>
-    </net>
-    <net code="36" name="/CURRENT_8">
-      <node ref="P8" pin="3"/>
-      <node ref="IC1" pin="26"/>
-    </net>
-    <net code="37" name="/N">
-      <node ref="P13" pin="2"/>
-      <node ref="P12" pin="2"/>
-      <node ref="R37" pin="1"/>
-      <node ref="R36" pin="1"/>
-      <node ref="R41" pin="2"/>
-    </net>
-    <net code="38" name="Net-(IC1-Pad16)">
-      <node ref="IC1" pin="16"/>
-    </net>
-    <net code="39" name="Net-(IC1-Pad15)">
-      <node ref="IC1" pin="15"/>
-    </net>
-    <net code="40" name="Net-(IC1-Pad12)">
-      <node ref="IC1" pin="12"/>
-    </net>
-    <net code="41" name="Net-(IC1-Pad10)">
-      <node ref="IC1" pin="10"/>
-    </net>
-    <net code="42" name="Net-(IC1-Pad9)">
-      <node ref="IC1" pin="9"/>
-    </net>
-    <net code="43" name="Net-(IC1-Pad8)">
-      <node ref="IC1" pin="8"/>
-    </net>
-    <net code="44" name="/CURRENT_7">
-      <node ref="P7" pin="3"/>
-      <node ref="IC1" pin="27"/>
-    </net>
-    <net code="45" name="Net-(D11-Pad2)">
+    <net code="3" name="Net-(D11-Pad2)">
       <node ref="D11" pin="2"/>
       <node ref="R18" pin="2"/>
     </net>
-    <net code="46" name="Net-(D11-Pad1)">
-      <node ref="Q6" pin="3"/>
-      <node ref="D11" pin="1"/>
-      <node ref="K6" pin="4-2"/>
-      <node ref="D12" pin="1"/>
-      <node ref="K6" pin="4-1"/>
+    <net code="4" name="/RELAY_6">
+      <node ref="IC1" pin="47"/>
+      <node ref="R16" pin="2"/>
     </net>
-    <net code="47" name="Net-(D13-Pad2)">
-      <node ref="D13" pin="2"/>
-      <node ref="R21" pin="2"/>
+    <net code="5" name="Net-(D9-Pad2)">
+      <node ref="D9" pin="2"/>
+      <node ref="R15" pin="2"/>
     </net>
-    <net code="48" name="/RELAY_7">
+    <net code="6" name="/L6">
+      <node ref="K6" pin="2-2"/>
+      <node ref="K6" pin="2-1"/>
+      <node ref="P6" pin="1"/>
+    </net>
+    <net code="7" name="/L5">
+      <node ref="P5" pin="1"/>
+      <node ref="K5" pin="2-1"/>
+      <node ref="K5" pin="2-2"/>
+    </net>
+    <net code="8" name="/RELAY_7">
       <node ref="R19" pin="2"/>
       <node ref="IC1" pin="46"/>
     </net>
-    <net code="49" name="Net-(Q7-Pad1)">
-      <node ref="R20" pin="1"/>
+    <net code="9" name="Net-(D13-Pad1)">
+      <node ref="Q7" pin="3"/>
+      <node ref="D14" pin="1"/>
+      <node ref="K7" pin="4-2"/>
+      <node ref="D13" pin="1"/>
+      <node ref="K7" pin="4-1"/>
+    </net>
+    <net code="10" name="Net-(D13-Pad2)">
+      <node ref="D13" pin="2"/>
+      <node ref="R21" pin="2"/>
+    </net>
+    <net code="11" name="/L7">
+      <node ref="K7" pin="2-2"/>
+      <node ref="P7" pin="1"/>
+      <node ref="K7" pin="2-1"/>
+    </net>
+    <net code="12" name="/L">
+      <node ref="K8" pin="1-1"/>
+      <node ref="K8" pin="1-2"/>
+      <node ref="K7" pin="1-1"/>
+      <node ref="K7" pin="1-2"/>
+      <node ref="K2" pin="1-2"/>
+      <node ref="K5" pin="1-1"/>
+      <node ref="K3" pin="1-2"/>
+      <node ref="K3" pin="1-1"/>
+      <node ref="K5" pin="1-2"/>
+      <node ref="C8" pin="1"/>
+      <node ref="R36" pin="2"/>
+      <node ref="K6" pin="1-1"/>
+      <node ref="K6" pin="1-2"/>
+      <node ref="R40" pin="2"/>
+      <node ref="K2" pin="1-1"/>
+      <node ref="K4" pin="1-1"/>
+      <node ref="K1" pin="1-1"/>
+      <node ref="K1" pin="1-2"/>
+      <node ref="P19" pin="1"/>
+      <node ref="P20" pin="1"/>
+      <node ref="K4" pin="1-2"/>
+    </net>
+    <net code="13" name="Net-(D11-Pad1)">
+      <node ref="D11" pin="1"/>
+      <node ref="K6" pin="4-2"/>
+      <node ref="Q6" pin="3"/>
+      <node ref="K6" pin="4-1"/>
+      <node ref="D12" pin="1"/>
+    </net>
+    <net code="14" name="+5V">
+      <node ref="C6" pin="1"/>
+      <node ref="D16" pin="2"/>
+      <node ref="K8" pin="3-1"/>
+      <node ref="K8" pin="3-2"/>
+      <node ref="R3" pin="1"/>
+      <node ref="K7" pin="3-2"/>
+      <node ref="K7" pin="3-1"/>
+      <node ref="R24" pin="1"/>
+      <node ref="D2" pin="2"/>
+      <node ref="R30" pin="1"/>
+      <node ref="K1" pin="3-2"/>
+      <node ref="K1" pin="3-1"/>
+      <node ref="R6" pin="1"/>
+      <node ref="R27" pin="1"/>
+      <node ref="U2" pin="3"/>
+      <node ref="P10" pin="1"/>
+      <node ref="C5" pin="1"/>
+      <node ref="U1" pin="8"/>
+      <node ref="P10" pin="1"/>
+      <node ref="P10" pin="1"/>
+      <node ref="P10" pin="1"/>
+      <node ref="P10" pin="5"/>
+      <node ref="R31" pin="1"/>
+      <node ref="D4" pin="2"/>
+      <node ref="R15" pin="1"/>
+      <node ref="D8" pin="2"/>
+      <node ref="R12" pin="1"/>
+      <node ref="K4" pin="3-1"/>
+      <node ref="K4" pin="3-2"/>
+      <node ref="R9" pin="1"/>
+      <node ref="P13" pin="1"/>
+      <node ref="P11" pin="1"/>
+      <node ref="P12" pin="1"/>
+      <node ref="K6" pin="3-2"/>
+      <node ref="K6" pin="3-1"/>
+      <node ref="R21" pin="1"/>
+      <node ref="D14" pin="2"/>
+      <node ref="K2" pin="3-1"/>
+      <node ref="K2" pin="3-2"/>
+      <node ref="K3" pin="3-1"/>
+      <node ref="K3" pin="3-2"/>
+      <node ref="R18" pin="1"/>
+      <node ref="D6" pin="2"/>
+      <node ref="D12" pin="2"/>
+      <node ref="P14" pin="1"/>
+      <node ref="P17" pin="1"/>
+      <node ref="D10" pin="2"/>
+      <node ref="K5" pin="3-1"/>
+      <node ref="K5" pin="3-2"/>
+      <node ref="P15" pin="1"/>
+      <node ref="P18" pin="1"/>
+      <node ref="P16" pin="1"/>
+    </net>
+    <net code="15" name="Net-(Q7-Pad1)">
       <node ref="R19" pin="1"/>
+      <node ref="R20" pin="1"/>
       <node ref="Q7" pin="1"/>
     </net>
-    <net code="50" name="/L6">
-      <node ref="K6" pin="2-1"/>
-      <node ref="K6" pin="2-2"/>
-      <node ref="P6" pin="1"/>
+    <net code="16" name="/RELAY_5">
+      <node ref="R13" pin="2"/>
+      <node ref="IC1" pin="1"/>
+    </net>
+    <net code="17" name="/L3">
+      <node ref="P3" pin="1"/>
+      <node ref="K3" pin="2-1"/>
+      <node ref="K3" pin="2-2"/>
+    </net>
+    <net code="18" name="Net-(D5-Pad2)">
+      <node ref="R9" pin="2"/>
+      <node ref="D5" pin="2"/>
+    </net>
+    <net code="19" name="/RELAY_3">
+      <node ref="R7" pin="2"/>
+      <node ref="IC1" pin="13"/>
+    </net>
+    <net code="20" name="Net-(D3-Pad2)">
+      <node ref="R6" pin="2"/>
+      <node ref="D3" pin="2"/>
+    </net>
+    <net code="21" name="Net-(Q3-Pad1)">
+      <node ref="Q3" pin="1"/>
+      <node ref="R7" pin="1"/>
+      <node ref="R8" pin="1"/>
+    </net>
+    <net code="22" name="Net-(D5-Pad1)">
+      <node ref="K3" pin="4-2"/>
+      <node ref="D6" pin="1"/>
+      <node ref="K3" pin="4-1"/>
+      <node ref="Q3" pin="3"/>
+      <node ref="D5" pin="1"/>
+    </net>
+    <net code="23" name="Net-(D7-Pad2)">
+      <node ref="D7" pin="2"/>
+      <node ref="R12" pin="2"/>
+    </net>
+    <net code="24" name="Net-(D10-Pad1)">
+      <node ref="Q5" pin="3"/>
+      <node ref="K5" pin="4-1"/>
+      <node ref="D10" pin="1"/>
+      <node ref="D9" pin="1"/>
+      <node ref="K5" pin="4-2"/>
+    </net>
+    <net code="25" name="Net-(Q5-Pad1)">
+      <node ref="R13" pin="1"/>
+      <node ref="R14" pin="1"/>
+      <node ref="Q5" pin="1"/>
+    </net>
+    <net code="26" name="/RELAY_4">
+      <node ref="IC1" pin="4"/>
+      <node ref="R10" pin="2"/>
+    </net>
+    <net code="27" name="/L4">
+      <node ref="P4" pin="1"/>
+      <node ref="K4" pin="2-2"/>
+      <node ref="K4" pin="2-1"/>
+    </net>
+    <net code="28" name="Net-(Q4-Pad1)">
+      <node ref="Q4" pin="1"/>
+      <node ref="R10" pin="1"/>
+      <node ref="R11" pin="1"/>
+    </net>
+    <net code="29" name="Net-(D7-Pad1)">
+      <node ref="D7" pin="1"/>
+      <node ref="D8" pin="1"/>
+      <node ref="K4" pin="4-1"/>
+      <node ref="Q4" pin="3"/>
+      <node ref="K4" pin="4-2"/>
+    </net>
+    <net code="30" name="Net-(Q2-Pad1)">
+      <node ref="Q2" pin="1"/>
+      <node ref="R4" pin="1"/>
+      <node ref="R5" pin="1"/>
+    </net>
+    <net code="31" name="Net-(R37-Pad2)">
+      <node ref="U3" pin="1"/>
+      <node ref="R37" pin="2"/>
+      <node ref="U3" pin="4"/>
+    </net>
+    <net code="32" name="/CURRENT_8">
+      <node ref="IC1" pin="26"/>
+      <node ref="P18" pin="2"/>
+    </net>
+    <net code="33" name="Net-(IC1-Pad8)">
+      <node ref="IC1" pin="8"/>
+    </net>
+    <net code="34" name="/N">
+      <node ref="R41" pin="2"/>
+      <node ref="R37" pin="1"/>
+      <node ref="P20" pin="2"/>
+      <node ref="R36" pin="1"/>
+      <node ref="P19" pin="2"/>
+    </net>
+    <net code="35" name="/CURRENT_7">
+      <node ref="P17" pin="2"/>
+      <node ref="IC1" pin="27"/>
+    </net>
+    <net code="36" name="/CURRENT_6">
+      <node ref="IC1" pin="28"/>
+      <node ref="P16" pin="2"/>
+    </net>
+    <net code="37" name="/CURRENT_5">
+      <node ref="P15" pin="2"/>
+      <node ref="IC1" pin="21"/>
+    </net>
+    <net code="38" name="/CURRENT_4">
+      <node ref="P14" pin="2"/>
+      <node ref="IC1" pin="22"/>
+    </net>
+    <net code="39" name="/CURRENT_3">
+      <node ref="P13" pin="2"/>
+      <node ref="IC1" pin="23"/>
+    </net>
+    <net code="40" name="/CURRENT_2">
+      <node ref="P12" pin="2"/>
+      <node ref="IC1" pin="24"/>
+    </net>
+    <net code="41" name="/CURRENT_1">
+      <node ref="P11" pin="2"/>
+      <node ref="IC1" pin="25"/>
+    </net>
+    <net code="42" name="Net-(IC1-Pad16)">
+      <node ref="IC1" pin="16"/>
+    </net>
+    <net code="43" name="Net-(IC1-Pad15)">
+      <node ref="IC1" pin="15"/>
+    </net>
+    <net code="44" name="Net-(IC1-Pad12)">
+      <node ref="IC1" pin="12"/>
+    </net>
+    <net code="45" name="Net-(IC1-Pad10)">
+      <node ref="IC1" pin="10"/>
+    </net>
+    <net code="46" name="Net-(IC1-Pad9)">
+      <node ref="IC1" pin="9"/>
+    </net>
+    <net code="47" name="Net-(D15-Pad1)">
+      <node ref="D15" pin="1"/>
+      <node ref="Q8" pin="3"/>
+      <node ref="K8" pin="4-1"/>
+      <node ref="K8" pin="4-2"/>
+      <node ref="D16" pin="1"/>
+    </net>
+    <net code="48" name="Net-(Q8-Pad1)">
+      <node ref="Q8" pin="1"/>
+      <node ref="R23" pin="1"/>
+      <node ref="R22" pin="1"/>
+    </net>
+    <net code="49" name="/L8">
+      <node ref="P8" pin="1"/>
+      <node ref="K8" pin="2-1"/>
+      <node ref="K8" pin="2-2"/>
+    </net>
+    <net code="50" name="Net-(D15-Pad2)">
+      <node ref="D15" pin="2"/>
+      <node ref="R24" pin="2"/>
     </net>
     <net code="51" name="/RELAY_8">
       <node ref="IC1" pin="36"/>
       <node ref="R22" pin="2"/>
     </net>
-    <net code="52" name="Net-(Q8-Pad1)">
-      <node ref="R22" pin="1"/>
-      <node ref="Q8" pin="1"/>
-      <node ref="R23" pin="1"/>
+    <net code="52" name="/B">
+      <node ref="U1" pin="7"/>
+      <node ref="P10" pin="3"/>
+      <node ref="P10" pin="3"/>
+      <node ref="P10" pin="7"/>
+      <node ref="P10" pin="3"/>
+      <node ref="P10" pin="3"/>
     </net>
-    <net code="53" name="Net-(D13-Pad1)">
-      <node ref="D13" pin="1"/>
-      <node ref="K7" pin="4-1"/>
-      <node ref="K7" pin="4-2"/>
-      <node ref="D14" pin="1"/>
-      <node ref="Q7" pin="3"/>
+    <net code="53" name="/A">
+      <node ref="P10" pin="2"/>
+      <node ref="P10" pin="2"/>
+      <node ref="P10" pin="2"/>
+      <node ref="U1" pin="6"/>
+      <node ref="P10" pin="6"/>
+      <node ref="P10" pin="2"/>
     </net>
-    <net code="54" name="/L7">
-      <node ref="K7" pin="2-2"/>
-      <node ref="P7" pin="1"/>
-      <node ref="K7" pin="2-1"/>
+    <net code="54" name="/TX">
+      <node ref="Q10" pin="3"/>
+      <node ref="U1" pin="4"/>
+      <node ref="R30" pin="2"/>
     </net>
-    <net code="55" name="/PGC">
-      <node ref="IC1" pin="5"/>
-      <node ref="P10" pin="5"/>
+    <net code="55" name="/RX">
+      <node ref="Q11" pin="3"/>
+      <node ref="R31" pin="2"/>
+      <node ref="U1" pin="1"/>
     </net>
-    <net code="56" name="Net-(D17-Pad2)">
-      <node ref="R33" pin="1"/>
-      <node ref="D17" pin="2"/>
+    <net code="56" name="/RTS">
+      <node ref="Q9" pin="3"/>
+      <node ref="U1" pin="3"/>
+      <node ref="R27" pin="2"/>
+      <node ref="U1" pin="2"/>
     </net>
     <net code="57" name="Net-(D17-Pad1)">
       <node ref="R32" pin="1"/>
       <node ref="D17" pin="1"/>
     </net>
-    <net code="58" name="/RX_LV">
-      <node ref="IC1" pin="20"/>
-      <node ref="Q11" pin="2"/>
-      <node ref="R29" pin="2"/>
+    <net code="58" name="/LED_R">
+      <node ref="R34" pin="2"/>
+      <node ref="IC1" pin="41"/>
     </net>
     <net code="59" name="Net-(D17-Pad3)">
       <node ref="R34" pin="1"/>
       <node ref="D17" pin="3"/>
     </net>
-    <net code="60" name="Net-(P10-Pad6)">
-      <node ref="P10" pin="6"/>
+    <net code="60" name="/LED_Y">
+      <node ref="IC1" pin="39"/>
+      <node ref="R33" pin="2"/>
     </net>
-    <net code="61" name="/B">
-      <node ref="P11" pin="3"/>
-      <node ref="P11" pin="3"/>
-      <node ref="U1" pin="7"/>
-      <node ref="P11" pin="3"/>
-      <node ref="P11" pin="7"/>
+    <net code="61" name="Net-(D17-Pad2)">
+      <node ref="D17" pin="2"/>
+      <node ref="R33" pin="1"/>
     </net>
-    <net code="62" name="/A">
-      <node ref="P11" pin="6"/>
-      <node ref="P11" pin="2"/>
-      <node ref="U1" pin="6"/>
-      <node ref="P11" pin="2"/>
-      <node ref="P11" pin="2"/>
+    <net code="62" name="/LED_G">
+      <node ref="R32" pin="2"/>
+      <node ref="IC1" pin="40"/>
     </net>
-    <net code="63" name="Net-(IC1-Pad32)">
+    <net code="63" name="Net-(D1-Pad2)">
+      <node ref="D1" pin="2"/>
+      <node ref="R3" pin="2"/>
+    </net>
+    <net code="64" name="Net-(P9-Pad6)">
+      <node ref="P9" pin="6"/>
+    </net>
+    <net code="65" name="Net-(Q9-Pad1)">
+      <node ref="Q9" pin="1"/>
+      <node ref="R25" pin="1"/>
+      <node ref="R26" pin="1"/>
+    </net>
+    <net code="66" name="+3V3">
+      <node ref="R29" pin="1"/>
+      <node ref="C7" pin="1"/>
+      <node ref="Q11" pin="1"/>
+      <node ref="R28" pin="1"/>
+      <node ref="U2" pin="2"/>
+      <node ref="Q10" pin="1"/>
+      <node ref="C2" pin="1"/>
+      <node ref="R35" pin="1"/>
+      <node ref="D17" pin="4"/>
+      <node ref="IC1" pin="43"/>
+      <node ref="P9" pin="2"/>
+      <node ref="R38" pin="2"/>
+      <node ref="R39" pin="1"/>
+      <node ref="C3" pin="1"/>
+      <node ref="U4" pin="8"/>
+      <node ref="IC1" pin="30"/>
+      <node ref="C1" pin="1"/>
+      <node ref="IC1" pin="18"/>
+    </net>
+    <net code="67" name="//MCLR">
+      <node ref="P9" pin="1"/>
+      <node ref="IC1" pin="19"/>
+    </net>
+    <net code="68" name="Net-(IC1-Pad32)">
       <node ref="X1" pin="3"/>
       <node ref="IC1" pin="32"/>
     </net>
-    <net code="64" name="Net-(IC1-Pad33)">
-      <node ref="X1" pin="1"/>
+    <net code="69" name="Net-(IC1-Pad33)">
       <node ref="IC1" pin="33"/>
+      <node ref="X1" pin="1"/>
     </net>
-    <net code="65" name="/RTS">
-      <node ref="R27" pin="2"/>
-      <node ref="Q9" pin="3"/>
-      <node ref="U1" pin="2"/>
-      <node ref="U1" pin="3"/>
-    </net>
-    <net code="66" name="Net-(R40-Pad1)">
-      <node ref="U4" pin="2"/>
-      <node ref="R40" pin="1"/>
-      <node ref="U4" pin="3"/>
-    </net>
-    <net code="67" name="/ZERO_CROSS">
-      <node ref="U4" pin="7"/>
-      <node ref="IC1" pin="3"/>
-      <node ref="U4" pin="6"/>
-    </net>
-    <net code="68" name="Net-(C8-Pad2)">
+    <net code="70" name="Net-(C8-Pad2)">
+      <node ref="U3" pin="3"/>
       <node ref="U3" pin="2"/>
       <node ref="C8" pin="2"/>
-      <node ref="U3" pin="3"/>
     </net>
-    <net code="69" name="Net-(D19-Pad2)">
+    <net code="71" name="Net-(R41-Pad1)">
+      <node ref="U4" pin="4"/>
+      <node ref="U4" pin="1"/>
+      <node ref="R41" pin="1"/>
+    </net>
+    <net code="72" name="/ZERO_CROSS">
+      <node ref="IC1" pin="3"/>
+      <node ref="U4" pin="6"/>
+      <node ref="U4" pin="7"/>
+    </net>
+    <net code="73" name="Net-(R40-Pad1)">
+      <node ref="U4" pin="3"/>
+      <node ref="R40" pin="1"/>
+      <node ref="U4" pin="2"/>
+    </net>
+    <net code="74" name="/AC_AVAIL">
+      <node ref="R39" pin="2"/>
+      <node ref="D19" pin="1"/>
+      <node ref="IC1" pin="2"/>
+      <node ref="U3" pin="8"/>
+      <node ref="U3" pin="6"/>
+    </net>
+    <net code="75" name="Net-(D19-Pad2)">
       <node ref="D19" pin="2"/>
       <node ref="R38" pin="1"/>
     </net>
-    <net code="70" name="/RELAY_1">
+    <net code="76" name="/RELAY_1">
       <node ref="R1" pin="2"/>
       <node ref="IC1" pin="35"/>
     </net>
-    <net code="71" name="Net-(D1-Pad2)">
-      <node ref="R3" pin="2"/>
-      <node ref="D1" pin="2"/>
+    <net code="77" name="Net-(Q1-Pad1)">
+      <node ref="R2" pin="1"/>
+      <node ref="Q1" pin="1"/>
+      <node ref="R1" pin="1"/>
     </net>
-    <net code="72" name="/L1">
+    <net code="78" name="Net-(D1-Pad1)">
+      <node ref="D2" pin="1"/>
+      <node ref="K1" pin="4-1"/>
+      <node ref="K1" pin="4-2"/>
+      <node ref="D1" pin="1"/>
+      <node ref="Q1" pin="3"/>
+    </net>
+    <net code="79" name="/L1">
       <node ref="P1" pin="1"/>
       <node ref="K1" pin="2-1"/>
       <node ref="K1" pin="2-2"/>
     </net>
-    <net code="73" name="Net-(R41-Pad1)">
-      <node ref="U4" pin="4"/>
-      <node ref="R41" pin="1"/>
-      <node ref="U4" pin="1"/>
-    </net>
-    <net code="74" name="Net-(D1-Pad1)">
-      <node ref="D1" pin="1"/>
-      <node ref="K1" pin="4-2"/>
-      <node ref="Q1" pin="3"/>
-      <node ref="K1" pin="4-1"/>
-      <node ref="D2" pin="1"/>
-    </net>
-    <net code="75" name="Net-(Q1-Pad1)">
-      <node ref="R1" pin="1"/>
-      <node ref="R2" pin="1"/>
-      <node ref="Q1" pin="1"/>
-    </net>
-    <net code="76" name="/RX">
-      <node ref="U1" pin="1"/>
-      <node ref="Q11" pin="3"/>
-      <node ref="R31" pin="2"/>
-    </net>
-    <net code="77" name="/AC_AVAIL">
-      <node ref="U3" pin="8"/>
-      <node ref="U3" pin="6"/>
-      <node ref="IC1" pin="2"/>
-      <node ref="R39" pin="2"/>
-      <node ref="D19" pin="1"/>
-    </net>
-    <net code="78" name="/TX_LV">
-      <node ref="IC1" pin="44"/>
-      <node ref="R28" pin="2"/>
-      <node ref="Q10" pin="2"/>
-    </net>
-    <net code="79" name="Net-(IC1-Pad34)">
-      <node ref="IC1" pin="34"/>
-    </net>
-    <net code="80" name="/LED_R">
-      <node ref="R34" pin="2"/>
-      <node ref="IC1" pin="41"/>
-    </net>
-    <net code="81" name="Net-(IC1-Pad37)">
-      <node ref="IC1" pin="37"/>
-    </net>
-    <net code="82" name="/LED_Y">
-      <node ref="IC1" pin="39"/>
-      <node ref="R33" pin="2"/>
-    </net>
-    <net code="83" name="Net-(IC1-Pad29)">
-      <node ref="IC1" pin="29"/>
-    </net>
-    <net code="84" name="//MCLR">
-      <node ref="P10" pin="1"/>
-      <node ref="IC1" pin="19"/>
-    </net>
-    <net code="85" name="//RTS">
-      <node ref="IC1" pin="48"/>
-      <node ref="IC1" pin="38"/>
-      <node ref="R25" pin="2"/>
-    </net>
-    <net code="86" name="/PGD">
-      <node ref="P10" pin="4"/>
-      <node ref="IC1" pin="45"/>
-    </net>
-    <net code="87" name="/LED_G">
-      <node ref="R32" pin="2"/>
-      <node ref="IC1" pin="40"/>
-    </net>
-    <net code="88" name="Net-(R37-Pad2)">
-      <node ref="R37" pin="2"/>
-      <node ref="U3" pin="1"/>
-      <node ref="U3" pin="4"/>
-    </net>
-    <net code="89" name="Net-(C4-Pad1)">
+    <net code="80" name="Net-(C4-Pad1)">
       <node ref="C4" pin="1"/>
       <node ref="IC1" pin="7"/>
+    </net>
+    <net code="81" name="/RELAY_2">
+      <node ref="R4" pin="2"/>
+      <node ref="IC1" pin="14"/>
+    </net>
+    <net code="82" name="Net-(IC1-Pad37)">
+      <node ref="IC1" pin="37"/>
+    </net>
+    <net code="83" name="/PGD">
+      <node ref="IC1" pin="45"/>
+      <node ref="P9" pin="4"/>
+    </net>
+    <net code="84" name="/TX_LV">
+      <node ref="Q10" pin="2"/>
+      <node ref="IC1" pin="44"/>
+      <node ref="R28" pin="2"/>
+    </net>
+    <net code="85" name="Net-(IC1-Pad34)">
+      <node ref="IC1" pin="34"/>
+    </net>
+    <net code="86" name="Net-(IC1-Pad29)">
+      <node ref="IC1" pin="29"/>
+    </net>
+    <net code="87" name="//RTS">
+      <node ref="R25" pin="2"/>
+      <node ref="IC1" pin="38"/>
+      <node ref="IC1" pin="48"/>
+    </net>
+    <net code="88" name="/L2">
+      <node ref="K2" pin="2-2"/>
+      <node ref="K2" pin="2-1"/>
+      <node ref="P2" pin="1"/>
+    </net>
+    <net code="89" name="Net-(D3-Pad1)">
+      <node ref="K2" pin="4-1"/>
+      <node ref="K2" pin="4-2"/>
+      <node ref="Q2" pin="3"/>
+      <node ref="D3" pin="1"/>
+      <node ref="D4" pin="1"/>
     </net>
     <net code="90" name="Net-(D18-Pad2)">
       <node ref="R35" pin="2"/>
       <node ref="D18" pin="2"/>
     </net>
-    <net code="91" name="Net-(Q9-Pad1)">
-      <node ref="Q9" pin="1"/>
-      <node ref="R25" pin="1"/>
-      <node ref="R26" pin="1"/>
+    <net code="91" name="/PGC">
+      <node ref="P9" pin="5"/>
+      <node ref="IC1" pin="5"/>
     </net>
-    <net code="92" name="/TX">
-      <node ref="R30" pin="2"/>
-      <node ref="U1" pin="4"/>
-      <node ref="Q10" pin="3"/>
+    <net code="92" name="/RX_LV">
+      <node ref="Q11" pin="2"/>
+      <node ref="R29" pin="2"/>
+      <node ref="IC1" pin="20"/>
     </net>
   </nets>
 </export>
