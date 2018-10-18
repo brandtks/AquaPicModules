@@ -1,11 +1,11 @@
 EESchema-LIBRARY Version 2.4
 #encoding utf-8
 #
-# GoodtimeDev:GNDA
+# GoodtimeDev_GNDA
 #
-DEF GoodtimeDev:GNDA #PWR 0 0 Y Y 1 F P
+DEF GoodtimeDev_GNDA #PWR 0 0 Y Y 1 F P
 F0 "#PWR" 0 -175 50 H I C CNN
-F1 "GoodtimeDev:GNDA" 0 -125 30 H V C CNN
+F1 "GoodtimeDev_GNDA" 0 -125 30 H V C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 DRAW
@@ -14,11 +14,11 @@ X GNDA 1 0 0 0 D 50 50 1 1 W N
 ENDDRAW
 ENDDEF
 #
-# GoodtimeDev:GNDD
+# GoodtimeDev_GNDD
 #
-DEF GoodtimeDev:GNDD #PWR 0 0 Y Y 1 F P
+DEF GoodtimeDev_GNDD #PWR 0 0 Y Y 1 F P
 F0 "#PWR" 0 -175 50 H I C CNN
-F1 "GoodtimeDev:GNDD" 0 -125 30 H V C CNN
+F1 "GoodtimeDev_GNDD" 0 -125 30 H V C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 DRAW
@@ -27,11 +27,11 @@ X GNDD 1 0 0 0 D 50 50 1 1 W N
 ENDDRAW
 ENDDEF
 #
-# GoodtimeDev:LMC6061
+# GoodtimeDev_LMC6061
 #
-DEF GoodtimeDev:LMC6061 U 0 20 Y Y 1 F N
+DEF GoodtimeDev_LMC6061 U 0 20 Y Y 1 F N
 F0 "U" 50 200 60 H V L CNN
-F1 "GoodtimeDev:LMC6061" 50 -150 60 H V L CNN
+F1 "GoodtimeDev_LMC6061" 50 -150 60 H V L CNN
 F2 "" 0 0 60 H V C CNN
 F3 "" 0 0 60 H V C CNN
 ALIAS LMC6082 LM358N TL072 TL082
@@ -48,11 +48,11 @@ X ~ 8 -200 250 200 L 50 50 1 1 N N
 ENDDRAW
 ENDDEF
 #
-# GoodtimeDev:LTC2483
+# GoodtimeDev_LTC2483
 #
-DEF GoodtimeDev:LTC2483 U 0 40 Y Y 1 F N
+DEF GoodtimeDev_LTC2483 U 0 40 Y Y 1 F N
 F0 "U" -500 300 60 H V C CNN
-F1 "GoodtimeDev:LTC2483" -600 -300 60 H V C CNN
+F1 "GoodtimeDev_LTC2483" -600 -300 60 H V C CNN
 F2 "" 0 0 60 H V C CNN
 F3 "" 0 0 60 H V C CNN
 DRAW
@@ -71,11 +71,11 @@ X ~ PAD 500 0 200 L 50 50 1 1 N N
 ENDDRAW
 ENDDEF
 #
-# GoodtimeDev:MOSFET_N_SMALL
+# GoodtimeDev_MOSFET_N_SMALL
 #
-DEF GoodtimeDev:MOSFET_N_SMALL Q 0 0 N Y 1 F N
+DEF GoodtimeDev_MOSFET_N_SMALL Q 0 0 N Y 1 F N
 F0 "Q" 150 150 60 H V L CNN
-F1 "GoodtimeDev:MOSFET_N_SMALL" 150 -150 60 H V L CNN
+F1 "GoodtimeDev_MOSFET_N_SMALL" 150 -150 60 H V L CNN
 F2 "" 0 0 60 H V C CNN
 F3 "" 0 0 60 H V C CNN
 DRAW
@@ -96,11 +96,11 @@ X D 3 100 200 100 D 40 40 1 1 P
 ENDDRAW
 ENDDEF
 #
-# GoodtimeDev:MOSFET_P_SMALL
+# GoodtimeDev_MOSFET_P_SMALL
 #
-DEF GoodtimeDev:MOSFET_P_SMALL Q 0 0 N Y 1 F N
+DEF GoodtimeDev_MOSFET_P_SMALL Q 0 0 N Y 1 F N
 F0 "Q" 150 200 60 H V L CNN
-F1 "GoodtimeDev:MOSFET_P_SMALL" 150 -150 60 H V L CNN
+F1 "GoodtimeDev_MOSFET_P_SMALL" 150 -150 60 H V L CNN
 F2 "" 0 0 60 H V C CNN
 F3 "" 0 0 60 H V C CNN
 DRAW
@@ -121,11 +121,11 @@ X D 3 100 200 100 D 40 40 1 1 P
 ENDDRAW
 ENDDEF
 #
-# GoodtimeDev:PIC32MM0064GPM028_QFN
+# GoodtimeDev_PIC32MM0064GPM028_QFN
 #
-DEF GoodtimeDev:PIC32MM0064GPM028_QFN IC 0 40 Y Y 1 F N
+DEF GoodtimeDev_PIC32MM0064GPM028_QFN IC 0 40 Y Y 1 F N
 F0 "IC" -300 1250 60 H V C CNN
-F1 "GoodtimeDev:PIC32MM0064GPM028_QFN" 0 -1250 60 H V C CNN
+F1 "GoodtimeDev_PIC32MM0064GPM028_QFN" 0 -1250 60 H V C CNN
 F2 "" 300 -450 60 H I C CNN
 F3 "" 300 -450 60 H I C CNN
 $FPLIST
@@ -164,11 +164,11 @@ X RA4 9 600 900 200 L 50 50 1 1 B
 ENDDRAW
 ENDDEF
 #
-# GoodtimeDev:RESONATOR
+# GoodtimeDev_RESONATOR
 #
-DEF GoodtimeDev:RESONATOR X 0 40 Y Y 1 F N
+DEF GoodtimeDev_RESONATOR X 0 40 Y Y 1 F N
 F0 "X" -150 150 60 H V C CNN
-F1 "GoodtimeDev:RESONATOR" 200 -150 60 H V C CNN
+F1 "GoodtimeDev_RESONATOR" 200 -150 60 H V C CNN
 F2 "" -100 0 60 H V C CNN
 F3 "" -100 0 60 H V C CNN
 DRAW
@@ -179,11 +179,11 @@ X X1 3 250 50 100 L 50 50 1 1 B
 ENDDRAW
 ENDDEF
 #
-# GoodtimeDev:ROE-0505S
+# GoodtimeDev_ROE-0505S
 #
-DEF GoodtimeDev:ROE-0505S PS 0 40 Y Y 1 F N
+DEF GoodtimeDev_ROE-0505S PS 0 40 Y Y 1 F N
 F0 "PS" -200 400 60 H V C CNN
-F1 "GoodtimeDev:ROE-0505S" 0 -400 60 H V C CNN
+F1 "GoodtimeDev_ROE-0505S" 0 -400 60 H V C CNN
 F2 "" 0 0 60 H V C CNN
 F3 "" 0 0 60 H V C CNN
 DRAW
@@ -201,11 +201,11 @@ X ~ 8 500 -150 200 L 50 50 1 1 N N
 ENDDRAW
 ENDDEF
 #
-# GoodtimeDev:SN75176B
+# GoodtimeDev_SN75176B
 #
-DEF GoodtimeDev:SN75176B U 0 0 Y Y 1 F N
+DEF GoodtimeDev_SN75176B U 0 0 Y Y 1 F N
 F0 "U" -200 450 60 H V C CNN
-F1 "GoodtimeDev:SN75176B" 350 -450 60 H V C CNN
+F1 "GoodtimeDev_SN75176B" 350 -450 60 H V C CNN
 F2 "" -100 -100 60 H V C CNN
 F3 "" -100 -100 60 H V C CNN
 DRAW
@@ -234,11 +234,11 @@ X Vcc 8 0 600 300 D 50 50 1 1 I
 ENDDRAW
 ENDDEF
 #
-# GoodtimeDev:Si8602
+# GoodtimeDev_Si8602
 #
-DEF GoodtimeDev:Si8602 U 0 40 Y Y 1 F N
+DEF GoodtimeDev_Si8602 U 0 40 Y Y 1 F N
 F0 "U" -350 250 60 H V C CNN
-F1 "GoodtimeDev:Si8602" 250 -275 60 H V C CNN
+F1 "GoodtimeDev_Si8602" 250 -275 60 H V C CNN
 F2 "" 0 0 60 H V C CNN
 F3 "" 0 0 60 H V C CNN
 DRAW
@@ -257,11 +257,11 @@ X Vdd2 8 600 150 200 L 50 50 1 1 W
 ENDDRAW
 ENDDEF
 #
-# GoodtimeDev:TC7660
+# GoodtimeDev_TC7660
 #
-DEF GoodtimeDev:TC7660 U 0 40 Y Y 1 F N
+DEF GoodtimeDev_TC7660 U 0 40 Y Y 1 F N
 F0 "U" -250 250 60 H V C CNN
-F1 "GoodtimeDev:TC7660" 150 -250 60 H V C CNN
+F1 "GoodtimeDev_TC7660" 150 -250 60 H V C CNN
 F2 "" 0 0 60 H V C CNN
 F3 "" 0 0 60 H V C CNN
 DRAW
@@ -277,11 +277,11 @@ X V+ 8 500 150 200 L 50 50 1 1 W
 ENDDRAW
 ENDDEF
 #
-# GoodtimeDev:TRI-LED
+# GoodtimeDev_TRI-LED
 #
-DEF GoodtimeDev:TRI-LED D 0 40 Y N 1 F N
+DEF GoodtimeDev_TRI-LED D 0 40 Y N 1 F N
 F0 "D" 0 350 50 H V C CNN
-F1 "GoodtimeDev:TRI-LED" 0 -390 50 H V C CNN
+F1 "GoodtimeDev_TRI-LED" 0 -390 50 H V C CNN
 F2 "" 0 250 60 H V C CNN
 F3 "" 0 250 60 H V C CNN
 $FPLIST
@@ -315,11 +315,11 @@ X ~ 4 -250 0 150 R 40 40 1 1 P
 ENDDRAW
 ENDDEF
 #
-# GoodtimeDev:USB1.0_Stacked
+# GoodtimeDev_USB1.0_Stacked
 #
-DEF GoodtimeDev:USB1.0_Stacked J 0 40 Y Y 1 F N
+DEF GoodtimeDev_USB1.0_Stacked J 0 40 Y Y 1 F N
 F0 "J" -300 550 60 H V C CNN
-F1 "GoodtimeDev:USB1.0_Stacked" 50 -550 60 H V C CNN
+F1 "GoodtimeDev_USB1.0_Stacked" 50 -550 60 H V C CNN
 F2 "" -150 300 60 H V C CNN
 F3 "" -150 300 60 H V C CNN
 DRAW
@@ -355,11 +355,11 @@ X 4 8 400 -450 300 L 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
-# pH-ORP-Card-rescue:AP1117-33
+# pH-ORP-Card-rescue_AP1117-33
 #
-DEF pH-ORP-Card-rescue:AP1117-33 U 0 10 Y Y 1 F N
+DEF pH-ORP-Card-rescue_AP1117-33 U 0 10 Y Y 1 F N
 F0 "U" -150 125 50 H V C CNN
-F1 "pH-ORP-Card-rescue:AP1117-33" 0 125 50 H V L CNN
+F1 "pH-ORP-Card-rescue_AP1117-33" 0 125 50 H V L CNN
 F2 "TO_SOT_Packages_SMD:SOT-223-3Lead_TabPin2" 0 200 50 H I C CNN
 F3 "" 100 -250 50 H I C CNN
 $FPLIST
@@ -373,11 +373,11 @@ X VI 3 -300 0 100 R 50 50 1 1 W
 ENDDRAW
 ENDDEF
 #
-# pH-ORP-Card-rescue:BNC
+# pH-ORP-Card-rescue_BNC
 #
-DEF pH-ORP-Card-rescue:BNC P 0 40 Y N 1 F N
+DEF pH-ORP-Card-rescue_BNC P 0 40 Y N 1 F N
 F0 "P" 10 120 50 H V C CNN
-F1 "pH-ORP-Card-rescue:BNC" 110 -60 50 V V C CNN
+F1 "pH-ORP-Card-rescue_BNC" 110 -60 50 V V C CNN
 F2 "" 0 0 50 H V C CNN
 F3 "" 0 0 50 H V C CNN
 $FPLIST
@@ -393,11 +393,11 @@ X Ext 2 0 -200 130 U 40 40 1 1 P
 ENDDRAW
 ENDDEF
 #
-# pH-ORP-Card-rescue:C
+# pH-ORP-Card-rescue_C
 #
-DEF pH-ORP-Card-rescue:C C 0 10 N Y 1 F N
+DEF pH-ORP-Card-rescue_C C 0 10 N Y 1 F N
 F0 "C" 25 100 50 H V L CNN
-F1 "pH-ORP-Card-rescue:C" 25 -100 50 H V L CNN
+F1 "pH-ORP-Card-rescue_C" 25 -100 50 H V L CNN
 F2 "" 38 -150 50 H V C CNN
 F3 "" 0 0 50 H V C CNN
 $FPLIST
@@ -415,11 +415,11 @@ X ~ 2 0 -150 110 U 40 40 1 1 P
 ENDDRAW
 ENDDEF
 #
-# pH-ORP-Card-rescue:CONN_01X02
+# pH-ORP-Card-rescue_CONN_01X02
 #
-DEF pH-ORP-Card-rescue:CONN_01X02 P 0 40 Y N 1 F N
+DEF pH-ORP-Card-rescue_CONN_01X02 P 0 40 Y N 1 F N
 F0 "P" 0 150 50 H V C CNN
-F1 "pH-ORP-Card-rescue:CONN_01X02" 100 0 50 V V C CNN
+F1 "pH-ORP-Card-rescue_CONN_01X02" 100 0 50 V V C CNN
 F2 "" 0 0 50 H V C CNN
 F3 "" 0 0 50 H V C CNN
 $FPLIST
@@ -437,11 +437,11 @@ X P2 2 -200 -50 150 R 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
-# pH-ORP-Card-rescue:CONN_01X06
+# pH-ORP-Card-rescue_CONN_01X06
 #
-DEF pH-ORP-Card-rescue:CONN_01X06 P 0 40 Y N 1 F N
+DEF pH-ORP-Card-rescue_CONN_01X06 P 0 40 Y N 1 F N
 F0 "P" 0 350 50 H V C CNN
-F1 "pH-ORP-Card-rescue:CONN_01X06" 100 0 50 V V C CNN
+F1 "pH-ORP-Card-rescue_CONN_01X06" 100 0 50 V V C CNN
 F2 "" 0 0 50 H V C CNN
 F3 "" 0 0 50 H V C CNN
 $FPLIST
@@ -467,11 +467,11 @@ X P6 6 -200 -250 150 R 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
-# pH-ORP-Card-rescue:CP1
+# pH-ORP-Card-rescue_CP1
 #
-DEF pH-ORP-Card-rescue:CP1 C 0 10 N N 1 F N
+DEF pH-ORP-Card-rescue_CP1 C 0 10 N N 1 F N
 F0 "C" 25 100 50 H V L CNN
-F1 "pH-ORP-Card-rescue:CP1" 25 -100 50 H V L CNN
+F1 "pH-ORP-Card-rescue_CP1" 25 -100 50 H V L CNN
 F2 "" 0 0 50 H V C CNN
 F3 "" 0 0 50 H V C CNN
 $FPLIST
@@ -492,11 +492,11 @@ X ~ 2 0 -150 130 U 40 40 1 1 P
 ENDDRAW
 ENDDEF
 #
-# pH-ORP-Card-rescue:C_Small
+# pH-ORP-Card-rescue_C_Small
 #
-DEF pH-ORP-Card-rescue:C_Small C 0 10 N N 1 F N
+DEF pH-ORP-Card-rescue_C_Small C 0 10 N N 1 F N
 F0 "C" 10 70 50 H V L CNN
-F1 "pH-ORP-Card-rescue:C_Small" 10 -80 50 H V L CNN
+F1 "pH-ORP-Card-rescue_C_Small" 10 -80 50 H V L CNN
 F2 "" 0 0 50 H V C CNN
 F3 "" 0 0 50 H V C CNN
 $FPLIST
@@ -514,11 +514,11 @@ X ~ 2 0 -100 80 U 40 40 1 1 P
 ENDDRAW
 ENDDEF
 #
-# pH-ORP-Card-rescue:D_Schottky_ALT
+# pH-ORP-Card-rescue_D_Schottky_ALT
 #
-DEF pH-ORP-Card-rescue:D_Schottky_ALT D 0 40 N N 1 F N
+DEF pH-ORP-Card-rescue_D_Schottky_ALT D 0 40 N N 1 F N
 F0 "D" 0 100 50 H V C CNN
-F1 "pH-ORP-Card-rescue:D_Schottky_ALT" 0 -100 50 H V C CNN
+F1 "pH-ORP-Card-rescue_D_Schottky_ALT" 0 -100 50 H V C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 $FPLIST
@@ -537,11 +537,11 @@ X A 2 150 0 100 L 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
-# pH-ORP-Card-rescue:LED_ALT
+# pH-ORP-Card-rescue_LED_ALT
 #
-DEF pH-ORP-Card-rescue:LED_ALT D 0 40 Y N 1 F N
+DEF pH-ORP-Card-rescue_LED_ALT D 0 40 Y N 1 F N
 F0 "D" 0 100 50 H V C CNN
-F1 "pH-ORP-Card-rescue:LED_ALT" 0 -100 50 H V C CNN
+F1 "pH-ORP-Card-rescue_LED_ALT" 0 -100 50 H V C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 $FPLIST
@@ -558,11 +558,11 @@ X A 2 150 0 100 L 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
-# pH-ORP-Card-rescue:LM358
+# pH-ORP-Card-rescue_LM358
 #
-DEF pH-ORP-Card-rescue:LM358 U 0 20 Y Y 2 F N
+DEF pH-ORP-Card-rescue_LM358 U 0 20 Y Y 2 F N
 F0 "U" -50 200 50 H V L CNN
-F1 "pH-ORP-Card-rescue:LM358" -50 -250 50 H V L CNN
+F1 "pH-ORP-Card-rescue_LM358" -50 -250 50 H V L CNN
 F2 "" 0 0 50 H V C CNN
 F3 "" 0 0 50 H V C CNN
 DRAW
@@ -578,11 +578,11 @@ X ~ 7 300 0 100 L 50 50 2 1 O
 ENDDRAW
 ENDDEF
 #
-# pH-ORP-Card-rescue:POT
+# pH-ORP-Card-rescue_POT
 #
-DEF pH-ORP-Card-rescue:POT RV 0 40 Y N 1 F N
+DEF pH-ORP-Card-rescue_POT RV 0 40 Y N 1 F N
 F0 "RV" 0 -80 50 H V C CNN
-F1 "pH-ORP-Card-rescue:POT" 0 0 50 H V C CNN
+F1 "pH-ORP-Card-rescue_POT" 0 0 50 H V C CNN
 F2 "" 0 0 50 H V C CNN
 F3 "" 0 0 50 H V C CNN
 DRAW
@@ -594,11 +594,11 @@ X 3 3 150 0 50 L 40 40 1 1 P
 ENDDRAW
 ENDDEF
 #
-# pH-ORP-Card-rescue:R
+# pH-ORP-Card-rescue_R
 #
-DEF pH-ORP-Card-rescue:R R 0 0 N Y 1 F N
+DEF pH-ORP-Card-rescue_R R 0 0 N Y 1 F N
 F0 "R" 80 0 50 V V C CNN
-F1 "pH-ORP-Card-rescue:R" 0 0 50 V V C CNN
+F1 "pH-ORP-Card-rescue_R" 0 0 50 V V C CNN
 F2 "" -70 0 50 V V C CNN
 F3 "" 0 0 50 H V C CNN
 $FPLIST
@@ -612,11 +612,11 @@ X ~ 2 0 -150 50 U 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
-# pH-ORP-Card-rescue:TEST_1P
+# pH-ORP-Card-rescue_TEST_1P
 #
-DEF pH-ORP-Card-rescue:TEST_1P W 0 30 N N 1 F N
+DEF pH-ORP-Card-rescue_TEST_1P W 0 30 N N 1 F N
 F0 "W" 0 270 50 H V C CNN
-F1 "pH-ORP-Card-rescue:TEST_1P" 0 200 50 H V C CNN
+F1 "pH-ORP-Card-rescue_TEST_1P" 0 200 50 H V C CNN
 F2 "" 200 0 50 H V C CNN
 F3 "" 200 0 50 H V C CNN
 DRAW
@@ -625,11 +625,11 @@ X 1 1 0 0 100 U 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
-# power:+3.3V
+# power_+3.3V
 #
-DEF power:+3.3V #PWR 0 0 Y Y 1 F P
+DEF power_+3.3V #PWR 0 0 Y Y 1 F P
 F0 "#PWR" 0 -150 50 H I C CNN
-F1 "power:+3.3V" 0 140 50 H V C CNN
+F1 "power_+3.3V" 0 140 50 H V C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 ALIAS +3.3V
@@ -641,11 +641,11 @@ X +3V3 1 0 0 0 U 50 50 1 1 W N
 ENDDRAW
 ENDDEF
 #
-# power:+5V
+# power_+5V
 #
-DEF power:+5V #PWR 0 0 Y Y 1 F P
+DEF power_+5V #PWR 0 0 Y Y 1 F P
 F0 "#PWR" 0 -150 50 H I C CNN
-F1 "power:+5V" 0 140 50 H V C CNN
+F1 "power_+5V" 0 140 50 H V C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 DRAW
@@ -656,11 +656,11 @@ X +5V 1 0 0 0 U 50 50 1 1 W N
 ENDDRAW
 ENDDEF
 #
-# power:+5VA
+# power_+5VA
 #
-DEF power:+5VA #PWR 0 0 Y Y 1 F P
+DEF power_+5VA #PWR 0 0 Y Y 1 F P
 F0 "#PWR" 0 -150 50 H I C CNN
-F1 "power:+5VA" 0 140 50 H V C CNN
+F1 "power_+5VA" 0 140 50 H V C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 DRAW
@@ -671,11 +671,11 @@ X +5VA 1 0 0 0 U 50 50 1 1 W N
 ENDDRAW
 ENDDEF
 #
-# power:+5VD
+# power_+5VD
 #
-DEF power:+5VD #PWR 0 0 Y Y 1 F P
+DEF power_+5VD #PWR 0 0 Y Y 1 F P
 F0 "#PWR" 0 -150 50 H I C CNN
-F1 "power:+5VD" 0 140 50 H V C CNN
+F1 "power_+5VD" 0 140 50 H V C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 DRAW
@@ -686,11 +686,11 @@ X +5VD 1 0 0 0 U 50 50 1 1 W N
 ENDDRAW
 ENDDEF
 #
-# power:-5V
+# power_-5V
 #
-DEF power:-5V #PWR 0 0 Y Y 1 F P
+DEF power_-5V #PWR 0 0 Y Y 1 F P
 F0 "#PWR" 0 100 50 H I C CNN
-F1 "power:-5V" 0 150 50 H V C CNN
+F1 "power_-5V" 0 150 50 H V C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 DRAW
@@ -699,11 +699,11 @@ X -5V 1 0 0 0 U 50 50 0 0 W N
 ENDDRAW
 ENDDEF
 #
-# power:-5VA
+# power_-5VA
 #
-DEF power:-5VA #PWR 0 0 Y Y 1 F P
+DEF power_-5VA #PWR 0 0 Y Y 1 F P
 F0 "#PWR" 0 100 50 H I C CNN
-F1 "power:-5VA" 0 150 50 H V C CNN
+F1 "power_-5VA" 0 150 50 H V C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 DRAW
@@ -712,11 +712,11 @@ X -5VA 1 0 0 0 U 50 50 0 0 W N
 ENDDRAW
 ENDDEF
 #
-# power:GND
+# power_GND
 #
-DEF power:GND #PWR 0 0 Y Y 1 F P
+DEF power_GND #PWR 0 0 Y Y 1 F P
 F0 "#PWR" 0 -250 50 H I C CNN
-F1 "power:GND" 0 -150 50 H V C CNN
+F1 "power_GND" 0 -150 50 H V C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 DRAW

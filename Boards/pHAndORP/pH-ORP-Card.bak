@@ -2516,11 +2516,8 @@ Wire Wire Line
 	7600 2300 7600 2250
 Wire Wire Line
 	7500 2300 7600 2300
-Connection ~ 11450 1700
 Wire Wire Line
 	11450 1700 11500 1700
-Wire Wire Line
-	11450 1550 11450 1700
 Wire Wire Line
 	11450 1700 11450 1750
 Connection ~ 11450 1100
@@ -3947,11 +3944,8 @@ F 3 "~" H 11450 5050 60  0000 C CNN
 	1    11450 5050
 	1    0    0    -1  
 $EndComp
-Connection ~ 11450 4600
 Wire Wire Line
 	11450 4600 11500 4600
-Wire Wire Line
-	11450 4450 11450 4600
 Wire Wire Line
 	11450 4600 11450 4650
 Connection ~ 11450 4000
@@ -4256,6 +4250,28 @@ F 6 "Stackpole" H 100 2900 50  0001 C CNN "Manufacturer"
 F 7 "RNCP0805FTD10K0" H 100 2900 50  0001 C CNN "Manufacturer Part Number"
 F 8 "Resistor" H 0   0   50  0001 C CNN "Type"
 	1    11100 5150
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5BB39D3C
+P 11450 1550
+F 0 "#PWR?" H 11450 1550 30  0001 C CNN
+F 1 "GND" H 11450 1480 30  0001 C CNN
+F 2 "~" H 11450 1550 60  0001 C CNN
+F 3 "~" H 11450 1550 60  0000 C CNN
+	1    11450 1550
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5BB3EDF1
+P 11450 4450
+F 0 "#PWR?" H 11450 4450 30  0001 C CNN
+F 1 "GND" H 11450 4380 30  0001 C CNN
+F 2 "~" H 11450 4450 60  0001 C CNN
+F 3 "~" H 11450 4450 60  0000 C CNN
+	1    11450 4450
 	1    0    0    -1  
 $EndComp
 $EndSCHEMATC
